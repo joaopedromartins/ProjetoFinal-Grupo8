@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @DiscriminatorValue("A")
 @Table(name = "Administrator")
 //@PrimaryKeyJoinColumn(name = "administrator_id", referencedColumnName = "user_id")
-public class AdministratorEntity extends UserEntity implements Serializable {
+public class AdministratorEntity extends UserEntity  {
 	private static final long serialVersionUID = 1L;
 
 	public AdministratorEntity() {

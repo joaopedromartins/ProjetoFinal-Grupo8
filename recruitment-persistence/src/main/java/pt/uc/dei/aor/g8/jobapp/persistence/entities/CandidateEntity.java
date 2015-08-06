@@ -14,10 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Candidate")
 @PrimaryKeyJoinColumn(name = "id")
-public class CandidateEntity implements Serializable{
-	
-
-	private static final long serialVersionUID = 1L;
+public class CandidateEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

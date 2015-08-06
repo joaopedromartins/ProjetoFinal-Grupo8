@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @DiscriminatorValue("I")
 @Table(name = "Interviewer")
 //@PrimaryKeyJoinColumn(name = "interviewer_id", referencedColumnName = "user_id")
-public class InterviewerEntity extends UserEntity implements Serializable{
+public class InterviewerEntity extends UserEntity {
 
 	private static final long serialVersionUID = 1L;
 
