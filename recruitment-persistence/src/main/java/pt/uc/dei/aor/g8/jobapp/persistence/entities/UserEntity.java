@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,15 +19,16 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 
-
-@Table(name = "User")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class UserEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name="tipo")
+//@Table(name = "User")
+public abstract class UserEntity {
+	//private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="user_id")
+	@Column(unique = true)
 	private long id;
 	
 	@Column(length = 255, nullable = false)
