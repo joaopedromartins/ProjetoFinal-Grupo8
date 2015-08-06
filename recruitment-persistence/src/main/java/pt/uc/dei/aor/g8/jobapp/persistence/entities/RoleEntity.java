@@ -44,11 +44,13 @@ public class RoleEntity implements Serializable {
 		this.role = role;
 	}
 
-	public WorkerEntity getWorker() {
-		return worker;
+	
+	public UserEntity getUser() {
+		return user;
 	}
-	public void setWorker(WorkerEntity worker) {
-		this.worker = worker;
+
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
 	public long getId() {
