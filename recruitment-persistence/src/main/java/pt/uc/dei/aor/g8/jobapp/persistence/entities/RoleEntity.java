@@ -8,10 +8,11 @@ import javax.persistence.*;
  * Entity implementation class for Entity: WorkerRoleEntity
  *
  */
-@Entity
-@Table(name = "Role")
+/*@Entity
+@Table(name = "Role")*/
 public class RoleEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
+	/*
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +22,7 @@ public class RoleEntity implements Serializable {
 	private RoleType role;
 	
 	@ManyToOne
-	@JoinColumn(name = "id", nullable = false, unique = false)
+	//@JoinColumn(name = "id", nullable = false, unique = false)
 	private UserEntity user;
 	
 	
@@ -56,7 +57,7 @@ public class RoleEntity implements Serializable {
 	public long getId() {
 		return id;
 	}
-   
+   */
 	
 	
 }

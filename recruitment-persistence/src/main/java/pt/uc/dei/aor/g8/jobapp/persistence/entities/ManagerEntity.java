@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -20,7 +22,8 @@ public class ManagerEntity extends UserEntity {
 
 	public ManagerEntity(String login, String password, String lastname, String firstname, String email) {
 		super(login, password, lastname, firstname, email);
-		this.role=RoleType.MANAGER;
+		roles=new ArrayList<RoleType>();
+		roles.add(RoleType.MANAGER);
 	}
 
 }

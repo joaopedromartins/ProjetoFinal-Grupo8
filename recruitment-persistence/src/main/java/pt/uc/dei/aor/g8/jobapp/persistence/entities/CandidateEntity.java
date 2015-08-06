@@ -13,13 +13,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Candidate")
-//@PrimaryKeyJoinColumn(name = "id")
+@PrimaryKeyJoinColumn(name = "id")
 public class CandidateEntity implements Serializable{
+	
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	private long id;
 	
 	@Column(length = 255, nullable = false)
@@ -63,6 +64,10 @@ public class CandidateEntity implements Serializable{
 	
 	@Column
     private String cv;
+	
+	public CandidateEntity() {
+		super();
+	}
 
 	public CandidateEntity(String login, String password, String lastname, String firstname, String email) {
 		this.login = login;
