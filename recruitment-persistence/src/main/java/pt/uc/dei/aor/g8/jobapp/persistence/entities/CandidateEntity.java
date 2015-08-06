@@ -19,6 +19,7 @@ public class CandidateEntity implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private long id;
 	
 	@Column(length = 255, nullable = false)

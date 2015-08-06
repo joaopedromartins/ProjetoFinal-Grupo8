@@ -6,12 +6,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Administrator")
-//@PrimaryKeyJoinColumn(name = "user_id")
+@PrimaryKeyJoinColumn(name = "administrator_id", referencedColumnName = "user_id")
 public class AdministratorEntity extends UserEntity {
 	private static final long serialVersionUID = 1L;
 
 	public AdministratorEntity() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
+
+	public AdministratorEntity(String login, String password, String lastname, String firstname, String email) {
+		super(login, password, lastname, firstname, email);
+		this.role=RoleType.ADMINISTRATOR;
+	}
+
+	
 
 }

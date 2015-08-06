@@ -7,15 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 
-@MappedSuperclass
+@Entity
+@Table(name = "User")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class UserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="user_id")
 	private long id;
 	
 	@Column(length = 255, nullable = false)
@@ -34,7 +39,7 @@ public abstract class UserEntity implements Serializable {
     private String email;
 	
 	@Column
-	private RoleType role;
+	protected RoleType role;
 	
 	
 	
