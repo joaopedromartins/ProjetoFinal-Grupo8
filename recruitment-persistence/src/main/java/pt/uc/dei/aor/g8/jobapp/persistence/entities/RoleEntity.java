@@ -9,6 +9,7 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name = "Role")
 public class RoleEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -21,7 +22,7 @@ public class RoleEntity implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "id", nullable = false, unique = false)
-	private WorkerEntity worker;
+	private UserEntity user;
 	
 	
 	//Constructors
@@ -29,9 +30,9 @@ public class RoleEntity implements Serializable {
 		super();
 	}
 	
-	public RoleEntity(RoleType role, WorkerEntity worker) {
+	public RoleEntity(RoleType role, UserEntity user) {
 		super();
-		this.worker = worker;
+		this.user = user;
 		this.role = role;
 	}
 

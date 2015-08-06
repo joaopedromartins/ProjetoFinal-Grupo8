@@ -6,14 +6,12 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "worker")
-@PrimaryKeyJoinColumn(name = "id")
+@Table(name = "Worker")
+//@PrimaryKeyJoinColumn(name = "id")
 public class WorkerEntity extends UserEntity {
 	private static final long serialVersionUID = 1L;
 	
 	// TODO passar a Lista de Roles
-	@Column
-	private RoleType role;
 	
 
 	public WorkerEntity() {

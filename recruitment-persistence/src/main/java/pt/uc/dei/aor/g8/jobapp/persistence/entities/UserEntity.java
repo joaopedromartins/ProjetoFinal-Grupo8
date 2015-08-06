@@ -11,7 +11,6 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-@Entity
 public abstract class UserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -33,6 +32,10 @@ public abstract class UserEntity implements Serializable {
 	
 	@Column(length = 255, nullable = false)
     private String email;
+	
+	@Column
+	private RoleType role;
+	
 	
 	
 	
