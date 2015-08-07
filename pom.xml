@@ -7,12 +7,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<description>Job applicatio for CriticalSoftware</description>
+	<description>Job application for CriticalSoftware</description>
 
 	<modules>
 		<module>recruitment-business</module>
 		<module>recruitment-persistence</module>
 		<module>recruitment-presentation</module>
+		<module>recruitment-hr-presentation</module>
 		<module>recruitment-ear</module>
 	</modules>
 
