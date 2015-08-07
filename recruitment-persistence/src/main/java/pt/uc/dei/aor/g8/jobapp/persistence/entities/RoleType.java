@@ -1,11 +1,11 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 public enum RoleType {
-	ADMINISTRATOR ("Administrador"),
-	MANAGER ("Gestor"),
-	RECRUITER ("Entrevistador");
+	ADMINISTRATOR ,
+	MANAGER ,
+	RECRUITER ;
 	
-	private String description;
+	/*private String description;
 	
 	RoleType (String description) {
 		this.description = description;
@@ -13,5 +13,5 @@ public enum RoleType {
 
 	public String getDescription() {
 		return description;
-	}
+	}*/
 }

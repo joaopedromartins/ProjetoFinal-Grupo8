@@ -1,22 +1,34 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 
-@MappedSuperclass
 @Entity
-public abstract class UserEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name="tipo")
+//@Table(name = "User")
+public abstract class UserEntity {
+	//private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(unique = true)
 	private long id;
 	
 	@Column(length = 255, nullable = false)
@@ -34,8 +46,13 @@ public abstract class UserEntity implements Serializable {
 	@Column(length = 255, nullable = false)
     private String email;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name="role")
+	@Enumerated(EnumType.STRING)
+	@Column(name="role")
+	protected List<RoleType> roles;
 	
-	
+
 	//Constructors
 	public UserEntity() {
 	}
