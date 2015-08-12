@@ -5,7 +5,17 @@
 	<persistence-unit name="recruitment" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/recruitment</jta-data-source>
+		
+		<class>pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity</class>
+        <class>pt.uc.dei.aor.g8.jobapp.persistence.entities.AdministratorEntity</class>
+        <class>pt.uc.dei.aor.g8.jobapp.persistence.entities.InterviewerEntity</class>
+        <class>pt.uc.dei.aor.g8.jobapp.persistence.entities.ManagerEntity</class>
+        <class>pt.uc.dei.aor.g8.jobapp.persistence.entities.CandidateEntity</class>
+       <!--  <class>pt.uc.dei.aor.g8.jobapp.persistence.entities.</class>
+        <class>pt.uc.dei.aor.g8.jobapp.persistence.entities.</class> -->
+		
 		<properties>
+<!-- 			<property name="hibernate.archive.autodetection" value="class, hbm"/> -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 		</properties>

@@ -91,14 +91,14 @@
 			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
-				<executions>
+				<!-- <executions>
 					<execution>
 						<phase>install</phase>
 						<goals>
 							<goal>deploy</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions> -->
 				<configuration>
 					<skip>false</skip>
 					<filename>${app.filename}.ear</filename>
