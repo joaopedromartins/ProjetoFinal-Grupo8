@@ -7,7 +7,7 @@ public enum RoleType {
 	
 	/*private String description;
 	
-	RoleType (String description) {
+	private RoleType (String description) {
 		this.description = description;
 	}
 

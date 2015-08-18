@@ -19,6 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import pt.uc.dei.aor.g8.business.enumeration.Localization;
+import pt.uc.dei.aor.g8.business.enumeration.Status;
+
 @Entity
 @Table(name = "Position")
 public class PositionEntity {
@@ -41,8 +44,9 @@ public class PositionEntity {
 	@Column
 	private String title;
 	
-	@Column
-	private String localization;
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="localization")
+	private List<Localization> localization;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="Status")
@@ -82,7 +86,7 @@ public class PositionEntity {
 	
 	
 	
-	public PositionEntity(Date openDate, Date closeDate, String code, String title, String localization, Status status,
+	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization, Status status,
 			int numberOfposition, String sLA, UserEntity userPosition, String company, String technicalArea,
 			String descriptionPosition, List<String> jobAdvertisingChanel, List<ScriptEntity> script) {
 		super();
@@ -155,16 +159,15 @@ public class PositionEntity {
 
 
 
-	public String getLocalization() {
+	public List<Localization> getLocalization() {
 		return localization;
 	}
 
 
 
-	public void setLocalization(String localization) {
+	public void setLocalization(List<Localization> localization) {
 		this.localization = localization;
 	}
-
 
 
 
