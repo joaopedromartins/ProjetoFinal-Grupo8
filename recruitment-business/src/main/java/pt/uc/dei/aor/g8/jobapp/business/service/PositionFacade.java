@@ -39,4 +39,10 @@ public class PositionFacade implements IPositionFacade {
 		return service.savePosition(newPosition);
 	}
 
+	@Override
+	public List<IPositionProxy> listOfAllPosition() {
+		
+		return service.listOfAllPosition();
+	}
+
 }

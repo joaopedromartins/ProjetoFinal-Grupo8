@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,69 +25,73 @@ import pt.uc.dei.aor.g8.business.enumeration.Status;
 
 @Entity
 @Table(name = "Position")
+@NamedQuery(name = "Position.listOfAllPosition", query = "SELECT p FROM PositionEntity p")
 public class PositionEntity {
+
+	public static final String LIST_OF_ALL_POSITION = "Position.listOfAllPosition";
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column
 	private Date openDate;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column
 	private Date closeDate;
-	
+
 	@Column
 	private String code;
-	
+
 	@Column
 	private String title;
-	
+
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="localization")
 	@Enumerated(EnumType.STRING)
 	private List<Localization> localization;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name="Status")
 	protected Status status;
-	
+
 	@Column
 	private int numberOfposition;
-	
+
 	@Column
 	private String SLA;
-	
+
 	@ManyToOne
 	private UserEntity userPosition;
-	
+
 	@Column
 	private String company;
-	
+
 	@Column
 	private String technicalArea;
-	
+
 	@Column
 	private String descriptionPosition;
-	
+
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="jobAdvertisingChanels")
 	private List<String> jobAdvertisingChanel;
-	
+
 	@OneToMany
 	private List<ScriptEntity> script;
-	
-		
-	
-	
+
+
+
+
 	public PositionEntity() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
+
+
 	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization,
 			Status status, int numberOfposition, String sLA, UserEntity userPosition, String company, 
 			String technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,

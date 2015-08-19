@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<meta charset="utf-8" />
+	<title>CriticalJobApplication</title>
+	<h:outputStylesheet library="css" name="style.css" />
+
+</h:head>
+<h:body>
+
+	<h:form>
+	<p:dataTable id="tablePositions" var="position" value="#{positionBean.listOfAllPosition()}">
+        <f:facet name="header">
+            Positions
+        </f:facet>
+        <p:column headerText="Code of position">
+            <h:outputText value="#{position.code}" />
+        </p:column>
+        <p:column headerText="Title">
+            <h:outputText value="#{position.title}" />
+        </p:column>
+        <p:column headerText="Open Date">
+            <h:outputText value="#{position.openDate}" />
+        </p:column>
+         <p:column headerText="Close Date">
+            <h:outputText value="#{position.closeDate}" />
+        </p:column>
+        <p:column headerText="Localization">
+            <h:outputText value="#{position.localization}" />
+        </p:column>
+        <p:column headerText="Status">
+            <h:outputText value="#{position.status}" />
+        </p:column>
+        <p:column headerText="Company">
+            <h:outputText value="#{position.company}" />
+        </p:column>
+         <p:column headerText="Technical Area">
+            <h:outputText value="#{position.technicalArea}" />
+        </p:column>
+ <!--        <p:column style="width:32px;text-align: center">
+             <p:commandButton update=":form:tablePositions" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{car}" target="#{dtSelectionView.selectedCar}" />
+            </p:commandButton>
+        </p:column> -->
+    </p:dataTable>
+	</h:form>
+</h:body>
+</html>

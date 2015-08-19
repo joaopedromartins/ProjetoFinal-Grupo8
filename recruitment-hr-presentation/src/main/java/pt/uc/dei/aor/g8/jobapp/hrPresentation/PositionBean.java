@@ -44,6 +44,11 @@ public class PositionBean {
 		
 	}
 	
+	public List<IPositionProxy> listOfAllPosition(){
+		
+		return position.listOfAllPosition();
+	}
+	
 	
 	public void creatNewPosition (){
 		IPositionProxy proxy;

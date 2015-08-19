@@ -1,8 +1,12 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;
@@ -35,5 +39,18 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 			return ((IEntityAware<PositionEntity>) positionProxy).getEntity();
 		}
 		throw new IllegalStateException();
+	}
+
+	@Override
+	public List<IPositionProxy> listOfAllPosition() {
+		TypedQuery<PositionEntity> query = em.createNamedQuery(PositionEntity.LIST_OF_ALL_POSITION, PositionEntity.class);
+		List<PositionEntity> entity= query.getResultList();
+		
+		List<IPositionProxy> proxy= new ArrayList<>();
+		for(PositionEntity p: entity){
+			proxy.add(new PositionProxy(p));
+		}
+		
+		return proxy;
 	}
 }

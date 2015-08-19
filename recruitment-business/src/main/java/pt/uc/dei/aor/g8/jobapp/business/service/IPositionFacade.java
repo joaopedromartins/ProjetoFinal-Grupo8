@@ -13,4 +13,6 @@ public interface IPositionFacade {
 	public IPositionProxy creatNewPosition(Date openDate, Date closeDate, String code, String title, List<Localization> localization, Status status,
 			int numberOfposition, String sLA, String userPosition, String company, String technicalArea,
 			String descriptionPosition, List<String> jobAdvertisingChanel, List<String> script);
+
+	public List<IPositionProxy> listOfAllPosition();
 }
