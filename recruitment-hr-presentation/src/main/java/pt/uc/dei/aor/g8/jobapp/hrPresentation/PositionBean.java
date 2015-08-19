@@ -1,19 +1,29 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
 
 
 @Named
 @RequestScoped
 public class PositionBean {
+	
+	@EJB
+	private IPositionFacade position;
 		
 	private Date openDate;
 	private Date closeDate;	
@@ -28,9 +38,29 @@ public class PositionBean {
 	private String technicalArea;
 	private String descriptionPosition;
 	private List<String> jobAdvertisingChanel;
-	private String script;
+	private List<String> script;
 	
 	public PositionBean() {
+		
+	}
+	
+	
+	public void creatNewPosition (){
+		IPositionProxy proxy;
+		
+		proxy=position.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
+	
+		if(proxy!=null){	
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_INFO,
+					"Position created successfully.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);	
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error creating position.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);	
+		}
 		
 	}
 
@@ -68,7 +98,7 @@ public class PositionBean {
 
 
 	public List<Localization> getPossibleLocalization(){
-		return Arrays.asList(Localization.values());
+		return new ArrayList<Localization>(EnumSet.allOf(Localization.class));
 	}
 	
 	public List<Localization> getLocalization() {
@@ -79,6 +109,10 @@ public class PositionBean {
 		this.localization = localization;
 	}
 
+	public List<Status> getPossibleStatus(){
+		return Arrays.asList(Status.values());
+	}
+	
 	public Status getStatus() {
 		return status;
 	}
@@ -86,9 +120,17 @@ public class PositionBean {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	
+	
 
-	public void setJobAdvertisingChanel(List<String> jobAdvertisingChanel) {
-		this.jobAdvertisingChanel = jobAdvertisingChanel;
+	public List<String> getJobAdvertisingChanel() {
+		return jobAdvertisingChanel;
+	}
+
+
+	public void setJobAdvertisingChanel(String jobAdvertisingChanel) {
+		this.jobAdvertisingChanel = new ArrayList<>();
+		this.jobAdvertisingChanel.add(jobAdvertisingChanel);
 	}
 
 	public int getNumberOfposition() {
@@ -139,12 +181,13 @@ public class PositionBean {
 		this.descriptionPosition = descriptionPosition;
 	}
 
-	public String getScript() {
+	public List<String> getScript() {
 		return script;
 	}
 
 	public void setScript(String script) {
-		this.script = script;
+		this.script = new ArrayList<>();
+		this.script.add(script);
 	}
 	
 	

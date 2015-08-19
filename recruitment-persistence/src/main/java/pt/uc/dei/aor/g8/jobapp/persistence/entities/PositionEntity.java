@@ -46,6 +46,7 @@ public class PositionEntity {
 	
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="localization")
+	@Enumerated(EnumType.STRING)
 	private List<Localization> localization;
 	
 	@Enumerated(EnumType.STRING)
@@ -86,10 +87,10 @@ public class PositionEntity {
 	
 	
 	
-	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization, Status status,
-			int numberOfposition, String sLA, UserEntity userPosition, String company, String technicalArea,
-			String descriptionPosition, List<String> jobAdvertisingChanel, List<ScriptEntity> script) {
-		super();
+	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization,
+			Status status, int numberOfposition, String sLA, UserEntity userPosition, String company, 
+			String technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,
+			List<ScriptEntity> script) {
 		this.openDate = openDate;
 		this.closeDate = closeDate;
 		this.code = code;
@@ -97,7 +98,7 @@ public class PositionEntity {
 		this.localization = localization;
 		this.status = status;
 		this.numberOfposition = numberOfposition;
-		SLA = sLA;
+		this.SLA = sLA;
 		this.userPosition = userPosition;
 		this.company = company;
 		this.technicalArea = technicalArea;
@@ -168,8 +169,6 @@ public class PositionEntity {
 	public void setLocalization(List<Localization> localization) {
 		this.localization = localization;
 	}
-
-
 
 	public Status getStatus() {
 		return status;

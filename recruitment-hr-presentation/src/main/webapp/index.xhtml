@@ -20,66 +20,76 @@
 		<h:outputText value="Add a Position" />
 		<p:panelGrid id="gridPosition" columns="3">
 			<p:outputLabel value="Title:" for="title" />
-			<p:inputText id="title" required="true" />
+			<p:inputText id="title" value="#{positionBean.title}" required="true" />
 			<p:message for="title" />
 
 			<p:outputLabel value="Techincal Area:" for="area" />
-			<p:inputText id="area" required="true" />
+			<p:inputText id="area" value="#{positionBean.technicalArea}"
+				required="true" />
 			<p:message for="area" />
 
 			<p:outputLabel value="Code:" for="code" />
-			<p:inputText id="code" required="true" />
+			<p:inputText id="code" value="#{positionBean.code}" required="true" />
 			<p:message for="code" />
 
 			<p:outputLabel value="Company:" for="company" />
-			<p:inputText id="company" required="true" />
+			<p:inputText id="company" value="#{positionBean.company}"
+				required="true" />
 			<p:message for="company" />
 
 			<p:outputLabel value="Localization:" for="localization" />
-			<p:selectOneMenu id="localization" required="true">
-				<f:selectItem itemLabel="Select one" noSelectionOption="false" />
+			<p:selectManyCheckbox id="localization"
+				value="#{positionBean.localization}"
+				converter="localizationConverter" required="true">
 				<f:selectItems value="#{positionBean.getPossibleLocalization()}"
-					 var="localization" itemLabel="#{localization.description}"/>
+					 var="localization" itemLabel="#{localization.description}"
+					 itemValue="#{localization}"/>
 
-			</p:selectOneMenu>
+			</p:selectManyCheckbox>
 			<p:message for="localization" />
 
 			<p:outputLabel value="Number of vacancy:" for="numberPositions" />
-			<p:spinner id="numberPositions" required="true" min="1" />
+			<p:spinner id="numberPositions"
+				value="#{positionBean.numberOfposition}" required="true" min="1" />
 			<p:message for="numberPositions" />
 
 			<p:outputLabel value="Open date position:" for="openDate" />
-			<p:calendar id="openDate" required="true" pattern="dd/MM/yyyy"
-				locale="pt" />
+			<p:calendar id="openDate" required="true"
+				value="#{positionBean.openDate}" pattern="dd/MM/yyyy" locale="pt" />
 			<p:message for="openDate" />
 
 			<p:outputLabel value="Close date position:" for="closeDate" />
-			<p:calendar id="closeDate" required="true" pattern="dd/MM/yyyy"
-				locale="pt" />
+			<p:calendar id="closeDate" required="true"
+				value="#{positionBean.closeDate}" pattern="dd/MM/yyyy" locale="pt" />
 			<p:message for="closeDate" />
 
 			<p:outputLabel value="SLA:" for="sla" />
-			<p:inputText id="sla" required="true" />
+			<p:inputText id="sla" value="#{positionBean.SLA}" required="true" />
 			<p:message for="sla" />
 
 			<p:outputLabel value="Technical manager:" for="userManager" />
-			<p:inputText id="userManager" required="true" />
+			<p:inputText id="userManager" value="#{positionBean.userPosition}"
+				required="true" />
 			<p:message for="userManager" />
 
 			<p:outputLabel value="Status:" for="status" />
-			<p:inputText id="status" required="true" />
+			<p:selectOneMenu id="status" value="#{positionBean.status}"
+				required="true">
+				<f:selectItems value="#{positionBean.possibleStatus}" var="status"
+					itemLabel="#{status.description}" />
+			</p:selectOneMenu>
 			<p:message for="status" />
 
 			<p:outputLabel value="Description:" for="description" />
 			<h:panelGroup>
-				<p:inputTextarea id="description" required="true" rows="5" cols="30"
-					counter="display" maxlength="10"
+				<p:inputTextarea id="description"
+					value="#{positionBean.descriptionPosition}" required="true"
+					rows="5" cols="30" counter="display" maxlength="200"
 					counterTemplate="{0} characters remaining." autoResize="false" />
 				<br />
 				<h:outputLabel id="display" />
 			</h:panelGroup>
 			<p:message for="description" />
-
 
 			<p:outputLabel value="Job Posting Channels:" for="channels" />
 			<p:inputText id="channels" required="true" />
@@ -90,10 +100,10 @@
 			<p:message for="script" />
 
 		</p:panelGrid>
-
-		<p:commandButton value="Save" update="gridPosition" />
-
-
+		<p:growl id="growl" />
+		<p:commandButton value="Save"
+			actionListener="#{positionBean.creatNewPosition()}"
+			update="gridPosition growl" />
 	</h:form>
 </h:body>
 </html>
