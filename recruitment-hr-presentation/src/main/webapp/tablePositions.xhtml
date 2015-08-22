@@ -14,41 +14,84 @@
 </h:head>
 <h:body>
 
-	<h:form>
-	<p:dataTable id="tablePositions" var="position" value="#{positionBean.listOfAllPosition()}">
-        <f:facet name="header">
+	<h:form id="formPositionsTable">
+		<p:dataTable id="tablePositions" var="position"
+			value="#{positionBean.listOfAllPosition()}">
+			<f:facet name="header">
             Positions
         </f:facet>
-        <p:column headerText="Code of position">
-            <h:outputText value="#{position.code}" />
-        </p:column>
-        <p:column headerText="Title">
-            <h:outputText value="#{position.title}" />
-        </p:column>
-        <p:column headerText="Open Date">
-            <h:outputText value="#{position.openDate}" />
-        </p:column>
-         <p:column headerText="Close Date">
-            <h:outputText value="#{position.closeDate}" />
-        </p:column>
-        <p:column headerText="Localization">
-            <h:outputText value="#{position.localization}" />
-        </p:column>
-        <p:column headerText="Status">
-            <h:outputText value="#{position.status}" />
-        </p:column>
-        <p:column headerText="Company">
-            <h:outputText value="#{position.company}" />
-        </p:column>
-         <p:column headerText="Technical Area">
-            <h:outputText value="#{position.technicalArea}" />
-        </p:column>
- <!--        <p:column style="width:32px;text-align: center">
-             <p:commandButton update=":form:tablePositions" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
-                <f:setPropertyActionListener value="#{car}" target="#{dtSelectionView.selectedCar}" />
-            </p:commandButton>
-        </p:column> -->
-    </p:dataTable>
+			<p:column headerText="Code of position">
+				<h:outputText value="#{position.code}" />
+			</p:column>
+			<p:column headerText="Title">
+				<h:outputText value="#{position.title}" />
+			</p:column>
+			<p:column headerText="Open Date">
+				<h:outputText value="#{position.openDate}" />
+			</p:column>
+			<p:column headerText="Close Date">
+				<h:outputText value="#{position.closeDate}" />
+			</p:column>
+			<p:column headerText="Localization">
+				<h:outputText value="#{position.localization}" />
+			</p:column>
+			<p:column headerText="Status">
+				<h:outputText value="#{position.status}" />
+			</p:column>
+			<p:column headerText="Company">
+				<h:outputText value="#{position.company}" />
+			</p:column>
+			<p:column headerText="Technical Area">
+				<h:outputText value="#{position.technicalArea}" />
+			</p:column>
+			<p:column style="width:32px;text-align: center">
+				<p:commandButton update=":formPositionsTable:tablePositions"
+					oncomplete="PF('positionDialog').show()" icon="ui-icon-search"
+					title="View">
+					<f:setPropertyActionListener value="#{position}"
+						target="#{dtSelectionView.selectedCar}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+
+		<p:dialog header="Position Info" widgetVar="positionDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="positionDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty dtSelectionView.selectedCar}"
+					columnClasses="label,value">
+					<f:facet name="header">
+						<h:outputText value="#{dtSelectionView.selectedCar.id}" />
+					</f:facet>
+
+					<h:outputText value="Code of position" />
+					<h:outputText value="#{position.code}" />
+
+					<h:outputText value="Title" />
+					<h:outputText value="#{position.title}" />
+
+
+					<h:outputText value="Open Date" />
+					<h:outputText value="#{position.openDate}" />
+
+					<h:outputText value="Close Date" />
+					<h:outputText value="#{position.closeDate}" />
+
+					<h:outputText value="Localization" />
+					<h:outputText value="#{position.localization}" />
+
+					<h:outputText value="Status" />
+					<h:outputText value="#{position.status}" />
+
+					<h:outputText value="Company" />
+					<h:outputText value="#{position.company}" />
+
+					<h:outputText value="Technical Area" />
+					<h:outputText value="#{position.technicalArea}" />
+					
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
 	</h:form>
 </h:body>
 </html>
