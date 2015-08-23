@@ -23,7 +23,7 @@ import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
 public class PositionBean {
 	
 	@EJB
-	private IPositionFacade position;
+	private IPositionFacade positionFacade;
 		
 	private Date openDate;
 	private Date closeDate;	
@@ -40,20 +40,39 @@ public class PositionBean {
 	private List<String> jobAdvertisingChanel;
 	private List<String> script;
 	
+	private List<IPositionProxy> listPosition;
+	private IPositionProxy positionProxy;
+
 	public PositionBean() {
 		
 	}
 	
 	public List<IPositionProxy> listOfAllPosition(){
 		
-		return position.listOfAllPosition();
+		return this.listPosition=positionFacade.listOfAllPosition();
+	}
+	
+	public List<IPositionProxy> getListPosition() {
+		return listPosition;
+	}
+
+	public void setListPosition(List<IPositionProxy> listOfAllPosition) {
+		this.listPosition = listOfAllPosition;
 	}
 	
 	
+	public IPositionProxy getPositionProxy() {
+		return positionProxy;
+	}
+
+	public void setPositionProxy(IPositionProxy positionProxy) {
+		this.positionProxy = positionProxy;
+	}
+
 	public void creatNewPosition (){
 		IPositionProxy proxy;
 		
-		proxy=position.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
+		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
 	
 		if(proxy!=null){	
 			FacesMessage message = new FacesMessage(
