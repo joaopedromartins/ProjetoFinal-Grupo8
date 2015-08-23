@@ -49,7 +49,7 @@
 					oncomplete="PF('positionDialog').show()" icon="ui-icon-search"
 					title="View">
 					<f:setPropertyActionListener value="#{position}"
-						target="#{dtSelectionView.selectedCar}" />
+						target="#{position}" />
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
@@ -58,10 +58,10 @@
 			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<p:outputPanel id="positionDetail" style="text-align:center;">
 				<p:panelGrid columns="2"
-					rendered="#{not empty dtSelectionView.selectedCar}"
+					rendered="#{not empty position}"
 					columnClasses="label,value">
 					<f:facet name="header">
-						<h:outputText value="#{dtSelectionView.selectedCar.id}" />
+						<h:outputText value="#{positionBean.title}" />
 					</f:facet>
 
 					<h:outputText value="Code of position" />
