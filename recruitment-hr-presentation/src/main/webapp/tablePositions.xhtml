@@ -45,7 +45,7 @@
 				<h:outputText value="#{position.technicalArea}" />
 			</p:column>
 			<p:column style="width:32px;text-align: center">
-				<p:commandButton update=":formPositionsTable:tablePositions"
+				<p:commandButton update=":formPositionsTable:tablePositions :formPositionsTable:positionDetail"
 					oncomplete="PF('positionDialog').show()" icon="ui-icon-search"
 					title="View">
 					<f:setPropertyActionListener value="#{position}"
@@ -57,37 +57,35 @@
 		<p:dialog header="Position Info" widgetVar="positionDialog"
 			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<p:outputPanel id="positionDetail" style="text-align:center;">
-				<p:panelGrid columns="2"
-					rendered="#{position}"
-					columnClasses="label,value">
+				<p:panelGrid columns="2" id="positionDetailPanelGrid">
 					<f:facet name="header">
 						<h:outputText value="#{positionBean.positionProxy.title}" />
 					</f:facet>
 
 					<h:outputText value="Code of position" />
-					<h:outputText value="#{position.code}" />
+					<h:outputText value="#{positionBean.positionProxy.code}" />
 
 					<h:outputText value="Title" />
-					<h:outputText value="#{position.title}" />
+					<h:outputText value="#{positionBean.positionProxy.title}" />
 
 
 					<h:outputText value="Open Date" />
-					<h:outputText value="#{position.openDate}" />
+					<h:outputText value="#{positionBean.positionProxy.openDate}" />
 
 					<h:outputText value="Close Date" />
-					<h:outputText value="#{position.closeDate}" />
+					<h:outputText value="#{positionBean.positionProxy.closeDate}" />
 
 					<h:outputText value="Localization" />
-					<h:outputText value="#{position.localization}" />
+					<h:outputText value="#{positionBean.positionProxy.localization}" />
 
 					<h:outputText value="Status" />
-					<h:outputText value="#{position.status}" />
+					<h:outputText value="#{positionBean.positionProxy.status}" />
 
 					<h:outputText value="Company" />
-					<h:outputText value="#{position.company}" />
+					<h:outputText value="#{positionBean.positionProxy.company}" />
 
 					<h:outputText value="Technical Area" />
-					<h:outputText value="#{position.technicalArea}" />
+					<h:outputText value="#{positionBean.positionProxy.technicalArea}" />
 					
 				</p:panelGrid>
 			</p:outputPanel>
