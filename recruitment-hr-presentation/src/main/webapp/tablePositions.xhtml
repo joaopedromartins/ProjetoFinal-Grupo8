@@ -20,7 +20,7 @@
 			<f:facet name="header">
             Positions
         </f:facet>
-			<p:column headerText="Code of position">
+			<p:column headerText="Position code">
 				<h:outputText value="#{position.code}" />
 			</p:column>
 			<p:column headerText="Title">
@@ -32,7 +32,7 @@
 			<p:column headerText="Close Date">
 				<h:outputText value="#{position.closeDate}" />
 			</p:column>
-			<p:column headerText="Localization">
+			<p:column headerText="Location">
 				<h:outputText value="#{position.localization}" />
 			</p:column>
 			<p:column headerText="Status">
@@ -62,29 +62,29 @@
 						<h:outputText value="#{positionBean.positionProxy.title}" />
 					</f:facet>
 
-					<h:outputText value="Code of position" />
+					<h:outputText value="Position code:" />
 					<h:outputText value="#{positionBean.positionProxy.code}" />
 
-					<h:outputText value="Title" />
+					<h:outputText value="Title:" />
 					<h:outputText value="#{positionBean.positionProxy.title}" />
 
 
-					<h:outputText value="Open Date" />
+					<h:outputText value="Open Date:" />
 					<h:outputText value="#{positionBean.positionProxy.openDate}" />
 
-					<h:outputText value="Close Date" />
+					<h:outputText value="Close Date:" />
 					<h:outputText value="#{positionBean.positionProxy.closeDate}" />
 
-					<h:outputText value="Localization" />
+					<h:outputText value="Location:" />
 					<h:outputText value="#{positionBean.positionProxy.localization}" />
 
-					<h:outputText value="Status" />
+					<h:outputText value="Status:" />
 					<h:outputText value="#{positionBean.positionProxy.status}" />
 
-					<h:outputText value="Company" />
+					<h:outputText value="Company:" />
 					<h:outputText value="#{positionBean.positionProxy.company}" />
 
-					<h:outputText value="Technical Area" />
+					<h:outputText value="Technical Area:" />
 					<h:outputText value="#{positionBean.positionProxy.technicalArea}" />
 					
 				</p:panelGrid>

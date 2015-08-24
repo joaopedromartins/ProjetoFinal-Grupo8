@@ -19,7 +19,7 @@
 		<br />
 		<h:outputText value="Add a Position" />
 		<p:panelGrid id="gridPosition" columns="3">
-			<p:outputLabel value="Title:" for="title" />
+			<p:outputLabel value="Title :" for="title" />
 			<p:inputText id="title" value="#{positionBean.title}" required="true" />
 			<p:message for="title" />
 
@@ -28,7 +28,7 @@
 				required="true" />
 			<p:message for="area" />
 
-			<p:outputLabel value="Code:" for="code" />
+			<p:outputLabel value="Posiiton code:" for="code" />
 			<p:inputText id="code" value="#{positionBean.code}" required="true" />
 			<p:message for="code" />
 
@@ -37,7 +37,7 @@
 				required="true" />
 			<p:message for="company" />
 
-			<p:outputLabel value="Localization:" for="localization" />
+			<p:outputLabel value="Location(s):" for="localization" />
 			<p:selectManyCheckbox id="localization"
 				value="#{positionBean.localization}"
 				converter="localizationConverter" required="true">
