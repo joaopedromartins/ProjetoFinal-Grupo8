@@ -1,0 +1,3 @@
+<jboss-web>
+    <security-domain>projetofinal-grupo8-hr</security-domain>
+</jboss-web>

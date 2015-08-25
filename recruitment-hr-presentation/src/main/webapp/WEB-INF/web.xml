@@ -18,4 +18,117 @@
 		<servlet-name>facesServlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Security -->
+	<login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>projetofinal-grupo8-hr</realm-name>
+        <form-login-config>
+            <form-login-page>/pages/login.xhtml</form-login-page>
+            <form-error-page>/pages/loginerror.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    
+    <security-constraint>
+        <display-name>Administrator Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Admin Area</web-resource-name>
+            <description></description>
+            <url-pattern>/pages/administrator/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMINISTRATOR</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>Manager Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Manager Area</web-resource-name>
+            <description></description>
+            <url-pattern>/pages/manager/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+     <security-constraint>
+        <display-name>Interviewer Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Interviewer Area</web-resource-name>
+            <description></description>
+            <url-pattern>/pages/interviewer/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>INTERVIEWER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>All Access</display-name>
+        <web-resource-collection>
+            <web-resource-name>None Protected User Area</web-resource-name>
+            <description/>
+            <url-pattern>/pages/everybody/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+        
+    </security-constraint>
+    
+	<security-role>  
+		<role-name>ADMINISTRATOR</role-name>  
+	</security-role>  
+	
+	<security-role>  
+		<role-name>MANAGER</role-name>  
+	</security-role>
+	
+	<security-role>  
+		<role-name>INTERVIEWER</role-name>  
+	</security-role>
+	
 </web-app>
