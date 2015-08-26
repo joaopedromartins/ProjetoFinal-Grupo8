@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 //@PrimaryKeyJoinColumn(name = "administrator_id", referencedColumnName = "user_id")
 public class AdministratorEntity extends UserEntity  {
 	private static final long serialVersionUID = 1L;
-
+		
 	public AdministratorEntity() {
 		super();
 		// TODO Auto-generated constructor stub
