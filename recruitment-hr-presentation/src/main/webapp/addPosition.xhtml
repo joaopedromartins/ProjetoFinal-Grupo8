@@ -24,8 +24,12 @@
 			<p:message for="title" />
 
 			<p:outputLabel value="Technical Area:" for="area" />
-			<p:inputText id="area" value="#{positionBean.technicalArea}"
-				required="true" />
+			<p:selectOneMenu id="area" value="#{positionBean.technicalArea}"
+				required="true">
+				<f:selectItem noSelectionOption="true" itemLabel="Select One"/>
+				<f:selectItems value="#{positionBean.possibleTecnicalArea}" var="area"
+					itemLabel="#{area.description}" />
+			</p:selectOneMenu>
 			<p:message for="area" />
 
 			<p:outputLabel value="Position code:" for="code" />
@@ -42,8 +46,8 @@
 				value="#{positionBean.localization}"
 				converter="localizationConverter" required="true">
 				<f:selectItems value="#{positionBean.getPossibleLocalization()}"
-					 var="localization" itemLabel="#{localization.description}"
-					 itemValue="#{localization}"/>
+					var="localization" itemLabel="#{localization.description}"
+					itemValue="#{localization}" />
 
 			</p:selectManyCheckbox>
 			<p:message for="localization" />
@@ -54,7 +58,7 @@
 			<p:message for="numberPositions" />
 
 			<p:outputLabel value="Open date position:" for="openDate" />
-			<p:calendar id="openDate" required="true"
+			<p:calendar id="openDate" disabled="true"
 				value="#{positionBean.openDate}" pattern="dd/MM/yyyy" locale="pt" />
 			<p:message for="openDate" />
 

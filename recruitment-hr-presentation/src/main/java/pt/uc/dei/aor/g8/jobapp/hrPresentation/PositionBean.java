@@ -8,34 +8,42 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
+import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
+import java.io.Serializable;
 
 
 @Named
-@RequestScoped
-public class PositionBean {
+@SessionScoped
+public class PositionBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5848909027854295752L;
+
 	@EJB
 	private IPositionFacade positionFacade;
 		
-	private Date openDate;
+	private Date openDate=new Date();
 	private Date closeDate;	
 	private String code;
 	private String title;
 	private List<Localization> localization;
 	private Status status;
-	private int numberOfposition;
+	private int numberOfposition=1;
 	private String SLA;
 	private String userPosition;
 	private String company;
-	private String technicalArea;
+	private TechnicalArea technicalArea;
 	private String descriptionPosition;
 	private List<String> jobAdvertisingChanel;
 	private List<String> script;
@@ -68,17 +76,49 @@ public class PositionBean {
 	public void setPositionProxy(IPositionProxy positionProxy) {
 		this.positionProxy = positionProxy;
 	}
+	
+	public void editPosition(){
+		IPositionProxy proxy;
+		
+		proxy=positionFacade.editPosition(positionProxy);
+		if(proxy!=null){
+			
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_INFO,
+					"Position updated successfully.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error updated position.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);	
+		}
+	}
 
 	public void creatNewPosition (){
 		IPositionProxy proxy;
 		
 		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
 	
-		if(proxy!=null){	
+		if(proxy!=null){
+			closeDate=null;
+			code=null;
+			title=null;
+			localization.clear();
+			status=null;
+			numberOfposition=1;
+			SLA=null;
+			userPosition=null;
+			company=null;
+			technicalArea=null;
+			descriptionPosition=null;
+			jobAdvertisingChanel=null;
+			script=null;
+			
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
 					"Position created successfully.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);	
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
@@ -92,9 +132,7 @@ public class PositionBean {
 		return openDate;
 	}
 
-	public void setOpenDate(Date openDate) {
-		this.openDate = openDate;
-	}
+
 
 	public Date getCloseDate() {
 		return closeDate;
@@ -189,11 +227,15 @@ public class PositionBean {
 		this.company = company;
 	}
 
-	public String getTechnicalArea() {
+	public TechnicalArea getTechnicalArea() {
 		return technicalArea;
 	}
+	
+	public List<TechnicalArea> getPossibleTecnicalArea(){
+		return Arrays.asList(TechnicalArea.values());
+	}
 
-	public void setTechnicalArea(String technicalArea) {
+	public void setTechnicalArea(TechnicalArea technicalArea) {
 		this.technicalArea = technicalArea;
 	}
 

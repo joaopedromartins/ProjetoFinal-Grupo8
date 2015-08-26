@@ -9,5 +9,7 @@ public interface IPositionPersistenceService {
 	public IPositionProxy savePosition(IPositionProxy newPosition);
 
 	public List<IPositionProxy> listOfAllPosition();
+
+	public IPositionProxy editPosition(IPositionProxy positionProxy);
 	
 }

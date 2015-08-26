@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
+import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 
 @Entity
 @Table(name = "Position")
@@ -69,9 +70,10 @@ public class PositionEntity {
 
 	@Column
 	private String company;
-
+	
+	@Enumerated(EnumType.STRING)
 	@Column
-	private String technicalArea;
+	private TechnicalArea technicalArea;
 
 	@Column
 	private String descriptionPosition;
@@ -94,7 +96,7 @@ public class PositionEntity {
 
 	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization,
 			Status status, int numberOfposition, String sLA, UserEntity userPosition, String company, 
-			String technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,
+			TechnicalArea technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,
 			List<ScriptEntity> script) {
 		this.openDate = openDate;
 		this.closeDate = closeDate;
@@ -237,13 +239,13 @@ public class PositionEntity {
 
 
 
-	public String getTechnicalArea() {
+	public TechnicalArea getTechnicalArea() {
 		return technicalArea;
 	}
 
 
 
-	public void setTechnicalArea(String technicalArea) {
+	public void setTechnicalArea(TechnicalArea technicalArea) {
 		this.technicalArea = technicalArea;
 	}
 

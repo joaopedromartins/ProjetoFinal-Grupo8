@@ -7,7 +7,9 @@ import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
+import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
 
 @Stateless
@@ -21,7 +23,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	
 	public PositionProxy(Date openDate, Date closeDate, String code, String title,
 			List<Localization> localization, Status status, int numberOfposition, String sLA, String userPosition,
-			String company, String technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,
+			String company, TechnicalArea technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,
 			List<String> script) {
 		
 		//TODO mudar o null do user e do script
@@ -85,7 +87,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	@Override
-	public String getLocalization() {
+	public String getStringLocalization() {
 		String localizations="";
 		List<Localization> localization=entity.getLocalization();
 		for (Localization l: localization){
@@ -97,6 +99,13 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 		}
 		return localizations; 
 	}
+	
+	@Override
+	public List<Localization> getLocalization() {
+		return entity.getLocalization();
+	}
+
+
 
 	@Override
 	public void setLocalization(List<Localization> localization) {
@@ -144,12 +153,12 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	@Override
-	public String getTechnicalArea() {
+	public TechnicalArea getTechnicalArea() {
 		return entity.getTechnicalArea();
 	}
 
 	@Override
-	public void setTechnicalArea(String technicalArea) {
+	public void setTechnicalArea(TechnicalArea technicalArea) {
 		entity.setTechnicalArea(technicalArea);
 	}
 
@@ -171,6 +180,18 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	@Override
 	public void setJobAdvertisingChanel(List<String> jobAdvertisingChanel) {
 		entity.setJobAdvertisingChanel(jobAdvertisingChanel);
+	}
+
+	@Override
+	public IUserProxy getUserPosition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setUserPosition(IUserProxy userPosition) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
