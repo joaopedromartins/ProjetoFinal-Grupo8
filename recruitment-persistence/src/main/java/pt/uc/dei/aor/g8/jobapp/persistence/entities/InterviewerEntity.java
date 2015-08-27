@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("I")
-@Table(name = "Interviewer")
+//@Table(name = "Interviewer")
 //@PrimaryKeyJoinColumn(name = "interviewer_id", referencedColumnName = "user_id")
 public class InterviewerEntity extends UserEntity {
 

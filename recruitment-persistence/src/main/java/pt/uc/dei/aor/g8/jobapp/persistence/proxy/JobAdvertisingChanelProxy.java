@@ -45,5 +45,20 @@ public class JobAdvertisingChanelProxy implements IJobAdvertisingChanelProxy, IE
 	}
 
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean equals(Object o) {
+		return entity.equals(((IEntityAware<JobAdvertisingChanelEntity>)o).getEntity());
+	}
+	
+	@Override
+	public int hashCode() {
+		return entity.hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return entity.toString();
+	}
 
 }

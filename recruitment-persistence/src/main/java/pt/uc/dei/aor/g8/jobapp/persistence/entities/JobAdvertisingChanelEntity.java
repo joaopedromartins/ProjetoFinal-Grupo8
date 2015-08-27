@@ -53,7 +53,6 @@ public class JobAdvertisingChanelEntity {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((chanelName == null) ? 0 : chanelName.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -72,9 +71,16 @@ public class JobAdvertisingChanelEntity {
 				return false;
 		} else if (!chanelName.equals(other.chanelName))
 			return false;
-		if (id != other.id)
-			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "JobAdvertisingChanelEntity [chanelName=" + chanelName + "]";
+	}
+
+
+	
 
 }

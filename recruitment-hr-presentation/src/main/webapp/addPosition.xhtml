@@ -25,10 +25,10 @@
 
 			<p:outputLabel value="Technical Area:" for="area" />
 			<p:selectOneMenu id="area" value="#{positionBean.technicalArea}"
-				required="true">
-				<f:selectItem noSelectionOption="true" itemLabel="Select One"/>
-				<f:selectItems value="#{positionBean.possibleTecnicalArea}" var="area"
-					itemLabel="#{area.description}" />
+				required="true" converter="omnifaces.SelectItemsConverter">
+				<f:selectItem noSelectionOption="true" itemLabel="Select One" />
+				<f:selectItems value="#{positionBean.possibleTecnicalArea}"
+					var="area" itemLabel="#{area.description}" />
 			</p:selectOneMenu>
 			<p:message for="area" />
 
@@ -43,8 +43,8 @@
 
 			<p:outputLabel value="Location(s):" for="localization" />
 			<p:selectManyCheckbox id="localization"
-				value="#{positionBean.localization}"
-				 required="true">
+				converter="omnifaces.SelectItemsConverter"
+				value="#{positionBean.localization}" required="true">
 				<f:selectItems value="#{positionBean.getPossibleLocalization()}"
 					var="localization" itemLabel="#{localization.description}"
 					itemValue="#{localization}" />
@@ -78,7 +78,7 @@
 
 			<p:outputLabel value="Status:" for="status" />
 			<p:selectOneMenu id="status" value="#{positionBean.status}"
-				 required="true">
+				required="true" converter="omnifaces.SelectItemsConverter">
 				<f:selectItems value="#{positionBean.possibleStatus}" var="status"
 					itemLabel="#{status.description}" />
 			</p:selectOneMenu>
@@ -96,7 +96,13 @@
 			<p:message for="description" />
 
 			<p:outputLabel value="Job Posting Channels:" for="channels" />
-			<p:inputText id="channels" required="true" />
+			<p:selectManyCheckbox id="channels"
+				value="#{positionBean.jobAdvertisingChanel}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{jobAdvertisingChanelBean.findAllChannels()}"
+					var="channel" itemLabel="#{channel.chanelName}"
+					itemValue="#{channel}" />
+			</p:selectManyCheckbox>
 			<p:message for="channels" />
 
 			<p:outputLabel value="Script:" for="script" />
@@ -106,7 +112,7 @@
 		</p:panelGrid>
 		<p:growl id="growl" />
 		<p:commandButton value="Save"
-			actionListener="#{positionBean.creatNewPosition()}"
+			action="#{positionBean.creatNewPosition()}"
 			update="gridPosition growl" />
 	</h:form>
 </h:body>

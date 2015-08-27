@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("A")
-@Table(name = "Administrator")
+//@Table(name = "Administrator")
 //@PrimaryKeyJoinColumn(name = "administrator_id", referencedColumnName = "user_id")
 public class AdministratorEntity extends UserEntity  {
 	private static final long serialVersionUID = 1L;

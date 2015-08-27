@@ -99,7 +99,6 @@ public class PositionBean implements Serializable {
 
 	public void creatNewPosition (){
 		IPositionProxy proxy;
-		
 		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
 	
 		if(proxy!=null){
@@ -191,9 +190,9 @@ public class PositionBean implements Serializable {
 	}
 
 
-	public void setJobAdvertisingChanel(IJobAdvertisingChanelProxy jobAdvertisingChanel) {
+	public void setJobAdvertisingChanel(List<IJobAdvertisingChanelProxy> jobAdvertisingChanel) {
 		this.jobAdvertisingChanel = new ArrayList<>();
-		this.jobAdvertisingChanel.add(jobAdvertisingChanel);
+		this.jobAdvertisingChanel.addAll(jobAdvertisingChanel);
 	}
 
 	public int getNumberOfposition() {
