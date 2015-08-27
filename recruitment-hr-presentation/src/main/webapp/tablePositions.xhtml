@@ -32,10 +32,10 @@
 				<h:outputText value="#{position.closeDate}" />
 			</p:column>
 			<p:column headerText="Location">
-				<h:outputText value="#{position.localization}" />
+				<h:outputText value="#{position.stringLocalization}" />
 			</p:column>
 			<p:column headerText="Status">
-				<h:outputText value="#{position.status}" />
+				<h:outputText value="#{position.status.description}" />
 			</p:column>
 			<p:column headerText="Company">
 				<h:outputText value="#{position.company}" />
@@ -121,9 +121,9 @@
 						disabled="true" />
 
 					<h:outputText value="Location:" />
-					<p:selectManyCheckbox id="localization"
+					<p:selectManyCheckbox id="localization" collectionType="java.util.ArrayList"
 						value="#{positionBean.positionProxy.localization}"
-						converter="localizationConverter" required="true">
+						converter="omnifaces.SelectItemsConverter" required="true">
 						<f:selectItems value="#{positionBean.getPossibleLocalization()}"
 							var="localization" itemLabel="#{localization.description}"
 							itemValue="#{localization}" />
@@ -131,10 +131,11 @@
 
 
 					<h:outputText value="Status:" />
-					<p:selectOneMenu id="status"
-						value="#{positionBean.positionProxy.status}" required="true">
+					<p:selectOneMenu id="status" converter="omnifaces.SelectItemsConverter"
+						value="#{positionBean.positionProxy.status}">
+							
 						<f:selectItems value="#{positionBean.possibleStatus}" var="status"
-							itemLabel="#{status.description}" />
+							itemLabel="#{status.description}" itemValue="#{status}" />
 					</p:selectOneMenu>
 
 					<h:outputText value="Company:" />

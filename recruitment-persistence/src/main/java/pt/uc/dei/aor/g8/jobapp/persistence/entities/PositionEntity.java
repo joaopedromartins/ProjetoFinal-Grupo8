@@ -51,7 +51,7 @@ public class PositionEntity {
 	private String title;
 
 	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name="localization")
+	@CollectionTable(name="localization" )
 	@Enumerated(EnumType.STRING)
 	private List<Localization> localization;
 

@@ -7,7 +7,6 @@ import java.util.EnumSet;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -21,6 +20,7 @@ import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
 import java.io.Serializable;
 
 
+
 @Named
 @SessionScoped
 public class PositionBean implements Serializable {
@@ -28,7 +28,8 @@ public class PositionBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5848909027854295752L;
+	private static final long serialVersionUID = 1L;
+
 
 	@EJB
 	private IPositionFacade positionFacade;
@@ -78,10 +79,10 @@ public class PositionBean implements Serializable {
 	}
 	
 	public void editPosition(){
-		IPositionProxy proxy;
+		IPositionProxy proxy2;
 		
-		proxy=positionFacade.editPosition(positionProxy);
-		if(proxy!=null){
+		proxy2=positionFacade.editPosition(positionProxy);
+		if(proxy2!=null){
 			
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
