@@ -11,6 +11,8 @@ public interface IProxyFactory {
 	
 	public IPositionProxy position(Date openDate, Date closeDate, String code, String title,
 			List<Localization> localization, Status status, int numberOfposition, String sLA, String userPosition,
-			String company, TechnicalArea technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,
+			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<String> script);
+	
+	public IJobAdvertisingChanelProxy jobAdvertisingChanel(String chanelName);
 }

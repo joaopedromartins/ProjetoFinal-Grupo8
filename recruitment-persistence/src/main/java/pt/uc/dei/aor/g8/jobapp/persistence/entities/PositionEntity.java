@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -78,9 +79,8 @@ public class PositionEntity {
 	@Column
 	private String descriptionPosition;
 
-	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name="jobAdvertisingChanels")
-	private List<String> jobAdvertisingChanel;
+	@OneToMany
+	private List<JobAdvertisingChanelEntity> jobAdvertisingChanel;
 
 	@OneToMany
 	private List<ScriptEntity> script;
@@ -96,7 +96,7 @@ public class PositionEntity {
 
 	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization,
 			Status status, int numberOfposition, String sLA, UserEntity userPosition, String company, 
-			TechnicalArea technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,
+			TechnicalArea technicalArea, String descriptionPosition, List<JobAdvertisingChanelEntity> jobAdvertisingChanel,
 			List<ScriptEntity> script) {
 		this.openDate = openDate;
 		this.closeDate = closeDate;
@@ -110,7 +110,10 @@ public class PositionEntity {
 		this.company = company;
 		this.technicalArea = technicalArea;
 		this.descriptionPosition = descriptionPosition;
-		this.jobAdvertisingChanel = jobAdvertisingChanel;
+		
+		this.jobAdvertisingChanel = new ArrayList<>();
+		this.jobAdvertisingChanel.addAll(jobAdvertisingChanel);
+		
 		this.script = script;
 	}
 
@@ -264,15 +267,17 @@ public class PositionEntity {
 
 
 
-	public List<String> getJobAdvertisingChanel() {
+	public List<JobAdvertisingChanelEntity> getJobAdvertisingChanel() {
 		return jobAdvertisingChanel;
 	}
 
 
 
 
-	public void setJobAdvertisingChanel(List<String> jobAdvertisingChanel) {
-		this.jobAdvertisingChanel = jobAdvertisingChanel;
+	public void setJobAdvertisingChanel(List<JobAdvertisingChanelEntity> jobAdvertisingChanel) {
+		this.jobAdvertisingChanel = new ArrayList<>();
+		this.jobAdvertisingChanel.addAll(jobAdvertisingChanel);
+
 	}
 
 

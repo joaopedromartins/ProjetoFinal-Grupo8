@@ -46,8 +46,8 @@ public interface IPositionProxy {
 	public String getDescriptionPosition();
 	public void setDescriptionPosition(String descriptionPosition);
 	
-	public List<String> getJobAdvertisingChanel();
-	public void setJobAdvertisingChanel(List<String> jobAdvertisingChanel);
+	public List<IJobAdvertisingChanelProxy> getJobAdvertisingChanel();
+	public void setJobAdvertisingChanel(List<IJobAdvertisingChanelProxy> jobAdvertisingChanel);
 	
 	/*public List<ScriptEntity> getScript();
 	public void setScript(List<ScriptEntity> script);*/

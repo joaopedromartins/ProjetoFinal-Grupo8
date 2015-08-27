@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import javax.ejb.Stateless;
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobAdvertisingChanelEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
 
 @Stateless
@@ -20,21 +23,21 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	public PositionProxy() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public PositionProxy(Date openDate, Date closeDate, String code, String title,
 			List<Localization> localization, Status status, int numberOfposition, String sLA, String userPosition,
-			String company, TechnicalArea technicalArea, String descriptionPosition, List<String> jobAdvertisingChanel,
+			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<String> script) {
-		
+
 		//TODO mudar o null do user e do script
-		entity = new PositionEntity(openDate,closeDate,code,title,localization,status,numberOfposition,sLA, null,
-				company,technicalArea,descriptionPosition, jobAdvertisingChanel,null); 
-		
+		this.entity = new PositionEntity(openDate,closeDate,code,title,localization,status,numberOfposition,sLA, null,
+				company,technicalArea,descriptionPosition, jobAdvertisingChanelConverterProxyToEntity(jobAdvertisingChanel),null); 
+
 	}
 
 	public PositionProxy(PositionEntity position){
 		if (position==null){
-			entity=new PositionEntity();
+			this.entity=new PositionEntity();
 		} else {
 			this.entity=position;
 		}
@@ -47,7 +50,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 
 	@Override
 	public Date getOpenDate() {
-		
+
 		return entity.getOpenDate();
 	}
 
@@ -99,7 +102,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 		}
 		return localizations; 
 	}
-	
+
 	@Override
 	public List<Localization> getLocalization() {
 		return entity.getLocalization();
@@ -173,14 +176,37 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	@Override
-	public List<String> getJobAdvertisingChanel() {
-		return entity.getJobAdvertisingChanel();
+	public List<IJobAdvertisingChanelProxy> getJobAdvertisingChanel() {
+		List<IJobAdvertisingChanelProxy> proxy= new ArrayList<>();
+
+		List<JobAdvertisingChanelEntity> entityChanel = entity.getJobAdvertisingChanel();
+
+		for ( JobAdvertisingChanelEntity j: entityChanel){
+			proxy.add(new JobAdvertisingChanelProxy(j));
+		}
+
+		return proxy;
 	}
 
+
 	@Override
-	public void setJobAdvertisingChanel(List<String> jobAdvertisingChanel) {
-		entity.setJobAdvertisingChanel(jobAdvertisingChanel);
+	public void setJobAdvertisingChanel(List<IJobAdvertisingChanelProxy> jobAdvertisingChanel) {
+		entity.setJobAdvertisingChanel(jobAdvertisingChanelConverterProxyToEntity(jobAdvertisingChanel));
 	}
+
+
+
+	@SuppressWarnings( "unchecked" )
+	private List<JobAdvertisingChanelEntity> jobAdvertisingChanelConverterProxyToEntity (List<IJobAdvertisingChanelProxy> proxy){
+		List<JobAdvertisingChanelEntity> entityChanel = new ArrayList<>();
+
+		for(IJobAdvertisingChanelProxy jP : proxy){
+			entityChanel.add(((IEntityAware<JobAdvertisingChanelEntity>)jP).getEntity());
+		}
+
+		return entityChanel;
+	}
+
 
 	@Override
 	public IUserProxy getUserPosition() {
@@ -191,7 +217,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	@Override
 	public void setUserPosition(IUserProxy userPosition) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 

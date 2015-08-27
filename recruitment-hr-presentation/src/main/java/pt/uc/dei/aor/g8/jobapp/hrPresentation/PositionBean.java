@@ -15,6 +15,7 @@ import javax.inject.Named;
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
 import java.io.Serializable;
@@ -46,7 +47,7 @@ public class PositionBean implements Serializable {
 	private String company;
 	private TechnicalArea technicalArea;
 	private String descriptionPosition;
-	private List<String> jobAdvertisingChanel;
+	private List<IJobAdvertisingChanelProxy> jobAdvertisingChanel;
 	private List<String> script;
 	
 	private List<IPositionProxy> listPosition;
@@ -184,14 +185,13 @@ public class PositionBean implements Serializable {
 		this.status = status;
 	}
 	
-	
 
-	public List<String> getJobAdvertisingChanel() {
+	public List<IJobAdvertisingChanelProxy> getJobAdvertisingChanel() {
 		return jobAdvertisingChanel;
 	}
 
 
-	public void setJobAdvertisingChanel(String jobAdvertisingChanel) {
+	public void setJobAdvertisingChanel(IJobAdvertisingChanelProxy jobAdvertisingChanel) {
 		this.jobAdvertisingChanel = new ArrayList<>();
 		this.jobAdvertisingChanel.add(jobAdvertisingChanel);
 	}

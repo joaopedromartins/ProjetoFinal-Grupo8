@@ -41,7 +41,7 @@
 				<h:outputText value="#{position.company}" />
 			</p:column>
 			<p:column headerText="Technical Area">
-				<h:outputText value="#{position.technicalArea}" />
+				<h:outputText value="#{position.technicalArea.description}" />
 			</p:column>
 			<p:column style="width:32px;text-align: center">
 				<p:commandButton
@@ -89,13 +89,13 @@
 				<h:outputText value="#{positionBean.positionProxy.stringLocalization}" />
 
 				<h:outputText value="Status:" />
-				<h:outputText value="#{positionBean.positionProxy.status}" />
+				<h:outputText value="#{positionBean.positionProxy.status.description}" />
 
 				<h:outputText value="Company:" />
 				<h:outputText value="#{positionBean.positionProxy.company}" />
 
 				<h:outputText value="Technical Area:" />
-				<h:outputText value="#{positionBean.positionProxy.technicalArea}" />
+				<h:outputText value="#{positionBean.positionProxy.technicalArea.description}" />
 
 			</p:panelGrid>
 		</p:outputPanel>
@@ -143,7 +143,7 @@
 						disabled="true" />
 
 					<h:outputText value="Technical Area:" />
-					<h:inputText value="#{positionBean.positionProxy.technicalArea}"
+					<h:inputText value="#{positionBean.positionProxy.technicalArea.description}"
 						disabled="true" />
 
 					<p:outputLabel value="Number of vacancy:" for="numberPositions" />

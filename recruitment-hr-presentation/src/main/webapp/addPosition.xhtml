@@ -44,7 +44,7 @@
 			<p:outputLabel value="Location(s):" for="localization" />
 			<p:selectManyCheckbox id="localization"
 				value="#{positionBean.localization}"
-				converter="localizationConverter" required="true">
+				 required="true">
 				<f:selectItems value="#{positionBean.getPossibleLocalization()}"
 					var="localization" itemLabel="#{localization.description}"
 					itemValue="#{localization}" />
@@ -78,7 +78,7 @@
 
 			<p:outputLabel value="Status:" for="status" />
 			<p:selectOneMenu id="status" value="#{positionBean.status}"
-				required="true">
+				 required="true">
 				<f:selectItems value="#{positionBean.possibleStatus}" var="status"
 					itemLabel="#{status.description}" />
 			</p:selectOneMenu>
