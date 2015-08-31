@@ -99,7 +99,7 @@
 			<h:panelGroup id="panelGroupChanel">
 				<p:selectManyCheckbox id="channels"
 					value="#{positionBean.jobAdvertisingChanel}"
-					converter="omnifaces.SelectItemsConverter">
+					converter="omnifaces.SelectItemsConverter" layout="grid" columns="3">
 					<f:selectItems
 						value="#{jobAdvertisingChanelBean.findAllChannels()}"
 						var="channel" itemLabel="#{channel.chanelName}"

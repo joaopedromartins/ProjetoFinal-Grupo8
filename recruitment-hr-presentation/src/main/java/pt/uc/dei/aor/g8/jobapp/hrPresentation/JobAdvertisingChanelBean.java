@@ -35,8 +35,6 @@ public class JobAdvertisingChanelBean implements Serializable {
 	public void addChannel(){	
 		IJobAdvertisingChanelProxy proxy;
 		proxy=facade.addChanel(channelName);
-		System.out.println("entraste na função addChanel. O nome do chanel é:" + channelName);
-		System.out.println(proxy);
 		if(proxy!=null){
 			this.add=false;
 			FacesMessage message = new FacesMessage(
