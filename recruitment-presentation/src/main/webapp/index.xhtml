@@ -11,7 +11,13 @@
 </h:head>
 <h:body>
 	<h:form>
-		<h:outputText value="olá"/>
+        Select where you want to go:
+        <br />
+        <h:commandLink value="To the candidate secure section" action="/pages/candidate/candidate?faces-redirect=true" />
+        <br />	
+        <h:commandLink value="To the user public section" action="/pages/everybody/user?faces-redirect=true" />
+        <br />	
+        <h:commandLink value="To the colaborators section" action="../CriticalJobApplicationHR/hrapplication.xhtml?faces-redirect=true" />
 	</h:form>	
 </h:body>
 </html>

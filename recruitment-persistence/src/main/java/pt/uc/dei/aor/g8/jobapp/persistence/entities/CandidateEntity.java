@@ -1,6 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
-import java.io.Serializable;
 import java.math.BigInteger;
 
 import javax.persistence.Column;
@@ -12,8 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Candidate")
-//@PrimaryKeyJoinColumn(name = "id")
+@Table(name = "candidate")
 public class CandidateEntity {
 	
 	@Id
@@ -62,6 +60,9 @@ public class CandidateEntity {
 	@Column
     private String cv;
 	
+	@Column
+    private String role;
+	
 	public CandidateEntity() {
 		super();
 	}
@@ -72,6 +73,7 @@ public class CandidateEntity {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.email = email;
+		this.role = "CANDIDATE";
 	}
 
 }
