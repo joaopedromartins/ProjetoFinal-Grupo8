@@ -18,15 +18,21 @@ public class JobAdvertisingChanelBean {
 	@EJB
 	private IJobAdversitingChanelFacade facade;
 	
+	private String channelName;
+	
+	private boolean add = false;
+	
 	public JobAdvertisingChanelBean() {
 
 	}
 	
-	public void addChanel(String chanelName){	
+	public void addChannel(){	
 		IJobAdvertisingChanelProxy proxy;
-		proxy=facade.addChanel(chanelName);
-		
+		proxy=facade.addChanel(channelName);
+		System.out.println("entraste na função addChanel. O nome do chanel é:" + channelName);
+		System.out.println(proxy);
 		if(proxy!=null){
+			this.add=false;
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
 					"Job Advertising Channel added successfully.", "");
@@ -42,5 +48,26 @@ public class JobAdvertisingChanelBean {
 	public List<IJobAdvertisingChanelProxy> findAllChannels (){
 		return facade.listOfAllChanel();
 	}
+	
+	public void showAddChanel(){
+		this.add=true;
+	}
 
+	public String getChannelName() {
+		return channelName;
+	}
+
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
+	}
+
+	public boolean isAdd() {
+		return add;
+	}
+
+	public void setAdd(boolean add) {
+		this.add = add;
+	}
+
+	
 }

@@ -14,7 +14,7 @@
 </h:head>
 <h:body>
 
-	<h:form>
+	<h:form id="formAddPosition">
 		<h:outputText value="Hello Human Resources" />
 		<br />
 		<h:outputText value="Add a Position" />
@@ -96,13 +96,30 @@
 			<p:message for="description" />
 
 			<p:outputLabel value="Job Posting Channels:" for="channels" />
-			<p:selectManyCheckbox id="channels"
-				value="#{positionBean.jobAdvertisingChanel}"
-				converter="omnifaces.SelectItemsConverter">
-				<f:selectItems value="#{jobAdvertisingChanelBean.findAllChannels()}"
-					var="channel" itemLabel="#{channel.chanelName}"
-					itemValue="#{channel}" />
-			</p:selectManyCheckbox>
+			<h:panelGroup id="panelGroupChanel">
+				<p:selectManyCheckbox id="channels"
+					value="#{positionBean.jobAdvertisingChanel}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItems
+						value="#{jobAdvertisingChanelBean.findAllChannels()}"
+						var="channel" itemLabel="#{channel.chanelName}"
+						itemValue="#{channel}" />
+				</p:selectManyCheckbox>
+				<p:commandButton id="addChanel" icon="ui-icon-plusthick"
+					process="@this"
+					action="#{jobAdvertisingChanelBean.showAddChanel()}"
+					update=":formAddPosition:panelGroupChanel" />
+
+				<h:panelGroup id="addChannelPanelGroup"
+					rendered="#{jobAdvertisingChanelBean.add}">
+					<p:outputLabel value="Chanel name:" />
+					<p:inputText id="channel" value="#{jobAdvertisingChanelBean.channelName}" />
+					<p:commandButton id="saveChanel" icon="ui-icon-disk"
+					process="@this"
+					action="#{jobAdvertisingChanelBean.addChannel}"
+					update=":formAddPosition:panelGroupChanel growl" />
+				</h:panelGroup>
+			</h:panelGroup>
 			<p:message for="channels" />
 
 			<p:outputLabel value="Script:" for="script" />
