@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -7,13 +8,18 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-
+import org.omnifaces.cdi.ViewScoped;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobAdversitingChanelFacade;
 
 @Named
-@RequestScoped
-public class JobAdvertisingChanelBean {
+@ViewScoped
+public class JobAdvertisingChanelBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@EJB
 	private IJobAdversitingChanelFacade facade;

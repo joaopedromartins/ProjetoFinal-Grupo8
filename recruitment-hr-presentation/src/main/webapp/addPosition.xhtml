@@ -113,11 +113,12 @@
 				<h:panelGroup id="addChannelPanelGroup"
 					rendered="#{jobAdvertisingChanelBean.add}">
 					<p:outputLabel value="Chanel name:" />
-					<p:inputText id="channel" value="#{jobAdvertisingChanelBean.channelName}" />
+					<p:inputText id="channel"
+						value="#{jobAdvertisingChanelBean.channelName}" />
 					<p:commandButton id="saveChanel" icon="ui-icon-disk"
-					process="@this"
-					action="#{jobAdvertisingChanelBean.addChannel}"
-					update=":formAddPosition:panelGroupChanel growl" />
+						process="@this channel"
+						actionListener="#{jobAdvertisingChanelBean.addChannel}"
+						update=":formAddPosition:panelGroupChanel growl" />
 				</h:panelGroup>
 			</h:panelGroup>
 			<p:message for="channels" />
