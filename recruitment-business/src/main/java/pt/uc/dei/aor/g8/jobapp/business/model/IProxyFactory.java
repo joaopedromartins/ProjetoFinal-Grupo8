@@ -15,4 +15,5 @@ public interface IProxyFactory {
 			List<String> script);
 	
 	public IJobAdvertisingChanelProxy jobAdvertisingChanel(String chanelName);
+	
 }
