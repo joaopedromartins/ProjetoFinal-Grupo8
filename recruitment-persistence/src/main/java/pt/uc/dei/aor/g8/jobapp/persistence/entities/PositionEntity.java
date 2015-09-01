@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,13 @@ import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 @Entity
 @Table(name = "Position")
 @NamedQuery(name = "Position.listOfAllPosition", query = "SELECT p FROM PositionEntity p")
-public class PositionEntity {
+public class PositionEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	public static final String LIST_OF_ALL_POSITION = "Position.listOfAllPosition";
 
