@@ -85,6 +85,8 @@ public class PositionEntity {
 
 	@OneToMany
 	private List<ScriptEntity> script;
+	
+	
 
 
 
