@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -55,37 +53,27 @@ public class JobApplicationEntity {
 	@Column
     private String cv;
 	
-	@Column
+	@ManyToOne
     private JobAdvertisingChanelEntity source;
 
-	@Column
+	@ManyToOne
 	private CandidateEntity candidateEntity;
 	
-	@Column
+	@ManyToOne
 	private PositionEntity positionEntity;
 	
-	@Column
-	private UserEntity userEntity;
 
 	
 	//Getters and Setters
-	@ManyToOne
-	@JoinColumn(name = "id")
+	
 	public CandidateEntity getCandidateEntity() {
 		return candidateEntity;
 	}
 	
-	@ManyToMany
-	@JoinColumn(name = "id")
 	public PositionEntity getPositionEntity() {
 		return positionEntity;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "id")
-	public UserEntity getUserEntity() {
-		return userEntity;
-	}
 	
 	public String getFirstname() {
 		return firstname;
@@ -170,7 +158,8 @@ public class JobApplicationEntity {
 	public void setCv(String cv) {
 		this.cv = cv;
 	}
-
+	
+	
 	public JobAdvertisingChanelEntity getSource() {
 		return source;
 	}

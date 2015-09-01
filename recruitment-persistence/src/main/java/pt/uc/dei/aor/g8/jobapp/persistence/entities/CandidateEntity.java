@@ -15,11 +15,10 @@ public class CandidateEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true)
 	private long id;
 	
 	@Column(length = 255, nullable = false, unique = true)
-    private String login;
+    private String username;
 	
 	@Column(length = 255, nullable = false)
     private String password;
@@ -63,13 +62,35 @@ public class CandidateEntity {
 	@Column
     private String role;
 	
+	
+	//Constructors
+	public CandidateEntity() {
+		super();
+	}
+
+
+	public CandidateEntity(String login, String password, String lastname, String firstname, String email) {
+		this.username = login;
+		this.password = password;
+		this.lastname = lastname;
+		this.firstname = firstname;
+		this.email = email;
+		this.role = "CANDIDATE";
+	}
+	
+	
+	
 	//Getters and setters
+	
+	public long getId() {
+		return id;
+	}
 
 	public String getLogin() {
-		return login;
+		return username;
 	}
 	public void setLogin(String login) {
-		this.login = login;
+		this.username = login;
 	}
 
 	public String getPassword() {
@@ -163,25 +184,7 @@ public class CandidateEntity {
 		this.cv = cv;
 	}
 
-	public long getId() {
-		return id;
-	}
 	
-	
-	//Constructors
-	public CandidateEntity() {
-		super();
-	}
-
-
-	public CandidateEntity(String login, String password, String lastname, String firstname, String email) {
-		this.login = login;
-		this.password = password;
-		this.lastname = lastname;
-		this.firstname = firstname;
-		this.email = email;
-		this.role = "CANDIDATE";
-	}
 
 }
 
