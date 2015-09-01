@@ -7,38 +7,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "Candidate")
-public class CandidateEntity {
+public class JobApplicationEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true)
 	private long id;
-	
-	@Column(length = 255, nullable = false, unique = true)
-    private String login;
-	
-	@Column(length = 255, nullable = false)
-    private String password;
+		
+	@Column(length = 60, nullable = false)
+    private String firstname;
 	
 	@Column(length = 60, nullable = false)
     private String lastname;
 
-	@Column(length = 60, nullable = false)
-    private String firstname;
-	
-	@Column(length = 255, nullable = false, unique = true)
+	@Column(length = 255, nullable = false)
     private String email;
 	
 	@Column(length = 255, nullable = false)
     private String address;
 	
-	@Column(length = 30, nullable = false)
+	@Column(length = 255, nullable = false)
     private String city;
-	
+
 	@Column(length = 30, nullable = false)
     private String country;
 	
@@ -61,22 +56,42 @@ public class CandidateEntity {
     private String cv;
 	
 	@Column
-    private String role;
+    private JobAdvertisingChanelEntity source;
+
+	@Column
+	private CandidateEntity candidateEntity;
 	
-	//Getters and setters
+	@Column
+	private PositionEntity positionEntity;
+	
+	@Column
+	private UserEntity userEntity;
 
-	public String getLogin() {
-		return login;
+	
+	//Getters and Setters
+	@ManyToOne
+	@JoinColumn(name = "id")
+	public CandidateEntity getCandidateEntity() {
+		return candidateEntity;
 	}
-	public void setLogin(String login) {
-		this.login = login;
+	
+	@ManyToMany
+	@JoinColumn(name = "id")
+	public PositionEntity getPositionEntity() {
+		return positionEntity;
 	}
-
-	public String getPassword() {
-		return password;
+	
+	@ManyToOne
+	@JoinColumn(name = "id")
+	public UserEntity getUserEntity() {
+		return userEntity;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getLastname() {
@@ -84,13 +99,6 @@ public class CandidateEntity {
 	}
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}
-
-	public String getFirstname() {
-		return firstname;
-	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
 	}
 
 	public String getEmail() {
@@ -163,25 +171,40 @@ public class CandidateEntity {
 		this.cv = cv;
 	}
 
+	public JobAdvertisingChanelEntity getSource() {
+		return source;
+	}
+	public void setSource(JobAdvertisingChanelEntity source) {
+		this.source = source;
+	}
+
 	public long getId() {
 		return id;
 	}
 	
-	
 	//Constructors
-	public CandidateEntity() {
+	public JobApplicationEntity(){
 		super();
 	}
 
-
-	public CandidateEntity(String login, String password, String lastname, String firstname, String email) {
-		this.login = login;
-		this.password = password;
-		this.lastname = lastname;
+	public JobApplicationEntity(String firstname, String lastname, String email, String address, String city,
+			String country, BigInteger phone, BigInteger mobile, String diploma, String school, String letter,
+			String cv, JobAdvertisingChanelEntity source) {
+		super();
 		this.firstname = firstname;
+		this.lastname = lastname;
 		this.email = email;
-		this.role = "CANDIDATE";
+		this.address = address;
+		this.city = city;
+		this.country = country;
+		this.phone = phone;
+		this.mobile = mobile;
+		this.diploma = diploma;
+		this.school = school;
+		this.letter = letter;
+		this.cv = cv;
+		this.source = source;
 	}
-
+	
+	
 }
-
