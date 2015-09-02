@@ -17,15 +17,6 @@ public class JobApplicationEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-		
-	@Column(length = 60, nullable = false)
-    private String firstname;
-	
-	@Column(length = 60, nullable = false)
-    private String lastname;
-
-	@Column(length = 255, nullable = false)
-    private String email;
 	
 	@Column(length = 255, nullable = false)
     private String address;
@@ -38,9 +29,6 @@ public class JobApplicationEntity {
 	
 	@Column(length = 15)
     private BigInteger phone;
-	
-	@Column(length = 15)
-    private BigInteger mobile;
 	
 	@Column(length = 60, nullable = false)
     private String diploma;
@@ -63,10 +51,29 @@ public class JobApplicationEntity {
 	@ManyToOne
 	private PositionEntity positionEntity;
 	
+	
+	//Constructors
+	public JobApplicationEntity(){
+		super();
+	}
 
+	public JobApplicationEntity(String address, String city,
+			String country, BigInteger phone, String diploma, String school, String letter,
+			String cv, JobAdvertisingChanelEntity source) {
+		super();
+		this.address = address;
+		this.city = city;
+		this.country = country;
+		this.phone = phone;
+		this.diploma = diploma;
+		this.school = school;
+		this.letter = letter;
+		this.cv = cv;
+		this.source = source;
+	}
+	
 	
 	//Getters and Setters
-	
 	public CandidateEntity getCandidateEntity() {
 		return candidateEntity;
 	}
@@ -75,28 +82,6 @@ public class JobApplicationEntity {
 		return positionEntity;
 	}
 	
-	
-	public String getFirstname() {
-		return firstname;
-	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -125,13 +110,7 @@ public class JobApplicationEntity {
 		this.phone = phone;
 	}
 
-	public BigInteger getMobile() {
-		return mobile;
-	}
-	public void setMobile(BigInteger mobile) {
-		this.mobile = mobile;
-	}
-
+	
 	public String getDiploma() {
 		return diploma;
 	}
@@ -171,29 +150,37 @@ public class JobApplicationEntity {
 	public long getId() {
 		return id;
 	}
-	
-	//Constructors
-	public JobApplicationEntity(){
-		super();
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((candidateEntity == null) ? 0 : candidateEntity.hashCode());
+		result = prime * result + ((positionEntity == null) ? 0 : positionEntity.hashCode());
+		return result;
 	}
 
-	public JobApplicationEntity(String firstname, String lastname, String email, String address, String city,
-			String country, BigInteger phone, BigInteger mobile, String diploma, String school, String letter,
-			String cv, JobAdvertisingChanelEntity source) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.address = address;
-		this.city = city;
-		this.country = country;
-		this.phone = phone;
-		this.mobile = mobile;
-		this.diploma = diploma;
-		this.school = school;
-		this.letter = letter;
-		this.cv = cv;
-		this.source = source;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JobApplicationEntity other = (JobApplicationEntity) obj;
+		if (candidateEntity == null) {
+			if (other.candidateEntity != null)
+				return false;
+		} else if (!candidateEntity.equals(other.candidateEntity))
+			return false;
+		if (positionEntity == null) {
+			if (other.positionEntity != null)
+				return false;
+		} else if (!positionEntity.equals(other.positionEntity))
+			return false;
+		return true;
 	}
 	
 	

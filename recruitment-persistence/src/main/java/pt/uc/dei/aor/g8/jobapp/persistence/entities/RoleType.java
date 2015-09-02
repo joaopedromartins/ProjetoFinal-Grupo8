@@ -3,7 +3,7 @@ package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 public enum RoleType {
 	ADMINISTRATOR ,
 	MANAGER ,
-	RECRUITER ;
+	INTERVIEWER ;
 	
 	/*private String description;
 	

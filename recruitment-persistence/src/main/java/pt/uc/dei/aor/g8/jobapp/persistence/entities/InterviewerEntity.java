@@ -23,7 +23,7 @@ public class InterviewerEntity extends UserEntity {
 	public InterviewerEntity(String login, String password, String lastname, String firstname, String email) {
 		super(login, password, lastname, firstname, email);
 		roles=new ArrayList<RoleType>();
-		roles.add(RoleType.RECRUITER);
+		roles.add(RoleType.INTERVIEWER);
 		
 	}
 
