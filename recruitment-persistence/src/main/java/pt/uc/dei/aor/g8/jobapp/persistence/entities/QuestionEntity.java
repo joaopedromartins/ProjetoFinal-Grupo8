@@ -33,8 +33,65 @@ public class QuestionEntity implements Serializable{
 	@Column(name="QuestionType")
 	private  QuestionType questiontype;
 
+	
+
 	public QuestionEntity() {
 		
 	}
+
+	public QuestionEntity(String question, QuestionType questiontype) {
+		super();
+		this.question = question;
+		this.questiontype = questiontype;
+	}
+
+
+
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public QuestionType getQuestiontype() {
+		return questiontype;
+	}
+
+	public void setQuestiontype(QuestionType questiontype) {
+		this.questiontype = questiontype;
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((question == null) ? 0 : question.hashCode());
+		result = prime * result + ((questiontype == null) ? 0 : questiontype.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		QuestionEntity other = (QuestionEntity) obj;
+		if (question == null) {
+			if (other.question != null)
+				return false;
+		} else if (!question.equals(other.question))
+			return false;
+		if (questiontype != other.questiontype)
+			return false;
+		return true;
+	}
+	
+	
 
 }

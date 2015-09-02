@@ -42,7 +42,7 @@ public class PositionBean implements Serializable {
 	private List<Localization> localization;
 	private Status status;
 	private int numberOfposition=1;
-	private String SLA;
+	private Date SLA;
 	private String userPosition;
 	private String company;
 	private TechnicalArea technicalArea;
@@ -203,11 +203,11 @@ public class PositionBean implements Serializable {
 		this.numberOfposition = numberOfposition;
 	}
 
-	public String getSLA() {
+	public Date getSLA() {
 		return SLA;
 	}
 
-	public void setSLA(String sLA) {
+	public void setSLA(Date sLA) {
 		SLA = sLA;
 	}
 

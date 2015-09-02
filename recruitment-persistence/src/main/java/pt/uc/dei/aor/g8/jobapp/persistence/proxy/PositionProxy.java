@@ -207,7 +207,6 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 		return entityChanel;
 	}
 
-
 	@Override
 	public IUserProxy getUserPosition() {
 		// TODO Auto-generated method stub
