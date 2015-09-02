@@ -31,11 +31,11 @@ public interface IPositionProxy {
 	public int getNumberOfposition();
 	public void setNumberOfposition(int numberOfposition);
 	
-	public String getSLA();
-	public void setSLA(String sLA);
+	public Date getSLA();
+	public void setSLA(Date sLA);
 	
-	public IUserProxy getUserPosition();
-	public void setUserPosition(IUserProxy userPosition);
+	public IManagerProxy getUserPosition();
+	public void setUserPosition(IManagerProxy userPosition);
 	
 	public String getCompany();
 	public void setCompany(String company);

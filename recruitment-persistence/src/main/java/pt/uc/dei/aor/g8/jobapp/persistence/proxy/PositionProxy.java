@@ -11,7 +11,7 @@ import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IManagerProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobAdvertisingChanelEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
 
@@ -25,7 +25,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	public PositionProxy(Date openDate, Date closeDate, String code, String title,
-			List<Localization> localization, Status status, int numberOfposition, String sLA, String userPosition,
+			List<Localization> localization, Status status, int numberOfposition, Date sLA, String userPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<String> script) {
 
@@ -136,12 +136,12 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	@Override
-	public String getSLA() {
+	public Date getSLA() {
 		return entity.getSLA();
 	}
 
 	@Override
-	public void setSLA(String sLA) {
+	public void setSLA(Date sLA) {
 		entity.setSLA(sLA);
 	}
 
@@ -208,13 +208,13 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	@Override
-	public IUserProxy getUserPosition() {
+	public IManagerProxy getUserPosition() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setUserPosition(IUserProxy userPosition) {
+	public void setUserPosition(IManagerProxy userPosition) {
 		// TODO Auto-generated method stub
 
 	}

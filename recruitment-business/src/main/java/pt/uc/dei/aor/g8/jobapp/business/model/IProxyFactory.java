@@ -10,7 +10,7 @@ import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 public interface IProxyFactory {
 	
 	public IPositionProxy position(Date openDate, Date closeDate, String code, String title,
-			List<Localization> localization, Status status, int numberOfposition, String sLA, String userPosition,
+			List<Localization> localization, Status status, int numberOfposition, Date sLA, String userPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<String> script);
 	
