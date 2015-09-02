@@ -9,15 +9,22 @@
     </h:head>
     
     <h:body>
-        <p:panel header="Login From">
+        <p:panel header="Login Required">
             <h:form id="loginForm" onsubmit="document.loginForm.action = 'j_security_check';">  
+            	<br/>
                 <h:outputLabel value="Username"></h:outputLabel>  
                 <input name="j_username" type="text" /> 
                 <br/> 
                 <h:outputLabel value="Password"></h:outputLabel>  
-                <input name="j_password" size="15" type="password" />  
+                <input name="j_password" size="15" type="password" /> 
+                <br/>  
                 <h:commandButton value="Login"></h:commandButton>  
             </h:form> 
         </p:panel>
+        
+		<br/>
+		If you are a new user, please register on the link below.
+		<br/> 
+		<a href="/CriticalJobApplication/pages/signup.xhtml" >Register new user</a>
     </h:body>
 </html>
