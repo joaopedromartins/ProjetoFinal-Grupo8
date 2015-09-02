@@ -20,9 +20,9 @@ public class JobAdvertisingChanelProxy implements IJobAdvertisingChanelProxy, IE
 
 	public JobAdvertisingChanelProxy (JobAdvertisingChanelEntity jobAdvertisingChanel){
 		if (jobAdvertisingChanel==null){
-			this.entity=new JobAdvertisingChanelEntity();
+			this.entity = new JobAdvertisingChanelEntity();
 		} else {
-			this.entity=jobAdvertisingChanel;
+			this.entity = jobAdvertisingChanel;
 		}
 	}
 

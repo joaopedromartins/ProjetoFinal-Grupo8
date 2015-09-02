@@ -71,10 +71,11 @@ public class PositionEntity implements Serializable{
 	@Column
 	private int numberOfposition;
 
+	@Temporal(TemporalType.DATE)
 	@Column
-	private String SLA;
+	private Date SLA;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private UserEntity userPosition;
 
 	@Column
@@ -105,7 +106,7 @@ public class PositionEntity implements Serializable{
 
 
 	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization,
-			Status status, int numberOfposition, String sLA, UserEntity userPosition, String company, 
+			Status status, int numberOfposition, Date sLA, UserEntity userPosition, String company, 
 			TechnicalArea technicalArea, String descriptionPosition, List<JobAdvertisingChanelEntity> jobAdvertisingChanel,
 			List<ScriptEntity> script) {
 		this.openDate = openDate;
@@ -213,14 +214,14 @@ public class PositionEntity implements Serializable{
 
 
 
-	public String getSLA() {
+	public Date getSLA() {
 		return SLA;
 	}
 
 
 
 
-	public void setSLA(String sLA) {
+	public void setSLA(Date sLA) {
 		SLA = sLA;
 	}
 

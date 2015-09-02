@@ -29,7 +29,7 @@ public class PositionFacade implements IPositionFacade {
 
 	@Override
 	public IPositionProxy creatNewPosition(Date openDate, Date closeDate, String code, String title,
-			List<Localization> localization, Status status, int numberOfposition, String sLA, String userPosition,
+			List<Localization> localization, Status status, int numberOfposition, Date sLA, String userPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<String> script) {
 

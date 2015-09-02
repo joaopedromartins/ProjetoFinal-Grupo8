@@ -68,7 +68,8 @@
 			<p:message for="closeDate" />
 
 			<p:outputLabel value="SLA:" for="sla" />
-			<p:inputText id="sla" value="#{positionBean.SLA}" required="true" />
+			<p:calendar id="sla" required="true" value="#{positionBean.SLA}"
+				pattern="dd/MM/yyyy" locate="pt" />
 			<p:message for="sla" />
 
 			<p:outputLabel value="Technical manager:" for="userManager" />
@@ -99,7 +100,8 @@
 			<h:panelGroup id="panelGroupChanel">
 				<p:selectManyCheckbox id="channels"
 					value="#{positionBean.jobAdvertisingChanel}"
-					converter="omnifaces.SelectItemsConverter" layout="grid" columns="3">
+					converter="omnifaces.SelectItemsConverter" layout="grid"
+					columns="3">
 					<f:selectItems
 						value="#{jobAdvertisingChanelBean.findAllChannels()}"
 						var="channel" itemLabel="#{channel.chanelName}"
