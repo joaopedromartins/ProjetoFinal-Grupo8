@@ -11,16 +11,14 @@ public class UserProxy implements IUserProxy, IEntityAware<UserEntity> {
 	private UserEntity entity;
 
 	
-	
-	public UserProxy(String login, String password, String lastname, String firstname, String email,List<RoleType> roles) {
+	public UserProxy(){
 		this(null);
 	}
 	
-	public UserProxy(){
-		
+	public UserProxy(String login, String password, String lastname, String firstname, String email,List<RoleType> roles) {
+		this.entity= new UserEntity(login,password,lastname,firstname,email,roles);
 	}
-
-
+	
 	public UserProxy(UserEntity user) {
 		if(user == null){
 			this.entity = new UserEntity();
