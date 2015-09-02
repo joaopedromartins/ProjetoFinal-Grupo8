@@ -1,4 +1,4 @@
-package pt.uc.dei.aor.g8.jobapp.persistence.entities;
+package pt.uc.dei.aor.g8.business.enumeration;
 
 public enum RoleType {
 	ADMINISTRATOR ,

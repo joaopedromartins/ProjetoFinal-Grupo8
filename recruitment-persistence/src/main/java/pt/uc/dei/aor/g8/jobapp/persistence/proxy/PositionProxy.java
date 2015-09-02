@@ -11,7 +11,7 @@ import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IManagerProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobAdvertisingChanelEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
 
@@ -208,13 +208,13 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	@Override
-	public IManagerProxy getUserPosition() {
+	public IUserProxy getUserPosition() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setUserPosition(IManagerProxy userPosition) {
+	public void setUserPosition(IUserProxy userPosition) {
 		// TODO Auto-generated method stub
 
 	}
