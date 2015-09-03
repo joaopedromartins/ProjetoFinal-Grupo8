@@ -12,13 +12,13 @@ import pt.uc.dei.aor.g8.jobapp.business.persistence.IUserPersistenceService;
 
 @Stateless
 public class UserFacade implements IUserFacade {
-	
+
 	@EJB
 	private IProxyFactory factory;
-	
+
 	@EJB
 	private IUserPersistenceService service;
-	
+
 	public UserFacade(){
 		// TODO Auto-generated constructor stub
 	}
@@ -26,11 +26,19 @@ public class UserFacade implements IUserFacade {
 	@Override
 	public IUserProxy createUser(String username, String password, String lastname, String firstname, String email,
 			List<RoleType> roles) {
-		
-		IUserProxy proxy = factory.user(username, password, lastname, firstname, email, roles);
-		
-		
-		return service.createUser(proxy);
+		IUserProxy userUsername = service.findUserByUsername(username);
+		IUserProxy userEmail = service.findUserByEmail(email);
+
+		if ( userUsername == null && userEmail == null ){
+			IUserProxy newUser = factory.user(username, password, lastname, firstname, email, roles);
+			return service.createUser(newUser);
+		} else if (userUsername == null && userEmail != null ){
+			return null;
+
+		} else if (userUsername != null && userEmail == null ){
+			return null;
+		}
+		return null;
 	}
 
 }

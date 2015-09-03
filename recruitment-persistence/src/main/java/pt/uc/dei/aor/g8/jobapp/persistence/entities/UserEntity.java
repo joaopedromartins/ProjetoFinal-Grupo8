@@ -14,21 +14,30 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import pt.uc.dei.aor.g8.business.enumeration.RoleType;
 
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "UserEntity.findUserByUsername", query = "SELECT u FROM UserEntity u WHERE u.username=:username"),
+	@NamedQuery(name = "UserEntity.findUserByEmail", query = "SELECT u FROM UserEntity u WHERE u.email=:email"),
+})
 public class UserEntity {
 	//private static final long serialVersionUID = 1L;
+
+	public static final String FIND_USER_BY_USERNAME = "UserEntity.findUserByUsername";
+	public static final String FIND_USER_BY_EMAIL = "UserEntity.findUserByEmail";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true)
 	private long id;
 
-	@Column(length = 255, nullable = false)
+	@Column(length = 255, nullable = false, unique = true)
 	private String username;
 
 	@Column(length = 255, nullable = false)
@@ -40,7 +49,7 @@ public class UserEntity {
 	@Column(length = 60, nullable = false)
 	private String firstname;
 
-	@Column(length = 255, nullable = false)
+	@Column(length = 255, nullable = false, unique = true)
 	private String email;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -48,6 +57,9 @@ public class UserEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name="role")
 	private List<RoleType> roles;
+
+	@OneToMany ( cascade=CascadeType.ALL , mappedBy="managerPosition")
+	private List<PositionEntity> position;
 
 
 	//Constructors
@@ -64,13 +76,6 @@ public class UserEntity {
 		this.roles = new ArrayList<>();
 		this.roles.addAll(roles);
 	}
-	
-	
-	
-	
-	@OneToMany ( cascade=CascadeType.ALL , mappedBy="managerPosition")
-	private List<PositionEntity> position;
-	
 
 
 	//Getters and Setters
@@ -118,7 +123,5 @@ public class UserEntity {
 		this.email = email;
 	}
 
-	public long getId() {
-		return id;
-	}
+
 }

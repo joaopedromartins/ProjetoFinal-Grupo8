@@ -1,20 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Secured Administrator Area</title>
 </h:head>
 <h:body>
-	<h1>Hello Administrator</h1>
-	<h:commandLink value="Add Position"
-		action="/pages/administrator/addPosition?faces-redirect=true" />
-	<br />
-	<h:commandLink value="Positions"
-		action="/pages/administrator/tablePositions?faces-redirect=true" />
-	<br />
-	<h:link outcome="/hrapplication" value="Back to Homepage" />
+	<h:form>
+		<h1>Hello Administrator</h1>
+		<h:commandLink value="Add Position" action="addPosition.xhtml" />
+		<br />
+		<h:commandLink value="Positions" action="tablePositions.xhtml" />
+		<br />
+		<h:link outcome="/hrapplication" value="Back to Homepage" />
+		<br />
+		<p:commandButton value="Logout" icon="ui-icon-power" ajax="false"
+			action="#{userEntityBean.endSession()}"
+			style="float:right; height:32px; margin-top:19px;margin-right: 10px;" />
+
+	</h:form>
 </h:body>
 </html>

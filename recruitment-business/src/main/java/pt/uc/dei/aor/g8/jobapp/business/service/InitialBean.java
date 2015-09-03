@@ -35,23 +35,28 @@ public class InitialBean {
 		List <RoleType> roles= new ArrayList<>();
 		roles.add(RoleType.ADMINISTRATOR);
 
-		try {
-			userFacade.createUser("admin", encriptarPass("admin"), "lastname", "firstname", "admin@gmail.com", roles );
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		userFacade.createUser("admin", encriptarPass("admin"), "lastname", "firstname", "admin@gmail.com", roles );
+		
+		
 	}
 
-	private String encriptarPass(String pass) throws NoSuchAlgorithmException,
-	UnsupportedEncodingException {
+	private String encriptarPass(String pass)  {
 
-		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-		byte messageDigest[] = algorithm.digest(pass.getBytes("UTF-8"));
-
-		String senha = Base64.encodeBase64String(messageDigest);
-
-		return senha;
+		MessageDigest algorithm;
+		byte messageDigest[];
+		try {
+			algorithm = MessageDigest.getInstance("SHA-256");
+			messageDigest = algorithm.digest(pass.getBytes("UTF-8"));
+			String senha= Base64.encodeBase64String(messageDigest);
+			return senha;
+			
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
+		return null;
 	}
 
 }

@@ -93,17 +93,10 @@ public class PositionEntity implements Serializable{
 
 	@OneToMany
 	private List<ScriptEntity> script;
-	
-	
-
-
-
 
 	public PositionEntity() {
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization,
 			Status status, int numberOfposition, Date sLA, UserEntity userPosition, String company, 
