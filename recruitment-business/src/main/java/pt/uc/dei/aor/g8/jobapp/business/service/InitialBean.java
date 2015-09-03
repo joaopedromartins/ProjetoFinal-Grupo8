@@ -4,13 +4,15 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Base64;
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+
+import org.apache.commons.codec.binary.Base64;
 
 import pt.uc.dei.aor.g8.business.enumeration.RoleType;
 
@@ -47,14 +49,9 @@ public class InitialBean {
 		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
 		byte messageDigest[] = algorithm.digest(pass.getBytes("UTF-8"));
 
-		StringBuilder hexString = new StringBuilder();
+		String senha = Base64.encodeBase64String(messageDigest);
 
-		for (byte b : messageDigest) {
-			hexString.append(String.format("%02X", 0xFF & b));
-		}
-
-		String senha = hexString.toString();
 		return senha;
-
 	}
+
 }
