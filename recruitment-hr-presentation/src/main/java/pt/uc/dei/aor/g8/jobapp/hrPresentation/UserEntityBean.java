@@ -13,10 +13,8 @@ import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import pt.uc.dei.aor.g8.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
-import pt.uc.dei.aor.g8.jobapp.business.service.UserFacade;
 
 @Named
 @SessionScoped
