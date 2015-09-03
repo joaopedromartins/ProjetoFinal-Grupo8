@@ -6,7 +6,9 @@
 	<display-name>web human resources presentation</display-name>
 	<module-name>recruitment-hr-presentation</module-name>
 	<welcome-file-list>
-		<welcome-file>hrapplication.xhtml</welcome-file>
+		<welcome-file>/pages/administrator/administrator.xhtml</welcome-file>
+		<welcome-file>/pages/interviewer/interviewer.xhtml</welcome-file>
+		<welcome-file>/pages/manager/manager.xhtml</welcome-file>
 	</welcome-file-list>
 	<servlet>
 		<servlet-name>facesServlet</servlet-name>
