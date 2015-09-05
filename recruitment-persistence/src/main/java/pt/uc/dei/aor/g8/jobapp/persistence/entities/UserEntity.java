@@ -88,11 +88,11 @@ public class UserEntity {
 		this.roles = roles;
 	}
 
-	public String getLogin() {
+	public String getUsername() {
 		return username;
 	}
-	public void setLogin(String login) {
-		this.username = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

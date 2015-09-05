@@ -50,6 +50,58 @@ public class UserProxy implements IUserProxy, IEntityAware<UserEntity> {
 	public String toString(){
 		return entity.toString();
 	}
+
+	@Override
+	public List<RoleType> getRoles() {
+		
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		return entity.getUsername();
+	}
+
+	@Override
+	public void setUsername(String username) {
+		entity.setUsername(username);
+		
+	}
+
+	@Override
+	public void setPassword(String password) {
+		entity.setUsername(password);	
+	}
+
+	@Override
+	public String getLastname() {
+		return entity.getLastname();
+	}
+
+	@Override
+	public void setLastname(String lastname) {
+		entity.setLastname(lastname);
+	}
+
+	@Override
+	public String getFirstname() {
+		return entity.getFirstname();
+	}
+
+	@Override
+	public void setFirstname(String firstname) {
+		entity.setFirstname(firstname);
+	}
+
+	@Override
+	public String getEmail() {
+		return entity.getEmail();
+	}
+
+	@Override
+	public void setEmail(String email) {
+		entity.setEmail(email);
+	}
 	
 
 }

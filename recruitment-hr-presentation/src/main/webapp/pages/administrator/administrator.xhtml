@@ -10,6 +10,7 @@
 <h:body>
 	<h:form>
 		<h1>Hello Administrator</h1>
+		<p:outputLabel value="#{userBean.login()}"/>
 		<h:commandLink value="Add Position" action="addPosition.xhtml" />
 		<br />
 		<h:commandLink value="Positions" action="tablePositions.xhtml" />
@@ -17,7 +18,7 @@
 		<h:link outcome="/hrapplication" value="Back to Homepage" />
 		<br />
 		<p:commandButton value="Logout" icon="ui-icon-power" ajax="false"
-			action="#{userEntityBean.endSession()}"
+			action="#{userBean.logout()}"
 			style="float:right; height:32px; margin-top:19px;margin-right: 10px;" />
 
 	</h:form>

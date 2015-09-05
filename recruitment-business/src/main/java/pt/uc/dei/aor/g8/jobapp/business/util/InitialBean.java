@@ -1,4 +1,4 @@
-package pt.uc.dei.aor.g8.jobapp.business.service;
+package pt.uc.dei.aor.g8.jobapp.business.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -15,6 +15,8 @@ import javax.ejb.Startup;
 import org.apache.commons.codec.binary.Base64;
 
 import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+import pt.uc.dei.aor.g8.jobapp.business.service.IJobAdversitingChanelFacade;
+import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 
 
 @Startup

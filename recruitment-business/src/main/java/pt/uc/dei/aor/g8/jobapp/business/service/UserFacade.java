@@ -41,4 +41,13 @@ public class UserFacade implements IUserFacade {
 		return null;
 	}
 
+	@Override
+	public IUserProxy findUserByUsername(String username) {
+		IUserProxy user = service.findUserByUsername(username);
+		if(user != null){
+			return user;
+		}
+		return null;
+	}
+
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -12,19 +11,19 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-
 import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 
 @Named
 @SessionScoped
-public class UserEntityBean implements Serializable {
+public class UserBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private boolean isLogged;
 	private String password;
 	private String username;
@@ -32,22 +31,24 @@ public class UserEntityBean implements Serializable {
 	private String lastName;
 	private String email;
 	private List<RoleType> roles;
-	
+	private IUserProxy currentUser;
+
 	@EJB
 	private IUserFacade userFacade;
 
-	public UserEntityBean() {
-		
+	public UserBean() {
+
 	}
-	
-	
-	public String endSession() {
+
+
+	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
 
 		try {
-			isLogged = false;
+			this.currentUser=null;
+			this.isLogged = false;
 			request.logout();
 			request.getSession().invalidate();
 		} catch (ServletException e) {
@@ -55,12 +56,34 @@ public class UserEntityBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR, "Logout Failed", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-		return "/pages/login.xhtml?faces-redirect=true";
+		return "login?faces-redirect=true";
 
 	}
-	
-	
-	
+
+
+	public IUserProxy getCurrentUser(){
+		if ( currentUser == null){
+			String username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+			if ( username != null ){
+				this.isLogged = true;
+				this.currentUser = findUserByUsername();
+				return currentUser;
+			}else {
+				logout();
+				return null;
+			}
+		} else {
+			return this.currentUser;
+		}
+	}
+
+
+
+	public IUserProxy findUserByUsername (){
+		return userFacade.findUserByUsername(username);
+	}
+
+
 
 	public boolean isLogged() {
 		return isLogged;
@@ -113,7 +136,7 @@ public class UserEntityBean implements Serializable {
 	public List<RoleType> getPossibleRoles() {
 		return new ArrayList<RoleType>(EnumSet.allOf(RoleType.class));
 	}
-	
+
 	public List<RoleType> getRoles() {
 		return roles;
 	}
@@ -123,15 +146,15 @@ public class UserEntityBean implements Serializable {
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
 
-/*	public void init() {
+
+
+
+
+
+
+
+	/*	public void init() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -193,7 +216,7 @@ public class UserEntityBean implements Serializable {
 		return null;
 	}
 
-	
+
 
 	public void register() {
 		boolean success = userInterface.save(newUser);
@@ -210,7 +233,7 @@ public class UserEntityBean implements Serializable {
 		newUser = new UserEntity();
 	}*/
 
-	
+
 
 
 }
