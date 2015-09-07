@@ -1,4 +1,4 @@
-package pt.uc.dei.aor.g8.jobapp.business.util;
+package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -11,30 +11,30 @@
 <h:body>
 
 	<h:form id="formAddUser">
-		<h:outputText value="Add a Position" />
+		<h:outputText value="Add a Employer" />
 		<br />
 		<p:panelGrid id="gridNewUser" columns="3">
-			<p:outputLabel value="Title :" for="title" />
-			<p:inputText id="title" value="#{positionBean.title}" required="true" />
-			<p:message for="title" />
-
-			<p:outputLabel value="Technical Area:" for="area" />
-			<p:selectOneMenu id="area" value="#{positionBean.technicalArea}"
-				required="true" converter="omnifaces.SelectItemsConverter">
-				<f:selectItem noSelectionOption="true" itemLabel="Select One" />
-				<f:selectItems value="#{positionBean.possibleTecnicalArea}"
-					var="area" itemLabel="#{area.description}" />
-			</p:selectOneMenu>
-			<p:message for="area" />
-
-			<p:outputLabel value="Position code:" for="code" />
-			<p:inputText id="code" value="#{positionBean.code}" required="true" />
-			<p:message for="code" />
-
-			<p:outputLabel value="Company:" for="company" />
-			<p:inputText id="company" value="#{positionBean.company}"
+			<p:outputLabel value="First Name:" for="firstname" />
+			<p:inputText id="firstname" value="#{registerUserBean.firstName}"
 				required="true" />
-			<p:message for="company" />
+			<p:message for="firstname" />
+
+			<p:outputLabel value="Last name:" for="lastname" />
+			<p:inputText id="lastname" value="#{registerUserBean.lastName}"
+				required="true" />
+			<p:message for="lastname" />
+
+			<p:outputLabel value="Email:" for="email" />
+			<p:inputText id="email" value="#{registerUserBean.email}"
+				required="true">
+				<f:validator validatorId="emailValidator" />
+			</p:inputText>
+			<p:message for="email" />
+
+			<p:outputLabel value="Password:" for="password" />
+			<p:password id="password" value="#{registerUserBean.password}" feedback="true"
+				required="true" />
+			<p:message for="password" />
 
 			<p:outputLabel value="Location(s):" for="localization" />
 			<p:selectManyCheckbox id="localization"
@@ -47,25 +47,7 @@
 			</p:selectManyCheckbox>
 			<p:message for="localization" />
 
-			<p:outputLabel value="Number of vacancy:" for="numberPositions" />
-			<p:spinner id="numberPositions"
-				value="#{positionBean.numberOfposition}" required="true" min="1" />
-			<p:message for="numberPositions" />
-
-			<p:outputLabel value="Open date position:" for="openDate" />
-			<p:calendar id="openDate" disabled="true"
-				value="#{positionBean.openDate}" pattern="dd/MM/yyyy" locale="pt" />
-			<p:message for="openDate" />
-
-			<p:outputLabel value="Close date position:" for="closeDate" />
-			<p:calendar id="closeDate" required="true"
-				value="#{positionBean.closeDate}" pattern="dd/MM/yyyy" locale="pt" />
-			<p:message for="closeDate" />
-
-			<p:outputLabel value="SLA:" for="sla" />
-			<p:calendar id="sla" required="true" value="#{positionBean.SLA}"
-				pattern="dd/MM/yyyy" locate="pt" />
-			<p:message for="sla" />
+			
 
 			<p:outputLabel value="Technical manager:" for="userManager" />
 			<p:inputText id="userManager" value="#{positionBean.userPosition}"
@@ -126,8 +108,7 @@
 
 		</p:panelGrid>
 		<p:growl id="growl" />
-		<p:commandButton value="Save"
-			action="#{registerUserBean.newUser()}"
+		<p:commandButton value="Save" action="#{registerUserBean.newUser()}"
 			update="gridPosition growl" />
 
 	</h:form>
