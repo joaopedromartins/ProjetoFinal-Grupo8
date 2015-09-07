@@ -23,6 +23,11 @@
 			<p:inputText id="lastname" value="#{registerUserBean.lastName}"
 				required="true" />
 			<p:message for="lastname" />
+			
+			<p:outputLabel value="Username:" for="username" />
+			<p:inputText id="username" value="#{registerUserBean.username}"
+				required="true" />
+			<p:message for="username" />
 
 			<p:outputLabel value="Email:" for="email" />
 			<p:inputText id="email" value="#{registerUserBean.email}"
@@ -31,85 +36,18 @@
 			</p:inputText>
 			<p:message for="email" />
 
-			<p:outputLabel value="Password:" for="password" />
-			<p:password id="password" value="#{registerUserBean.password}" feedback="true"
-				required="true" />
-			<p:message for="password" />
-
-			<p:outputLabel value="Location(s):" for="localization" />
-			<p:selectManyCheckbox id="localization"
-				converter="omnifaces.SelectItemsConverter"
-				value="#{positionBean.localization}" required="true">
-				<f:selectItems value="#{positionBean.getPossibleLocalization()}"
-					var="localization" itemLabel="#{localization.description}"
-					itemValue="#{localization}" />
-
-			</p:selectManyCheckbox>
-			<p:message for="localization" />
-
-			
-
-			<p:outputLabel value="Technical manager:" for="userManager" />
-			<p:inputText id="userManager" value="#{positionBean.userPosition}"
-				required="true" />
-			<p:message for="userManager" />
-
-			<p:outputLabel value="Status:" for="status" />
-			<p:selectOneMenu id="status" value="#{positionBean.status}"
+			<p:outputLabel value="Employer type:" for="employerType" />
+			<p:selectOneMenu id="employerType" value="#{registerUserBean.roles}"
 				required="true" converter="omnifaces.SelectItemsConverter">
-				<f:selectItems value="#{positionBean.possibleStatus}" var="status"
-					itemLabel="#{status.description}" />
+				<f:selectItems value="#{registerUserBean.getPossibleRoles()}"
+					var="roles" itemLabel="#{roles.description}" itemValue="#{roles}" />
 			</p:selectOneMenu>
-			<p:message for="status" />
-
-			<p:outputLabel value="Description:" for="description" />
-			<h:panelGroup>
-				<p:inputTextarea id="description"
-					value="#{positionBean.descriptionPosition}" required="true"
-					rows="5" cols="30" counter="display" maxlength="200"
-					counterTemplate="{0} characters remaining." autoResize="false" />
-				<br />
-				<h:outputLabel id="display" />
-			</h:panelGroup>
-			<p:message for="description" />
-
-			<p:outputLabel value="Job Posting Channels:" for="channels" />
-			<h:panelGroup id="panelGroupChanel">
-				<p:selectManyCheckbox id="channels"
-					value="#{positionBean.jobAdvertisingChanel}"
-					converter="omnifaces.SelectItemsConverter" layout="grid"
-					columns="3">
-					<f:selectItems
-						value="#{jobAdvertisingChanelBean.findAllChannels()}"
-						var="channel" itemLabel="#{channel.chanelName}"
-						itemValue="#{channel}" />
-				</p:selectManyCheckbox>
-				<p:commandButton id="addChanel" icon="ui-icon-plusthick"
-					process="@this"
-					action="#{jobAdvertisingChanelBean.showAddChanel()}"
-					update=":formAddPosition:panelGroupChanel" />
-
-				<h:panelGroup id="addChannelPanelGroup"
-					rendered="#{jobAdvertisingChanelBean.add}">
-					<p:outputLabel value="Chanel name:" />
-					<p:inputText id="channel"
-						value="#{jobAdvertisingChanelBean.channelName}" />
-					<p:commandButton id="saveChanel" icon="ui-icon-disk"
-						process="@this channel"
-						actionListener="#{jobAdvertisingChanelBean.addChannel}"
-						update=":formAddPosition:panelGroupChanel growl" />
-				</h:panelGroup>
-			</h:panelGroup>
-			<p:message for="channels" />
-
-			<p:outputLabel value="Script:" for="script" />
-			<p:inputText id="script" required="true" />
-			<p:message for="script" />
+			<p:message for="employerType" />
 
 		</p:panelGrid>
 		<p:growl id="growl" />
 		<p:commandButton value="Save" action="#{registerUserBean.newUser()}"
-			update="gridPosition growl" />
+			update="gridNewUser growl" />
 
 	</h:form>
 </h:body>

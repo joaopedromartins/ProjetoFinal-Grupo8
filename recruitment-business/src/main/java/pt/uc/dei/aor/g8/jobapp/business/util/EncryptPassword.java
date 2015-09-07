@@ -4,8 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.ejb.Stateless;
+
 import org.apache.commons.codec.binary.Base64;
 
+@Stateless
 public class EncryptPassword {
 	
 	public String encriptarPass(String pass)  {

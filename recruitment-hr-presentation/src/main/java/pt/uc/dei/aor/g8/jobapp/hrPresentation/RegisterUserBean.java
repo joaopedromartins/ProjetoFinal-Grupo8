@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -8,8 +9,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
 import pt.uc.dei.aor.g8.business.enumeration.RoleType;
-import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 
 @Named
@@ -20,12 +21,11 @@ public class RegisterUserBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String password;
 	private String username;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private List<RoleType> roles;
+	private RoleType roles;
 
 	@EJB
 	private IUserFacade userFacade;
@@ -36,25 +36,19 @@ public class RegisterUserBean implements Serializable{
 	}
 
 	public void newUser(){
-		IUserProxy newUser= userFacade.createUser(username, password, lastName, firstName, email, roles);
-		if (newUser != null) {
+		String messagebusiness= userFacade.createUserWithOutPassword(username, lastName, firstName, email, roles);
+		if (messagebusiness.equals("sucess")) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"User registered successfully.", "");
+					"Employer, " +firstName +" " + lastName +", registered successfully.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
 			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "E-mail already registered",
+					FacesMessage.SEVERITY_ERROR, "messagebusiness",
 					"");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
 
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public String getUsername() {
 		return username;
 	}
@@ -79,10 +73,14 @@ public class RegisterUserBean implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<RoleType> getRoles() {
+	
+	public List<RoleType> getPossibleRoles (){
+		return Arrays.asList(RoleType.values());	
+	}
+	public RoleType getRoles() {
 		return roles;
 	}
-	public void setRoles(List<RoleType> roles) {
+	public void setRoles(RoleType roles) {
 		this.roles = roles;
 	}
 

@@ -22,6 +22,7 @@ public class InitialBean {
 	@EJB
 	private IUserFacade userFacade;
 	
+	@EJB
 	private EncryptPassword passwordEncrypt;
 
 	@PostConstruct

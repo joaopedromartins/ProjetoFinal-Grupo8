@@ -56,17 +56,18 @@ public class UserBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR, "Logout Failed", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-		return "login?faces-redirect=true";
+		return "/pages/login?faces-redirect=true";
 
 	}
 
 
 	public IUserProxy getCurrentUser(){
 		if ( currentUser == null){
-			String username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+			this.username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
 			if ( username != null ){
 				this.isLogged = true;
 				this.currentUser = findUserByUsername();
+				System.out.println(currentUser);
 				return currentUser;
 			}else {
 				logout();
@@ -80,7 +81,7 @@ public class UserBean implements Serializable {
 
 
 	public IUserProxy findUserByUsername (){
-		return userFacade.findUserByUsername(username);
+		return userFacade.findUserByUsername(username);	
 	}
 
 
