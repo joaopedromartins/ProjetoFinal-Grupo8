@@ -6,6 +6,8 @@ import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 
 public interface ICandidateFacade {
 	public ICandidateProxy createNewCandidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile);
+
+	public ICandidateProxy editCandidate(ICandidateProxy candidateProxy);
 	
 
 }

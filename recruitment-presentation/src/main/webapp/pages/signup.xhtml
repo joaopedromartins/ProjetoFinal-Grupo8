@@ -15,10 +15,10 @@
 				<p:messages />
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Username" for="username"/>
-					<p:inputText id="username" required="true" value="#{SignUpBean.username}"/>
+					<p:inputText id="username" required="true" value="#{signUpBean.username}"/>
 				
 					<p:outputLabel value="Password" for="password" />
-					<p:password id="password" required="true" value="#{SignUpBean.password}" 
+					<p:password id="password" required="true" value="#{signUpBean.password}" 
 						feedback="true" weakLabel="Week" goodLabel="Good" strongLabel="Strong"
 						promptLabel="Insert Password" inline="true"
 						match="retypepassword" />
@@ -27,21 +27,21 @@
 					<p:password id="retypepassword" required="true" />
 					
 					<p:outputLabel value="Firstname" for="firstname"/>
-					<p:inputText id="firstname" required="true" value="#{SignUpBean.firstname}"/>
+					<p:inputText id="firstname" required="true" value="#{signUpBean.firstname}"/>
 					
 					<p:outputLabel value="Lastname" for="lastname"/>
-					<p:inputText id="lastname" required="true" value="#{SignUpBean.lastname}"/>
+					<p:inputText id="lastname" required="true" value="#{signUpBean.lastname}"/>
 					
 					<p:outputLabel value="Email" for="email"/>
-					<p:inputText id="email" required="true" value="#{SignUpBean.email}"/>
+					<p:inputText id="email" required="true" value="#{signUpBean.email}"/>
 					
 					<p:outputLabel value="Mobile" for="mobile"/>
-					<p:inputText id="mobile" required="true" value="#{SignUpBean.mobile}"/>
+					<p:inputText id="mobile" required="true" value="#{signUpBean.mobile}"/>
 					
 				</p:panelGrid>
 				
 				<br/>
-				<p:commandButton value="SignUp" action="#{SignUpBean.register}" update="@form" />
+				<p:commandButton value="SignUp" action="#{signUpBean.register}" update="@form" />
 				
 				</center>
 			</h:form> 

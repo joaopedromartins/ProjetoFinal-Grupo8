@@ -97,8 +97,6 @@ public class CandidateProxy implements ICandidateProxy, IEntityAware<CandidateEn
 	}
 	
 
-	
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object o) {

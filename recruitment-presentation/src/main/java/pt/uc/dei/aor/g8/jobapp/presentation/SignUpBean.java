@@ -1,11 +1,16 @@
 package pt.uc.dei.aor.g8.jobapp.presentation;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
+import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
+import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
 
 @Named
 @SessionScoped
@@ -13,15 +18,15 @@ public class SignUpBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	//@EJB
-	//private ICandidateFacade candidateFacade;
+	@EJB
+	private ICandidateFacade candidateFacade;
 	
 	private String username;
 	private String password;
 	private String firstname;
 	private String lastname;
 	private String email;
-	private String mobile;
+	private BigInteger mobile;
 	
 	
 	
@@ -56,19 +61,39 @@ public class SignUpBean implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getMobile() {
+	public BigInteger getMobile() {
 		return mobile;
 	}
-	public void setMobile(String mobile) {
+	public void setMobile(BigInteger mobile) {
 		this.mobile = mobile;
 	}
 	
 	
-	//
+	//Methods
 	
 	public String register() {
-		//TODO
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Signup username "+username+" sucess."));
+		ICandidateProxy proxy;
+		proxy=candidateFacade.createNewCandidate(username, password, lastname, firstname, email, mobile);
+	
+		if(proxy!=null){
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_INFO,
+					"User "+username+" created successfully.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			username=null;
+			password=null;
+			firstname=null;
+			lastname=null;
+			email=null;
+			mobile=null;
+			
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error adding user.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);	
+		}
+
 		return "signup";
 	}
 	
