@@ -4,7 +4,11 @@ import java.math.BigInteger;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
+
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
@@ -19,26 +23,41 @@ public class CandidateFacade implements ICandidateFacade {
 	@EJB
 	private ICandidatePersistenceService service;
 	
-	@Inject
-	private EncryptEJB crypt;
-
 	public CandidateFacade() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public ICandidateProxy createNewCandidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
-		//Encript password
-    	if (crypt != null) {
-    		ICandidateProxy newCandidate = factory.candidate(username, crypt.encrypt(password, username), lastname, firstname, email, mobile);
-    		return service.saveCandidate(newCandidate);
-    	}
-    	return null;
+		
+		try {
+			//Encript password
+			ICandidateProxy newCandidate = factory.candidate(username, encryptPass(password), lastname, firstname, email, mobile);
+			return service.saveCandidate(newCandidate);
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			//Encrypt password failed
+			//Abort candidate creation
+			return null;
+		}
+		
 	}
 
 	@Override
 	public ICandidateProxy editCandidate(ICandidateProxy candidateProxy) {
 		return service.editCandidate(candidateProxy);
+	}
+	
+	/**
+	 * Encrypt password SHA256 Base64
+	 * 
+	 * @param password
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 */
+	public String encryptPass(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		MessageDigest digest = MessageDigest.getInstance("SHA-256");
+		byte[] hash = digest.digest(password.getBytes("UTF-8"));
+		return new String(Base64.getEncoder().encode(hash));
 	}
 
 }
