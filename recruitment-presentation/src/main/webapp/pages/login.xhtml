@@ -11,20 +11,24 @@
     <h:body>
         <p:panel header="Login Required">
             <h:form id="loginForm" onsubmit="document.loginForm.action = 'j_security_check';">  
-            	<br/>
-                <h:outputLabel value="Username"></h:outputLabel>  
-                <input name="j_username" type="text" /> 
-                <br/> 
-                <h:outputLabel value="Password"></h:outputLabel>  
-                <input name="j_password" size="15" type="password" /> 
-                <br/>  
-                <h:commandButton value="Login"></h:commandButton>  
+            	<center>
+	            	<p:panelGrid columns="2">
+		                <h:outputLabel value="Username"></h:outputLabel>  
+		                <input name="j_username" type="text" /> 
+		                
+		                <h:outputLabel value="Password"></h:outputLabel>  
+		                <input name="j_password" type="password" /> 
+					</p:panelGrid>
+					<br/>
+					<h:commandButton value="Login"></h:commandButton> 
+				</center>
             </h:form> 
         </p:panel>
         
 		<br/>
-		If you are a new user, please register on the link below.
+		<a href="#{facesContext.externalContext.requestContextPath}/pages/signup.xhtml" >Click me to Register a new user.</a><br/>
+		<!--  <a href="CriticalJobApplication/pages/signup.xhtml" >Click me to Register a new user.</a> -->
 		<br/> 
-		<a href="/CriticalJobApplication/pages/signup.xhtml" >Register new user</a>
+		<a href="#{facesContext.externalContext.requestContextPath}/pages/recover.xhtml" >Forget username or password. Click to recover!</a>
     </h:body>
 </html>

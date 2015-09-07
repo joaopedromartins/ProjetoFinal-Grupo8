@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.business.model;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -15,5 +16,7 @@ public interface IProxyFactory {
 			List<String> script);
 	
 	public IJobAdvertisingChanelProxy jobAdvertisingChanel(String chanelName);
+	
+	public ICandidateProxy candidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile);
 	
 }

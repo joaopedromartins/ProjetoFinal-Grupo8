@@ -3,6 +3,8 @@ package pt.uc.dei.aor.g8.jobapp.presentation;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 @Named
@@ -23,7 +25,7 @@ public class SignUpBean implements Serializable {
 	
 	
 	
-	//Getters ans Setters
+	//Getters and Setters
 	public String getUsername() {
 		return username;
 	}
@@ -62,7 +64,17 @@ public class SignUpBean implements Serializable {
 	}
 	
 	
+	//
+	
 	public String register() {
+		//TODO
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Signup username "+username+" sucess."));
+		return "signup";
+	}
+	
+	public String recover() {
+		//TODO
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("recover email to "+email+" has been sent with sucess."));
 		return "signup";
 	}
 	

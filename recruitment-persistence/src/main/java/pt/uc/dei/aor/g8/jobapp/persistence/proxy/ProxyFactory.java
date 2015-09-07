@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
+import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
@@ -34,6 +36,9 @@ public class ProxyFactory implements IProxyFactory {
 		return new JobAdvertisingChanelProxy(chanelName);
 	}
 	
-	
+	@Override
+	public ICandidateProxy candidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
+		return new CandidateProxy (username, password, lastname, firstname, email, mobile);
+	}
 
 }

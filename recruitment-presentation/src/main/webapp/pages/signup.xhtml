@@ -11,8 +11,8 @@
     <h:body>
         <p:panel header="SignUp new User">
             <h:form id="signupForm"> 
+				<center>
 				<p:messages />
-
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Username" for="username"/>
 					<p:inputText id="username" required="true" value="#{SignUpBean.username}"/>
@@ -34,10 +34,19 @@
 					
 					<p:outputLabel value="Email" for="email"/>
 					<p:inputText id="email" required="true" value="#{SignUpBean.email}"/>
+					
+					<p:outputLabel value="Mobile" for="mobile"/>
+					<p:inputText id="mobile" required="true" value="#{SignUpBean.mobile}"/>
+					
 				</p:panelGrid>
-
-				<p:commandButton value="SignUp" action="#{SignUpBean.register}" update="@signupForm"/>
+				
+				<br/>
+				<p:commandButton value="SignUp" action="#{SignUpBean.register}" update="@form" />
+				
+				</center>
 			</h:form> 
 		</p:panel>
+		<br/>
+		<a href="#{facesContext.externalContext.requestContextPath}/" >Go Back</a>
     </h:body>
 </html>
