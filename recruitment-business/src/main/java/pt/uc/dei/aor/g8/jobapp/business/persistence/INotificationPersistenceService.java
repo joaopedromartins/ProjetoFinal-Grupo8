@@ -11,5 +11,6 @@ public interface INotificationPersistenceService {
 	public List <INotificationProxy> allNotificationByUser (IUserProxy userReceiver);
 	public List <INotificationProxy> viewNotificationByUser (IUserProxy userReceiver);
 	public List <INotificationProxy> notViewNotificationByUser (IUserProxy userReceiver);
+	public INotificationProxy updateNotification(INotificationProxy notificationProxy);
 	
 }

@@ -97,4 +97,14 @@ public class NotificationProxy implements INotificationProxy, IEntityAware<Notif
 		return entityUser;
 	}
 
+	@Override
+	public boolean isViewNotification() {
+		return entity.isViewNotification();
+	}
+
+	@Override
+	public void setViewNotification(boolean viewNotification) {
+		entity.setViewNotification(viewNotification);
+	}
+
 }

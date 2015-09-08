@@ -11,6 +11,6 @@ public interface INotificationFacade {
 	public List<INotificationProxy>	allNotificationByUser(IUserProxy userReceiver);
 	public List<INotificationProxy>	viewNotificationByUser(IUserProxy userReceiver);
 	public List<INotificationProxy>	notViewNotificationByUser(IUserProxy userReceiver);
-	public void viewTrue(INotificationProxy proxy);
+	public INotificationProxy viewTrue(INotificationProxy proxy);
 	
 }

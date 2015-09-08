@@ -25,9 +25,8 @@
 					<p:commandButton
 						update=":formNotificationsTable:tableNotifications :notificationDetail"
 						oncomplete="PF('notificationView').show()" icon="ui-icon-search"
-						title="View" action="#{notificationBean.view()}">
-						<f:setPropertyActionListener value="#{notification}"
-							target="#{notificationBean.notificationProxy}" />
+						title="View" actionListener="#{notificationBean.viewTrue(notification)}">
+						
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

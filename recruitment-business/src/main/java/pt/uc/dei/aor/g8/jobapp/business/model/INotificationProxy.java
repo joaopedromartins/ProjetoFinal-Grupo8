@@ -18,5 +18,8 @@ public interface INotificationProxy {
 
 	public IUserProxy getUserReciver();
 	public void setUserReciver(IUserProxy userReciver);
+	
+	public boolean isViewNotification();
+	public void setViewNotification(boolean viewNotification);
 
 }

@@ -49,9 +49,9 @@ public class NotificationFacade implements INotificationFacade {
 
 
 	@Override
-	public void viewTrue(INotificationProxy proxy) {
-		// TODO Auto-generated method stub
-		
+	public INotificationProxy viewTrue(INotificationProxy proxy) {
+		proxy.setViewNotification(true);
+		return service.updateNotification(proxy);
 	}
 
 }

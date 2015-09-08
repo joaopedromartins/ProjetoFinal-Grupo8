@@ -55,8 +55,11 @@ public class NotificationBean implements Serializable{
 		this.notificationProxy = notificationProxy;
 	}
 	
-	public void viewTrue(){
-		
+	public void viewTrue(INotificationProxy notification){
+		this.notificationProxy = notification;
+		if( !notificationProxy.isViewNotification()){
+			this.notificationProxy = facade.viewTrue(notificationProxy);
+		}
 	}
 
 
