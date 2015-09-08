@@ -63,11 +63,10 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 
 	@Override
 	public List<IPositionProxy> listOfAllOpenPosition() {
-		TypedQuery<PositionEntity> query = em.createQuery("SELECT p FROM PositionEntity p where p.status like :status", PositionEntity.class); 
-		query.setParameter("status", "Open");
-		List<PositionEntity> entity= query.getResultList();
+		TypedQuery<PositionEntity> query = em.createNamedQuery(PositionEntity.LIST_OF_ALL_OPEN_POSITION, PositionEntity.class); 
+		List<PositionEntity> entity = query.getResultList();
 		
-		List<IPositionProxy> proxy= new ArrayList<>();
+		List<IPositionProxy> proxy = new ArrayList<>();
 		for(PositionEntity p: entity){
 			proxy.add(new PositionProxy(p));
 		}

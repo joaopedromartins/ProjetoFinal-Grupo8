@@ -15,7 +15,7 @@
 <h:body>
 	<h:form id="formPositionsTable">
 		<p:dataTable id="tablePositions" var="position"
-			value="#{positionBean.listOfAllPosition()}">
+			value="#{positionBean.listOfAllOpenPosition()}">
 			<f:facet name="header">
             Positions
         </f:facet>
@@ -48,6 +48,15 @@
 					update=":formPositionsTable:tablePositions :positionDetail"
 					oncomplete="PF('positionView').show()" icon="ui-icon-search"
 					title="View">
+					<f:setPropertyActionListener value="#{position}"
+						target="#{positionBean.positionProxy}" />
+				</p:commandButton>
+			</p:column>
+			<p:column style="width:32px;text-align: center">
+				<p:commandButton
+					update=":formPositionEdit:positionEdit"
+					oncomplete="PF('positionEdit').show()" icon="ui-icon-bookmark"
+					title="Apply Position">
 					<f:setPropertyActionListener value="#{position}"
 						target="#{positionBean.positionProxy}" />
 				</p:commandButton>
@@ -87,12 +96,6 @@
 
 				<h:outputText value="Technical Area:" />
 				<h:outputText value="#{positionBean.positionProxy.technicalArea.description}" />
-				
-				<h:form id="formPositionEdit">
-					<p:commandButton value="Submit"
-							action="#{positionBean.submitPosition()}"
-							update=":formPositionsTable:tablePositions growl" />
-				</h:form>
 
 			</p:panelGrid>
 		</p:outputPanel>
@@ -157,8 +160,8 @@
 						value="#{positionBean.positionProxy.userPosition}" required="true" />
 
 
-					<p:commandButton value="Submit"
-						action="#{positionBean.submitPosition()}"
+					<p:commandButton value="Update"
+						action="#{positionBean.editPosition()}"
 						update=":formPositionsTable:tablePositions growl" />
 
 				</p:panelGrid>

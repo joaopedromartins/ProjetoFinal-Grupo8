@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,7 +30,10 @@ import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 
 @Entity
 @Table(name = "Position")
-@NamedQuery(name = "Position.listOfAllPosition", query = "SELECT p FROM PositionEntity p")
+@NamedQueries({
+@NamedQuery(name = "Position.listOfAllPosition", query = "SELECT p FROM PositionEntity p"),
+@NamedQuery(name = "Position.listOfAllOpenPosition", query = "SELECT p FROM PositionEntity p where p.status like 'OPEN' ")
+})
 public class PositionEntity implements Serializable{
 
 	/**
@@ -39,6 +43,8 @@ public class PositionEntity implements Serializable{
 
 
 	public static final String LIST_OF_ALL_POSITION = "Position.listOfAllPosition";
+	public static final String LIST_OF_ALL_OPEN_POSITION = "Position.listOfAllOpenPosition";
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

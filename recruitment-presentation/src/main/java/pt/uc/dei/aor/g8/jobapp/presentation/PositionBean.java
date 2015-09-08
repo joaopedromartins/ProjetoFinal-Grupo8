@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
@@ -55,13 +57,9 @@ public class PositionBean implements Serializable {
 		
 	}
 	
-	public void submitPosition() {
+	public List<IPositionProxy> listOfAllPosition(){
 		
-	}
-	
-	public List<IPositionProxy> listOfAllOpenPosition(){
-		
-		return this.listPosition=positionFacade.listOfAllOpenPosition();
+		return this.listPosition=positionFacade.listOfAllPosition();
 	}
 	
 	public List<IPositionProxy> getListPosition() {
@@ -81,13 +79,61 @@ public class PositionBean implements Serializable {
 		this.positionProxy = positionProxy;
 	}
 	
-	
+	public void editPosition(){
+		IPositionProxy proxy2;
+		
+		proxy2=positionFacade.editPosition(positionProxy);
+		if(proxy2!=null){
+			
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_INFO,
+					"Position updated successfully.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error updated position.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);	
+		}
+	}
 
+	public void creatNewPosition (){
+		IPositionProxy proxy;
+		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
 	
+		if(proxy!=null){
+			closeDate=null;
+			code=null;
+			title=null;
+			localization.clear();
+			status=null;
+			numberOfposition=1;
+			SLA=null;
+			userPosition=null;
+			company=null;
+			technicalArea=null;
+			descriptionPosition=null;
+			jobAdvertisingChanel=null;
+			script=null;
+			
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_INFO,
+					"Position created successfully.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error creating position.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);	
+		}
+		
+	}
 
 	public Date getOpenDate() {
 		return openDate;
 	}
+
+
 
 	public Date getCloseDate() {
 		return closeDate;
@@ -212,5 +258,10 @@ public class PositionBean implements Serializable {
 	
 	
 	
-
+	
+	public List<IPositionProxy> listOfAllOpenPosition(){
+		
+		return this.listPosition=positionFacade.listOfAllOpenPosition();
+	}
+	
 }
