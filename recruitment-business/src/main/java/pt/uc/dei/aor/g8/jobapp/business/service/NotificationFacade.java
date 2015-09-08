@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -20,11 +21,37 @@ public class NotificationFacade implements INotificationFacade {
 	
 	
 	@Override
-	public INotificationProxy createNotification(String title, Date dateNotification, String message, String signature,
+	public INotificationProxy createNotification(String title, String message, String signature,
 			IUserProxy userReciver) {
-		
+		Date dateNotification = new Date();
+		dateNotification.getTime();
 		INotificationProxy newNotification = factory.notification(title,dateNotification, message, signature, userReciver);
 		return service.creatNotification(newNotification);
+	}
+
+
+	@Override
+	public List<INotificationProxy> allNotificationByUser(IUserProxy userReceiver) {	
+		return service.allNotificationByUser(userReceiver);
+	}
+
+
+	@Override
+	public List<INotificationProxy> viewNotificationByUser(IUserProxy userReceiver) {
+		return service.notViewNotificationByUser(userReceiver);
+	}
+
+
+	@Override
+	public List<INotificationProxy> notViewNotificationByUser(IUserProxy userReceiver) {
+		return service.notViewNotificationByUser(userReceiver);
+	}
+
+
+	@Override
+	public void viewTrue(INotificationProxy proxy) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
