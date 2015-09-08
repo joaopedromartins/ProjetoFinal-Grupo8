@@ -1,139 +1,138 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="style.css" />
+	</ui:define>
 
-	<meta charset="utf-8" />
-	<title>CriticalJobApplication</title>
-	<h:outputStylesheet library="css" name="style.css" />
+	<ui:define name="content">
 
-</h:head>
-<h:body>
+		<h:form id="formAddPosition">
+			<h:outputText value="Hello Human Resources" />
+			<br />
+			<h:outputText value="Add a Position" />
+			<p:panelGrid id="gridPosition" columns="3">
+				<p:outputLabel value="Title :" for="title" />
+				<p:inputText id="title" value="#{positionBean.title}"
+					required="true" />
+				<p:message for="title" />
 
-	<h:form id="formAddPosition">
-		<h:outputText value="Hello Human Resources" />
-		<br />
-		<h:outputText value="Add a Position" />
-		<p:panelGrid id="gridPosition" columns="3">
-			<p:outputLabel value="Title :" for="title" />
-			<p:inputText id="title" value="#{positionBean.title}" required="true" />
-			<p:message for="title" />
+				<p:outputLabel value="Technical Area:" for="area" />
+				<p:selectOneMenu id="area" value="#{positionBean.technicalArea}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItem noSelectionOption="true" itemLabel="Select One" />
+					<f:selectItems value="#{positionBean.possibleTecnicalArea}"
+						var="area" itemLabel="#{area.description}" />
+				</p:selectOneMenu>
+				<p:message for="area" />
 
-			<p:outputLabel value="Technical Area:" for="area" />
-			<p:selectOneMenu id="area" value="#{positionBean.technicalArea}"
-				required="true" converter="omnifaces.SelectItemsConverter">
-				<f:selectItem noSelectionOption="true" itemLabel="Select One" />
-				<f:selectItems value="#{positionBean.possibleTecnicalArea}"
-					var="area" itemLabel="#{area.description}" />
-			</p:selectOneMenu>
-			<p:message for="area" />
+				<p:outputLabel value="Position code:" for="code" />
+				<p:inputText id="code" value="#{positionBean.code}" required="true" />
+				<p:message for="code" />
 
-			<p:outputLabel value="Position code:" for="code" />
-			<p:inputText id="code" value="#{positionBean.code}" required="true" />
-			<p:message for="code" />
+				<p:outputLabel value="Company:" for="company" />
+				<p:inputText id="company" value="#{positionBean.company}"
+					required="true" />
+				<p:message for="company" />
 
-			<p:outputLabel value="Company:" for="company" />
-			<p:inputText id="company" value="#{positionBean.company}"
-				required="true" />
-			<p:message for="company" />
+				<p:outputLabel value="Location(s):" for="localization" />
+				<p:selectManyCheckbox id="localization"
+					converter="omnifaces.SelectItemsConverter"
+					value="#{positionBean.localization}" required="true">
+					<f:selectItems value="#{positionBean.getPossibleLocalization()}"
+						var="localization" itemLabel="#{localization.description}"
+						itemValue="#{localization}" />
 
-			<p:outputLabel value="Location(s):" for="localization" />
-			<p:selectManyCheckbox id="localization"
-				converter="omnifaces.SelectItemsConverter"
-				value="#{positionBean.localization}" required="true">
-				<f:selectItems value="#{positionBean.getPossibleLocalization()}"
-					var="localization" itemLabel="#{localization.description}"
-					itemValue="#{localization}" />
-
-			</p:selectManyCheckbox>
-			<p:message for="localization" />
-
-			<p:outputLabel value="Number of vacancy:" for="numberPositions" />
-			<p:spinner id="numberPositions"
-				value="#{positionBean.numberOfposition}" required="true" min="1" />
-			<p:message for="numberPositions" />
-
-			<p:outputLabel value="Open date position:" for="openDate" />
-			<p:calendar id="openDate" disabled="true"
-				value="#{positionBean.openDate}" pattern="dd/MM/yyyy" locale="pt" />
-			<p:message for="openDate" />
-
-			<p:outputLabel value="Close date position:" for="closeDate" />
-			<p:calendar id="closeDate" required="true"
-				value="#{positionBean.closeDate}" pattern="dd/MM/yyyy" locale="pt" />
-			<p:message for="closeDate" />
-
-			<p:outputLabel value="SLA:" for="sla" />
-			<p:calendar id="sla" required="true" value="#{positionBean.SLA}"
-				pattern="dd/MM/yyyy" locate="pt" />
-			<p:message for="sla" />
-
-			<p:outputLabel value="Technical manager:" for="userManager" />
-			<p:inputText id="userManager" value="#{positionBean.userPosition}"
-				required="true" />
-			<p:message for="userManager" />
-
-			<p:outputLabel value="Status:" for="status" />
-			<p:selectOneMenu id="status" value="#{positionBean.status}"
-				required="true" converter="omnifaces.SelectItemsConverter">
-				<f:selectItems value="#{positionBean.possibleStatus}" var="status"
-					itemLabel="#{status.description}" />
-			</p:selectOneMenu>
-			<p:message for="status" />
-
-			<p:outputLabel value="Description:" for="description" />
-			<h:panelGroup>
-				<p:inputTextarea id="description"
-					value="#{positionBean.descriptionPosition}" required="true"
-					rows="5" cols="30" counter="display" maxlength="200"
-					counterTemplate="{0} characters remaining." autoResize="false" />
-				<br />
-				<h:outputLabel id="display" />
-			</h:panelGroup>
-			<p:message for="description" />
-
-			<p:outputLabel value="Job Posting Channels:" for="channels" />
-			<h:panelGroup id="panelGroupChanel">
-				<p:selectManyCheckbox id="channels"
-					value="#{positionBean.jobAdvertisingChanel}"
-					converter="omnifaces.SelectItemsConverter" layout="grid"
-					columns="3">
-					<f:selectItems
-						value="#{jobAdvertisingChanelBean.findAllChannels()}"
-						var="channel" itemLabel="#{channel.chanelName}"
-						itemValue="#{channel}" />
 				</p:selectManyCheckbox>
-				<p:commandButton id="addChanel" icon="ui-icon-plusthick"
-					process="@this"
-					action="#{jobAdvertisingChanelBean.showAddChanel()}"
-					update=":formAddPosition:panelGroupChanel" />
+				<p:message for="localization" />
 
-				<h:panelGroup id="addChannelPanelGroup"
-					rendered="#{jobAdvertisingChanelBean.add}">
-					<p:outputLabel value="Chanel name:" />
-					<p:inputText id="channel"
-						value="#{jobAdvertisingChanelBean.channelName}" />
-					<p:commandButton id="saveChanel" icon="ui-icon-disk"
-						process="@this channel"
-						actionListener="#{jobAdvertisingChanelBean.addChannel}"
-						update=":formAddPosition:panelGroupChanel growl" />
+				<p:outputLabel value="Number of vacancy:" for="numberPositions" />
+				<p:spinner id="numberPositions"
+					value="#{positionBean.numberOfposition}" required="true" min="1" />
+				<p:message for="numberPositions" />
+
+				<p:outputLabel value="Open date position:" for="openDate" />
+				<p:calendar id="openDate" disabled="true"
+					value="#{positionBean.openDate}" pattern="dd/MM/yyyy" locale="pt" />
+				<p:message for="openDate" />
+
+				<p:outputLabel value="Close date position:" for="closeDate" />
+				<p:calendar id="closeDate" required="true"
+					value="#{positionBean.closeDate}" pattern="dd/MM/yyyy" locale="pt" />
+				<p:message for="closeDate" />
+
+				<p:outputLabel value="SLA:" for="sla" />
+				<p:calendar id="sla" required="true" value="#{positionBean.SLA}"
+					pattern="dd/MM/yyyy" locate="pt" />
+				<p:message for="sla" />
+
+				<p:outputLabel value="Technical manager:" for="userManager" />
+				<p:inputText id="userManager" value="#{positionBean.userPosition}"
+					required="true" />
+				<p:message for="userManager" />
+
+				<p:outputLabel value="Status:" for="status" />
+				<p:selectOneMenu id="status" value="#{positionBean.status}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{positionBean.possibleStatus}" var="status"
+						itemLabel="#{status.description}" />
+				</p:selectOneMenu>
+				<p:message for="status" />
+
+				<p:outputLabel value="Description:" for="description" />
+				<h:panelGroup>
+					<p:inputTextarea id="description"
+						value="#{positionBean.descriptionPosition}" required="true"
+						rows="5" cols="30" counter="display" maxlength="200"
+						counterTemplate="{0} characters remaining." autoResize="false" />
+					<br />
+					<h:outputLabel id="display" />
 				</h:panelGroup>
-			</h:panelGroup>
-			<p:message for="channels" />
+				<p:message for="description" />
 
-			<p:outputLabel value="Script:" for="script" />
-			<p:inputText id="script" required="true" />
-			<p:message for="script" />
+				<p:outputLabel value="Job Posting Channels:" for="channels" />
+				<h:panelGroup id="panelGroupChanel">
+					<p:selectManyCheckbox id="channels"
+						value="#{positionBean.jobAdvertisingChanel}"
+						converter="omnifaces.SelectItemsConverter" layout="grid"
+						columns="3">
+						<f:selectItems
+							value="#{jobAdvertisingChanelBean.findAllChannels()}"
+							var="channel" itemLabel="#{channel.chanelName}"
+							itemValue="#{channel}" />
+					</p:selectManyCheckbox>
+					<p:commandButton id="addChanel" icon="ui-icon-plusthick"
+						process="@this"
+						action="#{jobAdvertisingChanelBean.showAddChanel()}"
+						update=":formAddPosition:panelGroupChanel" />
 
-		</p:panelGrid>
-		<p:growl id="growl" />
-		<p:commandButton value="Save"
-			action="#{positionBean.creatNewPosition()}"
-			update="gridPosition growl" />
-	</h:form>
-</h:body>
-</html>
+					<h:panelGroup id="addChannelPanelGroup"
+						rendered="#{jobAdvertisingChanelBean.add}">
+						<p:outputLabel value="Chanel name:" />
+						<p:inputText id="channel"
+							value="#{jobAdvertisingChanelBean.channelName}" />
+						<p:commandButton id="saveChanel" icon="ui-icon-disk"
+							process="@this channel"
+							actionListener="#{jobAdvertisingChanelBean.addChannel}"
+							update=":formAddPosition:panelGroupChanel growl" />
+					</h:panelGroup>
+				</h:panelGroup>
+				<p:message for="channels" />
+
+				<p:outputLabel value="Script:" for="script" />
+				<p:inputText id="script" required="true" />
+				<p:message for="script" />
+
+			</p:panelGrid>
+			<p:growl id="growl" />
+			<p:commandButton value="Save"
+				action="#{positionBean.creatNewPosition()}"
+				update="gridPosition growl" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>

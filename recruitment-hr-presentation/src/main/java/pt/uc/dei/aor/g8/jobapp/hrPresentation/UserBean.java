@@ -45,11 +45,9 @@ public class UserBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-		System.out.println("entaste na função logout");
 		try {
 			this.currentUser=null;
 			this.isLogged = false;
-			System.out.println("try dp logout");
 			request.logout();
 			request.getSession().invalidate();
 		} catch (ServletException e) {

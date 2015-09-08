@@ -74,7 +74,7 @@ public class PositionEntity implements Serializable{
 	@Column
 	private Date SLA;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private UserEntity managerPosition;
 
 	@Column

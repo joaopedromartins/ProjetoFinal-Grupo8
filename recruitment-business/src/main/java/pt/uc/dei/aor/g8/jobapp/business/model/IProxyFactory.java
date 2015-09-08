@@ -24,5 +24,6 @@ public interface IProxyFactory {
 	public IUserProxy user(String username, String password, String lastname, String firstname, String email,
 			List<RoleType> roles);
 
+	public INotificationProxy notification (String title, Date notificationDate, String message, String signature, IUserProxy userReceiver);
 	
 }
