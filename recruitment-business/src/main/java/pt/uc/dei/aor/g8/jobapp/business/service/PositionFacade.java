@@ -54,4 +54,9 @@ public class PositionFacade implements IPositionFacade {
 		
 	}
 
+	@Override
+	public List<IPositionProxy> listOfAllOpenPosition() {
+		return service.listOfAllOpenPosition();
+	}
+
 }

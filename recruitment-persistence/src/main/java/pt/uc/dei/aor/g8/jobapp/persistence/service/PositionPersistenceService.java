@@ -60,4 +60,18 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 		entity=em.merge(entity);
 		return new PositionProxy(entity);
 	}
+
+	@Override
+	public List<IPositionProxy> listOfAllOpenPosition() {
+		TypedQuery<PositionEntity> query = em.createQuery("SELECT p FROM PositionEntity p where p.status like :status", PositionEntity.class); 
+		query.setParameter("status", "Open");
+		List<PositionEntity> entity= query.getResultList();
+		
+		List<IPositionProxy> proxy= new ArrayList<>();
+		for(PositionEntity p: entity){
+			proxy.add(new PositionProxy(p));
+		}
+		
+		return proxy;
+	}
 }

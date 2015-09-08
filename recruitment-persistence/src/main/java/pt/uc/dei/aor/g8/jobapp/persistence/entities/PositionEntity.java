@@ -40,7 +40,6 @@ public class PositionEntity implements Serializable{
 
 	public static final String LIST_OF_ALL_POSITION = "Position.listOfAllPosition";
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
