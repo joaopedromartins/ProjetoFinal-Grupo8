@@ -56,7 +56,7 @@ public class UserBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR, "Logout Failed", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-		return "/pages/login?faces-redirect=true";
+		return "/login?faces-redirect=true";
 
 	}
 

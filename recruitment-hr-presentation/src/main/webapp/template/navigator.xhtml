@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="formNavigator">
+		<p:panelMenu style="width:300px">
+			<p:submenu label="Template Configuration">
+				<p:menuitem value="Edit" icon="ui-icon-pencil" />
+			</p:submenu>
+			<p:submenu label="Reports">
+			</p:submenu>
+			<p:submenu label="Position">
+				<p:menuitem value="New position"
+					outcome="/administrator/addPosition" icon="ui-icon-plus" />
+				<p:menuitem value="Positions"
+					outcome="/administrator/tablePositions"
+					icon="ui-icon-search ui-icon-pencil" />
+			</p:submenu>
+			<p:submenu label="User">
+				<p:menuitem value="New user" outcome="/administrator/addEmployee"
+					icon="ui-icon-plus" />
+				<p:menuitem value="Positions" outcome="/administrator/tableEmployee"
+					icon="ui-icon-search ui-icon-pencil" />
+			</p:submenu>
+			<p:submenu label="Script">
+			</p:submenu>
+			<p:submenu label="Interviewers">
+			</p:submenu>
+			<p:submenu label="Candidate">
+			</p:submenu>
+		</p:panelMenu>
+	</h:form>
+
+</ui:composition>
+
