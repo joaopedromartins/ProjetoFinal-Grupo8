@@ -81,7 +81,7 @@ public class PositionEntity implements Serializable{
 	private Date SLA;
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	private UserEntity userPosition;
+	private UserEntity managerPosition;
 
 	@Column
 	private String company;
@@ -98,17 +98,10 @@ public class PositionEntity implements Serializable{
 
 	@OneToMany
 	private List<ScriptEntity> script;
-	
-	
-
-
-
 
 	public PositionEntity() {
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization,
 			Status status, int numberOfposition, Date sLA, UserEntity userPosition, String company, 
@@ -122,7 +115,7 @@ public class PositionEntity implements Serializable{
 		this.status = status;
 		this.numberOfposition = numberOfposition;
 		this.SLA = sLA;
-		this.userPosition = userPosition;
+		this.managerPosition = userPosition;
 		this.company = company;
 		this.technicalArea = technicalArea;
 		this.descriptionPosition = descriptionPosition;
@@ -233,14 +226,14 @@ public class PositionEntity implements Serializable{
 
 
 
-	public UserEntity getUserPosition() {
-		return userPosition;
+	public UserEntity getManagerPosition() {
+		return managerPosition;
 	}
 
 
 
-	public void setUserPosition(UserEntity userPosition) {
-		this.userPosition = userPosition;
+	public void setManagerPosition(UserEntity userPosition) {
+		this.managerPosition = userPosition;
 	}
 
 

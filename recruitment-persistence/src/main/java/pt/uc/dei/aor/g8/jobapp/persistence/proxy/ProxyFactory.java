@@ -7,12 +7,14 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
+import pt.uc.dei.aor.g8.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 
 
 @Stateless
@@ -34,6 +36,13 @@ public class ProxyFactory implements IProxyFactory {
 	@Override
 	public IJobAdvertisingChanelProxy jobAdvertisingChanel(String chanelName) {
 		return new JobAdvertisingChanelProxy(chanelName);
+	}
+
+	@Override
+	public IUserProxy user(String username, String password, String lastname, String firstname, String email,
+			List<RoleType> roles) {
+		
+		return new UserProxy(username,password,lastname,firstname,email,roles);
 	}
 	
 	@Override
