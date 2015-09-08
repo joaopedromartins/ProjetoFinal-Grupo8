@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -7,9 +8,9 @@ import java.util.EnumSet;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
@@ -18,12 +19,11 @@ import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
-import java.io.Serializable;
 
 
 
 @Named
-@SessionScoped
+@ViewScoped
 public class PositionBean implements Serializable {
 	
 	/**

@@ -1,7 +1,9 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -12,62 +14,85 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+import pt.uc.dei.aor.g8.business.enumeration.RoleType;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name="tipo")
-//@Table(name = "User")
-public abstract class UserEntity {
+@NamedQueries({
+	@NamedQuery(name = "UserEntity.findUserByUsername", query = "SELECT u FROM UserEntity u WHERE u.username=:username"),
+	@NamedQuery(name = "UserEntity.findUserByEmail", query = "SELECT u FROM UserEntity u WHERE u.email=:email"),
+})
+public class UserEntity {
 	//private static final long serialVersionUID = 1L;
+
+	public static final String FIND_USER_BY_USERNAME = "UserEntity.findUserByUsername";
+	public static final String FIND_USER_BY_EMAIL = "UserEntity.findUserByEmail";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true)
 	private long id;
-	
+
+	@Column(length = 255, nullable = false, unique = true)
+	private String username;
+
 	@Column(length = 255, nullable = false)
-    private String login;
-	
-	@Column(length = 255, nullable = false)
-    private String password;
-	
-	@Column(length = 60, nullable = false)
-    private String lastname;
+	private String password;
 
 	@Column(length = 60, nullable = false)
-    private String firstname;
-	
-	@Column(length = 255, nullable = false)
-    private String email;
-	
+	private String lastname;
+
+	@Column(length = 60, nullable = false)
+	private String firstname;
+
+	@Column(length = 255, nullable = false, unique = true)
+	private String email;
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name="role")
 	@Enumerated(EnumType.STRING)
 	@Column(name="role")
-	protected List<RoleType> roles;
-	
+	private List<RoleType> roles;
+
+	@OneToMany ( cascade=CascadeType.ALL , mappedBy="managerPosition")
+	private List<PositionEntity> position;
+
 
 	//Constructors
 	public UserEntity() {
 	}
-	
-	public UserEntity(String login, String password, String lastname, String firstname, String email) {
-		this.login = login;
+
+	public UserEntity(String login, String password, String lastname, String firstname, String email, List<RoleType> roles) {
+		this.username = login;
 		this.password = password;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.email = email;
+
+		this.roles = new ArrayList<>();
+		this.roles.addAll(roles);
 	}
-	
+
+
 	//Getters and Setters
-	public String getLogin() {
-		return login;
+
+	public List<RoleType> getRoles() {
+		return roles;
 	}
-	public void setLogin(String login) {
-		this.login = login;
+
+	public void setRoles(List<RoleType> roles) {
+		this.roles = roles;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -97,8 +122,6 @@ public abstract class UserEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public long getId() {
-		return id;
-	}
+
+
 }
