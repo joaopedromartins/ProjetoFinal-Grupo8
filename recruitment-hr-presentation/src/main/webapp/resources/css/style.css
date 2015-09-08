@@ -5,13 +5,3 @@
  border: 0px solid rgba(0,0,0,0);   
 }
 
-.view{
-	font-weight: normal;
-	font-size: medium;
-	font-style: normal
-}
-.notView{
-	font-weight: 900;
-	font-size: large;
-	font-style: normal
-}
