@@ -5,12 +5,18 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="style.css" />
+	</ui:define>
+
+
 	<ui:define name="content">
 
 
 		<h:form id="formNotificationsTable">
 			<p:dataTable id="tableNotifications" var="notification"
-				value="#{notificationBean.allNotificationByUser()}">
+				value="#{notificationBean.allNotificationByUser()}"
+				rowStyleClass="#{notification.viewNotification ? 'view' : 'notView'}">
 				<f:facet name="header">Notifications</f:facet>
 				<p:column headerText="By:">
 					<h:outputText value="#{notification.signature}" />
@@ -25,8 +31,9 @@
 					<p:commandButton
 						update=":formNotificationsTable:tableNotifications :notificationDetail"
 						oncomplete="PF('notificationView').show()" icon="ui-icon-search"
-						title="View" actionListener="#{notificationBean.viewTrue(notification)}">
-						
+						title="View"
+						actionListener="#{notificationBean.viewTrue(notification)}">
+
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

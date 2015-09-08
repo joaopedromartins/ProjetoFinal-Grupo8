@@ -13,9 +13,9 @@
 			<p:submenu label="Position">
 				<p:menuitem value="New position"
 					outcome="/administrator/addPosition" icon="ui-icon-plus" />
-				<p:menuitem value="Positions"
+				<p:menuitem value="ui-icon-pencil Positions"
 					outcome="/administrator/tablePositions"
-					icon="ui-icon-search ui-icon-pencil" />
+					icon="ui-icon-search" />
 			</p:submenu>
 			<p:submenu label="User">
 				<p:menuitem value="New user" outcome="/administrator/addEmployee"
@@ -28,6 +28,10 @@
 			<p:submenu label="Interviewers">
 			</p:submenu>
 			<p:submenu label="Candidate">
+			</p:submenu>
+			<p:submenu label="Notifications">
+			<p:menuitem value="View notifications" outcome="/administrator/notifications"
+					icon="ui-icon-search" />
 			</p:submenu>
 		</p:panelMenu>
 	</h:form>
