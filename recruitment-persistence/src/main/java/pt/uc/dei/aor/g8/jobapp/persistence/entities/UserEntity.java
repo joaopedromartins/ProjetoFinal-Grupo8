@@ -60,6 +60,9 @@ public class UserEntity {
 
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="managerPosition")
 	private List<PositionEntity> position;
+	
+	@OneToMany ( cascade=CascadeType.ALL , mappedBy="userReceiver")
+	private List<NotificationEntity> notification;
 
 
 	//Constructors

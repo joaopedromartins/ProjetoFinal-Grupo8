@@ -45,7 +45,6 @@ public class UserBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-
 		try {
 			this.currentUser=null;
 			this.isLogged = false;
@@ -56,7 +55,7 @@ public class UserBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR, "Logout Failed", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-		return "/pages/login?faces-redirect=true";
+		return "/login?faces-redirect=true";
 
 	}
 

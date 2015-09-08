@@ -5,10 +5,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
-import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
-import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobAdvertisingChanelEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.QuestionEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.ScriptEntity;
 
