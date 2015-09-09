@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
+import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
@@ -16,6 +17,8 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.INotificationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 
 
@@ -65,6 +68,15 @@ public class ProxyFactory implements IProxyFactory {
 		return null;
 		//return new IJobApplicationProxy( address,  city,  country,  phone,
 		//		 diploma,  school,  letter,  cv, source.getChanelName(),  status);
+	}
+
+	public IScriptProxy script() {
+		return new ScriptProxy();
+	}
+
+	@Override
+	public IQuestionProxy question(String question, QuestionType questionType) {
+		return new QuestionProxy(question,questionType);
 	}
 
 }

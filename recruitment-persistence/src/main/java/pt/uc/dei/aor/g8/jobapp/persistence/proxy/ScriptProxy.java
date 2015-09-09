@@ -2,6 +2,7 @@ package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 
@@ -16,7 +17,7 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	private ScriptEntity entity;
 	
 	public ScriptProxy() {
-		
+		this(null);
 	}
 	
 	public ScriptProxy (ScriptEntity script){
@@ -49,7 +50,7 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	public List<IQuestionProxy> getQuestions() {
 		List<IQuestionProxy> proxy = new ArrayList<>();
 		
-		List<QuestionEntity> entityQuestion = entity.getQuestions();
+		Set<QuestionEntity> entityQuestion = entity.getQuestions();
 		
 		for (QuestionEntity q:entityQuestion){
 			proxy.add(new QuestionProxy(q));
@@ -59,12 +60,12 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 
 	@Override
 	public void setQuestions(List<IQuestionProxy> questions) {
-		entity.setQuestions(questionConverterProxyToEntity(questions));
+		entity.setQuestions(questionsConverterProxyToEntity(questions));
 		
 	}
 	
 	@SuppressWarnings( "unchecked" )
-	private List<QuestionEntity> questionConverterProxyToEntity (List<IQuestionProxy> proxy){
+	private List<QuestionEntity> questionsConverterProxyToEntity (List<IQuestionProxy> proxy){
 		List<QuestionEntity> questionsEntity = new ArrayList<>();
 
 		for(IQuestionProxy qP : proxy){
@@ -72,6 +73,19 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 		}
 
 		return questionsEntity;
+	}
+
+	@Override
+	public void addQuestionToListQuestion(IQuestionProxy question) {
+		entity.addQuestionToListQuestion(questionConverterProxyToEntity(question));
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	private QuestionEntity questionConverterProxyToEntity (IQuestionProxy proxy){
+		QuestionEntity questionEntity = ((IEntityAware<QuestionEntity>)proxy).getEntity(); 
+		return questionEntity;
+		
 	}
 
 }

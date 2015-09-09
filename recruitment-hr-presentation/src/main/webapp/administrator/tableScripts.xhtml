@@ -1,0 +1,51 @@
+<ui:composition template="/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		<h:form id="formTableScript">
+
+			<p:dataTable id="tableScripts" var="script"
+				value="#{scriptBean.scripts}">
+				<f:facet name="header">Scripts</f:facet>
+				<p:column headerText="Title">
+					<h:outputText value="#{script.scriptTitle}" />
+				</p:column>
+				<p:column headerText="Number of Questions">
+					<h:outputText value="#{script.questions.size()}" />
+				</p:column>
+				<p:column style="width:32px;text-align: center">
+					<p:commandButton
+						update=":formTableScript:tableScripts :scriptDetail"
+						oncomplete="PF('scriptView').show()" icon="ui-icon-search"
+						title="View">
+						<f:setPropertyActionListener value="#{script}"
+							target="#{scriptBean.script}" />
+
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<p:dialog header="Script" widgetVar="scriptView" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="scriptDetail" style="text-align:center;">
+				<p:dataTable id="scriptDetailPanelGrid" var="question"
+					value="#{scriptBean.script.questions}">
+					<f:facet name="header">#{scriptBean.script.scriptTitle}</f:facet>
+					<p:column headerText="NºOrder">
+						<h:outputText value="#{question.orderNumber}" />
+					</p:column>
+					<p:column headerText="Questions">
+						<h:outputText value="#{question.question}" />
+						<h:outputText value="#{question.questiontype}" />
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</p:dialog>
+	</ui:define>
+
+</ui:composition>

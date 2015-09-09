@@ -9,13 +9,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 
 @Entity
 @Table(name = "Question")
-public class QuestionEntity implements Serializable{
+public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	
 	/**
 	 * 
@@ -27,11 +28,17 @@ public class QuestionEntity implements Serializable{
 	private long id;
 	
 	@Column
+	private int orderNumber;
+
+	@Column
 	private String question;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="QuestionType")
 	private  QuestionType questiontype;
+	
+	@ManyToOne
+	private ScriptEntity script;
 
 	
 
@@ -63,13 +70,26 @@ public class QuestionEntity implements Serializable{
 		this.questiontype = questiontype;
 	}
 	
-	
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public void setScript(ScriptEntity script) {
+		this.script = script;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + orderNumber;
 		result = prime * result + ((question == null) ? 0 : question.hashCode());
 		result = prime * result + ((questiontype == null) ? 0 : questiontype.hashCode());
+		result = prime * result + ((script == null) ? 0 : script.hashCode());
 		return result;
 	}
 
@@ -82,6 +102,8 @@ public class QuestionEntity implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		QuestionEntity other = (QuestionEntity) obj;
+		if (orderNumber != other.orderNumber)
+			return false;
 		if (question == null) {
 			if (other.question != null)
 				return false;
@@ -89,9 +111,32 @@ public class QuestionEntity implements Serializable{
 			return false;
 		if (questiontype != other.questiontype)
 			return false;
+		if (script == null) {
+			if (other.script != null)
+				return false;
+		} else if (!script.equals(other.script))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestionEntity [orderNumber=" + orderNumber + ", question=" + question + ", questiontype="
+				+ questiontype + ", script=" + script + "]";
+	}
+
+	@Override
+	public int compareTo(QuestionEntity o) {
+		if (orderNumber < o.orderNumber){
+			return -1;
+		} else if (orderNumber > o.orderNumber){
+			return 1;
+		} else {
+			return 0;
+		}
+		
 	}
 	
 	
-
+	
 }
