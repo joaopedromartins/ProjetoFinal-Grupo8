@@ -1,0 +1,12 @@
+@CHARSET "ISO-8859-1";
+
+.view{
+	font-weight: normal;
+	font-size: medium;
+	font-style: normal
+}
+.notView{
+	font-weight: 900;
+	font-size: large;
+	font-style: normal
+}

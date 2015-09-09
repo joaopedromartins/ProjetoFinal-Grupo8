@@ -1,0 +1,51 @@
+<ui:composition template="/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		<h:form id="formAddUser">
+			<h:outputText value="Add a Employer" />
+			<br />
+			<p:panelGrid id="gridNewUser" columns="3">
+				<p:outputLabel value="First Name:" for="firstname" />
+				<p:inputText id="firstname" value="#{registerUserBean.firstName}"
+					required="true" />
+				<p:message for="firstname" />
+
+				<p:outputLabel value="Last name:" for="lastname" />
+				<p:inputText id="lastname" value="#{registerUserBean.lastName}"
+					required="true" />
+				<p:message for="lastname" />
+
+				<p:outputLabel value="Username:" for="username" />
+				<p:inputText id="username" value="#{registerUserBean.username}"
+					required="true" />
+				<p:message for="username" />
+
+				<p:outputLabel value="Email:" for="email" />
+				<p:inputText id="email" value="#{registerUserBean.email}"
+					required="true">
+					<f:validator validatorId="emailValidator" />
+				</p:inputText>
+				<p:message for="email" />
+
+				<p:outputLabel value="Employer type:" for="employerType" />
+				<p:selectOneMenu id="employerType" value="#{registerUserBean.roles}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{registerUserBean.getPossibleRoles()}"
+						var="roles" itemLabel="#{roles.description}" itemValue="#{roles}" />
+				</p:selectOneMenu>
+				<p:message for="employerType" />
+
+			</p:panelGrid>
+			<p:growl id="growl" />
+			<p:commandButton value="Save" action="#{registerUserBean.newUser()}"
+				update="gridNewUser growl" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>

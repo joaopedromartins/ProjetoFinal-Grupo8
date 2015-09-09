@@ -22,9 +22,11 @@ public class UserFacade implements IUserFacade {
 	@EJB
 	private IUserPersistenceService service;
 	@EJB
-	private EncryptPassword passwordEncript;
+	private EncryptPassword passEncript;
 	@EJB
 	private AutoGeneratePasswor passwordGenrate;
+	@EJB
+	private INotificationFacade notification;
 
 	public UserFacade(){
 		// TODO Auto-generated constructor stub
@@ -38,13 +40,14 @@ public class UserFacade implements IUserFacade {
 		IUserProxy userEmail = service.findUserByEmail(email);
 
 		if ( userUsername == null && userEmail == null ){
-			String password = passwordGenrate.autoGeneratePassword();
-			System.out.println( "Username, " + username + ", with password, " + password + ".");
-			password = passwordEncript.encriptarPass(password);
+			String passwordGenerate = passwordGenrate.autoGeneratePassword();
+			System.out.println( "Username, " + username + ", with password, " + passwordGenerate + ".");
+			String passwordEncripty = passEncript.encriptarPass(passwordGenerate);
 			
-			IUserProxy newUser = factory.user(username, password, lastname, firstname, email, rolesList(role));
+			IUserProxy newUser = factory.user(username, passwordEncripty, lastname, firstname, email, rolesList(role));
 			service.createUser(newUser);
-			
+			notification.createNotification("User Register"," Your registration have the following items:\nUsername - " 
+			+ username + "\nPassword - " + passwordGenerate + "", "", newUser);
 			return "sucess";  
 			
 		} else if (userUsername == null && userEmail != null ){

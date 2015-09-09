@@ -1,0 +1,64 @@
+<ui:composition template="/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="notifications.css" />
+	</ui:define>
+
+
+	<ui:define name="content">
+
+
+		<h:form id="formNotificationsTable">
+			<p:dataTable id="tableNotifications" var="notification"
+				value="#{notificationBean.allNotificationByUser()}"
+				rowStyleClass="#{notification.viewNotification ? 'view' : 'notView'}">
+				<f:facet name="header">Notifications</f:facet>
+				<p:column headerText="By:">
+					<h:outputText value="#{notification.signature}" />
+				</p:column>
+				<p:column headerText="Title">
+					<h:outputText value="#{notification.title}" />
+				</p:column>
+				<p:column headerText="Date">
+					<h:outputText value="#{notification.notificationDate}" />
+				</p:column>
+				<p:column style="width:32px;text-align: center">
+					<p:commandButton
+						update=":formNotificationsTable:tableNotifications :notificationDetail"
+						oncomplete="PF('notificationView').show()" icon="ui-icon-search"
+						title="View"
+						actionListener="#{notificationBean.viewTrue(notification)}">
+
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<p:dialog header="Notification" widgetVar="notificationView"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="notificationDetail" style="text-align:center;">
+				<p:panelGrid columns="2" id="notificationDetailPanelGrid">
+					<f:facet name="header">
+						<h:outputText value="#{notificationBean.notificationProxy.title}" />
+					</f:facet>
+
+					<h:outputText value="Date:" />
+					<h:outputText
+						value="#{notificationBean.notificationProxy.notificationDate}" />
+
+					<h:outputText value="Message:" />
+					<h:outputText value="#{notificationBean.notificationProxy.message}" />
+
+					<br />
+					<h:outputText
+						value="#{notificationBean.notificationProxy.signature}" />
+
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

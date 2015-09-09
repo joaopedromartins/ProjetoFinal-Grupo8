@@ -8,17 +8,29 @@
 <h:head>
 	<meta charset="utf-8" />
 	<title>CriticalJobApplication</title>
+	<ui:insert name="stylesheet"/>
+	
 </h:head>
 <h:body>
 	<div class="ui-grid ui-grid-responsive">
-
 		<div class="ui-grid-row">
-			<header class="ui-grid-col-12"> 
-			<ui:include name="" />
+			<header class="ui-grid-col-12">
+				<ui:include src="/template/header.xhtml" />
 			</header>
 		</div>
-
-
+		<div class="ui-grid-row">
+			<nav class="ui-grid-col-2">
+				<ui:include src="/template/navigator.xhtml" />
+			</nav>
+			<div class="ui-grid-col-10">
+				<ui:insert name="content" />
+			</div>
+		</div>
+		<div class="ui-grid-row">
+			<footer class="ui-grid-col-12">
+				<ui:include src="/template/footer.xhtml" />
+			</footer>
+		</div>
 	</div>
 </h:body>
 </html>

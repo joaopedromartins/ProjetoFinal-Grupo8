@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -45,7 +46,6 @@ public class UserBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-
 		try {
 			this.currentUser=null;
 			this.isLogged = false;
@@ -56,7 +56,13 @@ public class UserBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR, "Logout Failed", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-		return "/pages/login?faces-redirect=true";
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/CriticalJobApplicationHR/");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/login?faces-redirect=true";
 
 	}
 
