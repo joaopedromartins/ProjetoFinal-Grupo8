@@ -42,6 +42,9 @@ public class JobApplicationEntity {
 	@Column
     private String cv;
 	
+	@Column
+    private String status;
+	
 	@ManyToOne
     private JobAdvertisingChanelEntity source;
 
@@ -57,9 +60,10 @@ public class JobApplicationEntity {
 		super();
 	}
 
-	public JobApplicationEntity(String address, String city,
-			String country, BigInteger phone, String diploma, String school, String letter,
-			String cv, JobAdvertisingChanelEntity source) {
+	public JobApplicationEntity(
+			 String address, String city, String country, BigInteger phone, String diploma,
+			 String school, String letter, String cv, JobAdvertisingChanelEntity source,
+			 String status)  {
 		super();
 		this.address = address;
 		this.city = city;
@@ -70,6 +74,7 @@ public class JobApplicationEntity {
 		this.letter = letter;
 		this.cv = cv;
 		this.source = source;
+		this.status = "Open";
 	}
 	
 	

@@ -8,6 +8,7 @@ import javax.inject.Named;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -22,6 +23,7 @@ public class JobApplicationBean implements Serializable {
 
 	@EJB
 	private IJobApplicationFacade jobApplicationFacade;
+	private ICandidateFacade candidateFacade;
 
 	private String address;
 	private String city;
@@ -129,25 +131,26 @@ public class JobApplicationBean implements Serializable {
 	
 	//methods
 	public String findSessionUsername(){
-		String username = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
-		return username;
+		return (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
 	}
 	
 	public ICandidateProxy findCandidateProxyByUsername(String username){
-		return candidateProxy = jobApplicationFacade.findCandidateByUsername(username);
+		return candidateProxy = candidateFacade.findCandidateByUsername(username);
 	}
 	
 
 	public String applyPosition() {
 		System.out.println( "\n     Username:       "+findSessionUsername());
 		System.out.println( "\n     Position Title: "+positionProxy.getTitle() +"\n");
-		return "/pages/candidate/applyPosition.xhtml";
-		//return "/CriticalJobApplication/pages/candidate/applyPosition.xhtml";
+		//return "/pages/candidate/applyPosition.xhtml";
+		return "/CriticalJobApplication/pages/candidate/applyPosition.xhtml";
 	}
 	
 	public String applyJobApplication() {
 		// TODO
-		return "/pages/candidate/candidate.xhtml";
+		//return "/pages/candidate/candidate.xhtml";
+
+		return "/CriticalJobApplication/pages/candidate/candidate.xhtml";
 	}
 	
 }	

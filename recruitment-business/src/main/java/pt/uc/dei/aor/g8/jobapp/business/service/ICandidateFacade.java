@@ -8,6 +8,6 @@ public interface ICandidateFacade {
 	public ICandidateProxy createNewCandidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile);
 
 	public ICandidateProxy editCandidate(ICandidateProxy candidateProxy);
-	
 
+	public ICandidateProxy findCandidateByUsername(String username);
 }

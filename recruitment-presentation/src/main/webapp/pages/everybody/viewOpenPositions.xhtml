@@ -52,17 +52,16 @@
 						target="#{positionBean.positionProxy}" />
 				</p:commandButton>
 			</p:column>
-			<!--  
+			
 			<p:column style="width:32px;text-align: center">
-				<p:commandButton
-					update=":formPositionEdit:positionEdit"
-					oncomplete="PF('positionEdit').show()" icon="ui-icon-bookmark"
-					title="Apply Position">
+				<p:commandButton value="Apply Position" 
+					icon="ui-icon-bookmark" 
+					action="#{jobApplicationBean.applyPosition}"  >
 					<f:setPropertyActionListener value="#{position}"
-						target="#{positionBean.positionProxy}" />
+						target="#{jobApplicationBean.positionProxy}" />
 				</p:commandButton>
 			</p:column>
-			-->
+			
 		</p:dataTable>
 	</h:form>
 

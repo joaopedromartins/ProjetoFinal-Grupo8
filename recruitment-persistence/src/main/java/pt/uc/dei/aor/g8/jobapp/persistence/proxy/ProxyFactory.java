@@ -12,6 +12,7 @@ import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.INotificationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
@@ -55,6 +56,15 @@ public class ProxyFactory implements IProxyFactory {
 	public INotificationProxy notification(String title, Date notificationDate, String message, String signature,
 			IUserProxy userReceiver) {
 		return new NotificationProxy (title,notificationDate,message,signature,userReceiver);
+	}
+
+	@Override
+	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
+			String diploma, String school, String letter, String cv, IJobAdvertisingChanelProxy source, String status) {
+		// TODO Auto-generated method stub
+		return null;
+		//return new IJobApplicationProxy( address,  city,  country,  phone,
+		//		 diploma,  school,  letter,  cv, source.getChanelName(),  status);
 	}
 
 }

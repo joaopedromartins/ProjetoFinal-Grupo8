@@ -4,6 +4,7 @@ import java.math.BigInteger;
 
 import javax.ejb.Stateless;
 
+import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
@@ -22,10 +23,10 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 
 	public JobApplicationProxy(String address, String city,
 			String country, BigInteger phone, String diploma, String school, String letter,
-			String cv, JobAdvertisingChanelEntity source) {
+			String cv, IJobAdvertisingChanelProxy source, String status) {
 		this.entity = new JobApplicationEntity(address, city,
 				country, phone, diploma, school, letter,
-				cv, source);
+				cv, new JobAdvertisingChanelEntity( source.getChanelName()), status);
 	}
 
 	public JobApplicationProxy (JobApplicationEntity jobApplication){
@@ -55,102 +56,8 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	}
 	
 
-	@Override
-	public String getAddress() {
-		return entity.getAddress();
-	}
-	@Override
-	public void setAddress(String address) {
-		entity.setAddress(address);
-	}
-
-	@Override
-	public String getCity() {
-		return entity.getCity();
-	}
-	@Override
-	public void setCity(String city) {
-		entity.setCity(city);
-	}
-
-	@Override
-	public String getCountry() {	
-		return entity.getCountry();
-	}
-	@Override
-	public void setCountry(String country) {
-		entity.setCountry(country);
-	}
-
-	@Override
-	public BigInteger getPhone() {
-		return entity.getPhone();
-	}
-	@Override
-	public void setPhone(BigInteger phone) {
-		entity.setPhone(phone);
-	}
-
 	
-	@Override
-	public String getDiploma() {
-		return entity.getDiploma();
-	}
-	@Override
-	public void setDiploma(String diploma) {
-		entity.setDiploma(diploma);
-	}
-
-	@Override
-	public String getSchool() {
-		return entity.getSchool();
-	}
-	@Override
-	public void setSchool(String school) {
-		entity.setSchool(school);
-	}
-
-	@Override
-	public String getLetter() {
-		// TODO Auto-generated method stub
-		return entity.getLetter();
-	}
-	@Override
-	public void setLetter(String letter) {
-		entity.setLetter(letter);
-	}
-
-	@Override
-	public String getCv() {
-		return entity.getCv();
-	}
-	@Override
-	public void setCv(String cv) {
-		entity.setCv(cv);
-	}
-
-	@Override
-	public IJobAdvertisingChanelProxy getSource() {
-		return (IJobAdvertisingChanelProxy) entity.getSource();
-	}
-	@Override
-	public void setSource(IJobAdvertisingChanelProxy source) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public long getId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
-	@Override
-	public long getStatus() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	
 
 	@SuppressWarnings("unchecked")
@@ -168,6 +75,139 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	public String toString() {
 		return entity.toString();
 	}
+
+	@Override
+	public void setCandidateEntity(ICandidateProxy candidateJobApplication) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPositionEntity(IPositionProxy positionJobApplication) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAddress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAddress(String address) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCity(String city) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCountry() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCountry(String country) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BigInteger getPhone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPhone(BigInteger phone) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getDiploma() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDiploma(String diploma) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSchool() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSchool(String school) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getLetter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLetter(String letter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCv() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCv(String cv) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public IJobAdvertisingChanelProxy getJobApplicationSource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setJobApplicationSource(IJobAdvertisingChanelProxy jobApplicationSource) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Status getStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setStatus(Status status) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 

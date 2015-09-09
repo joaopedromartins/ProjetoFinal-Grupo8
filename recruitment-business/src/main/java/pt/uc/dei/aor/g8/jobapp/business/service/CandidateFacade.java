@@ -59,5 +59,11 @@ public class CandidateFacade implements ICandidateFacade {
 		byte[] hash = digest.digest(password.getBytes("UTF-8"));
 		return new String(Base64.getEncoder().encode(hash));
 	}
+	
+	@Override
+	public ICandidateProxy findCandidateByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

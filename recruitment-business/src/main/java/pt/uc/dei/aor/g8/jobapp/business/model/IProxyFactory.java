@@ -16,6 +16,9 @@ public interface IProxyFactory {
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<String> script);
 	
+	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
+			String diploma, String school, String letter, String cv, IJobAdvertisingChanelProxy source, String status);
+	
 	public IJobAdvertisingChanelProxy jobAdvertisingChanel(String chanelName);
 	
 
