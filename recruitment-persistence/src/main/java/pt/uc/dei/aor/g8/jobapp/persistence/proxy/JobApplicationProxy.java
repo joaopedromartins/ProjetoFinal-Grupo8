@@ -42,13 +42,9 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 		return entity;
 	}
 
-	
-	
-
 	@Override
 	public ICandidateProxy getCandidateEntity() {
 		// TODO Auto-generated method stub
-		
 		return null;
 	}
 
@@ -57,6 +53,7 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	@Override
 	public String getAddress() {
@@ -97,58 +94,45 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	
 	@Override
 	public String getDiploma() {
-		// TODO Auto-generated method stub
-		return null;
+		return entity.getDiploma();
 	}
-
 	@Override
 	public void setDiploma(String diploma) {
-		// TODO Auto-generated method stub
-		
+		entity.setDiploma(diploma);
 	}
 
 	@Override
 	public String getSchool() {
-		// TODO Auto-generated method stub
-		return null;
+		return entity.getSchool();
 	}
-
 	@Override
 	public void setSchool(String school) {
-		// TODO Auto-generated method stub
-		
+		entity.setSchool(school);
 	}
 
 	@Override
 	public String getLetter() {
 		// TODO Auto-generated method stub
-		return null;
+		return entity.getLetter();
 	}
-
 	@Override
 	public void setLetter(String letter) {
-		// TODO Auto-generated method stub
-		
+		entity.setLetter(letter);
 	}
 
 	@Override
 	public String getCv() {
-		// TODO Auto-generated method stub
-		return null;
+		return entity.getCv();
 	}
-
 	@Override
 	public void setCv(String cv) {
-		// TODO Auto-generated method stub
-		
+		entity.setCv(cv);
 	}
 
 	@Override
 	public IJobAdvertisingChanelProxy getSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return (IJobAdvertisingChanelProxy) entity.getSource();
 	}
-
 	@Override
 	public void setSource(IJobAdvertisingChanelProxy source) {
 		// TODO Auto-generated method stub
@@ -157,6 +141,12 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 
 	@Override
 	public long getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public long getStatus() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -178,6 +168,10 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	public String toString() {
 		return entity.toString();
 	}
+
+	
+
+	
 
 	
 }

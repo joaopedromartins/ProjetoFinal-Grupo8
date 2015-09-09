@@ -80,54 +80,57 @@ public class PositionBean implements Serializable {
 	}
 	
 	public void editPosition(){
-		IPositionProxy proxy2;
-		
-		proxy2=positionFacade.editPosition(positionProxy);
-		if(proxy2!=null){
-			
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_INFO,
-					"Position updated successfully.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} else {
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR,
-					"Error updated position.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);	
-		}
-	}
-
-	public void creatNewPosition (){
-		IPositionProxy proxy;
-		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
 	
-		if(proxy!=null){
-			closeDate=null;
-			code=null;
-			title=null;
-			localization.clear();
-			status=null;
-			numberOfposition=1;
-			SLA=null;
-			userPosition=null;
-			company=null;
-			technicalArea=null;
-			descriptionPosition=null;
-			jobAdvertisingChanel=null;
-			script=null;
-			
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_INFO,
-					"Position created successfully.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} else {
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR,
-					"Error creating position.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);	
-		}
-		
 	}
+//	public void editPosition(){
+//		IPositionProxy proxy2;
+//		
+//		proxy2=positionFacade.editPosition(positionProxy);
+//		if(proxy2!=null){
+//			
+//			FacesMessage message = new FacesMessage(
+//					FacesMessage.SEVERITY_INFO,
+//					"Position updated successfully.", "");
+//			FacesContext.getCurrentInstance().addMessage(null, message);
+//		} else {
+//			FacesMessage message = new FacesMessage(
+//					FacesMessage.SEVERITY_ERROR,
+//					"Error updated position.", "");
+//			FacesContext.getCurrentInstance().addMessage(null, message);	
+//		}
+//	}
+
+//	public void creatNewPosition (){
+//		IPositionProxy proxy;
+//		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
+//	
+//		if(proxy!=null){
+//			closeDate=null;
+//			code=null;
+//			title=null;
+//			localization.clear();
+//			status=null;
+//			numberOfposition=1;
+//			SLA=null;
+//			userPosition=null;
+//			company=null;
+//			technicalArea=null;
+//			descriptionPosition=null;
+//			jobAdvertisingChanel=null;
+//			script=null;
+//			
+//			FacesMessage message = new FacesMessage(
+//					FacesMessage.SEVERITY_INFO,
+//					"Position created successfully.", "");
+//			FacesContext.getCurrentInstance().addMessage(null, message);
+//		} else {
+//			FacesMessage message = new FacesMessage(
+//					FacesMessage.SEVERITY_ERROR,
+//					"Error creating position.", "");
+//			FacesContext.getCurrentInstance().addMessage(null, message);	
+//		}
+//		
+//	}
 
 	public Date getOpenDate() {
 		return openDate;
@@ -256,12 +259,9 @@ public class PositionBean implements Serializable {
 		this.script.add(script);
 	}
 	
-	
-	
-	
 	public List<IPositionProxy> listOfAllOpenPosition(){
-		
 		return this.listPosition=positionFacade.listOfAllOpenPosition();
 	}
+	
 	
 }

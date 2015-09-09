@@ -26,5 +26,5 @@ public interface IJobApplicationProxy {
 	public IJobAdvertisingChanelProxy getSource() ;
 	public void setSource(IJobAdvertisingChanelProxy source) ;
 	public long getId() ;
-	
+	public long getStatus() ;
 }

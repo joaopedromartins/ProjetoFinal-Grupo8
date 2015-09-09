@@ -302,5 +302,4 @@ public class PositionEntity implements Serializable{
 		this.script = script;
 	}
 
-
 }
