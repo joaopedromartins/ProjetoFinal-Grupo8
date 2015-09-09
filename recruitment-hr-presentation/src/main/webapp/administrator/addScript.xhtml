@@ -1,0 +1,50 @@
+<ui:composition template="/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="style.css" />
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="formAddScript">
+			<h:outputText value="Add a Script" />
+			<br />
+			<h:outputText value="Title:" for="titleScript" />
+			<p:inputText id="titleScript"
+				value="#{scriptBean.script.scriptTitle}" required="true" />
+			<p:message for="titleScript" />
+
+			<p:orderList id="orderListScript" var="question"
+				controlsLocation="none" converter="omnifaces.ListConverter"
+				value="#{scriptBean.script.questions}" responsive="true"
+				itemValue="#{question}">
+
+
+				<!-- <f:facet name="caption">Questions</f:facet>
+
+				<p:column>
+					<h:outputText value="#{question.orderNumber}" />
+				</p:column>
+
+				<p:column>
+					<h:outputText value="#{question.question}" />
+					<h:outputText value="#{question.questiontype}" />
+				</p:column>
+				<p:column>
+
+				</p:column>
+				
+				
+				<f:facet name="footer">
+					<p:commandButton id="addQuestion" process="@this" />
+				</f:facet> -->
+			</p:orderList>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

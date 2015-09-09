@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 	<h:form id="formNavigator">
-		<p:panelMenu >
+		<p:panelMenu>
 			<p:submenu label="Template Configuration">
 				<p:menuitem value="Edit" icon="ui-icon-pencil" />
 			</p:submenu>
@@ -14,8 +14,7 @@
 				<p:menuitem value="New position"
 					outcome="/administrator/addPosition" icon="ui-icon-plus" />
 				<p:menuitem value="ui-icon-pencil Positions"
-					outcome="/administrator/tablePositions"
-					icon="ui-icon-search" />
+					outcome="/administrator/tablePositions" icon="ui-icon-search" />
 			</p:submenu>
 			<p:submenu label="User">
 				<p:menuitem value="New user" outcome="/administrator/addEmployee"
@@ -24,14 +23,18 @@
 					icon="ui-icon-search ui-icon-pencil" />
 			</p:submenu>
 			<p:submenu label="Script">
+				<p:menuitem value="View Scripts"
+					outcome="/administrator/tableScripts" icon="ui-icon-search" />
+				<p:menuitem value="New Script"
+					action="#{scriptBean.initialNewScript()}" icon="ui-icon-pencil" />
 			</p:submenu>
 			<p:submenu label="Interviewers">
 			</p:submenu>
 			<p:submenu label="Candidate">
 			</p:submenu>
 			<p:submenu label="Notifications">
-			<p:menuitem value="View notifications" outcome="/administrator/notifications"
-					icon="ui-icon-search" />
+				<p:menuitem value="View notifications"
+					outcome="/administrator/notifications" icon="ui-icon-search" />
 			</p:submenu>
 		</p:panelMenu>
 	</h:form>

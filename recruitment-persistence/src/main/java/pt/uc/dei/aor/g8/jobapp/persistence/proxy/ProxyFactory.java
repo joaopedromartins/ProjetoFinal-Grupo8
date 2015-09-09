@@ -15,6 +15,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.INotificationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 
 
@@ -55,6 +56,11 @@ public class ProxyFactory implements IProxyFactory {
 	public INotificationProxy notification(String title, Date notificationDate, String message, String signature,
 			IUserProxy userReceiver) {
 		return new NotificationProxy (title,notificationDate,message,signature,userReceiver);
+	}
+
+	@Override
+	public IScriptProxy script() {
+		return new ScriptProxy();
 	}
 
 }

@@ -54,6 +54,7 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 		for (QuestionEntity q:entityQuestion){
 			proxy.add(new QuestionProxy(q));
 		}
+		proxy.add(new QuestionProxy());
 		return proxy;
 	}
 

@@ -26,4 +26,6 @@ public interface IProxyFactory {
 
 	public INotificationProxy notification (String title, Date notificationDate, String message, String signature, IUserProxy userReceiver);
 	
+	public IScriptProxy script ();
+	
 }

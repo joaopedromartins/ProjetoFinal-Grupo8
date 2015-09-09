@@ -1,26 +1,38 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Script")
-public class ScriptEntity {
+@NamedQuery(name = "Script.listOfAllScripts", query = "SELECT s FROM ScriptEntity s")
+public class ScriptEntity implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public static final String LIST_OF_ALL_SCRIPTS = "Script.listOfAllScripts";
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	private String scriptTitle;
 	
-	@ManyToMany
+	@OneToMany (cascade=CascadeType.ALL, mappedBy = "script", fetch=FetchType.EAGER)
 	private List<QuestionEntity> questions;
 	
 	public ScriptEntity() {
