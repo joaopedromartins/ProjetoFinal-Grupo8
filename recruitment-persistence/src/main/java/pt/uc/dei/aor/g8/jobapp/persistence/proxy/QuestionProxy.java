@@ -4,7 +4,6 @@ import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
-import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobAdvertisingChanelEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.QuestionEntity;
 
 @Stateless

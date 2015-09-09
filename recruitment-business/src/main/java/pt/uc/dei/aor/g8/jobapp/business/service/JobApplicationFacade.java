@@ -1,22 +1,14 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
 import java.math.BigInteger;
-import java.util.Date;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import pt.uc.dei.aor.g8.business.enumeration.Localization;
-import pt.uc.dei.aor.g8.business.enumeration.Status;
-import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
-import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
-import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;
 
 @Stateless
 public class JobApplicationFacade implements IJobApplicationFacade {
