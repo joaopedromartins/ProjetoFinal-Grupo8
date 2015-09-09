@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -21,39 +23,45 @@ public class ScriptBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	private IScriptFacade facade;
-	
-	private String title;
+
+	private String title = "Untitled Script";
 	private List<IQuestionProxy> questions;
 
 	private IScriptProxy   script;
-	
+
+	private boolean addQuestion=false; 
+
 	private String question;
 	private QuestionType questionType;
-	
 
-	
+
+
 	public ScriptBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public String initialNewScript (){
 		this.script = facade.initialNewScript();
 		return "/administrator/addScript?faces-redirect=true";
 	}
-	
-	
-	
-	
+
+
+
+
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public boolean isAddQuestion() {
+		return addQuestion;
 	}
 
 	public String getQuestion() {
@@ -71,7 +79,7 @@ public class ScriptBean implements Serializable{
 	public void setQuestions(List<IQuestionProxy> questions) {
 		this.questions = questions;
 	}
-	
+
 	public List<QuestionType> getPossibleQuestionType (){
 		return Arrays.asList(QuestionType.values());
 	}
@@ -87,8 +95,8 @@ public class ScriptBean implements Serializable{
 	public List<IScriptProxy> getScripts() {
 		return facade.listOfAllScripts();
 	}
-	
-	
+
+
 	public IScriptProxy getScript() {
 		if ( script != null){
 			return script;
@@ -96,15 +104,26 @@ public class ScriptBean implements Serializable{
 			this.script=facade.initialNewScript();
 			return script;
 		}
-		
+
 	}
 	public void setScript(IScriptProxy script) {
 		this.script = script;
 	}
-	
+
 	public void addQuestionToScript (){
+		if(("Untitled Script").equals(title)){
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Write title of Script.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			this.script.setScriptTitle(title);
+			this.script = facade.addQuestionToScript(script, question, questionType);
+			this.addQuestion = false;
+		}
 		
-		facade.addQuestionToScript(script, question, questionType);
+	}
+
+	public void showPanelAddQuestion(){
+		this.addQuestion = true;
 	}
 
 }

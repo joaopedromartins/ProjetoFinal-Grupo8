@@ -16,7 +16,7 @@ import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 
 @Entity
 @Table(name = "Question")
-public class QuestionEntity implements Serializable{
+public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	
 	/**
 	 * 
@@ -78,6 +78,10 @@ public class QuestionEntity implements Serializable{
 		this.orderNumber = orderNumber;
 	}
 
+	public void setScript(ScriptEntity script) {
+		this.script = script;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,6 +123,18 @@ public class QuestionEntity implements Serializable{
 	public String toString() {
 		return "QuestionEntity [orderNumber=" + orderNumber + ", question=" + question + ", questiontype="
 				+ questiontype + ", script=" + script + "]";
+	}
+
+	@Override
+	public int compareTo(QuestionEntity o) {
+		if (orderNumber < o.orderNumber){
+			return -1;
+		} else if (orderNumber > o.orderNumber){
+			return 1;
+		} else {
+			return 0;
+		}
+		
 	}
 	
 	

@@ -2,6 +2,7 @@ package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 
@@ -49,7 +50,7 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	public List<IQuestionProxy> getQuestions() {
 		List<IQuestionProxy> proxy = new ArrayList<>();
 		
-		List<QuestionEntity> entityQuestion = entity.getQuestions();
+		Set<QuestionEntity> entityQuestion = entity.getQuestions();
 		
 		for (QuestionEntity q:entityQuestion){
 			proxy.add(new QuestionProxy(q));

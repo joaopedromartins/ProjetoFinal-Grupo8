@@ -14,10 +14,13 @@
 		<h:form id="formListQuestions">
 			<h:outputText value="Add a Script" />
 			<br />
-			<h:outputText value="Title:" for="titleScript" />
-			<p:inputText id="titleScript" value="#{scriptBean.title}"
-				required="true" />
-			<p:message for="titleScript" />
+
+			<h:outputLabel for="titleScript" value="Title:" />
+			<p:inplace id="titleScript" editor="true">
+				<p:inputText value="#{scriptBean.title}" required="true"
+					label="text" />
+			</p:inplace>
+			
 
 			<p:orderList id="orderListScript" var="question"
 				controlsLocation="none" converter="omnifaces.ListConverter"
@@ -41,36 +44,36 @@
 
 			</p:orderList>
 		</h:form>
-		<h:form id="formAddQuestion">
-			<p:panelGrid id="gridAddQuestion" columns="2">
+		<h:panelGroup id="panelGroupQuestion">
+			<h:form id="formAddQuestion" rendered="#{scriptBean.addQuestion}">
+				<p:panelGrid id="gridAddQuestion" columns="2">
 
-				<p:outputLabel value="Question:" />
-				<p:inputText value="#{scriptBean.question}" />
+					<p:outputLabel value="Question:" />
+					<p:inputText value="#{scriptBean.question}" />
 
-				<p:outputLabel value="Question:" />
-				<p:selectOneMenu value="#{scriptBean.questionType}"
-					converter="omnifaces.SelectItemsConverter">
-					<f:selectItems value="#{scriptBean.possibleQuestionType}"
-						var="questionType" itemLabel="#{questionType.description}" />
-				</p:selectOneMenu>
+					<p:outputLabel value="Question:" />
+					<p:selectOneMenu value="#{scriptBean.questionType}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItems value="#{scriptBean.possibleQuestionType}"
+							var="questionType" itemLabel="#{questionType.description}" />
+					</p:selectOneMenu>
 
-				<p:spacer />
-				<p:commandButton id="saveQuestion" value="Done" action="#{scriptBean.addQuestionToScript}"
-					update=":formListQuestions:orderListScript" />
+					<p:spacer />
+					<p:commandButton id="saveQuestion" value="Done"
+						action="#{scriptBean.addQuestionToScript}"
+						update=":formListQuestions:orderListScript :panelGroupQuestion messageScript" />
 
-			</p:panelGrid>
+				</p:panelGrid>
+				<p:messages id="messageScript" />
+			</h:form>
 
-
-		</h:form>
-		<h:form>
+		</h:panelGroup>
+		<h:form id="formButtonAddQuestion">
 			<p:commandButton id="addQuestion" value="Add question"
-				process="@this" />
+				action="#{scriptBean.showPanelAddQuestion()}"
+				update=":panelGroupQuestion" />
 
 		</h:form>
-
-
-
-
 
 
 	</ui:define>

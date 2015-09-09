@@ -37,7 +37,8 @@ public class ScripFacade implements IScriptFacade {
 		
 		IScriptProxy newScript = factory.script();
 		
-		return service.saveScript(newScript);
+		//return service.saveScript(newScript);
+		return newScript;
 	}
 
 

@@ -1,18 +1,21 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -31,21 +34,24 @@ public class ScriptEntity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@Column
 	private String scriptTitle;
 	
+	@OrderBy("orderNumber ASC")
 	@OneToMany (cascade=CascadeType.ALL, mappedBy = "script", fetch=FetchType.EAGER)
-	private List<QuestionEntity> questions;
+	private SortedSet<QuestionEntity> questions;
 	
 	
 	
 	public ScriptEntity() {
-		this.questions = new ArrayList<>();
+		this.questions = new TreeSet<>();
 	}
 	
 	public ScriptEntity(String scriptTitle, List<QuestionEntity> questions) {
 		super();
 		this.scriptTitle = scriptTitle;
-		this.questions = questions;
+		this.questions = new TreeSet<>();
+		this.questions.addAll(questions);
 	}
 
 
@@ -61,29 +67,26 @@ public class ScriptEntity implements Serializable{
 	public void addQuestionToListQuestion (QuestionEntity question){
 		int  sizeListQuestion = questions.size();
 		question.setOrderNumber(sizeListQuestion + 1);
+		question.setScript(this);
 		this.questions.add(question);
 	}
 
-	public List<QuestionEntity> getQuestions() {
+	public Set<QuestionEntity> getQuestions() {
 		return questions;
 	}
 
 	public void setQuestions(List<QuestionEntity> questions) {
-		this.questions = questions;
+		this.questions.addAll(questions);
 	}
-
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((questions == null) ? 0 : questions.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((scriptTitle == null) ? 0 : scriptTitle.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -94,10 +97,7 @@ public class ScriptEntity implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ScriptEntity other = (ScriptEntity) obj;
-		if (questions == null) {
-			if (other.questions != null)
-				return false;
-		} else if (!questions.equals(other.questions))
+		if (id != other.id)
 			return false;
 		if (scriptTitle == null) {
 			if (other.scriptTitle != null)
@@ -106,7 +106,9 @@ public class ScriptEntity implements Serializable{
 			return false;
 		return true;
 	}
-	
+
+
+
 	
 	
 
