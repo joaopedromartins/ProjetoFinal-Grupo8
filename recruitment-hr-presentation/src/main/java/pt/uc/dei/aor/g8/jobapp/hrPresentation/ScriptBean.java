@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
@@ -12,7 +12,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IScriptFacade;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class ScriptBean implements Serializable{
 
 	/**
@@ -54,7 +54,13 @@ public class ScriptBean implements Serializable{
 	
 	
 	public IScriptProxy getScript() {
-		return script;
+		if ( script != null){
+			return script;
+		} else {
+			this.script=facade.initialNewScript();
+			return script;
+		}
+		
 	}
 	public void setScript(IScriptProxy script) {
 		this.script = script;

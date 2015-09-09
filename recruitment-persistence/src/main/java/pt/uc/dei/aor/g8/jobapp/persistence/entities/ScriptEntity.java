@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,12 +36,12 @@ public class ScriptEntity implements Serializable{
 	@OneToMany (cascade=CascadeType.ALL, mappedBy = "script", fetch=FetchType.EAGER)
 	private List<QuestionEntity> questions;
 	
+	
+	
 	public ScriptEntity() {
-		// TODO Auto-generated constructor stub
+		this.questions = new ArrayList<>();
 	}
 	
-	
-
 	public ScriptEntity(String scriptTitle, List<QuestionEntity> questions) {
 		super();
 		this.scriptTitle = scriptTitle;

@@ -16,7 +16,7 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	private ScriptEntity entity;
 	
 	public ScriptProxy() {
-		
+		this(null);
 	}
 	
 	public ScriptProxy (ScriptEntity script){
@@ -54,7 +54,6 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 		for (QuestionEntity q:entityQuestion){
 			proxy.add(new QuestionProxy(q));
 		}
-		proxy.add(new QuestionProxy());
 		return proxy;
 	}
 
