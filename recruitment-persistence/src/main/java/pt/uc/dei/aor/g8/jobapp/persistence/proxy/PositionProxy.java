@@ -1,4 +1,4 @@
-package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
+								package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
 import java.util.ArrayList;
 import java.util.Date;

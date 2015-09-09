@@ -11,12 +11,12 @@
 
 	<ui:define name="content">
 
-		<h:form id="formAddScript">
+		<h:form id="formListQuestions">
 			<h:outputText value="Add a Script" />
 			<br />
 			<h:outputText value="Title:" for="titleScript" />
-			<p:inputText id="titleScript"
-				value="#{scriptBean.script.scriptTitle}" required="true" />
+			<p:inputText id="titleScript" value="#{scriptBean.title}"
+				required="true" />
 			<p:message for="titleScript" />
 
 			<p:orderList id="orderListScript" var="question"
@@ -25,7 +25,7 @@
 				itemValue="#{question}">
 
 
-				<!-- <f:facet name="caption">Questions</f:facet>
+				<f:facet name="caption">Questions</f:facet>
 
 				<p:column>
 					<h:outputText value="#{question.orderNumber}" />
@@ -38,13 +38,40 @@
 				<p:column>
 
 				</p:column>
-				
-				
-				<f:facet name="footer">
-					<p:commandButton id="addQuestion" process="@this" />
-				</f:facet> -->
+
 			</p:orderList>
+		</h:form>
+		<h:form id="formAddQuestion">
+			<p:panelGrid id="gridAddQuestion" columns="2">
+
+				<p:outputLabel value="Question:" />
+				<p:inputText value="#{scriptBean.question}" />
+
+				<p:outputLabel value="Question:" />
+				<p:selectOneMenu value="#{scriptBean.questionType}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{scriptBean.possibleQuestionType}"
+						var="questionType" itemLabel="#{questionType.description}" />
+				</p:selectOneMenu>
+
+				<p:spacer />
+				<p:commandButton id="saveQuestion" value="Done" action="#{scriptBean.addQuestionToScript}"
+					update=":formListQuestions:orderListScript" />
+
+			</p:panelGrid>
+
 
 		</h:form>
+		<h:form>
+			<p:commandButton id="addQuestion" value="Add question"
+				process="@this" />
+
+		</h:form>
+
+
+
+
+
+
 	</ui:define>
 </ui:composition>

@@ -9,5 +9,7 @@ public interface IScriptPersistenceService {
 	public List<IScriptProxy> listOfAllScripts();
 
 	public IScriptProxy saveScript(IScriptProxy newScript);
+	
+	public IScriptProxy updateScript(IScriptProxy updateScript);
 
 }

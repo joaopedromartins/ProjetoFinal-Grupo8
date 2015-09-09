@@ -26,6 +26,10 @@ public class QuestionProxy implements IQuestionProxy, IEntityAware<QuestionEntit
 
 
 
+	public QuestionProxy(String question, QuestionType questionType) {
+			this.entity= new QuestionEntity(question, questionType);
+	}
+
 	@Override
 	public QuestionEntity getEntity() {
 		return entity;

@@ -5,7 +5,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IScriptPersistenceService;
 
@@ -36,6 +38,16 @@ public class ScripFacade implements IScriptFacade {
 		IScriptProxy newScript = factory.script();
 		
 		return service.saveScript(newScript);
+	}
+
+
+
+
+	@Override
+	public IScriptProxy addQuestionToScript(IScriptProxy script, String question, QuestionType questionType) {
+		IQuestionProxy newQuestion = factory.question(question, questionType);
+		script.addQuestionToListQuestion(newQuestion);
+		return service.updateScript(script);
 	}
 	
 	

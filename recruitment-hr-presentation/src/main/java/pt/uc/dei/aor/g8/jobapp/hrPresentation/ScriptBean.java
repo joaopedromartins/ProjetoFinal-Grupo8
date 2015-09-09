@@ -1,12 +1,14 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IScriptFacade;
@@ -25,9 +27,11 @@ public class ScriptBean implements Serializable{
 	
 	private String title;
 	private List<IQuestionProxy> questions;
-	
-	private List<IScriptProxy> scripts;
+
 	private IScriptProxy   script;
+	
+	private String question;
+	private QuestionType questionType;
 	
 
 	
@@ -43,14 +47,46 @@ public class ScriptBean implements Serializable{
 	
 	
 	
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public List<IQuestionProxy> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<IQuestionProxy> questions) {
+		this.questions = questions;
+	}
+	
+	public List<QuestionType> getPossibleQuestionType (){
+		return Arrays.asList(QuestionType.values());
+	}
+
+	public QuestionType getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(QuestionType questionType) {
+		this.questionType = questionType;
+	}
+
 	public List<IScriptProxy> getScripts() {
 		return facade.listOfAllScripts();
 	}
-	
-	public void setScripts(List<IScriptProxy> scripts) {
-		this.scripts = scripts;
-	}
-	
 	
 	
 	public IScriptProxy getScript() {
@@ -64,6 +100,11 @@ public class ScriptBean implements Serializable{
 	}
 	public void setScript(IScriptProxy script) {
 		this.script = script;
+	}
+	
+	public void addQuestionToScript (){
+		
+		facade.addQuestionToScript(script, question, questionType);
 	}
 
 }

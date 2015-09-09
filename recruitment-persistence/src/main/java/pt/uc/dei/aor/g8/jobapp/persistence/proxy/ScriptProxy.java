@@ -59,12 +59,12 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 
 	@Override
 	public void setQuestions(List<IQuestionProxy> questions) {
-		entity.setQuestions(questionConverterProxyToEntity(questions));
+		entity.setQuestions(questionsConverterProxyToEntity(questions));
 		
 	}
 	
 	@SuppressWarnings( "unchecked" )
-	private List<QuestionEntity> questionConverterProxyToEntity (List<IQuestionProxy> proxy){
+	private List<QuestionEntity> questionsConverterProxyToEntity (List<IQuestionProxy> proxy){
 		List<QuestionEntity> questionsEntity = new ArrayList<>();
 
 		for(IQuestionProxy qP : proxy){
@@ -72,6 +72,19 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 		}
 
 		return questionsEntity;
+	}
+
+	@Override
+	public void addQuestionToListQuestion(IQuestionProxy question) {
+		entity.addQuestionToListQuestion(questionConverterProxyToEntity(question));
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	private QuestionEntity questionConverterProxyToEntity (IQuestionProxy proxy){
+		QuestionEntity questionEntity = ((IEntityAware<QuestionEntity>)proxy).getEntity(); 
+		return questionEntity;
+		
 	}
 
 }

@@ -54,5 +54,14 @@ public class ScriptPersistenceService implements IScriptPersistenceService {
 		}
 		throw new IllegalStateException();
 	}
+
+	@Override
+	public IScriptProxy updateScript(IScriptProxy updateScript) {
+		ScriptEntity entity = getEntity(updateScript);
+		entity = em.merge(entity);
+		return new ScriptProxy(entity);
+	}
+	
+	
 		
 }

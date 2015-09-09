@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import pt.uc.dei.aor.g8.business.enumeration.Localization;
+import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.business.enumeration.Status;
 import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
@@ -27,5 +28,7 @@ public interface IProxyFactory {
 	public INotificationProxy notification (String title, Date notificationDate, String message, String signature, IUserProxy userReceiver);
 	
 	public IScriptProxy script ();
+	
+	public IQuestionProxy question (String question, QuestionType questionType);
 	
 }

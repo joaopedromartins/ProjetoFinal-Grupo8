@@ -57,6 +57,12 @@ public class ScriptEntity implements Serializable{
 	public void setScriptTitle(String scriptTitle) {
 		this.scriptTitle = scriptTitle;
 	}
+	
+	public void addQuestionToListQuestion (QuestionEntity question){
+		int  sizeListQuestion = questions.size();
+		question.setOrderNumber(sizeListQuestion + 1);
+		this.questions.add(question);
+	}
 
 	public List<QuestionEntity> getQuestions() {
 		return questions;
