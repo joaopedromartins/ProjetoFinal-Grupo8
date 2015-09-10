@@ -40,7 +40,7 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 	public List<IJobApplicationProxy> listOfAllCandidateJobApplication(String username) {
 		
 		TypedQuery<JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_CANDIDATE_JOB_APPLICATION, JobApplicationEntity.class);
-		//query.setParameter( "login", username);
+		query.setParameter( "login", username);
 		List<JobApplicationEntity> entity= query.getResultList();
 
 		List<IJobApplicationProxy> proxy= new ArrayList<>();

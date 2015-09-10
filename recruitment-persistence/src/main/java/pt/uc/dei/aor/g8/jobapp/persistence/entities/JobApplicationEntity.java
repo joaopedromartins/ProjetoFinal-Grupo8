@@ -13,8 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "JobApplication")
-//@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", query = "SELECT j FROM JobApplicationEntity j inner join j.CandidateEntity c where c.username like :login ")
-@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", query = "SELECT j FROM JobApplicationEntity j ")
+@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c where c.username like :login ")
 public class JobApplicationEntity {
 	
 	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplicattion.listOfAllCandidateJobApplication";
