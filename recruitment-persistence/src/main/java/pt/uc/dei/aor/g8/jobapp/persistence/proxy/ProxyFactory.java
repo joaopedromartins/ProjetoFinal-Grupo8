@@ -18,6 +18,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.INotificationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionScaleProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 
@@ -78,5 +79,17 @@ public class ProxyFactory implements IProxyFactory {
 	public IQuestionProxy question(String question, QuestionType questionType) {
 		return new QuestionProxy(question,questionType);
 	}
+	
+	@Override
+	public IQuestionProxy question(String question, QuestionType questionType, IQuestionScaleProxy newScale) {
+		return new QuestionProxy(question,questionType,newScale);
+	}
+
+	@Override
+	public IQuestionScaleProxy scale(int min, int max, String minLabel, String maxLabel) {
+		return new QuestionScaleProxy(min,max,minLabel,maxLabel);
+	}
+
+	
 
 }
