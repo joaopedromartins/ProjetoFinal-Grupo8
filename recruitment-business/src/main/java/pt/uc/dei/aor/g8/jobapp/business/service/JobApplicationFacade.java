@@ -37,8 +37,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 
 	@Override
 	public IJobApplicationProxy editJobApplication(IJobApplicationProxy jobApplicationProxy) {
-		// TODO Auto-generated method stub
-		//return null;
+		
 		return service.editJobApplication(jobApplicationProxy);
 	}
 	

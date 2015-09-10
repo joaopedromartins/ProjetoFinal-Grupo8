@@ -8,11 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "JobApplication")
+//@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", query = "SELECT j FROM JobApplicationEntity j inner join j.CandidateEntity c where c.username like :login ")
+@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", query = "SELECT j FROM JobApplicationEntity j ")
 public class JobApplicationEntity {
+	
+	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplicattion.listOfAllCandidateJobApplication";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
