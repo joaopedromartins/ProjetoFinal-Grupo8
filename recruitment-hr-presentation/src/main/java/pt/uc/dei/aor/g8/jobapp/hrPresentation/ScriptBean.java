@@ -40,6 +40,8 @@ public class ScriptBean implements Serializable{
 
 	@Inject
 	private QuestionScaleBean scale;
+	@Inject
+	private QuestionChoiceBean options;
 
 
 
@@ -123,10 +125,14 @@ public class ScriptBean implements Serializable{
 			if ( questionType == QuestionType.SCALE){
 				this.script = facade.addQuestionToScript(script, question, questionType,
 						scale.getMin(), scale.getMax(), scale.getMinLabel(), scale.getMaxLabel());
+			} else if ( questionType == QuestionType.CHECKBOXES || questionType == QuestionType.MULTIPLECHOICE ||
+					questionType == QuestionType.CHOOSEFROMLIST){		
+				this.script = facade.addQuestionToScript(script, question, questionType, 
+						options.getOptions());
 			} else {
 				this.script = facade.addQuestionToScript(script, question, questionType);
 			}
-			
+
 			this.addQuestion = false;
 		}
 

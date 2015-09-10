@@ -17,6 +17,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.INotificationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionChoiceProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionScaleProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
@@ -88,6 +89,18 @@ public class ProxyFactory implements IProxyFactory {
 	@Override
 	public IQuestionScaleProxy scale(int min, int max, String minLabel, String maxLabel) {
 		return new QuestionScaleProxy(min,max,minLabel,maxLabel);
+	}
+
+	@Override
+	public IQuestionChoiceProxy choise(String option) {
+		
+		return new QuestionChoiceProxy (option) ;
+	}
+
+	@Override
+	public IQuestionProxy question(String question, QuestionType questionType, List<IQuestionChoiceProxy> options) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

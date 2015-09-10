@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionChoiceProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionScaleProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
@@ -63,6 +64,22 @@ public class ScripFacade implements IScriptFacade {
 		script.addQuestionToListQuestion(newQuestion);
 		return service.updateScript(script);
 	}
+
+
+
+
+	@Override
+	public IScriptProxy addQuestionToScript(IScriptProxy script, String question, QuestionType questionType,
+			List<IQuestionChoiceProxy> options) {
+		IQuestionProxy newQuestion = factory.question(question, questionType, options);
+		script.addQuestionToListQuestion(newQuestion);
+		return service.updateScript(script);
+	}
+
+
+
+
+	
 
 
 

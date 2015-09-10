@@ -38,4 +38,7 @@ public interface IProxyFactory {
 
 	public IQuestionProxy question(String question, QuestionType questionType, IQuestionScaleProxy newScale);
 	
+	public IQuestionChoiceProxy choise (String option);
+	
+	public IQuestionProxy question (String question, QuestionType questionType, List<IQuestionChoiceProxy> options);
 }

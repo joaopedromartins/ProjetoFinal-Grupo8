@@ -2,7 +2,6 @@ package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 

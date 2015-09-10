@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "QuestionOptionChoice")
-public class QuestionOptionChoice {
+public class QuestionChoiceEntity implements Serializable{
 
 	/**
 	 * 
@@ -23,12 +25,22 @@ public class QuestionOptionChoice {
 	@Column
 	private String option;
 
-	public QuestionOptionChoice() {
+	public QuestionChoiceEntity() {
 	
 	}
 
-	public QuestionOptionChoice(String option) {
+	public QuestionChoiceEntity(String option) {
 		super();
 		this.option = option;
-	}	
+	}
+
+	public String getOption() {
+		return option;
+	}
+
+	public void setOption(String option) {
+		this.option = option;
+	}
+	
+	
 }

@@ -15,10 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.metadata.CascadableDescriptor;
 
 import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
-import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionScaleProxy;
 
 @Entity
 @Table(name = "Question")
@@ -50,7 +48,7 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	private QuestionScaleEntity scale;
 	
 	@OneToMany (cascade = CascadeType.ALL)
-	private List <QuestionOptionChoice> options;
+	private List <QuestionChoiceEntity> options;
 
 	
 
