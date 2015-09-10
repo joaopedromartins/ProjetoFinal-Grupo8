@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.metadata.CascadableDescriptor;
@@ -46,6 +48,9 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	
 	@OneToOne (cascade = CascadeType.ALL)
 	private QuestionScaleEntity scale;
+	
+	@OneToMany (cascade = CascadeType.ALL)
+	private List <QuestionOptionChoice> options;
 
 	
 

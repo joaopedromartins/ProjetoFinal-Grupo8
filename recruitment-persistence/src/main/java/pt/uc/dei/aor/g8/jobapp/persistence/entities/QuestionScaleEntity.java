@@ -90,12 +90,4 @@ public class QuestionScaleEntity implements Serializable{
 		this.maxLabel = maxLabel;
 	}
 
-
-
-	
-	
-	
-	
-	
-
 }
