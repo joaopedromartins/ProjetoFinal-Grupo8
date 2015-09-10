@@ -2,6 +2,7 @@ package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,9 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.metadata.CascadableDescriptor;
 
 import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionScaleProxy;
 
 @Entity
 @Table(name = "Question")
@@ -39,6 +43,9 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	
 	@ManyToOne
 	private ScriptEntity script;
+	
+	@OneToOne (cascade = CascadeType.ALL)
+	private QuestionScaleEntity scale;
 
 	
 
@@ -53,6 +60,20 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	}
 
 
+
+	public QuestionEntity(String question2, QuestionType questionType2, QuestionScaleEntity newScale) {
+		this.question = question2;
+		this.questiontype = questionType2;
+		this.scale = newScale;
+	}
+
+	public QuestionScaleEntity getScale() {
+		return scale;
+	}
+
+	public void setScale(QuestionScaleEntity scale) {
+		this.scale = scale;
+	}
 
 	public String getQuestion() {
 		return question;

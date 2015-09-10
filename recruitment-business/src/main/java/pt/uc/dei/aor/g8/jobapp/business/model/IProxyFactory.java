@@ -34,4 +34,8 @@ public interface IProxyFactory {
 	
 	public IQuestionProxy question (String question, QuestionType questionType);
 	
+	public IQuestionScaleProxy scale (int min,int max, String minLabel, String maxLabel);
+
+	public IQuestionProxy question(String question, QuestionType questionType, IQuestionScaleProxy newScale);
+	
 }

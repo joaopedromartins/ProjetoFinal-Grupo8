@@ -20,7 +20,7 @@
 				<p:inputText value="#{scriptBean.title}" required="true"
 					label="text" />
 			</p:inplace>
-			
+
 
 			<p:orderList id="orderListScript" var="question"
 				controlsLocation="none" converter="omnifaces.ListConverter"
@@ -36,7 +36,9 @@
 
 				<p:column>
 					<h:outputText value="#{question.question}" />
+					<br />
 					<h:outputText value="#{question.questiontype}" />
+
 				</p:column>
 				<p:column>
 
@@ -56,7 +58,43 @@
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItems value="#{scriptBean.possibleQuestionType}"
 							var="questionType" itemLabel="#{questionType.description}" />
+						<p:ajax event="change" update="panelGroupQuestionType" />
 					</p:selectOneMenu>
+
+					<p:spacer />
+
+
+					<h:panelGroup id="panelGroupQuestionType">
+
+						<p:panelGrid id="questionTypeText"
+							rendered="#{scriptBean.questionType eq 'TEXT'}">
+							<p:inputText disabled="true" />
+						</p:panelGrid>
+
+						<p:panelGrid id="questionTypeParagraph"
+							rendered="#{scriptBean.questionType eq 'PARAGRAPH'}">
+							<p:inputTextarea disabled="true" />
+						</p:panelGrid>
+
+						<p:panelGrid id="questionTypeScale"
+							rendered="#{scriptBean.questionType eq 'SCALE'}" columns="2">
+
+							<p:spinner id="min" value="#{questionScaleBean.min}" min="0"
+								max="1" />
+							<p:spinner id="max" value="#{questionScaleBean.max}" min="2"
+								max="10" />
+
+							<p:outputLabel value="min" for="minLabel" />
+							<p:inputText id="minLabel" value="#{questionScaleBean.minLabel}" />
+
+							<p:outputLabel value="max" for="maxLabel" />
+							<p:inputText id="maxLabel" value="#{questionScaleBean.maxLabel}" />
+						</p:panelGrid>
+
+
+
+					</h:panelGroup>
+
 
 					<p:spacer />
 					<p:commandButton id="saveQuestion" value="Done"

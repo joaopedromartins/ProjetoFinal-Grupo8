@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
@@ -35,7 +36,10 @@ public class ScriptBean implements Serializable{
 	private boolean addQuestion=false; 
 
 	private String question;
-	private QuestionType questionType;
+	private QuestionType questionType =QuestionType.TEXT;
+
+	@Inject
+	private QuestionScaleBean scale;
 
 
 
@@ -116,10 +120,16 @@ public class ScriptBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
 			this.script.setScriptTitle(title);
-			this.script = facade.addQuestionToScript(script, question, questionType);
+			if ( questionType == QuestionType.SCALE){
+				this.script = facade.addQuestionToScript(script, question, questionType,
+						scale.getMin(), scale.getMax(), scale.getMinLabel(), scale.getMaxLabel());
+			} else {
+				this.script = facade.addQuestionToScript(script, question, questionType);
+			}
+			
 			this.addQuestion = false;
 		}
-		
+
 	}
 
 	public void showPanelAddQuestion(){

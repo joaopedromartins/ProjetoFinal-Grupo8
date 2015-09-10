@@ -13,4 +13,7 @@ public interface IScriptFacade {
 
 	public IScriptProxy addQuestionToScript(IScriptProxy script, String question, QuestionType questionType);
 
+	public IScriptProxy addQuestionToScript(IScriptProxy script, String question, QuestionType questionType, int min,
+			int max, String minLabel, String maxLabel);
+
 }

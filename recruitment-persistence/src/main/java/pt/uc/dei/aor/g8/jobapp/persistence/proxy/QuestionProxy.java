@@ -4,7 +4,9 @@ import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionScaleProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.QuestionEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.QuestionScaleEntity;
 
 @Stateless
 public class QuestionProxy implements IQuestionProxy, IEntityAware<QuestionEntity> {
@@ -26,7 +28,18 @@ public class QuestionProxy implements IQuestionProxy, IEntityAware<QuestionEntit
 
 
 	public QuestionProxy(String question, QuestionType questionType) {
-			this.entity= new QuestionEntity(question, questionType);
+			this.entity = new QuestionEntity(question, questionType);
+	}
+
+	public QuestionProxy(String question, QuestionType questionType, IQuestionScaleProxy newScale){
+		this.entity = new QuestionEntity(question, questionType, scaleConverterProxyToEntity(newScale));
+	}
+	
+	@SuppressWarnings("unchecked")
+	private QuestionScaleEntity scaleConverterProxyToEntity (IQuestionScaleProxy proxy){
+		QuestionScaleEntity scaleEntity = ((IEntityAware<QuestionScaleEntity>)proxy).getEntity(); 
+		return scaleEntity;
+		
 	}
 
 	@Override
