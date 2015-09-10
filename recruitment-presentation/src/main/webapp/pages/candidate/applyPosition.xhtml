@@ -15,9 +15,9 @@
 <h:body>
 
 	<h:form id="formApplyPosition">
-		<h:outputText value="Hello Candidate" />
+		<h:outputText value="Hello #{jobApplicationBean.sessionUserLogged}" />
 		<br />
-		<h:outputText value="Add a Jobb Application" />
+		<h:outputText value="Apply a Job Application" />
 		<p:panelGrid id="gridPosition" columns="3">
 			<p:outputLabel value="Address :" for="address" />
 			<p:inputText id="address" value="#{jobApplicationBean.address}" required="true" />
@@ -48,57 +48,27 @@
 			<p:message for="letter" />
 			
 			<p:outputLabel value="CV :" for="cv" />
+			<h:inputTextarea id="cv" value="#{jobApplicationBean.cv}" required="true" />
+			<p:message for="cv" />
 			
 			<p:outputLabel value="Source :" for="source" />
-			
-			<p:outputLabel value="#{jobApplicationBean.findSessionUsername}" />
-
-	
-			<!--  
-			<p:outputLabel value="Status:" for="status" />
-			<p:selectOneMenu id="status" value="#{jobApplicationBean.status}"
+			<p:selectOneMenu id="source" value="#{jobAdvertisingChanelBean.findAllChannels()}"
 				required="true" converter="omnifaces.SelectItemsConverter">
-				<f:selectItems value="#{jobApplicationBean.possibleStatus}" var="status"
-					itemLabel="#{status.description}" />
+				<f:selectItems value="#{jobApplicationBean.source}" var="source"
+					itemLabel="#{source.chanelName}" />
 			</p:selectOneMenu>
-			<p:message for="status" />
-
-			<p:outputLabel value="Job Posting Channels:" for="channels" />
-			<h:panelGroup id="panelGroupChanel">
-				<p:selectManyCheckbox id="channels"
-					value="#{jobApplicationBean.jobAdvertisingChanel}"
-					converter="omnifaces.SelectItemsConverter" layout="grid"
-					columns="3">
-					<f:selectItems
-						value="#{jobAdvertisingChanelBean.findAllChannels()}"
-						var="channel" itemLabel="#{channel.chanelName}"
-						itemValue="#{channel}" />
-				</p:selectManyCheckbox>
-				<p:commandButton id="addChanel" icon="ui-icon-plusthick"
-					process="@this"
-					action="#{jobAdvertisingChanelBean.showAddChanel()}"
-					update=":formAddPosition:panelGroupChanel" />
-
-				<h:panelGroup id="addChannelPanelGroup"
-					rendered="#{jobAdvertisingChanelBean.add}">
-					<p:outputLabel value="Chanel name:" />
-					<p:inputText id="channel"
-						value="#{jobAdvertisingChanelBean.channelName}" />
-					<p:commandButton id="saveChanel" icon="ui-icon-disk"
-						process="@this channel"
-						actionListener="#{jobAdvertisingChanelBean.addChannel}"
-						update=":formAddPosition:panelGroupChanel growl" />
-				</h:panelGroup>
-				
-			</h:panelGroup>
-			<p:message for="channels" />
-			-->
-
+			<p:message for="source" />
+			
+			 
+			<p:outputLabel value="#{jobApplicationBean.sessionUserLogged}" />
+			
+			
 		</p:panelGrid>
-		<p:growl id="growl" />
+		<center>
 		<p:commandButton value="Apply"
 			action="#{jobApplicationBean.applyJobApplication()}"
-			update="gridPosition growl" />
+			update="formApplyPosition" />
+		</center>
 	</h:form>
 </h:body>
 </html>

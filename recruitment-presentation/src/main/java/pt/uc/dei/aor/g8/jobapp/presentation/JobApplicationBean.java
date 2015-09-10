@@ -4,12 +4,16 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 
@@ -23,6 +27,8 @@ public class JobApplicationBean implements Serializable {
 
 	@EJB
 	private IJobApplicationFacade jobApplicationFacade;
+	
+	@EJB
 	private ICandidateFacade candidateFacade;
 
 	private String address;
@@ -38,6 +44,8 @@ public class JobApplicationBean implements Serializable {
 	
 	private ICandidateProxy candidateProxy;
 	private IPositionProxy positionProxy;
+	
+	private String sessionUserLogged;
 
 	//constructors
 	public JobApplicationBean() {
@@ -129,28 +137,44 @@ public class JobApplicationBean implements Serializable {
 		this.positionProxy = positionProxy;
 	}
 	
+	public String getSessionUserLogged() {
+		this.sessionUserLogged = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+		return sessionUserLogged;
+	}
+
+
 	//methods
-	public String findSessionUsername(){
-		return (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
-	}
 	
-	public ICandidateProxy findCandidateProxyByUsername(String username){
-		return candidateProxy = candidateFacade.findCandidateByUsername(username);
-	}
+	
+//	public ICandidateProxy findCandidateProxyByUsername(String username){
+//		return candidateProxy = candidateFacade.findCandidateByUsername(username);
+//	}
 	
 
 	public String applyPosition() {
-		System.out.println( "\n     Username:       "+findSessionUsername());
-		System.out.println( "\n     Position Title: "+positionProxy.getTitle() +"\n");
-		//return "/pages/candidate/applyPosition.xhtml";
-		return "/CriticalJobApplication/pages/candidate/applyPosition.xhtml";
+		return "/pages/candidate/applyPosition?faces-redirect=true";
 	}
 	
 	public String applyJobApplication() {
 		// TODO
 		//return "/pages/candidate/candidate.xhtml";
-
-		return "/CriticalJobApplication/pages/candidate/candidate.xhtml";
+		System.out.println( "\n     Username:       "+getSessionUserLogged());
+		System.out.println( "\n     Position Title: "+positionProxy.getTitle() +"\n");
+		
+		return "/CriticalJobApplication/pages/candidate/candidate";
 	}
+	
+//	private void redirect(String path){
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+//        
+//        try {
+//            response.sendRedirect(request.getContextPath()+path);
+//        } catch (IOException e) {
+//            // Redirection error
+//            e.printStackTrace();
+//        }
+//    }
+
 	
 }	

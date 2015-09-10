@@ -54,9 +54,10 @@
 			</p:column>
 			
 			<p:column style="width:32px;text-align: center">
-				<p:commandButton value="Apply Position" 
+				<p:commandButton 
 					icon="ui-icon-bookmark" 
-					action="#{jobApplicationBean.applyPosition}"  >
+					action="#{jobApplicationBean.applyPosition}"  
+					title="Apply Jobb Position">
 					<f:setPropertyActionListener value="#{position}"
 						target="#{jobApplicationBean.positionProxy}" />
 				</p:commandButton>
@@ -99,16 +100,7 @@
 				<h:outputText value="#{positionBean.positionProxy.technicalArea.description}" />
 
 			</p:panelGrid>
-			 
-			<br/>
-			<center>
-				<p:commandButton value="Apply Position" 
-					icon="ui-icon-bookmark" 
-					action="#{jobApplicationBean.applyPosition}"  >
-					<f:setPropertyActionListener value="#{position}"
-						target="#{jobApplicationBean.positionProxy}" />
-				</p:commandButton>
-			</center>
+			
 		</p:outputPanel>
 	</p:dialog>
 			
