@@ -69,6 +69,12 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 		this.questiontype = questionType2;
 		this.scale = newScale;
 	}
+	
+	public QuestionEntity (String question3, QuestionType questionType3, List<QuestionChoiceEntity> options ){
+		this.question = question3;
+		this.questiontype = questionType3;
+		this.options = options;	
+	}
 
 	public QuestionScaleEntity getScale() {
 		return scale;

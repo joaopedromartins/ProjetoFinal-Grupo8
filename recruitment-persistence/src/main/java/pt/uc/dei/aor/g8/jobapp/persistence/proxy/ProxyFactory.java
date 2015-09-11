@@ -85,6 +85,12 @@ public class ProxyFactory implements IProxyFactory {
 	public IQuestionProxy question(String question, QuestionType questionType, IQuestionScaleProxy newScale) {
 		return new QuestionProxy(question,questionType,newScale);
 	}
+	
+	@Override
+	public IQuestionProxy question(String question, QuestionType questionType, List<IQuestionChoiceProxy> options) {
+		return new QuestionProxy(question,questionType,options);
+	}
+
 
 	@Override
 	public IQuestionScaleProxy scale(int min, int max, String minLabel, String maxLabel) {
@@ -93,16 +99,10 @@ public class ProxyFactory implements IProxyFactory {
 
 	@Override
 	public IQuestionChoiceProxy choise(String option) {
-		
 		return new QuestionChoiceProxy (option) ;
 	}
 
-	@Override
-	public IQuestionProxy question(String question, QuestionType questionType, List<IQuestionChoiceProxy> options) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	
 
 }

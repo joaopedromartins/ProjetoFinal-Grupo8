@@ -8,7 +8,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class AutoGeneratePasswor {
 	
 	public String autoGeneratePassword (){
-		String autoGeneratePassword = RandomStringUtils.randomAscii(8);
+		String autoGeneratePassword = RandomStringUtils.randomAlphanumeric(8);
         System.out.println("PassWor random = " + autoGeneratePassword);
 		return autoGeneratePassword;	
 	}

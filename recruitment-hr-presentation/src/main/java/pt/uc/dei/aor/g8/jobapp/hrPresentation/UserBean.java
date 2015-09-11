@@ -63,7 +63,27 @@ public class UserBean implements Serializable {
 			e.printStackTrace();
 		}
 		return "/login?faces-redirect=true";
+	}
 
+	public String login(){
+		this.username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+		if ( username != null ){
+			this.currentUser = findUserByUsername();
+			this.isLogged = true;
+			int numeroRoles=currentUser.getRoles().size();
+			String page;
+			if ( numeroRoles == 3){
+				page = "/administrator/administrator?faces-redirect=true";
+			} else if (numeroRoles==2){
+				page = "/manager/manager?faces-redirect=true" ;
+			} else {
+				page = "/interviewer/interviewer?faces-redirect=true";
+			}
+			return page;
+		}else {
+			logout();
+			return null;
+		}
 	}
 
 
@@ -73,7 +93,6 @@ public class UserBean implements Serializable {
 			if ( username != null ){
 				this.isLogged = true;
 				this.currentUser = findUserByUsername();
-				System.out.println(currentUser);
 				return currentUser;
 			}else {
 				logout();
@@ -144,12 +163,12 @@ public class UserBean implements Serializable {
 		return new ArrayList<RoleType>(EnumSet.allOf(RoleType.class));
 	}
 
-	public List<RoleType> getRoles() {
+	public List<RoleType> getRolesUser() {
 		return roles;
 	}
 
-	public void setRoles(List<RoleType> roles) {
-		this.roles = roles;
+	public void setRolesUser(List<RoleType> rolesUser) {
+		this.roles = rolesUser;
 	}
 
 

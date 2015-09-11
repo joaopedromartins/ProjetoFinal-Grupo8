@@ -51,7 +51,7 @@
 				<p:panelGrid id="gridAddQuestion" columns="2">
 
 					<p:outputLabel value="Question:" />
-					<p:inputText value="#{scriptBean.question}" />
+					<p:inputText value="#{scriptBean.question}" required="true"/>
 
 					<p:outputLabel value="Question:" />
 					<p:selectOneMenu value="#{scriptBean.questionType}"
@@ -101,18 +101,20 @@
 									<h:outputText value="#{option.option}" />
 								</p:column>
 							</p:dataTable>
-
+							<p:spacer />
+							
 							<p:outputLabel />
 							<p:inputText id="option1" value="#{questionChoiceBean.option}" />
 
+							<p:outputLabel />
 							<p:inputText id="optionNew"
 								value="#{questionChoiceBean.optionNew}" />
+							
 							<p:spacer />
 							<h:commandButton id="buttonOption" value="Add option"
 							
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptions" />
-
+								update=":formAddQuestion:questionTypeMultiplechoice:tableOptions" />
 							<p:defaultCommand target="buttonOption" />
 
 						</p:panelGrid>

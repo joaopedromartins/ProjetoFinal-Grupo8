@@ -71,6 +71,7 @@ public class ScripFacade implements IScriptFacade {
 	@Override
 	public IScriptProxy addQuestionToScript(IScriptProxy script, String question, QuestionType questionType,
 			List<IQuestionChoiceProxy> options) {
+		//List<IQuestionChoiceProxy> newOptions= factory.choice(options);
 		IQuestionProxy newQuestion = factory.question(question, questionType, options);
 		script.addQuestionToListQuestion(newQuestion);
 		return service.updateScript(script);

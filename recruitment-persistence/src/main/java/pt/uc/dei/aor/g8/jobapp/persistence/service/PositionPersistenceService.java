@@ -31,6 +31,15 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 		em.persist(entity);
 		return new PositionProxy(entity);
 	}
+	
+	@Override
+	public IPositionProxy editPosition(IPositionProxy positionProxy) {
+		PositionEntity entity = getEntity(positionProxy);
+		entity=em.merge(entity);
+		return new PositionProxy(entity);
+	}
+	
+	
 
 
 	@SuppressWarnings("unchecked")
@@ -54,12 +63,7 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 		return proxy;
 	}
 
-	@Override
-	public IPositionProxy editPosition(IPositionProxy positionProxy) {
-		PositionEntity entity = getEntity(positionProxy);
-		entity=em.merge(entity);
-		return new PositionProxy(entity);
-	}
+
 
 	@Override
 	public List<IPositionProxy> listOfAllOpenPosition() {
