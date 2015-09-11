@@ -49,8 +49,8 @@ public class JobApplicationEntity {
 	@Column
     private String status;
 	
-	@ManyToOne
-    private JobAdvertisingChanelEntity source;
+	@Column
+    private String jobPositionSource;
 
 	@ManyToOne
 	private CandidateEntity candidateEntity;
@@ -66,8 +66,8 @@ public class JobApplicationEntity {
 
 	public JobApplicationEntity(
 			 String address, String city, String country, BigInteger phone, String diploma,
-			 String school, String letter, String cv, JobAdvertisingChanelEntity source,
-			 String status)  {
+			 String school, String letter, String cv, String source,
+			 String status, CandidateEntity candidateEntity, PositionEntity positionEntity)  {
 		super();
 		this.address = address;
 		this.city = city;
@@ -77,8 +77,10 @@ public class JobApplicationEntity {
 		this.school = school;
 		this.letter = letter;
 		this.cv = cv;
-		this.source = source;
+		this.jobPositionSource = source;
 		this.status = "Open";
+		this.candidateEntity = candidateEntity;
+		this.positionEntity = positionEntity;
 	}
 	
 	
@@ -147,13 +149,27 @@ public class JobApplicationEntity {
 	public void setCv(String cv) {
 		this.cv = cv;
 	}
-	
-	
-	public JobAdvertisingChanelEntity getSource() {
-		return source;
+
+	public String getJobPositionSource() {
+		return jobPositionSource;
 	}
-	public void setSource(JobAdvertisingChanelEntity source) {
-		this.source = source;
+
+	public void setJobPositionSource(String jobPositionSource) {
+		this.jobPositionSource = jobPositionSource;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setCandidateEntity(CandidateEntity candidateEntity) {
+		this.candidateEntity = candidateEntity;
+	}
+	public void setPositionEntity(PositionEntity positionEntity) {
+		this.positionEntity = positionEntity;
 	}
 
 	public long getId() {

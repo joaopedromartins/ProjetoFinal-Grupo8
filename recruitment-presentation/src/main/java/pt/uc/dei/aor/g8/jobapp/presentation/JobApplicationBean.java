@@ -2,18 +2,17 @@ package pt.uc.dei.aor.g8.jobapp.presentation;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 
@@ -39,7 +38,7 @@ public class JobApplicationBean implements Serializable {
 	private String school;
 	private String letter; 
 	private String cv;
-	private IJobAdvertisingChanelProxy source;
+	private String source;
 	private String status;
 	
 	private ICandidateProxy candidateProxy;
@@ -109,10 +108,10 @@ public class JobApplicationBean implements Serializable {
 		this.cv = cv;
 	}
 
-	public IJobAdvertisingChanelProxy getSource() {
+	public String getSource() {
 		return source;
 	}
-	public void setSource(IJobAdvertisingChanelProxy source) {
+	public void setSource(String source) {
 		this.source = source;
 	}
 
@@ -157,11 +156,44 @@ public class JobApplicationBean implements Serializable {
 	
 	public String applyJobApplication() {
 		// TODO
-		//return "/pages/candidate/candidate.xhtml";
+		// APAGAR sysout
 		System.out.println( "\n     Username:       "+getSessionUserLogged());
 		System.out.println( "\n     Position Title: "+positionProxy.getTitle() +"\n");
+		//
 		
-		return "/CriticalJobApplication/pages/candidate/candidate";
+		IJobApplicationProxy proxy;
+		proxy=jobApplicationFacade.createNewJobApplication(
+				 address,  city,  country, phone, diploma,
+				 school,  letter,  cv, source, status, candidateProxy, positionProxy);
+		if(proxy!=null){
+			address=null;
+			city=null;
+			country=null;
+			phone=null;
+			diploma=null;
+			school=null;
+			letter=null; 
+			cv=null;
+			source=null;
+			status=null;
+						
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_INFO,
+					"Position created successfully.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			
+			// TODO
+			// vai para a pagina ver candidaturas
+			//return "/pages/candidate/candidate";
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error creating position.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);	
+		}
+		
+		//Volta à mesma pagina
+		return "/pages/candidate/candidate";
 	}
 	
 //	private void redirect(String path){

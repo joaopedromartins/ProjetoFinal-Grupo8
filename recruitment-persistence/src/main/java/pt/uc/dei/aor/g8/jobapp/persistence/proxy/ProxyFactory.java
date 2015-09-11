@@ -62,15 +62,6 @@ public class ProxyFactory implements IProxyFactory {
 		return new NotificationProxy (title,notificationDate,message,signature,userReceiver);
 	}
 
-	@Override
-	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
-			String diploma, String school, String letter, String cv, IJobAdvertisingChanelProxy source, String status) {
-		// TODO Auto-generated method stub
-		return null;
-		//return new IJobApplicationProxy( address,  city,  country,  phone,
-		//		 diploma,  school,  letter,  cv, source.getChanelName(),  status);
-	}
-
 	public IScriptProxy script() {
 		return new ScriptProxy();
 	}
@@ -90,6 +81,12 @@ public class ProxyFactory implements IProxyFactory {
 		return new QuestionScaleProxy(min,max,minLabel,maxLabel);
 	}
 
-	
+	@Override
+	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
+			String diploma, String school, String letter, String cv, String source, String status,
+			ICandidateProxy candidate, IPositionProxy position) {
+		return new JobApplicationProxy( address,  city,  country,  phone,
+				 diploma,  school,  letter,  cv, source,  status, candidate, position);
+	}
 
 }

@@ -9,8 +9,9 @@ import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
-import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobAdvertisingChanelEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.CandidateEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobApplicationEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
 
 @Stateless
 public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<JobApplicationEntity> {
@@ -23,11 +24,27 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 
 	public JobApplicationProxy(String address, String city,
 			String country, BigInteger phone, String diploma, String school, String letter,
-			String cv, IJobAdvertisingChanelProxy source, String status) {
-		this.entity = new JobApplicationEntity(address, city,
-				country, phone, diploma, school, letter,
-				cv, new JobAdvertisingChanelEntity( source.getChanelName()), status);
+			String cv, String source, String status, ICandidateProxy candidateProxy, IPositionProxy positionProxy)  {
+		this.entity = new JobApplicationEntity(address, city, country, phone, diploma, school, letter,
+				cv, source, status, 
+				candidateCoverterProxyToEntity(candidateProxy), 
+				positionCoverterProxyToEntity(positionProxy) );
 	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	private CandidateEntity candidateCoverterProxyToEntity (ICandidateProxy candidate){
+		CandidateEntity entity = ((IEntityAware<CandidateEntity>)candidate).getEntity();
+		return entity;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private PositionEntity positionCoverterProxyToEntity (IPositionProxy position){
+		PositionEntity entity = ((IEntityAware<PositionEntity>)position).getEntity();
+		return entity;
+	}
+	
 
 	public JobApplicationProxy (JobApplicationEntity jobApplication){
 		if (jobApplication==null){
