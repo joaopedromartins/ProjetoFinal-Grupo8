@@ -33,6 +33,8 @@ public class InitialBean {
 		chanelFacade.addChanel("Facebook");
 		List <RoleType> roles= new ArrayList<>();
 		roles.add(RoleType.ADMINISTRATOR);
+		roles.add(RoleType.MANAGER);
+		roles.add(RoleType.INTERVIEWER);
 
 		String password = passwordEncrypt.encriptarPass("admin");
 		userFacade.createUser("admin", password, "lastname", "firstname", "admin@gmail.com", roles );

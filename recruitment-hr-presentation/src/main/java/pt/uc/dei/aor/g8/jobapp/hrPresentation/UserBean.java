@@ -66,6 +66,16 @@ public class UserBean implements Serializable {
 	}
 
 	public String login(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		try {
+			// isto é para fazer o login no container que não é feito automaticamente no form
+			request.login(username, password);
+		}
+		catch (ServletException e) {
+			// se a password estiver errada
+			return "loginerror.xhtml?faces-redirect=true";
+		}
 		this.username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
 		if ( username != null ){
 			this.currentUser = findUserByUsername();

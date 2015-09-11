@@ -103,18 +103,79 @@
 							</p:dataTable>
 							<p:spacer />
 							
-							<p:outputLabel />
+							<h:panelGroup id="panelGroupInputText">
+							<p:outputLabel value= "radio"/>
 							<p:inputText id="option1" value="#{questionChoiceBean.option}" />
+							</h:panelGroup>
 
 							<p:outputLabel />
-							<p:inputText id="optionNew"
+							<p:inputText id="optionNew1"
 								value="#{questionChoiceBean.optionNew}" />
+								
 							
-							<p:spacer />
-							<h:commandButton id="buttonOption" value="Add option"
+							<h:commandButton id="buttonOption1" value="Add option"
 							
 								action="#{questionChoiceBean.addOptionToList()}"
 								update=":formAddQuestion:questionTypeMultiplechoice:tableOptions" />
+							<p:defaultCommand target="buttonOption" />
+
+						</p:panelGrid>
+						
+						<p:panelGrid id="questionTypeCheckboxes"
+							rendered="#{scriptBean.questionType eq 'CHECKBOXES'}"
+							columns="2">
+
+							<p:dataTable id="tableOptionsCheckboxes" var="option"
+								value="#{questionChoiceBean.options}">
+								<p:column>
+									<h:outputText value="#{option.option}" />
+								</p:column>
+							</p:dataTable>
+							<p:spacer />
+							
+							<h:panelGroup id="panelGroupcheckboxes">
+							<p:outputLabel value= "checkboxes"/>
+							<p:inputText id="option2" value="#{questionChoiceBean.option}" />
+							</h:panelGroup>
+
+							<p:outputLabel />
+							<p:inputText id="optionNew2"
+								value="#{questionChoiceBean.optionNew}" />
+								
+							
+							<h:commandButton id="buttonOption2" value="Add option"
+							
+								action="#{questionChoiceBean.addOptionToList()}"
+								update=":formAddQuestion:questionTypeCheckboxes:tableOptionsCheckboxes" />
+							<p:defaultCommand target="buttonOption" />
+
+						</p:panelGrid>
+						
+						<p:panelGrid id="questionTypeChooseFromList"
+							rendered="#{scriptBean.questionType eq 'CHOOSEFROMLIST'}"
+							columns="2">
+
+							<h:dataTable id="tableOptionsList" var="option"
+								value="#{questionChoiceBean.options}">
+								<h:column>
+									<h:outputText value="#{option.option}" />
+								</h:column>
+							</h:dataTable>
+							<p:spacer />
+							
+							<h:panelGroup id="panelGroupList">
+							<p:inputText id="option3" value="#{questionChoiceBean.option}" />
+							</h:panelGroup>
+
+							<p:outputLabel />
+							<p:inputText id="optionNew3"
+								value="#{questionChoiceBean.optionNew}" />
+								
+							
+							<h:commandButton id="buttonOption3" value="Add option"
+							
+								action="#{questionChoiceBean.addOptionToList()}"
+								update=":formAddQuestion:questionTypeChooseFromList:tableOptionsList" />
 							<p:defaultCommand target="buttonOption" />
 
 						</p:panelGrid>
