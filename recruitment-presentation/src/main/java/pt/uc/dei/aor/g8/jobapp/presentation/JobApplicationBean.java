@@ -5,9 +5,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
@@ -123,7 +124,20 @@ public class JobApplicationBean implements Serializable {
 	}
 
 	public ICandidateProxy getCandidateProxy() {
-		return candidateProxy;
+		if ( candidateProxy == null){
+			this.sessionUserLogged = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+			if ( sessionUserLogged != null ){
+				this.candidateProxy = findCandidateProxyByUsername();
+				// TODO remove sysout
+				System.out.println(candidateProxy);
+				return candidateProxy;
+			}else {
+				logout();
+				return null;
+			}
+		} else {
+			return this.candidateProxy;
+		}
 	}
 	public void setCandidateProxy(ICandidateProxy candidateProxy) {
 		this.candidateProxy = candidateProxy;
@@ -140,23 +154,33 @@ public class JobApplicationBean implements Serializable {
 		this.sessionUserLogged = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
 		return sessionUserLogged;
 	}
-
+	
 
 	//methods
 	
-	
-//	public ICandidateProxy findCandidateProxyByUsername(String username){
-//		return candidateProxy = candidateFacade.findCandidateByUsername(username);
-//	}
-	
+	private String logout() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		
+		try {
+			request.logout();
+			return "/index?faces-redirect=true";
+		} catch (ServletException e) {
+			context.addMessage(null, new FacesMessage("Logout failed"));
+		}
+		return "/pages/candidate/applyPosition?faces-redirect=true";
+	}
+
+	private ICandidateProxy findCandidateProxyByUsername() {
+		return candidateFacade.findCandidateByUsername(sessionUserLogged);	
+	}
 
 	public String applyPosition() {
 		return "/pages/candidate/applyPosition?faces-redirect=true";
 	}
 	
 	public String applyJobApplication() {
-		// TODO
-		// APAGAR sysout
+		// TODO APAGAR sysout
 		System.out.println( "\n     Username:       "+getSessionUserLogged());
 		System.out.println( "\n     Position Title: "+positionProxy.getTitle() +"\n");
 		//
