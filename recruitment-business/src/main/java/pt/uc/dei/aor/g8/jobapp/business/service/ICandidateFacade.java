@@ -10,4 +10,6 @@ public interface ICandidateFacade {
 	public ICandidateProxy editCandidate(ICandidateProxy candidateProxy);
 
 	public ICandidateProxy findCandidateByUsername(String username);
+	
+	public ICandidateProxy findCandidateByEmail(String email);
 }
