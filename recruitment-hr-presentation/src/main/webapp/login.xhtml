@@ -12,10 +12,10 @@
 
 	<h:form id="login" >
 		<h:panelGrid columns="2">
-			<p:outputLabel for="j_username" value="Username" />
-			<p:inputText id="j_username" name="j_username" />
-			<p:outputLabel for="j_password" value="Password" />
-			<p:password id="j_password" name="j_password" />
+			<p:outputLabel for="username" value="Username" />
+			<p:inputText id="username" name="#{userBean.username}" />
+			<p:outputLabel for="password" value="Password" />
+			<p:password id="password" name="#{userBean.password}" />
 			<p:commandButton id="submit" value="Login" action="#{userBean.login}"/>
 		</h:panelGrid>
 	</h:form>
