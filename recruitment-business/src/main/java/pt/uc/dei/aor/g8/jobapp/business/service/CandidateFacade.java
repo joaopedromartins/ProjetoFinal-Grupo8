@@ -12,6 +12,7 @@ import java.util.Base64;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.ICandidatePersistenceService;
 
 @Stateless
@@ -62,7 +63,19 @@ public class CandidateFacade implements ICandidateFacade {
 	
 	@Override
 	public ICandidateProxy findCandidateByUsername(String username) {
-		// TODO Auto-generated method stub
+		ICandidateProxy candidate = service.findCandidateByUsername(username);
+		if(candidate != null){
+			return candidate;
+		}
+		return null;
+	}
+	
+	@Override
+	public ICandidateProxy findCandidateByEmail(String email) {
+		ICandidateProxy candidate = service.findCandidateByEmail(email);
+		if(candidate != null){
+			return candidate;
+		}
 		return null;
 	}
 

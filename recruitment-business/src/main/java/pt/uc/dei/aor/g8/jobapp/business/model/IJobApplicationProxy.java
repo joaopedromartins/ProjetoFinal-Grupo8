@@ -39,6 +39,6 @@ public interface IJobApplicationProxy {
 	public IJobAdvertisingChanelProxy getJobApplicationSource();
 	public void setJobApplicationSource(IJobAdvertisingChanelProxy jobApplicationSource);
 	
-	public Status getStatus();
-	public void setStatus(Status status);
+	public String getStatus();
+	public void setStatus(String status);
 }

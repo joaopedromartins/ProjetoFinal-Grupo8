@@ -13,92 +13,73 @@
 
 </h:head>
 <h:body>
+	<p:outputLabel value="Hello #{jobApplicationBean.sessionUserLogged}" />
+	<br />
+	<p:panel header="Applying Job Position: #{jobApplicationBean.positionProxy.title}">
 
-	<h:form id="formApplyPosition">
-		<h:outputText value="Hello Candidate" />
-		<br />
-		<h:outputText value="Add a Jobb Application" />
-		<p:panelGrid id="gridPosition" columns="3">
-			<p:outputLabel value="Address :" for="address" />
-			<p:inputText id="address" value="#{jobApplicationBean.address}" required="true" />
-			<p:message for="address" />
-			
-			<p:outputLabel value="City :" for="city" />
-			<p:inputText id="city" value="#{jobApplicationBean.city}" required="true" />
-			<p:message for="city" />
-			
-			<p:outputLabel value="Country :" for="country" />
-			<p:inputText id="country" value="#{jobApplicationBean.country}" required="true" />
-			<p:message for="country" />
-			
-			<p:outputLabel value="Phone :" for="phone" />
-			<p:inputText id="phone" value="#{jobApplicationBean.phone}" required="true" />
-			<p:message for="phone" />
-			
-			<p:outputLabel value="Diploma :" for="diploma" />
-			<p:inputText id="diploma" value="#{jobApplicationBean.diploma}" required="true" />
-			<p:message for="diploma" />
-			
-			<p:outputLabel value="School :" for="school" />
-			<p:inputText id="school" value="#{jobApplicationBean.school}" required="true" />
-			<p:message for="school" />
-			
-			<p:outputLabel value="Letter :" for="letter" />
-			<h:inputTextarea id="letter" value="#{jobApplicationBean.letter}" required="true" />
-			<p:message for="letter" />
-			
-			<p:outputLabel value="CV :" for="cv" />
-			
-			<p:outputLabel value="Source :" for="source" />
-			
-			<p:outputLabel value="#{jobApplicationBean.findSessionUsername}" />
-
-	
-			<!--  
-			<p:outputLabel value="Status:" for="status" />
-			<p:selectOneMenu id="status" value="#{jobApplicationBean.status}"
-				required="true" converter="omnifaces.SelectItemsConverter">
-				<f:selectItems value="#{jobApplicationBean.possibleStatus}" var="status"
-					itemLabel="#{status.description}" />
-			</p:selectOneMenu>
-			<p:message for="status" />
-
-			<p:outputLabel value="Job Posting Channels:" for="channels" />
-			<h:panelGroup id="panelGroupChanel">
-				<p:selectManyCheckbox id="channels"
-					value="#{jobApplicationBean.jobAdvertisingChanel}"
-					converter="omnifaces.SelectItemsConverter" layout="grid"
-					columns="3">
-					<f:selectItems
-						value="#{jobAdvertisingChanelBean.findAllChannels()}"
-						var="channel" itemLabel="#{channel.chanelName}"
-						itemValue="#{channel}" />
-				</p:selectManyCheckbox>
-				<p:commandButton id="addChanel" icon="ui-icon-plusthick"
-					process="@this"
-					action="#{jobAdvertisingChanelBean.showAddChanel()}"
-					update=":formAddPosition:panelGroupChanel" />
-
-				<h:panelGroup id="addChannelPanelGroup"
-					rendered="#{jobAdvertisingChanelBean.add}">
-					<p:outputLabel value="Chanel name:" />
-					<p:inputText id="channel"
-						value="#{jobAdvertisingChanelBean.channelName}" />
-					<p:commandButton id="saveChanel" icon="ui-icon-disk"
-						process="@this channel"
-						actionListener="#{jobAdvertisingChanelBean.addChannel}"
-						update=":formAddPosition:panelGroupChanel growl" />
-				</h:panelGroup>
+		<h:form id="formApplyPosition">
+			<center>
 				
-			</h:panelGroup>
-			<p:message for="channels" />
-			-->
+				<p:panelGrid id="gridPosition" columns="3">
+					<p:outputLabel value="Address :" for="address" />
+					<p:inputText id="address" value="#{jobApplicationBean.address}"
+						required="true" />
+					<p:message for="address" />
 
-		</p:panelGrid>
-		<p:growl id="growl" />
-		<p:commandButton value="Apply"
-			action="#{jobApplicationBean.applyJobApplication()}"
-			update="gridPosition growl" />
-	</h:form>
+					<p:outputLabel value="City :" for="city" />
+					<p:inputText id="city" value="#{jobApplicationBean.city}"
+						required="true" />
+					<p:message for="city" />
+
+					<p:outputLabel value="Country :" for="country" />
+					<p:inputText id="country" value="#{jobApplicationBean.country}"
+						required="true" />
+					<p:message for="country" />
+
+					<p:outputLabel value="Phone :" for="phone" />
+					<p:inputText id="phone" value="#{jobApplicationBean.phone}"
+						required="false" />
+					<p:message for="phone" />
+
+					<p:outputLabel value="Diploma :" for="diploma" />
+					<p:inputText id="diploma" value="#{jobApplicationBean.diploma}"
+						required="true" />
+					<p:message for="diploma" />
+
+					<p:outputLabel value="School :" for="school" />
+					<p:inputText id="school" value="#{jobApplicationBean.school}"
+						required="true" />
+					<p:message for="school" />
+
+					<p:outputLabel value="Letter :" for="letter" />
+					<h:inputTextarea id="letter" value="#{jobApplicationBean.letter}"
+						required="true" />
+					<p:message for="letter" />
+
+					<p:outputLabel value="CV :" for="cv" />
+					<h:inputTextarea id="cv" value="#{jobApplicationBean.cv}"
+						required="true" />
+					<p:message for="cv" />
+
+					<p:outputLabel value="Source :" for="source" />
+					<p:selectOneMenu id="source" value="#{jobApplicationBean.source}"
+						required="true" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
+						<f:selectItems
+							value="#{jobAdvertisingChanelBean.findAllChannels()}"
+							var="channel" itemLabel="#{channel.chanelName}"
+							itemValue="#{channel}" />
+					</p:selectOneMenu>
+					<p:message for="source" />
+
+				</p:panelGrid>
+				<p:growl id="growl" />
+				<br />
+				<p:commandButton value="Apply"
+					action="#{jobApplicationBean.applyJobApplication()}"
+					update="formApplyPosition growl" />
+			</center>
+		</h:form>
+	</p:panel>
 </h:body>
 </html>
