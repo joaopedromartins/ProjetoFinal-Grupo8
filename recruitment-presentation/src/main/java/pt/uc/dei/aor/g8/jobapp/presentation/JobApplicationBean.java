@@ -1,21 +1,19 @@
 package pt.uc.dei.aor.g8.jobapp.presentation;
 
+import java.io.Serializable;
+import java.math.BigInteger;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 
-import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
-
-import java.io.Serializable;
-import java.math.BigInteger;
 
 
 
@@ -30,6 +28,10 @@ public class JobApplicationBean implements Serializable {
 	
 	@EJB
 	private ICandidateFacade candidateFacade;
+	
+	@Inject
+	private LoginBean loginBean;
+	
 
 	private String address;
 	private String city;
@@ -42,11 +44,9 @@ public class JobApplicationBean implements Serializable {
 	private String source;
 	private String status;
 	
-	private ICandidateProxy candidateProxy;
 	private IPositionProxy positionProxy;
 	
-	private String sessionUserLogged;
-
+	
 	//constructors
 	public JobApplicationBean() {
 	}
@@ -123,27 +123,7 @@ public class JobApplicationBean implements Serializable {
 		this.status = status;
 	}
 
-	public ICandidateProxy getCandidateProxy() {
-		if ( candidateProxy == null){
-			this.sessionUserLogged = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-			System.out.println("Username candidate:"+sessionUserLogged);
-			if ( sessionUserLogged != null ){
-				this.candidateProxy = candidateFacade.findCandidateByUsername(sessionUserLogged);
-				// TODO remove sysout
-				System.out.println(candidateProxy);
-				return candidateProxy;
-			}else {
-				logout();
-				return null;
-			}
-		} else {
-			return this.candidateProxy;
-		}
-	}
-	public void setCandidateProxy(ICandidateProxy candidateProxy) {
-		this.candidateProxy = candidateProxy;
-	}
-
+	
 	public IPositionProxy getPositionProxy() {
 		return positionProxy;
 	}
@@ -151,47 +131,18 @@ public class JobApplicationBean implements Serializable {
 		this.positionProxy = positionProxy;
 	}
 	
-	public String getSessionUserLogged() {
-		this.sessionUserLogged = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-		return sessionUserLogged;
-	}
 	
-
 	//methods
-	
-	private String logout() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-		
-		try {
-			request.logout();
-			return "/index?faces-redirect=true";
-		} catch (ServletException e) {
-			context.addMessage(null, new FacesMessage("Logout failed"));
-		}
-		return "/pages/candidate/applyPosition?faces-redirect=true";
-	}
-
-	private ICandidateProxy findCandidateProxyByUsername() {
-		return candidateFacade.findCandidateByUsername(sessionUserLogged);	
-	}
-
 	public String applyPosition() {
 		return "/pages/candidate/applyPosition?faces-redirect=true";
 	}
 	
 	public String applyJobApplication() {
-		// TODO APAGAR sysout
-		System.out.println( "\n     Username:       "+getSessionUserLogged());
-		System.out.println( "\n     Position Title: "+positionProxy.getTitle() +"\n");
-		System.out.println("candidate " + candidateProxy);
-		//
-		
 		IJobApplicationProxy proxy;
-		/*proxy=jobApplicationFacade.createNewJobApplication(
+		proxy=jobApplicationFacade.createNewJobApplication(
 				 address,  city,  country, phone, diploma,
-				 school,  letter,  cv, source, status, candidateProxy, positionProxy);*/
-		/*if(proxy!=null){
+				 school,  letter,  cv, source, status, loginBean.getUser(), positionProxy);
+		if(proxy!=null){
 			address=null;
 			city=null;
 			country=null;
@@ -216,7 +167,7 @@ public class JobApplicationBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR,
 					"Error creating position.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);	
-		}*/
+		}
 		
 		//Volta à mesma pagina
 		return "/pages/candidate/candidate";
