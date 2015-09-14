@@ -30,6 +30,10 @@ public class JobAdvertisingChanelBean implements Serializable {
 	
 	public List<IJobAdvertisingChanelProxy> findAllChannels (){
 		return facade.listOfAllChanel();
+		
+		
+		//TODO tu tens é de ir bucar os channels da posição, não são todos o channels existentes
+		
 	}
 	
 	
