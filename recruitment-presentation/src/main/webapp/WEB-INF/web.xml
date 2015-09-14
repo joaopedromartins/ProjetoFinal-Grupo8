@@ -21,60 +21,60 @@
 		<servlet-name>facesServlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Security -->
 	<login-config>
-        <auth-method>FORM</auth-method>
-        <form-login-config>
-            <form-login-page>/pages/login.xhtml</form-login-page>
-            <form-error-page>/pages/loginerror.xhtml</form-error-page>
-        </form-login-config>
-    </login-config>
-    
-    <security-constraint>
-        <display-name>Candidate Pages</display-name>
-        <web-resource-collection>
-            <web-resource-name>Protected Candidate Area</web-resource-name>
-            <description></description>
-            <url-pattern>/pages/candidate/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-            <http-method>HEAD</http-method>
-            <http-method>PUT</http-method>
-            <http-method>OPTIONS</http-method>
-            <http-method>TRACE</http-method>
-            <http-method>DELETE</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
-            <role-name>CANDIDATE</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-    
-    <security-constraint>
-        <display-name>All Access</display-name>
-        <web-resource-collection>
-            <web-resource-name>None Protected User Area</web-resource-name>
-            <description/>
-            <url-pattern>/pages/everybody/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-            <http-method>HEAD</http-method>
-            <http-method>PUT</http-method>
-            <http-method>OPTIONS</http-method>
-            <http-method>TRACE</http-method>
-            <http-method>DELETE</http-method>
-        </web-resource-collection>
-        <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-    
-	<security-role>  
-		<role-name>CANDIDATE</role-name>  
-	</security-role>  
-    
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/pages/login.xhtml</form-login-page>
+			<form-error-page>/pages/loginerror.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<security-constraint>
+		<display-name>Candidate Pages</display-name>
+		<web-resource-collection>
+			<web-resource-name>Protected Candidate Area</web-resource-name>
+			<description></description>
+			<url-pattern>/pages/candidate/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>CANDIDATE</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>All Access</display-name>
+		<web-resource-collection>
+			<web-resource-name>None Protected User Area</web-resource-name>
+			<description />
+			<url-pattern>/pages/everybody/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<security-role>
+		<role-name>CANDIDATE</role-name>
+	</security-role>
+
 </web-app>

@@ -57,6 +57,12 @@
 					<p:message for="letter" />
 
 					<p:outputLabel value="CV :" for="cv" />
+					<!-- 
+					<p:fileUpload fileUploadListener="#{fileUploadController.upload}"
+						allowTypes="/(\.|\/)(pdf|doc?x|xps)$/" 
+						sizeLimit="100000" 
+						description="Select Your CV"/>
+					 -->
 					<h:inputTextarea id="cv" value="#{jobApplicationBean.cv}"
 						required="true" />
 					<p:message for="cv" />
