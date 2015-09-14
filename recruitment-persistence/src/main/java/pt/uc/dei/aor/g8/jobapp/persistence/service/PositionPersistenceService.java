@@ -22,7 +22,7 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 	private EntityManager em;
 	
 	public PositionPersistenceService() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override

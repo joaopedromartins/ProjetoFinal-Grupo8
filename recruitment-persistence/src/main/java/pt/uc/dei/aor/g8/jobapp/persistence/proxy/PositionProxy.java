@@ -21,7 +21,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	private PositionEntity entity;
 
 	public PositionProxy() {
-		// TODO Auto-generated constructor stub
+		this(null);
 	}
 
 	public PositionProxy(Date openDate, Date closeDate, String code, String title,

@@ -11,15 +11,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity@NamedQueries({
+@Entity
+@NamedQueries({
 	@NamedQuery(name = "CandidateEntity.findCandidateByUsername", query = "SELECT c FROM CandidateEntity c WHERE c.username=:username"),
 	@NamedQuery(name = "CandidateEntity.findCandidateByEmail", query = "SELECT c FROM CandidateEntity c WHERE c.email=:email"),
 })
 @Table(name = "Candidate")
 public class CandidateEntity {
 	
-	public static final String FIND_CANDIDATE_BY_USERNAME = "UserEntity.findCandidateByUsername";
-	public static final String FIND_CANDIDATE_BY_EMAIL = "UserEntity.findCandidateByEmail";
+	public static final String FIND_CANDIDATE_BY_USERNAME = "CandidateEntity.findCandidateByUsername";
+	public static final String FIND_CANDIDATE_BY_EMAIL = "CandidateEntity.findCandidateByEmail";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

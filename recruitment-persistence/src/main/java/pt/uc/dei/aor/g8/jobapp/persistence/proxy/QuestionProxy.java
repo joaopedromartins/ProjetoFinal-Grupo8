@@ -19,7 +19,7 @@ public class QuestionProxy implements IQuestionProxy, IEntityAware<QuestionEntit
 	private QuestionEntity entity;
 
 	public QuestionProxy() {
-
+		this(null);
 	}
 
 	public QuestionProxy(QuestionEntity question) {

@@ -13,7 +13,7 @@ public class CandidateProxy implements ICandidateProxy, IEntityAware<CandidateEn
 	private CandidateEntity entity;
 
 	public CandidateProxy() {
-		
+
 	}
 
 	public CandidateProxy(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
@@ -34,7 +34,7 @@ public class CandidateProxy implements ICandidateProxy, IEntityAware<CandidateEn
 		return entity;
 	}
 
-	
+
 	@Override
 	public long getId() {
 		return entity.getId();
@@ -47,7 +47,7 @@ public class CandidateProxy implements ICandidateProxy, IEntityAware<CandidateEn
 	@Override
 	public void setUsername(String username) {
 		entity.setUsername(username);
-		
+
 	}
 
 	@Override
@@ -95,23 +95,23 @@ public class CandidateProxy implements ICandidateProxy, IEntityAware<CandidateEn
 	public void setMobile(BigInteger mobile) {
 		entity.setMobile(mobile);
 	}
-	
+
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object o) {
 		return entity.equals(((IEntityAware<CandidateEntity>)o).getEntity());
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return entity.hashCode();
 	}
-	
+
 	@Override
 	public String toString() {
 		return entity.toString();
 	}
 
-	
+
 }

@@ -12,7 +12,7 @@ public class QuestionScaleProxy implements IQuestionScaleProxy, IEntityAware<Que
 	
 	
 	public QuestionScaleProxy() {
-		
+		this(null);
 	}
 	
 	public QuestionScaleProxy (QuestionScaleEntity scale){

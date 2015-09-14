@@ -43,7 +43,7 @@ public class RegisterUserBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
 			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "messagebusiness",
+					FacesMessage.SEVERITY_ERROR, messagebusiness,
 					"");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}

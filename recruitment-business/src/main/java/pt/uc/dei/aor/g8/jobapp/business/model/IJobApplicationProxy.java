@@ -2,8 +2,6 @@ package pt.uc.dei.aor.g8.jobapp.business.model;
 
 import java.math.BigInteger;
 
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
-
 public interface IJobApplicationProxy {
 
 	public ICandidateProxy getCandidateEntity();
