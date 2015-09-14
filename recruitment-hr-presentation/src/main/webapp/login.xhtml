@@ -13,9 +13,9 @@
 	<h:form id="login" >
 		<h:panelGrid columns="2">
 			<p:outputLabel for="username" value="Username" />
-			<p:inputText id="username" name="#{userBean.username}" />
+			<p:inputText id="username" value="#{userBean.username}" />
 			<p:outputLabel for="password" value="Password" />
-			<p:password id="password" name="#{userBean.password}" />
+			<p:password id="password" value="#{userBean.password}" />
 			<p:commandButton id="submit" value="Login" action="#{userBean.login}"/>
 		</h:panelGrid>
 	</h:form>

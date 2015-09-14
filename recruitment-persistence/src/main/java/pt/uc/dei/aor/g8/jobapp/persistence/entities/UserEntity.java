@@ -18,7 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 
 
 @Entity

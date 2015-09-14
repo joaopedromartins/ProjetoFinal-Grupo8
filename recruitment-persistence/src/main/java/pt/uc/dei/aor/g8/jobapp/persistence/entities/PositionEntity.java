@@ -24,9 +24,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import pt.uc.dei.aor.g8.business.enumeration.Localization;
-import pt.uc.dei.aor.g8.business.enumeration.Status;
-import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 
 @Entity
 @Table(name = "Position")

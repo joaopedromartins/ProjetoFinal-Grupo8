@@ -6,7 +6,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IUserPersistenceService;

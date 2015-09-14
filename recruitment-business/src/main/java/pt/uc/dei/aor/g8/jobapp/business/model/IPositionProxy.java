@@ -3,9 +3,9 @@ package pt.uc.dei.aor.g8.jobapp.business.model;
 import java.util.Date;
 import java.util.List;
 
-import pt.uc.dei.aor.g8.business.enumeration.Localization;
-import pt.uc.dei.aor.g8.business.enumeration.Status;
-import pt.uc.dei.aor.g8.business.enumeration.TechnicalArea;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 
 public interface IPositionProxy {
 

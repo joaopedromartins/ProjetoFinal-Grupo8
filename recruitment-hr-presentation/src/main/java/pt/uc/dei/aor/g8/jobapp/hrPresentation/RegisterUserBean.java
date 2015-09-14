@@ -10,7 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 
 @Named

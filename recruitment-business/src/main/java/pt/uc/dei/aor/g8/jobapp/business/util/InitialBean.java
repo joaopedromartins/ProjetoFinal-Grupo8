@@ -8,7 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
-import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobAdversitingChanelFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 

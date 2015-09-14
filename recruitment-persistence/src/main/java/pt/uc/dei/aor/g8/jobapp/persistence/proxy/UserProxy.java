@@ -2,7 +2,7 @@ package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
 import java.util.List;
 
-import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 
@@ -52,9 +52,8 @@ public class UserProxy implements IUserProxy, IEntityAware<UserEntity> {
 	}
 
 	@Override
-	public List<RoleType> getRoles() {
-		
-		return null;
+	public List<RoleType> getRoles() {	
+		return entity.getRoles();
 	}
 
 	@Override

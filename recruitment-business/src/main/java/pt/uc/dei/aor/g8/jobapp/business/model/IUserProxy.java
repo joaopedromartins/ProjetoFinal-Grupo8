@@ -2,7 +2,7 @@ package pt.uc.dei.aor.g8.jobapp.business.model;
 
 import java.util.List;
 
-import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 
 public interface IUserProxy {
 	

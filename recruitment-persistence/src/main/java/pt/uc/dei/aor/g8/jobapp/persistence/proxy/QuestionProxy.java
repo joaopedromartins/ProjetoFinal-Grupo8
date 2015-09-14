@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
-import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionChoiceProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionScaleProxy;

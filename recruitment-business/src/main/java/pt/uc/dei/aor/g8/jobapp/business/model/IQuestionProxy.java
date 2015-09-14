@@ -1,6 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.business.model;
 
-import pt.uc.dei.aor.g8.business.enumeration.QuestionType;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.QuestionType;
 
 public interface IQuestionProxy {
 	

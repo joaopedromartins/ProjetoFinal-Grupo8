@@ -12,7 +12,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import pt.uc.dei.aor.g8.business.enumeration.RoleType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 
@@ -24,6 +28,7 @@ public class UserBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = LoggerFactory.getLogger(UserBean.class);
 
 	private boolean isLogged;
 	private String password;
@@ -38,9 +43,7 @@ public class UserBean implements Serializable {
 	private IUserFacade userFacade;
 
 	public UserBean() {
-
 	}
-
 
 	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -51,6 +54,7 @@ public class UserBean implements Serializable {
 			this.isLogged = false;
 			request.logout();
 			request.getSession().invalidate();
+			
 		} catch (ServletException e) {
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Logout Failed", "");
@@ -69,8 +73,7 @@ public class UserBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		try {
-			request.login(username, password);
-			System.out.printf(username, password);
+			request.login(username, password);			
 		}
 		catch (ServletException e) {
 			return "loginerror.xhtml?faces-redirect=true";
@@ -79,6 +82,7 @@ public class UserBean implements Serializable {
 		if ( username != null ){
 			this.currentUser = findUserByUsername();
 			this.isLogged = true;
+			log.error("current user:"  + currentUser);
 			int numeroRoles=currentUser.getRoles().size();
 			String page;
 			if ( numeroRoles == 3){
@@ -109,6 +113,7 @@ public class UserBean implements Serializable {
 			}
 		} else {
 			return this.currentUser;
+			
 		}
 	}
 
@@ -181,35 +186,7 @@ public class UserBean implements Serializable {
 	}
 
 
-
-
-
-
-
-
-
-
-	/*	public void init() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-			String mail = securityBean.getPrincipalName();
-			System.out.println("Mail: "+mail);
-			current.setMail(mail);
-			current = userInterface.findByEmail(mail);
-			if (current != null) {
-				isLogged = true;
-				loggedUtil.addUser(current);
-				request.getSession().setAttribute("user", current);
-			} else {
-				request.getSession().invalidate();
-				try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect("main.xhtml");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-	}
+	/*	
 
 	// editar informacao
 	public void editar() {
@@ -249,26 +226,6 @@ public class UserBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 		return null;
-	}
-
-
-
-	public void register() {
-		boolean success = userInterface.save(newUser);
-		if (success) {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"User registered successfully.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} else {
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "E-mail already registered",
-					"");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		}
-		newUser = new UserEntity();
 	}*/
-
-
-
 
 }
