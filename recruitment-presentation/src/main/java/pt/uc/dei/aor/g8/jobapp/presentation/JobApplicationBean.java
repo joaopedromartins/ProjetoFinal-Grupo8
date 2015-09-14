@@ -126,8 +126,9 @@ public class JobApplicationBean implements Serializable {
 	public ICandidateProxy getCandidateProxy() {
 		if ( candidateProxy == null){
 			this.sessionUserLogged = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+			System.out.println("Username candidate:"+sessionUserLogged);
 			if ( sessionUserLogged != null ){
-				this.candidateProxy = findCandidateProxyByUsername();
+				this.candidateProxy = candidateFacade.findCandidateByUsername(sessionUserLogged);
 				// TODO remove sysout
 				System.out.println(candidateProxy);
 				return candidateProxy;
@@ -183,13 +184,14 @@ public class JobApplicationBean implements Serializable {
 		// TODO APAGAR sysout
 		System.out.println( "\n     Username:       "+getSessionUserLogged());
 		System.out.println( "\n     Position Title: "+positionProxy.getTitle() +"\n");
+		System.out.println("candidate " + candidateProxy);
 		//
 		
 		IJobApplicationProxy proxy;
-		proxy=jobApplicationFacade.createNewJobApplication(
+		/*proxy=jobApplicationFacade.createNewJobApplication(
 				 address,  city,  country, phone, diploma,
-				 school,  letter,  cv, source, status, candidateProxy, positionProxy);
-		if(proxy!=null){
+				 school,  letter,  cv, source, status, candidateProxy, positionProxy);*/
+		/*if(proxy!=null){
 			address=null;
 			city=null;
 			country=null;
@@ -214,7 +216,7 @@ public class JobApplicationBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR,
 					"Error creating position.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);	
-		}
+		}*/
 		
 		//Volta à mesma pagina
 		return "/pages/candidate/candidate";
