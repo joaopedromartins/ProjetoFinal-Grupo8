@@ -34,6 +34,7 @@ public class CandidateFacade implements ICandidateFacade {
 	@Override
 	public String createNewCandidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
 		// TODO  mudei te isto
+		// Ficou espetacular
 		ICandidateProxy candidateUsername = findCandidateByUsername(username);
 		ICandidateProxy candidateEmail = findCandidateByEmail(email);
 		String passwordEncript = passEncript.encriptarPass(password);

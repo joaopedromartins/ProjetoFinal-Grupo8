@@ -34,6 +34,15 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		em.persist(entity);
 		return new JobApplicationProxy(entity);
 	}
+	
+	public boolean existsJobApplicationToPositionCodeAndUsername(String positionCode, String username) {
+		TypedQuery<JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_JOB_APPLICATION_TO_POSITION_CODE_AND_USERNAME, JobApplicationEntity.class);
+		query.setParameter( "code", positionCode);
+		query.setParameter( "username", username);
+		List<JobApplicationEntity> entity= query.getResultList();
+		
+		return !entity.isEmpty();
+	}
 
 
 	@Override

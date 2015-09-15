@@ -156,21 +156,19 @@ public class JobApplicationBean implements Serializable {
 						
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
-					"Position created successfully.", "");
+					"Job Position applied successfully.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			
-			// TODO
 			// vai para a pagina ver candidaturas
-			//return "/pages/candidate/candidate";
+			return "/pages/candidate/candidate";
 		} else {
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
-					"Error creating position.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);	
+					"Error applying job position.\nPlease check if you applied already to this position.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			//Volta à mesma pagina
+			return "/pages/candidate/applyPosition";
 		}
-		
-		//Volta à mesma pagina
-		return "/pages/candidate/candidate";
 	}
 	
 //	private void redirect(String path){

@@ -8,15 +8,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "JobApplication")
-@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c where c.username like :login ")
+@NamedQueries({
+	@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", 
+		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
+				" where c.username like :login ") ,
+	@NamedQuery(name = "JobApplicattion.listOfAllJobApplicationToPositionCodeAndUsername", 
+		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
+				" inner join j.positionEntity p where c.username like :username and p.code like :code ")
+})
 public class JobApplicationEntity {
 	
 	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplicattion.listOfAllCandidateJobApplication";
+	public static final String LIST_OF_ALL_JOB_APPLICATION_TO_POSITION_CODE_AND_USERNAME = "JobApplicattion.listOfAllJobApplicationToPositionCodeAndUsername";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

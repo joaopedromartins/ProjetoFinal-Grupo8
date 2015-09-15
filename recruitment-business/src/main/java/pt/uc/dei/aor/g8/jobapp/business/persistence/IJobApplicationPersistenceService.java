@@ -11,5 +11,7 @@ public interface IJobApplicationPersistenceService {
 	public List<IJobApplicationProxy> listOfAllCandidateJobApplication(String username);
 
 	public IJobApplicationProxy editJobApplication(IJobApplicationProxy jobApplicationProxy);
+
+	public boolean existsJobApplicationToPositionCodeAndUsername(String code, String username);
 	
 }
