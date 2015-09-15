@@ -97,7 +97,7 @@ public class PositionEntity implements Serializable{
 	@ManyToMany
 	private List<JobAdvertisingChanelEntity> jobAdvertisingChanel;
 
-	@OneToMany
+	@ManyToMany
 	private List<ScriptEntity> script;
 	
 	

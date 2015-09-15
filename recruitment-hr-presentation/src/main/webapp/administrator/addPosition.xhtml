@@ -71,10 +71,11 @@
 				<p:message for="sla" />
 
 				<p:outputLabel value="Technical manager:" for="userManager" />
-				<p:selectOneMenu id="userManager" value="#{positionBean.managerPosition}"
-					required="true" converter="omnifaces.SelectItemsConverter">
-					<f:selectItems value="#{positionBean.possibleManagers}" var="manager"
-						itemLabel="#{manager.fullName}" />
+				<p:selectOneMenu id="userManager"
+					value="#{positionBean.managerPosition}" required="true"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{positionBean.possibleManagers}"
+						var="manager" itemLabel="#{manager.fullName}" />
 				</p:selectOneMenu>
 				<p:message for="userManager" />
 
@@ -127,15 +128,14 @@
 				<p:message for="channels" />
 
 				<p:outputLabel value="Scripts:" for="scripts" />
-				<p:selectManyCheckbox id="scripts"
+				<p:selectCheckboxMenu id="scripts" filter="true"
+					filterMatchMode="startsWith"
 					converter="omnifaces.SelectItemsConverter"
 					value="#{positionBean.scripts}" required="true">
-					<f:selectItems value="#{scriptBean.scripts}"
-						var="script" itemLabel="#{script.scriptTitle}"
-						itemValue="#{script}" />
-				</p:selectManyCheckbox>
+					<f:selectItems value="#{scriptBean.scripts}" var="script"
+						itemLabel="#{script.scriptTitle}" itemValue="#{script}" />
+				</p:selectCheckboxMenu>
 				<p:message for="scripts" />
-
 			</p:panelGrid>
 			<p:growl id="growl" />
 			<p:commandButton value="Save"
