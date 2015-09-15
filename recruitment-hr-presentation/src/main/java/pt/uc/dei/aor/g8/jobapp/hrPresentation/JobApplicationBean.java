@@ -20,6 +20,8 @@ public class JobApplicationBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private IJobApplicationFacade facade;
+	
+	private IJobApplicationProxy jobApplication;
 
 	public JobApplicationBean() {
 		super();
@@ -28,6 +30,14 @@ public class JobApplicationBean implements Serializable {
 	
 	public List <IJobApplicationProxy> findALL(){
 		return facade.listOfAll();
+	}
+
+	public IJobApplicationProxy getJobApplication() {
+		return jobApplication;
+	}
+
+	public void setJobApplication(IJobApplicationProxy jobApplication) {
+		this.jobApplication = jobApplication;
 	}
 	
 

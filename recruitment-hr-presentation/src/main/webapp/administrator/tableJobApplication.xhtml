@@ -14,19 +14,118 @@
 
 			<p:dataTable id="gridJobApplication"
 				value="#{jobApplicationBean.findALL()}" var="jobApplication">
-				<p:column>
+				<p:column headerText="Position">
 					<p:outputLabel value="#{jobApplication.positionEntity.code}" />
-					<!-- <br />
-					<p:outputLabel value="#{jobApplication.positionEntity.title}" /> -->
+					<br />
+					<p:outputLabel value="#{jobApplication.positionEntity.title}" />
 				</p:column>
 
-				<p:column>
+				<p:column headerText="Candidate">
 					<p:outputLabel value="#{jobApplication.candidateEntity.firstname}" />
-					<!-- <br />
-					<p:outputLabel value="#{jobApplication.cv}" /> -->
+					<br />
+					<p:outputLabel value="#{jobApplication.cv}" />
+				</p:column>
+
+				<p:column headerText="Detail">
+
+					<p:commandButton update=":formDialogDetailJobApplication"
+						oncomplete="PF('jobApplicationDetail').show()"
+						icon="ui-icon-search" title="Detail Job Application">
+						<f:setPropertyActionListener value="#{jobApplication}"
+							target="#{jobApplicationBean.jobApplication}" />
+					</p:commandButton>
+
 				</p:column>
 
 			</p:dataTable>
 		</h:form>
+
+		<p:dialog header="Job Application Details"
+			widgetVar="jobApplicationDetail" modal="true" showEffect="fade"
+			hideEffect="fade" resizable="false">
+			<h:form id="formDialogDetailJobApplication">
+
+				<p:panel id="positionJobApplicaton" header="Position Detail"
+					toggleable="true" toggleSpeed="500" widgetVar="panel"
+					style="margin-bottom:20px">
+
+					<h:panelGrid columns="2" cellpadding="10">
+
+						<h:outputText value="Position code:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.code}" />
+
+						<h:outputText value="Title:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.title}" />
+
+
+						<h:outputText value="Open Date:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.openDate}" />
+
+						<h:outputText value="Close Date:" />
+						<h:outputText value="#{positionBean.positionProxy.closeDate}" />
+
+						<h:outputText value="Location:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.stringLocalization}" />
+
+						<h:outputText value="Status:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.status.description}" />
+
+						<h:outputText value="Company:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.company}" />
+
+						<h:outputText value="Technical Area:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.technicalArea.description}" />
+					</h:panelGrid>
+					<f:facet name="options">
+						<p:menu>
+							<p:submenu label="Settings">
+								<p:menuitem value="Toggle" url="#" icon="ui-icon-newwin"
+									onclick="PF('panel').toggle()" />
+							</p:submenu>
+						</p:menu>
+					</f:facet>
+				</p:panel>
+
+				<p:panel id="candidateJobApplicaton" header="Candidate Detail"
+					toggleable="true" toggleSpeed="500" widgetVar="panel"
+					style="margin-bottom:20px">
+
+					<p:ajax event="toggle" />
+
+					<h:panelGrid columns="2" cellpadding="10">
+
+						<h:outputText value="Name :" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.candidateEntity.firstname}" />
+
+						<h:outputText value="Adress:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.address}" />
+
+
+						<h:outputText value="Degree:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.diploma}" />
+
+						<h:outputText value="Cover letter:" />
+						<h:outputLabel value="#{jobApplicationBean.jobApplication.letter}" />
+
+						<h:outputText value="School:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.school}" />
+
+						<h:outputText value="Phone:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.phone}" />
+
+					</h:panelGrid>
+				</p:panel>
+
+			</h:form>
+		</p:dialog>
+
 	</ui:define>
 </ui:composition>
