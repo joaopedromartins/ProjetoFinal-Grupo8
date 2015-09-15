@@ -92,8 +92,8 @@ public class PositionEntity implements Serializable{
 
 	@Column
 	private String descriptionPosition;
-
-	@ManyToMany
+	
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<JobAdvertisingChanelEntity> jobAdvertisingChanel;
 
 	@OneToMany

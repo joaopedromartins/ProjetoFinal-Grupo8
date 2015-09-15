@@ -90,7 +90,9 @@ public class SignUpBean implements Serializable {
 	}
 
 	public String recover() {
-		//TODO o que é isto?
+		// TODO username/password recover
+		// A pagina login vai ser alterada por forma a poder ser efectuado signup na mesma página e possibilitar recuperação da password
+		// Falta reset da password e envio de email com username e a pass gerada aleatoriamente
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("recover email to "+email+" has been sent with sucess."));
 		return "signup";
 	}

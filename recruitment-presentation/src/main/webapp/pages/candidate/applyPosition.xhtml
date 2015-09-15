@@ -55,28 +55,32 @@
 					<h:inputTextarea id="letter" value="#{jobApplicationBean.letter}"
 						required="true" />
 					<p:message for="letter" />
-
-					<p:outputLabel value="CV :" for="cv" />
+					
+					<!-- -->
 					<!-- 
 					<p:fileUpload fileUploadListener="#{fileUploadController.upload}"
 						allowTypes="/(\.|\/)(pdf|doc?x|xps)$/" 
 						sizeLimit="100000" 
 						description="Select Your CV"/>
-					 -->
+					-->
+					<!-- -->
+					<p:outputLabel value="CV :" for="cv" />
 					<h:inputTextarea id="cv" value="#{jobApplicationBean.cv}"
 						required="true" />
 					<p:message for="cv" />
 
+					
 					<p:outputLabel value="Source :" for="source" />
 					<p:selectOneMenu id="source" value="#{jobApplicationBean.source}"
 						required="true" converter="omnifaces.SelectItemsConverter">
 						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
 						<f:selectItems
-							value="#{jobAdvertisingChanelBean.findAllChannels()}"
+							value="#{jobApplicationBean.positionProxy.jobAdvertisingChanel}"
 							var="channel" itemLabel="#{channel.chanelName}"
 							itemValue="#{channel}" />
 					</p:selectOneMenu>
 					<p:message for="source" />
+					
 
 				</p:panelGrid>
 				<p:growl id="growl" />
