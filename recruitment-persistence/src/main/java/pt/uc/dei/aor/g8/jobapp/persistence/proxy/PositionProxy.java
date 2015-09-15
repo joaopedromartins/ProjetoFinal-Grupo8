@@ -11,9 +11,11 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobAdvertisingChanelEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.ScriptEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 
 @Stateless
@@ -28,13 +30,14 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	public PositionProxy(Date openDate, Date closeDate, String code, String title,
 			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
-			List<String> script) {
+			List<IScriptProxy> scripts) {
 
 		//TODO mudar o null do script
 		this.entity = new PositionEntity(openDate,closeDate,code,title,localization,status,numberOfposition,sLA, userConverterProxyToEntity(managerPosition),
-				company,technicalArea,descriptionPosition, jobAdvertisingChanelConverterProxyToEntity(jobAdvertisingChanel),null); 
+				company,technicalArea,descriptionPosition, jobAdvertisingChanelConverterProxyToEntity(jobAdvertisingChanel),scriptsConvertProxyToEntity(scripts)); 
 
 	}
+
 
 	public PositionProxy(PositionEntity position){
 		if (position==null){
@@ -226,6 +229,17 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 		UserEntity entityUser = ((IEntityAware<UserEntity>)proxy).getEntity();
 		return entityUser;
 	}
+	
+	@SuppressWarnings("unchecked")
+	private List<ScriptEntity> scriptsConvertProxyToEntity(List<IScriptProxy> scripts) {
+		List<ScriptEntity> entityScripts = new ArrayList<>();
+
+		for(IScriptProxy jP : scripts){
+			entityScripts.add(((IEntityAware<ScriptEntity>)jP).getEntity());
+		}
+		return entityScripts;
+	}
+
 
 
 

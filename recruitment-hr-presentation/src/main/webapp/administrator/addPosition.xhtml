@@ -126,9 +126,15 @@
 				</h:panelGroup>
 				<p:message for="channels" />
 
-				<p:outputLabel value="Script:" for="script" />
-				<p:inputText id="script" required="true" />
-				<p:message for="script" />
+				<p:outputLabel value="Scripts:" for="scripts" />
+				<p:selectManyCheckbox id="scripts"
+					converter="omnifaces.SelectItemsConverter"
+					value="#{positionBean.scripts}" required="true">
+					<f:selectItems value="#{scriptBean.scripts}"
+						var="script" itemLabel="#{script.scriptTitle}"
+						itemValue="#{script}" />
+				</p:selectManyCheckbox>
+				<p:message for="scripts" />
 
 			</p:panelGrid>
 			<p:growl id="growl" />

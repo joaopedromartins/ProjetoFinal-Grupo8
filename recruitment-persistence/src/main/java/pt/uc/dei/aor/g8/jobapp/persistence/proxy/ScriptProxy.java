@@ -84,8 +84,30 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	@SuppressWarnings("unchecked")
 	private QuestionEntity questionConverterProxyToEntity (IQuestionProxy proxy){
 		QuestionEntity questionEntity = ((IEntityAware<QuestionEntity>)proxy).getEntity(); 
-		return questionEntity;
-		
+		return questionEntity;		
 	}
+
+	@Override
+	public int hashCode() {
+		return entity.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return entity.equals(scriptConverterProxyToEntity((IScriptProxy)obj));
+	}
+	
+	@SuppressWarnings("unchecked")
+	private ScriptEntity scriptConverterProxyToEntity (IScriptProxy proxy){
+		ScriptEntity scriptEntity = ((IEntityAware<ScriptEntity>)proxy).getEntity(); 
+		return scriptEntity;		
+	}
+
+	@Override
+	public String toString() {
+		return "ScriptProxy [entity=" + entity + "]";
+	}
+	
+	
 
 }

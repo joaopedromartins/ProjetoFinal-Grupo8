@@ -12,6 +12,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;
 
@@ -32,7 +33,7 @@ public class PositionFacade implements IPositionFacade {
 	public IPositionProxy creatNewPosition(Date openDate, Date closeDate, String code, String title,
 			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
-			List<String> script) {
+			List<IScriptProxy> script) {
 
 		IPositionProxy newPosition= factory.position(openDate, closeDate, code, title, localization, status, 
 				numberOfposition, sLA, managerPosition, company, technicalArea, descriptionPosition,

@@ -18,6 +18,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
@@ -52,8 +53,10 @@ public class PositionBean implements Serializable {
 	private TechnicalArea technicalArea;
 	private String descriptionPosition;
 	private List<IJobAdvertisingChanelProxy> jobAdvertisingChanel;
-	private List<String> script;
+	private List<IScriptProxy> scripts;
 	
+	
+
 	private List<IPositionProxy> listPosition;
 	private IPositionProxy positionProxy;
 
@@ -103,7 +106,7 @@ public class PositionBean implements Serializable {
 
 	public void creatNewPosition (){
 		IPositionProxy proxy;
-		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, managerPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
+		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, managerPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, scripts);
 	
 		if(proxy!=null){
 			closeDate=null;
@@ -118,7 +121,7 @@ public class PositionBean implements Serializable {
 			technicalArea=null;
 			descriptionPosition=null;
 			jobAdvertisingChanel=null;
-			script=null;
+			scripts=null;
 			
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
@@ -255,14 +258,15 @@ public class PositionBean implements Serializable {
 		this.descriptionPosition = descriptionPosition;
 	}
 
-	public List<String> getScript() {
-		return script;
+	public List<IScriptProxy> getScripts() {
+		return scripts;
 	}
 
-	public void setScript(String script) {
-		this.script = new ArrayList<>();
-		this.script.add(script);
+	public void setScripts(List<IScriptProxy> script) {
+		this.scripts = new ArrayList<>();
+		this.scripts.addAll(script);
 	}
+	
 	
 	
 	
