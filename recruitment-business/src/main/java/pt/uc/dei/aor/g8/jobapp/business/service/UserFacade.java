@@ -12,6 +12,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IUserPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.util.AutoGeneratePasswor;
 import pt.uc.dei.aor.g8.jobapp.business.util.EncryptPassword;
+import pt.uc.dei.aor.g8.jobapp.business.util.GmailMessage;
 
 @Stateless
 public class UserFacade implements IUserFacade {
@@ -27,6 +28,8 @@ public class UserFacade implements IUserFacade {
 	private AutoGeneratePasswor passwordGenrate;
 	@EJB
 	private INotificationFacade notification;
+	@EJB
+	private GmailMessage mail;
 
 	public UserFacade(){
 		// TODO Auto-generated constructor stub
@@ -48,6 +51,8 @@ public class UserFacade implements IUserFacade {
 			service.createUser(newUser);
 			notification.createNotification("User Register"," Your registration have the following items:\nUsername - " 
 			+ username + "\nPassword - " + passwordGenerate + "", "", newUser);
+			mail.sendEmail(newUser.getEmail(), "jobappmailtest@gmail.com", "User Register", "Your registration have the following items:\nUsername - " 
+					+ username + "\nPassword - " + passwordGenerate + "");
 			return "sucess";  
 			
 		} else if (userUsername == null && userEmail != null ){
@@ -86,6 +91,26 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<IUserProxy> findManagers() {
+		List <IUserProxy> managers = service.findManagers();
+		if (managers != null){
+			return managers;
+		}
+		return null;
+	}
+
+	@Override
+	public List<IUserProxy> findInterviewers() {
+		List <IUserProxy> interviewers = service.findInterviewers();
+		if (interviewers != null){
+			return interviewers;
+		}
+		return null;
+	}
+	
+	
 
 	@Override
 	public String createUser(String username, String password, String lastname, String firstname, String email,
@@ -106,5 +131,9 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
+
+	
+	
+	
 
 }

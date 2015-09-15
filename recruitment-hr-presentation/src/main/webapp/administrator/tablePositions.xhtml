@@ -155,9 +155,12 @@
 							required="true" />
 
 						<p:outputLabel value="Technical manager:" for="userManager" />
-						<p:inputText id="userManager"
-							value="#{positionBean.positionProxy.userPosition}"
-							required="true" />
+						<p:selectOneMenu id="userManager"
+							value="#{positionBean.positionProxy.managerPosition}" 
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItems value="#{positionBean.possibleManagers}"
+								var="manager" itemLabel="#{manager.fullName}" />
+						</p:selectOneMenu>
 
 
 						<p:commandButton value="Update"

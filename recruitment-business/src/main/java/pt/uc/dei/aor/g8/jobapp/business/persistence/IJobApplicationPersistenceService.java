@@ -14,4 +14,6 @@ public interface IJobApplicationPersistenceService {
 
 	public boolean existsJobApplicationToPositionCodeAndUsername(String code, String username);
 	
+	public List <IJobApplicationProxy> findAllJobApplication ();
+	
 }

@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 @LocalBean
 public class GmailMessage {
 	@Resource(mappedName="java:jboss/mail/Gmail")
-	Session gmailSession;
+	private Session gmailSession;
 
 	/**
 	 * Default constructor. 

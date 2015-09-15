@@ -46,7 +46,6 @@
 					<f:selectItems value="#{positionBean.getPossibleLocalization()}"
 						var="localization" itemLabel="#{localization.description}"
 						itemValue="#{localization}" />
-
 				</p:selectManyCheckbox>
 				<p:message for="localization" />
 
@@ -71,8 +70,12 @@
 				<p:message for="sla" />
 
 				<p:outputLabel value="Technical manager:" for="userManager" />
-				<p:inputText id="userManager" value="#{positionBean.userPosition}"
-					required="true" />
+				<p:selectOneMenu id="userManager"
+					value="#{positionBean.managerPosition}" required="true"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{positionBean.possibleManagers}"
+						var="manager" itemLabel="#{manager.fullName}" />
+				</p:selectOneMenu>
 				<p:message for="userManager" />
 
 				<p:outputLabel value="Status:" for="status" />
@@ -123,10 +126,15 @@
 				</h:panelGroup>
 				<p:message for="channels" />
 
-				<p:outputLabel value="Script:" for="script" />
-				<p:inputText id="script" required="true" />
-				<p:message for="script" />
-
+				<p:outputLabel value="Scripts:" for="scripts" />
+				<p:selectCheckboxMenu id="scripts" filter="true"
+					filterMatchMode="startsWith"
+					converter="omnifaces.SelectItemsConverter"
+					value="#{positionBean.scripts}" required="true">
+					<f:selectItems value="#{scriptBean.scripts}" var="script"
+						itemLabel="#{script.scriptTitle}" itemValue="#{script}" />
+				</p:selectCheckboxMenu>
+				<p:message for="scripts" />
 			</p:panelGrid>
 			<p:growl id="growl" />
 			<p:commandButton value="Save"

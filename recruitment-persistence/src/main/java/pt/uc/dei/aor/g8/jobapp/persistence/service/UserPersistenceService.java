@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -68,6 +69,30 @@ public class UserPersistenceService implements IUserPersistenceService {
 			proxy=null;
 		}
 		
+		return proxy;
+	}
+
+	@Override
+	public List<IUserProxy> findManagers() {
+		TypedQuery <UserEntity> query = em.createNamedQuery(UserEntity.FIND_MANAGER, UserEntity.class);
+		List <UserEntity> entity = query.getResultList();
+		
+		List <IUserProxy> proxy = new ArrayList<>();
+		for (UserEntity u: entity){
+			proxy.add(new UserProxy(u));
+		}
+		return proxy;
+	}
+
+	@Override
+	public List<IUserProxy> findInterviewers() {
+		TypedQuery <UserEntity> query = em.createNamedQuery(UserEntity.FIND_INTERVIEWER, UserEntity.class);
+		List <UserEntity> entity = query.getResultList();
+		
+		List <IUserProxy> proxy = new ArrayList<>();
+		for (UserEntity u: entity){
+			proxy.add(new UserProxy(u));
+		}
 		return proxy;
 	}
 

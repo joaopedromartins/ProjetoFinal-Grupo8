@@ -25,12 +25,16 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 @NamedQueries({
 	@NamedQuery(name = "UserEntity.findUserByUsername", query = "SELECT u FROM UserEntity u WHERE u.username=:username"),
 	@NamedQuery(name = "UserEntity.findUserByEmail", query = "SELECT u FROM UserEntity u WHERE u.email=:email"),
+	@NamedQuery(name = "UserEntity.findManager", query = "SELECT u FROM UserEntity u WHERE 'MANAGER' member of u.roles"),
+	@NamedQuery(name = "UserEntity.findInterviewer", query = "SELECT u FROM UserEntity u WHERE 'INTERVIEWER' member of u.roles"),
 })
 public class UserEntity {
 	//private static final long serialVersionUID = 1L;
 
 	public static final String FIND_USER_BY_USERNAME = "UserEntity.findUserByUsername";
 	public static final String FIND_USER_BY_EMAIL = "UserEntity.findUserByEmail";
+	public static final String FIND_MANAGER = "UserEntity.findManager";
+	public static final String FIND_INTERVIEWER = "UserEntity.findInterviewer";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,10 +63,15 @@ public class UserEntity {
 	private List<RoleType> roles;
 
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="managerPosition")
-	private List<PositionEntity> position;
+	private List <PositionEntity> position;
 	
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="userReceiver")
-	private List<NotificationEntity> notification;
+	private List <NotificationEntity> notification;
+	
+	@OneToMany ( cascade=CascadeType.ALL , mappedBy="interviewer" )
+	private List <JobInterviewEntity> interview;
+
+
 
 
 	//Constructors
@@ -125,6 +134,68 @@ public class UserEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public List<PositionEntity> getPosition() {
+		return position;
+	}
+
+	public void setPosition(List<PositionEntity> position) {
+		this.position = position;
+	}
+
+	public List<NotificationEntity> getNotification() {
+		return notification;
+	}
+
+	public void setNotification(List<NotificationEntity> notification) {
+		this.notification = notification;
+	}
+
+	public List<JobInterviewEntity> getInterview() {
+		return interview;
+	}
+
+	public void setInterview(List<JobInterviewEntity> interview) {
+		this.interview = interview;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserEntity other = (UserEntity) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [lastname=" + lastname + ", firstname=" + firstname + "]";
+	}
+	
+	
 
 
 }

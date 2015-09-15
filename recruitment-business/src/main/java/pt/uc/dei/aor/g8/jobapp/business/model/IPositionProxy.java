@@ -34,8 +34,8 @@ public interface IPositionProxy {
 	public Date getSLA();
 	public void setSLA(Date sLA);
 	
-	public IUserProxy getUserPosition();
-	public void setUserPosition(IUserProxy userPosition);
+	public IUserProxy getManagerPosition();
+	public void setManagerPosition(IUserProxy userPosition);
 	
 	public String getCompany();
 	public void setCompany(String company);

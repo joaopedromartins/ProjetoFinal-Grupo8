@@ -106,19 +106,16 @@
 							<p:spacer />
 
 							<h:panelGroup id="panelGroupInputText" >
-
-								<h:selectOneRadio onclick="return false;">
+								<h:selectOneRadio onclick="return false;" styleClass="radio">
 									<f:selectItem itemDisabled="true"/>
 								</h:selectOneRadio>
 								<p:inputText id="option1" value="#{questionChoiceBean.option}"
 									required="true" />
-
 							</h:panelGroup>
 
-
-							<h:commandButton id="buttonOption1" value="Add option"
+							<p:commandButton id="buttonOption1" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:questionTypeMultiplechoice:tableOptions" />
+								update=":formAddQuestion:tableOptions" />
 							<p:defaultCommand target="buttonOption1" />
 
 						</p:panelGrid>
@@ -135,7 +132,9 @@
 							<p:spacer />
 
 							<h:panelGroup id="panelGroupcheckboxes">
-								<p:outputLabel value="checkboxes" />
+								<h:selectManyCheckbox   styleClass="checkbox">
+									<f:selectItem itemDisabled="true" itemValue="false" itemLabel=""/>
+								</h:selectManyCheckbox>
 								<p:inputText id="option2" value="#{questionChoiceBean.option}"
 									required="true" />
 							</h:panelGroup>
@@ -143,11 +142,9 @@
 							<p:outputLabel />
 							<p:inputText id="optionNew2"
 								value="#{questionChoiceBean.optionNew}" />
-
-
-							<h:commandButton id="buttonOption2" value="Add option"
+							<p:commandButton id="buttonOption2" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:questionTypeCheckboxes:tableOptionsCheckboxes" />
+								update=":formAddQuestion:tableOptionsCheckboxes" />
 							<p:defaultCommand target="buttonOption2" />
 
 						</p:panelGrid>
@@ -172,9 +169,9 @@
 							<p:outputLabel />
 							<p:inputText id="optionNew3"
 								value="#{questionChoiceBean.optionNew}" />
-							<h:commandButton id="buttonOption3" value="Add option"
+							<p:commandButton id="buttonOption3" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:questionTypeChooseFromList:tableOptionsList" />
+								update=":formAddQuestion:tableOptionsList" />
 							<p:defaultCommand target="buttonOption3" />
 
 						</p:panelGrid>

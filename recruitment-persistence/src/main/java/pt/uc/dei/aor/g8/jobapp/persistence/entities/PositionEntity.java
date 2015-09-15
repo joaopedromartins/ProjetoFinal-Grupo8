@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -96,8 +97,10 @@ public class PositionEntity implements Serializable{
 	@ManyToMany(fetch=FetchType.EAGER)
 	private List<JobAdvertisingChanelEntity> jobAdvertisingChanel;
 
-	@OneToMany
+	@ManyToMany
 	private List<ScriptEntity> script;
+	
+	
 
 	public PositionEntity() {
 		// TODO Auto-generated constructor stub

@@ -34,7 +34,7 @@ public class ScriptEntity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Column
+	@Column ( unique = true)
 	private String scriptTitle;
 	
 	@OrderBy("orderNumber ASC")
@@ -107,9 +107,5 @@ public class ScriptEntity implements Serializable{
 		return true;
 	}
 
-
-
-	
-	
 
 }
