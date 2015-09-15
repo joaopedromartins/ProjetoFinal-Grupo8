@@ -11,7 +11,7 @@ public class JobAdvertisingChanelProxy implements IJobAdvertisingChanelProxy, IE
 	private JobAdvertisingChanelEntity entity;
 
 	public JobAdvertisingChanelProxy() {
-		
+		this(new JobAdvertisingChanelEntity());
 	}
 
 	public JobAdvertisingChanelProxy(String chanelName) {
@@ -48,6 +48,7 @@ public class JobAdvertisingChanelProxy implements IJobAdvertisingChanelProxy, IE
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object o) {
+		if (o == null) return false;
 		return entity.equals(((IEntityAware<JobAdvertisingChanelEntity>)o).getEntity());
 	}
 	

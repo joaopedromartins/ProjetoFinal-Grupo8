@@ -18,7 +18,9 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
+import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 
 
 
@@ -34,6 +36,8 @@ public class PositionBean implements Serializable {
 
 	@EJB
 	private IPositionFacade positionFacade;
+	@EJB
+	private IUserFacade userFacade;
 		
 	private Date openDate=new Date();
 	private Date closeDate;	
@@ -43,7 +47,7 @@ public class PositionBean implements Serializable {
 	private Status status;
 	private int numberOfposition=1;
 	private Date SLA;
-	private String userPosition;
+	private IUserProxy managerPosition;
 	private String company;
 	private TechnicalArea technicalArea;
 	private String descriptionPosition;
@@ -99,7 +103,7 @@ public class PositionBean implements Serializable {
 
 	public void creatNewPosition (){
 		IPositionProxy proxy;
-		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, userPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
+		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, managerPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, script);
 	
 		if(proxy!=null){
 			closeDate=null;
@@ -109,7 +113,7 @@ public class PositionBean implements Serializable {
 			status=null;
 			numberOfposition=1;
 			SLA=null;
-			userPosition=null;
+			managerPosition=null;
 			company=null;
 			technicalArea=null;
 			descriptionPosition=null;
@@ -211,12 +215,16 @@ public class PositionBean implements Serializable {
 		SLA = sLA;
 	}
 
-	public String getUserPosition() {
-		return userPosition;
+	public IUserProxy getManagerPosition() {
+		return managerPosition;
+	}
+	
+	public List <IUserProxy> getPossibleManagers (){
+		return userFacade.findManagers();
 	}
 
-	public void setUserPosition(String userPosition) {
-		this.userPosition = userPosition;
+	public void setManagerPosition(IUserProxy userPosition) {
+		this.managerPosition = userPosition;
 	}
 
 	public String getCompany() {

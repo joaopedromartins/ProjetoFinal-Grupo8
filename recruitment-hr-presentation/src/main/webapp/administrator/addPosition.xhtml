@@ -71,8 +71,11 @@
 				<p:message for="sla" />
 
 				<p:outputLabel value="Technical manager:" for="userManager" />
-				<p:inputText id="userManager" value="#{positionBean.userPosition}"
-					required="true" />
+				<p:selectOneMenu id="userManager" value="#{positionBean.managerPosition}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{positionBean.possibleManagers}" var="manager"
+						itemLabel="#{manager.fullName}" />
+				</p:selectOneMenu>
 				<p:message for="userManager" />
 
 				<p:outputLabel value="Status:" for="status" />

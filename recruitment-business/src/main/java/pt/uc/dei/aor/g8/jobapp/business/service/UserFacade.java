@@ -91,6 +91,26 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<IUserProxy> findManagers() {
+		List <IUserProxy> managers = service.findManagers();
+		if (managers != null){
+			return managers;
+		}
+		return null;
+	}
+
+	@Override
+	public List<IUserProxy> findInterviewers() {
+		List <IUserProxy> interviewers = service.findInterviewers();
+		if (interviewers != null){
+			return interviewers;
+		}
+		return null;
+	}
+	
+	
 
 	@Override
 	public String createUser(String username, String password, String lastname, String firstname, String email,
@@ -111,5 +131,9 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
+
+	
+	
+	
 
 }

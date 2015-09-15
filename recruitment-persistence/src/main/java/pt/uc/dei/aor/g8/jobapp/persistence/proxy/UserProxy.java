@@ -34,17 +34,6 @@ public class UserProxy implements IUserProxy, IEntityAware<UserEntity> {
 	}
 
 
-	@Override
-	public int hashCode() {
-		return entity.hashCode();
-	}
-
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public boolean equals(Object obj) {
-		return entity.equals(((IEntityAware<UserEntity>)obj).getEntity());
-	}
 	
 	@Override
 	public String toString(){
@@ -101,6 +90,31 @@ public class UserProxy implements IUserProxy, IEntityAware<UserEntity> {
 	public void setEmail(String email) {
 		entity.setEmail(email);
 	}
+
+	@Override
+	public String getFullName() {
+		String fullName = getFirstname()+ " " + getLastname();
+		return fullName;
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		return entity.hashCode();
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {	
+		return entity.equals(userConverterProxyToEntity((UserProxy)obj));
+	}
+	
+	@SuppressWarnings( "unchecked" )
+	private UserEntity userConverterProxyToEntity ( IUserProxy proxy){
+		UserEntity entityUser = ((IEntityAware<UserEntity>)proxy).getEntity();
+		return entityUser;
+	}
+	
 	
 
 }

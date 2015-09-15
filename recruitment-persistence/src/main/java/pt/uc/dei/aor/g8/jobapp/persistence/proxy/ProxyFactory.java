@@ -33,11 +33,11 @@ public class ProxyFactory implements IProxyFactory {
 
 	@Override
 	public IPositionProxy position(Date openDate, Date closeDate, String code, String title,
-			List<Localization> localization, Status status, int numberOfposition, Date sLA, String userPosition,
+			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<String> script) {
 		
-		return new PositionProxy (openDate,closeDate,code,title,localization,status,numberOfposition,sLA, userPosition,company,technicalArea,descriptionPosition, jobAdvertisingChanel,script);
+		return new PositionProxy (openDate,closeDate,code,title,localization,status,numberOfposition,sLA, managerPosition,company,technicalArea,descriptionPosition, jobAdvertisingChanel,script);
 	}
 
 	@Override

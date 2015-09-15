@@ -10,5 +10,7 @@ public interface IUserFacade {
 	public String createUserWithOutPassword(String username, String lastname, String firstname, String email, RoleType roles);
 	public String createUser(String username, String password, String lastname, String firstname, String email, List<RoleType> roles);
 	public IUserProxy findUserByUsername(String username);
+	public List <IUserProxy> findManagers();
+	public List <IUserProxy> findInterviewers();
 
 }

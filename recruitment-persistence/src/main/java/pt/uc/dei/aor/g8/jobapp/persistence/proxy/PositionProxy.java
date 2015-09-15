@@ -14,6 +14,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobAdvertisingChanelEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 
 @Stateless
 public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntity> {
@@ -25,12 +26,12 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	public PositionProxy(Date openDate, Date closeDate, String code, String title,
-			List<Localization> localization, Status status, int numberOfposition, Date sLA, String userPosition,
+			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<String> script) {
 
-		//TODO mudar o null do user e do script
-		this.entity = new PositionEntity(openDate,closeDate,code,title,localization,status,numberOfposition,sLA, null,
+		//TODO mudar o null do script
+		this.entity = new PositionEntity(openDate,closeDate,code,title,localization,status,numberOfposition,sLA, userConverterProxyToEntity(managerPosition),
 				company,technicalArea,descriptionPosition, jobAdvertisingChanelConverterProxyToEntity(jobAdvertisingChanel),null); 
 
 	}
@@ -206,17 +207,24 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 
 		return entityChanel;
 	}
+	
 
 	@Override
-	public IUserProxy getUserPosition() {
-		// TODO Auto-generated method stub
-		return null;
+	public IUserProxy getManagerPosition() {
+		UserEntity entityUser = entity.getManagerPosition();
+		IUserProxy proxy = new UserProxy(entityUser);
+		return proxy;
 	}
 
 	@Override
-	public void setUserPosition(IUserProxy userPosition) {
-		// TODO Auto-generated method stub
-
+	public void setManagerPosition(IUserProxy userPosition) {
+		entity.setManagerPosition(userConverterProxyToEntity(userPosition));
+	}
+	
+	@SuppressWarnings( "unchecked" )
+	private UserEntity userConverterProxyToEntity ( IUserProxy proxy){
+		UserEntity entityUser = ((IEntityAware<UserEntity>)proxy).getEntity();
+		return entityUser;
 	}
 
 
