@@ -30,9 +30,6 @@ public class JobInterviewEntity {
 	private UserEntity interviewer;
 	
 	@ManyToOne
-	private PositionEntity position;
-	
-	@ManyToOne
 	private JobApplicationEntity jobapplication;
 	
 	@OneToMany
@@ -47,14 +44,14 @@ public class JobInterviewEntity {
 	
 	
 
-	public JobInterviewEntity(Date interviewDate, UserEntity interviewer, PositionEntity position,
-			JobApplicationEntity jobapplication, List<AnswerInterview> answer) {
+	public JobInterviewEntity(Date interviewDate, UserEntity interviewer,
+			JobApplicationEntity jobapplication ) {
 		super();
 		this.interviewDate = interviewDate;
 		this.interviewer = interviewer;
-		this.position = position;
+
 		this.jobapplication = jobapplication;
-		this.answer = answer;
+		
 	}
 
 
@@ -76,13 +73,6 @@ public class JobInterviewEntity {
 		this.interviewer = interviewer;
 	}
 
-	public PositionEntity getPosition() {
-		return position;
-	}
-
-	public void setPosition(PositionEntity position) {
-		this.position = position;
-	}
 
 	public JobApplicationEntity getJobapplication() {
 		return jobapplication;

@@ -59,10 +59,13 @@ public class UserEntity {
 	private List<RoleType> roles;
 
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="managerPosition")
-	private List<PositionEntity> position;
+	private List <PositionEntity> position;
 	
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="userReceiver")
-	private List<NotificationEntity> notification;
+	private List <NotificationEntity> notification;
+	
+	@OneToMany ( cascade=CascadeType.ALL , mappedBy="interviewer" )
+	private List <JobInterviewEntity> interview;
 
 
 	//Constructors
