@@ -12,4 +12,6 @@ public interface IJobApplicationPersistenceService {
 
 	public IJobApplicationProxy editJobApplication(IJobApplicationProxy jobApplicationProxy);
 	
+	public List <IJobApplicationProxy> findAllJobApplication ();
+	
 }

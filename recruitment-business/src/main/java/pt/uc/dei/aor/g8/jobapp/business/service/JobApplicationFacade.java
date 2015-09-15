@@ -1,12 +1,12 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
@@ -41,6 +41,11 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 	public IJobApplicationProxy editJobApplication(IJobApplicationProxy jobApplicationProxy) {
 		
 		return service.editJobApplication(jobApplicationProxy);
+	}
+
+	@Override
+	public List<IJobApplicationProxy> listOfAll() {
+		return service.findAllJobApplication();
 	}
 	
 	

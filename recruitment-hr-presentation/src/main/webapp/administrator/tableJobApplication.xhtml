@@ -1,0 +1,32 @@
+<ui:composition template="/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h:outputText value="" />
+		<br />
+		<h:outputText value="List JobApplication" />
+
+		<h:form id="formViewjobApplication">
+
+			<p:dataTable id="gridJobApplication"
+				value="#{jobApplicationBean.findALL()}" var="jobApplication">
+				<p:column>
+					<p:outputLabel value="#{jobApplication.positionEntity.code}" />
+					<!-- <br />
+					<p:outputLabel value="#{jobApplication.positionEntity.title}" /> -->
+				</p:column>
+
+				<p:column>
+					<p:outputLabel value="#{jobApplication.candidateEntity.firstname}" />
+					<!-- <br />
+					<p:outputLabel value="#{jobApplication.cv}" /> -->
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

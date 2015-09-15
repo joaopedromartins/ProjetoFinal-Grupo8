@@ -29,8 +29,15 @@
 					action="#{scriptBean.initialNewScript()}" icon="ui-icon-pencil" />
 			</p:submenu>
 			<p:submenu label="Interviewers">
+				<p:menuitem value="Shedule Interview"
+					outcome="/administrator/scheduleInterview" icon="ui-icon-plus" />
+				<p:menuitem value="Edit Interview"
+					outcome="/administrator/editInterview" icon="ui-icon-pencil" />
+
 			</p:submenu>
 			<p:submenu label="Candidate">
+				<p:menuitem value="Job Applications"
+					outcome="/administrator/tableJobApplication" icon="ui-icon-plus" />
 			</p:submenu>
 			<p:submenu label="Notifications">
 				<p:menuitem value="View notifications"

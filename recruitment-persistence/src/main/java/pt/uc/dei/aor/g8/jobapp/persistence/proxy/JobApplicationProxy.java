@@ -159,23 +159,26 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 
 	@Override
 	public ICandidateProxy getCandidateEntity() {
-		// TODO Auto-generated method stub
-		return null;
+		ICandidateProxy proxy = new CandidateProxy(entity.getCandidateEntity());
+		return proxy;
 	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setCandidateEntity(ICandidateProxy candidateJobApplication) {
-		// TODO Auto-generated method stub
+		entity.setCandidateEntity(((IEntityAware<CandidateEntity>)candidateJobApplication).getEntity());
 		
 	}
 
 	@Override
 	public IPositionProxy getPositionEntity() {
-		// TODO Auto-generated method stub
-		return null;
+		return new PositionProxy (entity.getPositionEntity());
 	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setPositionEntity(IPositionProxy positionJobApplication) {
-		// TODO Auto-generated method stub
+		entity.setPositionEntity(((IEntityAware<PositionEntity>)positionJobApplication).getEntity());
 		
 	}
 
