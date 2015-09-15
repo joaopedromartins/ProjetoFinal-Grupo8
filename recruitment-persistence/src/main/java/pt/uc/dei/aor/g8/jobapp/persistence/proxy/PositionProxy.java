@@ -184,7 +184,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 		for ( JobAdvertisingChanelEntity j: entityChanel){
 			proxy.add(new JobAdvertisingChanelProxy(j));
 		}
-
+		
 		return proxy;
 	}
 

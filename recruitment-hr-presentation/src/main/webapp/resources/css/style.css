@@ -5,3 +5,8 @@
  border: 0px solid rgba(0,0,0,0);   
 }
 
+.radio, .checkbox{
+	display: inline-block;
+    vertical-align: middle;
+}
+

@@ -82,7 +82,6 @@ public class UserBean implements Serializable {
 		if ( username != null ){
 			this.currentUser = findUserByUsername();
 			this.isLogged = true;
-			log.error("current user:"  + currentUser);
 			int numeroRoles=currentUser.getRoles().size();
 			String page;
 			if ( numeroRoles == 3){
