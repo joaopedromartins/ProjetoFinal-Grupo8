@@ -38,9 +38,75 @@
 					<h:outputText value="#{question.question}" />
 					<br />
 					<h:outputText value="#{question.questiontype}" />
+					<br />
+					<h:panelGroup id="typeOfQuestion">
+					
+						<h:panelGrid id="questionText"
+							rendered="#{question.questiontype eq 'TEXT'}">
+							<p:inputText disabled="true" />
+						</h:panelGrid>
+
+						<h:panelGrid id="questionParagraph"
+							rendered="#{question.questiontype eq 'PARAGRAPH'}">
+							<p:inputTextarea disabled="true" />
+						</h:panelGrid>
+
+						<h:panelGrid id="questionMultiplechoice"
+							rendered="#{question.questiontype eq 'MULTIPLECHOICE'}"
+							columns="1">
+							<h:dataTable id="MultichoiseOptions" var="option"
+								value="#{question.options}">
+								<p:column>
+									<h:selectOneRadio onclick="return false;" styleClass="radio">
+										<f:selectItem itemDisabled="true" />
+									</h:selectOneRadio>
+								</p:column>
+								<p:column>
+									<h:outputText value="#{option.option}" />
+								</p:column>
+							</h:dataTable>
+						</h:panelGrid>
+
+						<h:panelGrid id="questionCheckboxes"
+							rendered="#{question.questiontype eq 'CHECKBOXES'}" columns="2">
+
+							<h:dataTable id="optionsCheckboxes" var="option"
+								value="#{question.options}">
+								<p:column>
+									<h:selectManyCheckbox styleClass="checkbox">
+										<f:selectItem itemDisabled="true" itemValue="false"
+											itemLabel="" />
+									</h:selectManyCheckbox>
+								</p:column>
+								<p:column>
+									<h:outputText value="#{option.option}" />
+								</p:column>
+							</h:dataTable>
+						</h:panelGrid>
+
+						<h:panelGrid id="questionChooseFromList"
+							rendered="#{question.questiontype eq 'CHOOSEFROMLIST'}"
+							columns="1">
+
+							<h:dataTable id="optionsList" var="option"
+								value="#{question.options}">
+								<h:column>
+									<h:outputText value="#{option.option}" />
+								</h:column>
+							</h:dataTable>
+						</h:panelGrid>
+
+						<h:panelGrid>
+						</h:panelGrid>
+
+						<h:panelGrid>
+						</h:panelGrid>
+
+					</h:panelGroup>
 
 				</p:column>
 				<p:column>
+
 
 				</p:column>
 
@@ -58,7 +124,9 @@
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItems value="#{scriptBean.possibleQuestionType}"
 							var="questionType" itemLabel="#{questionType.description}" />
-						<p:ajax event="change" update=":formAddQuestion:panelGroupQuestionType" />
+						<p:ajax event="change"
+							listener="#{scriptBean.changeQuestionType()}"
+							update=":formAddQuestion:panelGroupQuestionType" />
 					</p:selectOneMenu>
 
 					<p:spacer />
@@ -100,14 +168,19 @@
 							<h:dataTable id="tableOptions" var="option"
 								value="#{questionChoiceBean.options}">
 								<p:column>
+									<h:selectOneRadio onclick="return false;" styleClass="radio">
+										<f:selectItem itemDisabled="true" />
+									</h:selectOneRadio>
+								</p:column>
+								<p:column>
 									<h:outputText value="#{option.option}" />
 								</p:column>
 							</h:dataTable>
 							<p:spacer />
 
-							<h:panelGroup id="panelGroupInputText" >
+							<h:panelGroup id="panelGroupInputText">
 								<h:selectOneRadio onclick="return false;" styleClass="radio">
-									<f:selectItem itemDisabled="true"/>
+									<f:selectItem itemDisabled="true" />
 								</h:selectOneRadio>
 								<p:inputText id="option1" value="#{questionChoiceBean.option}"
 									required="true" />
@@ -126,22 +199,26 @@
 							<h:dataTable id="tableOptionsCheckboxes" var="option"
 								value="#{questionChoiceBean.options}">
 								<p:column>
+									<h:selectManyCheckbox styleClass="checkbox">
+										<f:selectItem itemDisabled="true" itemValue="false"
+											itemLabel="" />
+									</h:selectManyCheckbox>
+								</p:column>
+								<p:column>
 									<h:outputText value="#{option.option}" />
 								</p:column>
 							</h:dataTable>
 							<p:spacer />
 
 							<h:panelGroup id="panelGroupcheckboxes">
-								<h:selectManyCheckbox   styleClass="checkbox">
-									<f:selectItem itemDisabled="true" itemValue="false" itemLabel=""/>
+								<h:selectManyCheckbox styleClass="checkbox">
+									<f:selectItem itemDisabled="true" itemValue="false"
+										itemLabel="" />
 								</h:selectManyCheckbox>
 								<p:inputText id="option2" value="#{questionChoiceBean.option}"
 									required="true" />
 							</h:panelGroup>
 
-							<p:outputLabel />
-							<p:inputText id="optionNew2"
-								value="#{questionChoiceBean.optionNew}" />
 							<p:commandButton id="buttonOption2" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
 								update=":formAddQuestion:tableOptionsCheckboxes" />
@@ -166,9 +243,6 @@
 									required="true" />
 							</h:panelGroup>
 
-							<p:outputLabel />
-							<p:inputText id="optionNew3"
-								value="#{questionChoiceBean.optionNew}" />
 							<p:commandButton id="buttonOption3" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
 								update=":formAddQuestion:tableOptionsList" />

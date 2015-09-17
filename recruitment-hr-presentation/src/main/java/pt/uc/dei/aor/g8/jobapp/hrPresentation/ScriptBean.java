@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,6 +57,10 @@ public class ScriptBean implements Serializable{
 	}
 
 
+	public void changeQuestionType (){
+		this.options.setOptions(new ArrayList<>());
+		this.question = null;
+	}
 
 
 	public String getTitle() {

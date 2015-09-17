@@ -63,8 +63,7 @@ public class UserBean implements Serializable {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/CriticalJobApplicationHR/");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		return "/login?faces-redirect=true";
 	}
