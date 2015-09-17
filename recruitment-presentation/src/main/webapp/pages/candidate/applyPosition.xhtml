@@ -17,7 +17,7 @@
 	<br />
 	<p:panel header="Applying Job Position: #{jobApplicationBean.positionProxy.title}">
 
-		<h:form id="formApplyPosition">
+		<h:form id="formApplyPosition" enctype="multipart/form-data">
 			<center>
 				
 				<p:panelGrid id="gridPosition" columns="3">
@@ -56,19 +56,25 @@
 						required="true" />
 					<p:message for="letter" />
 					
-					<!-- -->
-					<!-- 
-					<p:fileUpload fileUploadListener="#{fileUploadController.upload}"
+					<p:outputLabel value="Upload CV:" for="cvuploaded" /> 
+					<p:outputLabel id="cvuploaded" value="#{jobApplicationBean.cv}" />
+					<p:message for="cvuploaded" />
+					
+					<!-- SPACE -->
+					<p:fileUpload id="upload" 
+						fileUploadListener="#{jobApplicationBean.upload}"
+						auto="true"
+						mode="advanced" 
 						allowTypes="/(\.|\/)(pdf|doc?x|xps)$/" 
-						sizeLimit="100000" 
-						description="Select Your CV"/>
-					-->
-					<!-- -->
-					<p:outputLabel value="CV :" for="cv" />
-					<h:inputTextarea id="cv" value="#{jobApplicationBean.cv}"
-						required="true" />
-					<p:message for="cv" />
-
+						sizeLimit="1000000" 
+						description="Select Your CV" 
+						dragDropSupport="true"
+						multiple="false" 
+						fileLimit="1"
+						required="true"
+						requiredMessage="CV upload required"
+						update="cvuploaded" />
+					<p:message for="upload" />
 					
 					<p:outputLabel value="Source :" for="source" />
 					<p:selectOneMenu id="source" value="#{jobApplicationBean.source}"

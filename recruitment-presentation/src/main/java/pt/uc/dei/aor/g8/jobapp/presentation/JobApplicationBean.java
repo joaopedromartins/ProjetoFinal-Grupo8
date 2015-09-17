@@ -1,5 +1,10 @@
 package pt.uc.dei.aor.g8.jobapp.presentation;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.math.BigInteger;
 
@@ -9,6 +14,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.event.FileUploadEvent;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -32,7 +39,6 @@ public class JobApplicationBean implements Serializable {
 	@Inject
 	private LoginBean loginBean;
 	
-
 	private String address;
 	private String city;
 	private String country;
@@ -45,6 +51,8 @@ public class JobApplicationBean implements Serializable {
 	private String status;
 	
 	private IPositionProxy positionProxy;
+	
+	/*private String uploadDirectory="/cv/";*/
 	
 	
 	//constructors
@@ -171,6 +179,7 @@ public class JobApplicationBean implements Serializable {
 		}
 	}
 	
+	
 //	private void redirect(String path){
 //        FacesContext context = FacesContext.getCurrentInstance();
 //        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
@@ -182,6 +191,44 @@ public class JobApplicationBean implements Serializable {
 //            e.printStackTrace();
 //        }
 //    }
+	
+	public void upload(FileUploadEvent event ) {  
+		FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		// Do what you want with the file        
+		try {
+			copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
+		} catch (IOException e) {
+			// TODO send to logger
+			System.out.println(e.getMessage());
+		}
+	}  
 
+	
+	public void copyFile(String fileName, InputStream in) {
+		try {
+			String filePrefix = /*uploadDirectory +*/ positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_";
+			// write the inputStream to a FileOutputStream
+			OutputStream out = new FileOutputStream(new File("./cv", filePrefix + fileName));
+			
+
+			int read = 0;
+			byte[] bytes = new byte[1024];
+
+			while ((read = in.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
+
+			in.close();
+			out.flush();
+			out.close();
+			// TODO send to logger
+			System.out.println("New file created!");
+			this.cv = "./cv/" + filePrefix + fileName;
+		} catch (IOException e) {
+			// TODO send to logger
+			System.out.println(e.getMessage());
+		}
+	}
 
 }	
