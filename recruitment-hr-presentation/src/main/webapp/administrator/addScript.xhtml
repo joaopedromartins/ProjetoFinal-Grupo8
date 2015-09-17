@@ -58,7 +58,7 @@
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItems value="#{scriptBean.possibleQuestionType}"
 							var="questionType" itemLabel="#{questionType.description}" />
-						<p:ajax event="change" update="panelGroupQuestionType" />
+						<p:ajax event="change" update=":formAddQuestion:panelGroupQuestionType" />
 					</p:selectOneMenu>
 
 					<p:spacer />
@@ -97,12 +97,12 @@
 							rendered="#{scriptBean.questionType eq 'MULTIPLECHOICE'}"
 							columns="2">
 
-							<p:dataTable id="tableOptions" var="option"
+							<h:dataTable id="tableOptions" var="option"
 								value="#{questionChoiceBean.options}">
 								<p:column>
 									<h:outputText value="#{option.option}" />
 								</p:column>
-							</p:dataTable>
+							</h:dataTable>
 							<p:spacer />
 
 							<h:panelGroup id="panelGroupInputText" >
@@ -123,12 +123,12 @@
 						<p:panelGrid id="questionTypeCheckboxes"
 							rendered="#{scriptBean.questionType eq 'CHECKBOXES'}" columns="2">
 
-							<p:dataTable id="tableOptionsCheckboxes" var="option"
+							<h:dataTable id="tableOptionsCheckboxes" var="option"
 								value="#{questionChoiceBean.options}">
 								<p:column>
 									<h:outputText value="#{option.option}" />
 								</p:column>
-							</p:dataTable>
+							</h:dataTable>
 							<p:spacer />
 
 							<h:panelGroup id="panelGroupcheckboxes">

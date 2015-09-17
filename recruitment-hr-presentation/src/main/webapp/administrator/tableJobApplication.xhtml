@@ -83,18 +83,11 @@
 						<h:outputText
 							value="#{jobApplicationBean.jobApplication.positionEntity.technicalArea.description}" />
 					</h:panelGrid>
-					<f:facet name="options">
-						<p:menu>
-							<p:submenu label="Settings">
-								<p:menuitem value="Toggle" url="#" icon="ui-icon-newwin"
-									onclick="PF('panel').toggle()" />
-							</p:submenu>
-						</p:menu>
-					</f:facet>
+					
 				</p:panel>
 
 				<p:panel id="candidateJobApplicaton" header="Candidate Detail"
-					toggleable="true" toggleSpeed="500" widgetVar="panel"
+					toggleable="true" toggleSpeed="500" widgetVar="panel2"
 					style="margin-bottom:20px">
 
 					<p:ajax event="toggle" />
