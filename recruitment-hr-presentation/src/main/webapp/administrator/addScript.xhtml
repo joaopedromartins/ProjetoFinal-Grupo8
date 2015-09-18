@@ -25,22 +25,22 @@
 			<p:orderList id="orderListScript" var="question"
 				controlsLocation="none" converter="omnifaces.ListConverter"
 				value="#{scriptBean.script.questions}" responsive="true"
-				itemValue="#{question}">
+				itemValue="#{question}" >
 
 
 				<f:facet name="caption">Questions</f:facet>
 
-				<p:column>
+				<p:column style="width:5%">
 					<h:outputText value="#{question.orderNumber}" />
 				</p:column>
 
-				<p:column>
+				<p:column  style="width:90%">
 					<h:outputText value="#{question.question}" />
 					<br />
 					<h:outputText value="#{question.questiontype}" />
 					<br />
 					<h:panelGroup id="typeOfQuestion">
-					
+
 						<h:panelGrid id="questionText"
 							rendered="#{question.questiontype eq 'TEXT'}">
 							<p:inputText disabled="true" />
@@ -105,7 +105,8 @@
 					</h:panelGroup>
 
 				</p:column>
-				<p:column>
+				
+				<p:column style="width:5%">
 
 
 				</p:column>
