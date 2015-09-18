@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="stylesheet">
-		<h:outputStylesheet library="css" name="style.css" />
+		<h:outputStylesheet library="css" name="script.css" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -22,13 +22,14 @@
 			</p:inplace>
 
 
+
 			<p:orderList id="orderListScript" var="question"
 				controlsLocation="none" converter="omnifaces.ListConverter"
 				value="#{scriptBean.script.questions}" responsive="true"
-				itemValue="#{question}">
+				itemValue="#{question}" style="width:100%">
 
 
-				<f:facet name="caption">Questions</f:facet>
+				<!-- <f:facet name="caption">Questions</f:facet> -->
 
 				<p:column style="width:5%">
 					<h:outputText value="#{question.orderNumber}" />
@@ -97,20 +98,25 @@
 						</h:panelGrid>
 
 						<h:panelGrid id="questionScale"
-							rendered="#{scriptBean.questionType eq 'SCALE'}" columns="2">
+							rendered="#{scriptBean.questionType eq 'SCALE'}" columns="3"
+							style="width:auto; text-align:left;">
+
+							<p:spacer />
 							<ui:repeat value="#{scriptBean.getScaleValues(question)}"
 								var="scale">
-								<span>#{scale}</span>
+								<span class="radioLabel">#{scale}</span>
 							</ui:repeat>
-							<br />
-							<ui:repeat value="#{scriptBean.getScaleValues(question)}"
-								var="scale">
-								<span>
-								<h:selectOneRadio onclick="return false;" style="display:inline">
-									<f:selectItem itemDisabled="true" />
-								</h:selectOneRadio>
-								</span>
-							</ui:repeat>
+							<p:spacer />
+
+							<h:outputLabel value="#{question.scale.minLabel}" />
+							<h:selectOneRadio styleClass="radioLine">
+
+								<f:selectItems itemDisabled="true" itemLabel=""
+									value="#{scriptBean.getScaleValues(question)}" />
+
+							</h:selectOneRadio>
+							<h:outputLabel value="#{question.scale.maxLabel}" />
+
 						</h:panelGrid>
 
 						<h:panelGrid>
