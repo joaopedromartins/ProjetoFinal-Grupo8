@@ -146,5 +146,15 @@ public class ScriptBean implements Serializable{
 	public void showPanelAddQuestion(){
 		this.addQuestion = true;
 	}
+	
+	public List<Integer> getScaleValues(IQuestionProxy question){
+		int max = question.getScale().getMaximum();
+		int min = question.getScale().getMinimum();
+		List<Integer> scale = new ArrayList<>();
+		for (int i = min; i<= max ; i++){
+			scale.add(i);
+		}
+		return scale;
+	}
 
 }
