@@ -146,7 +146,7 @@ public class ScriptBean implements Serializable{
 	public void showPanelAddQuestion(){
 		this.addQuestion = true;
 	}
-	
+
 	public List<Integer> getScaleValues(IQuestionProxy question){
 		int max = question.getScale().getMaximum();
 		int min = question.getScale().getMinimum();
@@ -156,10 +156,10 @@ public class ScriptBean implements Serializable{
 		}
 		return scale;
 	}
-	
+
 	public void deleteQuestion (IQuestionProxy questionDelete){
 		System.out.println(questionDelete.getOrderNumber());
-		facade.deleteQuestion(this.script, questionDelete);
+		this.script = facade.deleteQuestion(this.script, questionDelete);
 	}
 
 }

@@ -127,7 +127,7 @@
 				</p:column>
 
 				<p:column style="width:5%">
-					<p:commandButton id="deleteQuestion" icon="ui-icon-trash" 
+					<p:commandButton id="deleteQuestion" icon="ui-icon-trash"  process="@this"
 						actionListener="#{scriptBean.deleteQuestion(question)}"
 						update=":formListQuestions:orderListScript"/>
 
