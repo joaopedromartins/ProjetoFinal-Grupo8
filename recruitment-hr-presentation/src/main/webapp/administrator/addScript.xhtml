@@ -43,12 +43,12 @@
 					<h:panelGroup id="typeOfQuestion">
 
 						<h:panelGrid id="questionText"
-							rendered="#{question.questiontype eq 'TEXT'}">
+							rendered="#{question.questiontype eq 'TEXT'}" columns="1">
 							<p:inputText disabled="true" />
 						</h:panelGrid>
 
 						<h:panelGrid id="questionParagraph"
-							rendered="#{question.questiontype eq 'PARAGRAPH'}">
+							rendered="#{question.questiontype eq 'PARAGRAPH'}" columns="1">
 							<p:inputTextarea disabled="true" />
 						</h:panelGrid>
 
@@ -98,8 +98,8 @@
 						</h:panelGrid>
 
 						<h:panelGrid id="questionScale"
-							rendered="#{scriptBean.questionType eq 'SCALE'}" columns="3"
-							style="width:auto; text-align:left;">
+							rendered="#{question.questiontype eq 'SCALE'}" columns="3"
+							style="width: auto; text-align: left;">
 
 							<p:spacer />
 							<ui:repeat value="#{scriptBean.getScaleValues(question)}"
@@ -127,7 +127,9 @@
 				</p:column>
 
 				<p:column style="width:5%">
-
+					<p:commandButton id="deleteQuestion" icon="ui-icon-trash" 
+						actionListener="#{scriptBean.deleteQuestion(question)}"
+						update=":formListQuestions:orderListScript"/>
 
 				</p:column>
 

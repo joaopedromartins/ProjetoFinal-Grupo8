@@ -22,31 +22,31 @@ import javax.persistence.Table;
 @Table(name = "Script")
 @NamedQuery(name = "Script.listOfAllScripts", query = "SELECT s FROM ScriptEntity s")
 public class ScriptEntity implements Serializable{
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String LIST_OF_ALL_SCRIPTS = "Script.listOfAllScripts";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@Column ( unique = true)
 	private String scriptTitle;
-	
+
 	@OrderBy("orderNumber ASC")
 	@OneToMany (cascade=CascadeType.ALL, mappedBy = "script", fetch=FetchType.EAGER)
 	private SortedSet<QuestionEntity> questions;
-	
-	
-	
+
+
+
 	public ScriptEntity() {
 		this.questions = new TreeSet<>();
 	}
-	
+
 	public ScriptEntity(String scriptTitle, List<QuestionEntity> questions) {
 		super();
 		this.scriptTitle = scriptTitle;
@@ -63,12 +63,25 @@ public class ScriptEntity implements Serializable{
 	public void setScriptTitle(String scriptTitle) {
 		this.scriptTitle = scriptTitle;
 	}
-	
+
 	public void addQuestionToListQuestion (QuestionEntity question){
 		int  sizeListQuestion = questions.size();
 		question.setOrderNumber(sizeListQuestion + 1);
 		question.setScript(this);
 		this.questions.add(question);
+	}
+
+	public void deleteQuestionOfListQuestion (QuestionEntity questionDelete){
+
+		if (questions.remove(questionDelete)){
+			int orderNumber = questionDelete.getOrderNumber();
+			for (QuestionEntity q:questions){
+				if (q.getOrderNumber() > orderNumber) {
+					q.setOrderNumber(q.getOrderNumber()-1);
+				}
+			}
+			questionDelete.setScript(null);
+		}
 	}
 
 	public Set<QuestionEntity> getQuestions() {

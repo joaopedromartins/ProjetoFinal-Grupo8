@@ -156,5 +156,10 @@ public class ScriptBean implements Serializable{
 		}
 		return scale;
 	}
+	
+	public void deleteQuestion (IQuestionProxy questionDelete){
+		System.out.println(questionDelete.getOrderNumber());
+		facade.deleteQuestion(this.script, questionDelete);
+	}
 
 }

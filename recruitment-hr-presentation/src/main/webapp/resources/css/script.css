@@ -11,9 +11,7 @@
 	display: inline-block;
 }
 
-
-
-.ui-orderlist ul.ui-orderlist-list {	
+.ui-orderlist ul.ui-orderlist-list {
 	width: 100%;
-    height: auto;
+	height: auto;
 }

@@ -81,6 +81,12 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 		
 	}
 	
+	@Override
+	public void deleteQuestionOfListQuestion (IQuestionProxy questionDelete){
+		entity.deleteQuestionOfListQuestion(questionConverterProxyToEntity(questionDelete));
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	private QuestionEntity questionConverterProxyToEntity (IQuestionProxy proxy){
 		QuestionEntity questionEntity = ((IEntityAware<QuestionEntity>)proxy).getEntity(); 

@@ -16,4 +16,6 @@ public interface IScriptProxy {
 	public void setQuestions(List<IQuestionProxy> questions);
 	
 	public void addQuestionToListQuestion (IQuestionProxy question);
+	
+	public void deleteQuestionOfListQuestion (IQuestionProxy questionDelete);
 }
