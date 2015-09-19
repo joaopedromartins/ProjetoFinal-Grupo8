@@ -1,17 +1,24 @@
 @CHARSET "ISO-8859-1";
 
-.radioLabel {
-	width: 28px;
-	display: inline-block;
-	text-align: center;
-}
-
-.radioLine>tbody>tr>td {
-	width: 31px;
-	display: inline-block;
-}
-
 .ui-orderlist ul.ui-orderlist-list {
 	width: 100%;
 	height: auto;
+}
+
+.radioLabel {
+	width: 13.3px;
+	display: inline-block;
+	text-align: center;
+	margin-left: 14.4px;
+	margin-right: 17.3px
+}
+
+.radioLine>tbody>tr>td {
+	width: 30px;
+	display: inline-block;
+	border: none;
+}
+
+.ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {
+	border: 0px solid rgba(0, 0, 0, 0);
 }

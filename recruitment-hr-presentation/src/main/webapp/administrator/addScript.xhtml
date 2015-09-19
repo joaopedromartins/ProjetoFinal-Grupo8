@@ -23,9 +23,9 @@
 
 
 
-			<p:orderList id="orderListScript" var="question"
-				controlsLocation="none" converter="omnifaces.ListConverter"
-				value="#{scriptBean.script.questions}" responsive="true"
+			<h:dataTable id="orderListScript" var="question"
+				 converter="omnifaces.ListConverter" 
+				value="#{scriptBean.script.questions}" draggableRows = "true"
 				itemValue="#{question}" style="width:100%">
 
 
@@ -104,12 +104,12 @@
 							<p:spacer />
 							<ui:repeat value="#{scriptBean.getScaleValues(question)}"
 								var="scale">
-								<span class="radioLabel">#{scale}</span>
+								<span class="radioLabel">#{scale} </span>
 							</ui:repeat>
 							<p:spacer />
 
 							<h:outputLabel value="#{question.scale.minLabel}" />
-							<h:selectOneRadio styleClass="radioLine">
+							<h:selectOneRadio styleClass="radioLine" >
 
 								<f:selectItems itemDisabled="true" itemLabel=""
 									value="#{scriptBean.getScaleValues(question)}" />
@@ -133,7 +133,7 @@
 
 				</p:column>
 
-			</p:orderList>
+			</h:dataTable>
 		</h:form>
 		<h:panelGroup id="panelGroupQuestion">
 			<h:form id="formAddQuestion" rendered="#{scriptBean.addQuestion}">
@@ -280,7 +280,7 @@
 
 					<p:spacer />
 					<p:commandButton id="saveQuestion" value="Done"
-						action="#{scriptBean.addQuestionToScript}"
+						action="#{scriptBean.addQuestionToScript}" ajax="true"
 						update=":formListQuestions:orderListScript :panelGroupQuestion messageScript" />
 
 				</p:panelGrid>
