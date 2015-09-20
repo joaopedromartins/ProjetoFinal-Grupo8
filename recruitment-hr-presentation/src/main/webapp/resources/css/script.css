@@ -35,19 +35,18 @@ tbody {
 }
 
 .ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {
- border: 0px solid rgba(0,0,0,0);   
+	border: 0px solid rgba(0, 0, 0, 0);
 }
 
-.radio, .checkbox{
+.radio, .checkbox {
 	display: inline-block;
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
-ui-sortable-helper * {
-border: none !important;
+.ui-sortable-helper * {
+	border: none !important;
 }
 
 .rowClasses {
 	background-color: white;
-	
 }
