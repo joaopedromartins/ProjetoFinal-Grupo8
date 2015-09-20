@@ -10,7 +10,6 @@ import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
-import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 
 @Stateless

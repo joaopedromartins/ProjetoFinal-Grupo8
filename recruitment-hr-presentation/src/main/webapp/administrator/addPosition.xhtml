@@ -136,10 +136,10 @@
 				</p:selectCheckboxMenu>
 				<p:message for="scripts" />
 			</p:panelGrid>
-			<p:growl id="growl" />
+			<p:messages autoUpdate="true"/>
 			<p:commandButton value="Save"
 				action="#{positionBean.creatNewPosition()}"
-				update="gridPosition growl" />
+				update="gridPosition" validateClient="true"/>
 		</h:form>
 
 	</ui:define>

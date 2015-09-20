@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -22,31 +23,31 @@ import javax.persistence.Table;
 @Table(name = "Script")
 @NamedQuery(name = "Script.listOfAllScripts", query = "SELECT s FROM ScriptEntity s")
 public class ScriptEntity implements Serializable{
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String LIST_OF_ALL_SCRIPTS = "Script.listOfAllScripts";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@Column ( unique = true)
 	private String scriptTitle;
-	
+
 	@OrderBy("orderNumber ASC")
 	@OneToMany (cascade=CascadeType.ALL, mappedBy = "script", fetch=FetchType.EAGER)
 	private SortedSet<QuestionEntity> questions;
-	
-	
-	
+
+
+
 	public ScriptEntity() {
 		this.questions = new TreeSet<>();
 	}
-	
+
 	public ScriptEntity(String scriptTitle, List<QuestionEntity> questions) {
 		super();
 		this.scriptTitle = scriptTitle;
@@ -63,12 +64,44 @@ public class ScriptEntity implements Serializable{
 	public void setScriptTitle(String scriptTitle) {
 		this.scriptTitle = scriptTitle;
 	}
-	
+
 	public void addQuestionToListQuestion (QuestionEntity question){
 		int  sizeListQuestion = questions.size();
 		question.setOrderNumber(sizeListQuestion + 1);
 		question.setScript(this);
 		this.questions.add(question);
+	}
+	
+	public void addQuestionWithOrderToListQuestion (QuestionEntity question){
+		question.setScript(this);
+		this.questions.add(question);
+	}
+
+	public void deleteQuestionOfListQuestion (QuestionEntity questionDelete){
+
+		if (questions.remove(questionDelete)){
+			int orderNumber = questionDelete.getOrderNumber();
+			for (QuestionEntity q:questions){
+				if (q.getOrderNumber() > orderNumber) {
+					q.setOrderNumber(q.getOrderNumber()-1);
+				}
+			}
+			questionDelete.setScript(null);
+		}
+	}
+	
+	private QuestionEntity removeTheFirstOfSortedSet (){
+		QuestionEntity firstQuestion= questions.first();
+		questions.remove(firstQuestion);
+		return firstQuestion;
+	}
+	
+	public List <QuestionEntity> removeALLQuestion (){
+		List <QuestionEntity> questionList = new ArrayList<>();
+		while (questions.size() > 0){
+			questionList.add(removeTheFirstOfSortedSet());
+		}
+		return questionList;
 	}
 
 	public Set<QuestionEntity> getQuestions() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionChoiceProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 
 public interface IScriptFacade {
@@ -19,5 +20,9 @@ public interface IScriptFacade {
 
 	public IScriptProxy addQuestionToScript(IScriptProxy script, String question, QuestionType questionType,
 			List <IQuestionChoiceProxy> options);
+	
+	public IScriptProxy deleteQuestion (IScriptProxy script, IQuestionProxy question);
+
+	public IScriptProxy changeOrderOfQuestion(IScriptProxy script, int fromRow, int toRow);
 
 }
