@@ -15,8 +15,8 @@ public class QuestionScaleBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private int min;
-	private int max;
+	private int min = 1;
+	private int max = 5;
 	private String minLabel;
 	private String maxLabel;
 	
