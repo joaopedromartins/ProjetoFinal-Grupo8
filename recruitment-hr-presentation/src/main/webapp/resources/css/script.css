@@ -1,8 +1,8 @@
 @CHARSET "ISO-8859-1";
 
-.ui-orderlist ul.ui-orderlist-list {
-	width: 100%;
-	height: auto;
+.ui-datatable table {
+    width: auto;
+    table-layout: auto;
 }
 
 .radioLabel {
@@ -17,6 +17,7 @@
 	width: 30px;
 	display: inline-block;
 	border: none;
+	whitespace-wrap:nowrap;
 }
 
 .ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {

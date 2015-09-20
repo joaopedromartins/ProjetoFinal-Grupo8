@@ -23,10 +23,10 @@
 
 
 
-			<h:dataTable id="orderListScript" var="question"
-				 converter="omnifaces.ListConverter" 
-				value="#{scriptBean.script.questions}" draggableRows = "true"
-				itemValue="#{question}" style="width:100%">
+			<p:dataTable id="orderListScript" var="question"
+				converter="omnifaces.ListConverter"
+				value="#{scriptBean.script.questions}" draggableRows="true"
+				itemValue="#{question}" style="width:90%">
 
 
 				<!-- <f:facet name="caption">Questions</f:facet> -->
@@ -35,7 +35,7 @@
 					<h:outputText value="#{question.orderNumber}" />
 				</p:column>
 
-				<p:column style="width:90%">
+				<p:column style="width:85%">
 					<h:outputText value="#{question.question}" />
 					<br />
 					<h:outputText value="#{question.questiontype}" />
@@ -98,25 +98,25 @@
 						</h:panelGrid>
 
 						<h:panelGrid id="questionScale"
-							rendered="#{question.questiontype eq 'SCALE'}" columns="3"
-							style="width: auto; text-align: left;">
+							rendered="#{question.questiontype eq 'SCALE'}"
+							style=" text-align: left;" columns="3">
+							
+								<p:spacer />
+								<ui:repeat value="#{scriptBean.getScaleValues(question)}"
+									var="scale">
+									<span class="radioLabel">#{scale} </span>
+								</ui:repeat>
+								<p:spacer />
 
-							<p:spacer />
-							<ui:repeat value="#{scriptBean.getScaleValues(question)}"
-								var="scale">
-								<span class="radioLabel">#{scale} </span>
-							</ui:repeat>
-							<p:spacer />
+								<h:outputLabel value="#{question.scale.minLabel}" />
+								<h:selectOneRadio styleClass="radioLine">
 
-							<h:outputLabel value="#{question.scale.minLabel}" />
-							<h:selectOneRadio styleClass="radioLine" >
+									<f:selectItems itemDisabled="true" itemLabel=""
+										value="#{scriptBean.getScaleValues(question)}" />
 
-								<f:selectItems itemDisabled="true" itemLabel=""
-									value="#{scriptBean.getScaleValues(question)}" />
-
-							</h:selectOneRadio>
-							<h:outputLabel value="#{question.scale.maxLabel}" />
-
+								</h:selectOneRadio>
+								<h:outputLabel value="#{question.scale.maxLabel}" />
+							
 						</h:panelGrid>
 
 						<h:panelGrid>
@@ -126,14 +126,14 @@
 
 				</p:column>
 
-				<p:column style="width:5%">
-					<p:commandButton id="deleteQuestion" icon="ui-icon-trash"  process="@this"
-						action="#{scriptBean.deleteQuestion(question)}"
-						update=":formListQuestions:orderListScript"/>
+				<p:column style="width:10%">
+					<p:commandButton id="deleteQuestion" icon="ui-icon-trash"
+						process="@this" action="#{scriptBean.deleteQuestion(question)}"
+						update=":formListQuestions:orderListScript" />
 
 				</p:column>
 
-			</h:dataTable>
+			</p:dataTable>
 		</h:form>
 		<h:panelGroup id="panelGroupQuestion">
 			<h:form id="formAddQuestion" rendered="#{scriptBean.addQuestion}">
