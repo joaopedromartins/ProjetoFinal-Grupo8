@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -82,6 +83,20 @@ public class ScriptEntity implements Serializable{
 			}
 			questionDelete.setScript(null);
 		}
+	}
+	
+	private QuestionEntity removeTheFirstOfSortedSet (){
+		QuestionEntity firstQuestion= questions.first();
+		questions.remove(firstQuestion);
+		return firstQuestion;
+	}
+	
+	public List <QuestionEntity> removeALLQuestion (){
+		List <QuestionEntity> questionList = new ArrayList<>();
+		for (int i = 0; i< questions.size() ; i++){
+			questionList.add(removeTheFirstOfSortedSet());
+		}
+		return questionList;
 	}
 
 	public Set<QuestionEntity> getQuestions() {

@@ -4,6 +4,8 @@ import java.util.List;
 
 
 
+
+
 public interface IScriptProxy {
 
 	
@@ -18,4 +20,7 @@ public interface IScriptProxy {
 	public void addQuestionToListQuestion (IQuestionProxy question);
 	
 	public void deleteQuestionOfListQuestion (IQuestionProxy questionDelete);
+
+	public void changeOrderOfQuestion(int fromRow, int toRow);
+	
 }

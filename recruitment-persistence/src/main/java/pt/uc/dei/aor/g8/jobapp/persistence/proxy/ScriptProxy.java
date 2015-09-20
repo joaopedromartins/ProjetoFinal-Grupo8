@@ -15,11 +15,11 @@ import pt.uc.dei.aor.g8.jobapp.persistence.entities.ScriptEntity;
 public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 
 	private ScriptEntity entity;
-	
+
 	public ScriptProxy() {
 		this(null);
 	}
-	
+
 	public ScriptProxy (ScriptEntity script){
 		if (script == null){
 			this.entity = new ScriptEntity();
@@ -43,15 +43,15 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	@Override
 	public void setScriptTitle(String scriptTitle) {
 		entity.setScriptTitle(scriptTitle);
-		
+
 	}
 
 	@Override
 	public List<IQuestionProxy> getQuestions() {
 		List<IQuestionProxy> proxy = new ArrayList<>();
-		
+
 		Set<QuestionEntity> entityQuestion = entity.getQuestions();
-		
+
 		for (QuestionEntity q:entityQuestion){
 			proxy.add(new QuestionProxy(q));
 		}
@@ -61,9 +61,9 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	@Override
 	public void setQuestions(List<IQuestionProxy> questions) {
 		entity.setQuestions(questionsConverterProxyToEntity(questions));
-		
+
 	}
-	
+
 	@SuppressWarnings( "unchecked" )
 	private List<QuestionEntity> questionsConverterProxyToEntity (List<IQuestionProxy> proxy){
 		List<QuestionEntity> questionsEntity = new ArrayList<>();
@@ -78,15 +78,47 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	@Override
 	public void addQuestionToListQuestion(IQuestionProxy question) {
 		entity.addQuestionToListQuestion(questionConverterProxyToEntity(question));
-		
+
 	}
-	
+
 	@Override
 	public void deleteQuestionOfListQuestion (IQuestionProxy questionDelete){
 		entity.deleteQuestionOfListQuestion(questionConverterProxyToEntity(questionDelete));
+
+	}
+
+	@Override
+	public void changeOrderOfQuestion(int fromRow, int toRow) {
+		List <QuestionEntity> questionsRemove = (entity.removeALLQuestion());
+		for (int i = 0; i<questionsRemove.size(); i++){
+			if (questionsRemove.get(i).getOrderNumber() == fromRow){
+				questionsRemove.get(i).setOrderNumber(toRow);
+			}
+		}
+		if (fromRow <= toRow){
+			for (int i = fromRow ; i<=toRow-1;i++){
+				int orderNumber = questionsRemove.get(i).getOrderNumber();
+				System.out.println("Question tem o numero de ordem:"+orderNumber);
+				questionsRemove.get(i).setOrderNumber(orderNumber-1);
+				System.out.println("Question agora o numero de ordem:"+questionsRemove.get(i).getOrderNumber());
+			}
+		} else {
+			for (int i = toRow-1 ; i<fromRow-1;i++){
+				int orderNumber = questionsRemove.get(i).getOrderNumber();
+				System.out.println("Question tem o numero de ordem:"+orderNumber);
+				questionsRemove.get(i).setOrderNumber(orderNumber+1);
+				System.out.println("Question agora o numero de ordem:"+questionsRemove.get(i).getOrderNumber());
+			}
+		}
+		for (QuestionEntity q: questionsRemove){
+			entity.addQuestionToListQuestion(q);
+		}
 		
 	}
-	
+
+
+
+
 	@SuppressWarnings("unchecked")
 	private QuestionEntity questionConverterProxyToEntity (IQuestionProxy proxy){
 		QuestionEntity questionEntity = ((IEntityAware<QuestionEntity>)proxy).getEntity(); 
@@ -102,7 +134,7 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	public boolean equals(Object obj) {
 		return entity.equals(scriptConverterProxyToEntity((IScriptProxy)obj));
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private ScriptEntity scriptConverterProxyToEntity (IScriptProxy proxy){
 		ScriptEntity scriptEntity = ((IEntityAware<ScriptEntity>)proxy).getEntity(); 
@@ -113,7 +145,12 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	public String toString() {
 		return "ScriptProxy [entity=" + entity + "]";
 	}
-	
-	
+
+
+
+
+
+
+
 
 }

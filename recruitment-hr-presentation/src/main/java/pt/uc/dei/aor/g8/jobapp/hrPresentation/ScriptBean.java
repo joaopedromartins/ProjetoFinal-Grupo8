@@ -12,6 +12,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.ReorderEvent;
+
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
@@ -160,6 +162,14 @@ public class ScriptBean implements Serializable{
 	public void deleteQuestion (IQuestionProxy questionDelete){
 		System.out.println(questionDelete.getOrderNumber());
 		this.script = facade.deleteQuestion(this.script, questionDelete);
+	}
+	
+	public void onRowReorder(ReorderEvent event) {
+		int fromRow = event.getFromIndex() + 1;
+		int toRow  = event.getToIndex() + 1;
+		
+		this.script = facade.changeOrderOfQuestion (this.script, fromRow, toRow);
+        
 	}
 
 }

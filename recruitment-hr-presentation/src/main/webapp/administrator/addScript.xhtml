@@ -26,7 +26,9 @@
 			<p:dataTable id="orderListScript" var="question"
 				converter="omnifaces.ListConverter"
 				value="#{scriptBean.script.questions}" draggableRows="true"
-				itemValue="#{question}" style="width:90%">
+				itemValue="#{question}" styleClass="scriptTable" rowStyleClass="rowClasses">
+				
+				<p:ajax event="rowReorder" listener="#{scriptBean.onRowReorder}" update="formListQuestions:orderListScript" />
 
 
 				<!-- <f:facet name="caption">Questions</f:facet> -->

@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -83,6 +84,23 @@ public class ScripFacade implements IScriptFacade {
 	@Override
 	public IScriptProxy deleteQuestion(IScriptProxy script, IQuestionProxy questionDelete) {
 		script.deleteQuestionOfListQuestion(questionDelete);
+		return service.updateScript(script);
+	}
+
+
+
+
+	@Override
+	public IScriptProxy changeOrderOfQuestion(IScriptProxy script, int fromRow, int toRow) {
+		List <IQuestionProxy> listQuestion = new ArrayList<>();
+		listQuestion.addAll(script.getQuestions());
+		for (IQuestionProxy q: listQuestion){
+			if(q.getOrderNumber() == fromRow){
+				script.changeOrderOfQuestion(fromRow,toRow);
+			}
+		}
+		
+		
 		return service.updateScript(script);
 	}
 
