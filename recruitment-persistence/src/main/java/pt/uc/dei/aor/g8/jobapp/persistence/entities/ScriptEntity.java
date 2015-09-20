@@ -71,6 +71,11 @@ public class ScriptEntity implements Serializable{
 		question.setScript(this);
 		this.questions.add(question);
 	}
+	
+	public void addQuestionWithOrderToListQuestion (QuestionEntity question){
+		question.setScript(this);
+		this.questions.add(question);
+	}
 
 	public void deleteQuestionOfListQuestion (QuestionEntity questionDelete){
 
@@ -93,7 +98,7 @@ public class ScriptEntity implements Serializable{
 	
 	public List <QuestionEntity> removeALLQuestion (){
 		List <QuestionEntity> questionList = new ArrayList<>();
-		for (int i = 0; i< questions.size() ; i++){
+		while (questions.size() > 0){
 			questionList.add(removeTheFirstOfSortedSet());
 		}
 		return questionList;

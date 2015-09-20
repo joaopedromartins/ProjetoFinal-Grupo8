@@ -98,20 +98,16 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 		if (fromRow <= toRow){
 			for (int i = fromRow ; i<=toRow-1;i++){
 				int orderNumber = questionsRemove.get(i).getOrderNumber();
-				System.out.println("Question tem o numero de ordem:"+orderNumber);
 				questionsRemove.get(i).setOrderNumber(orderNumber-1);
-				System.out.println("Question agora o numero de ordem:"+questionsRemove.get(i).getOrderNumber());
 			}
 		} else {
 			for (int i = toRow-1 ; i<fromRow-1;i++){
 				int orderNumber = questionsRemove.get(i).getOrderNumber();
-				System.out.println("Question tem o numero de ordem:"+orderNumber);
 				questionsRemove.get(i).setOrderNumber(orderNumber+1);
-				System.out.println("Question agora o numero de ordem:"+questionsRemove.get(i).getOrderNumber());
 			}
 		}
 		for (QuestionEntity q: questionsRemove){
-			entity.addQuestionToListQuestion(q);
+			entity.addQuestionWithOrderToListQuestion(q);
 		}
 		
 	}

@@ -48,8 +48,6 @@ border: none !important;
 }
 
 .rowClasses {
-	background-color: transparent;
-	border-color: Silver;
-	border-width: thin;
-	border-style: solid;
+	background-color: white;
+	
 }
