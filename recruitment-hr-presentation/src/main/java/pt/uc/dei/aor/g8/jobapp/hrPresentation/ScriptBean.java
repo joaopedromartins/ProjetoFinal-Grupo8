@@ -37,7 +37,7 @@ public class ScriptBean implements Serializable{
 
 	private IScriptProxy   script;
 
-	private boolean addQuestion=false; 
+	private boolean addQuestion = false; 
 
 	private String question;
 	private QuestionType questionType =QuestionType.TEXT;
@@ -150,12 +150,16 @@ public class ScriptBean implements Serializable{
 			if ( questionType == QuestionType.SCALE){
 				this.script = facade.addQuestionToScript(script, question, questionType,
 						scale.getMin(), scale.getMax(), scale.getMinLabel(), scale.getMaxLabel());
+				this.addQuestion = false;
+				this.question = "";
 			
 			} else if ( questionType == QuestionType.CHECKBOXES || questionType == QuestionType.MULTIPLECHOICE ||
 					questionType == QuestionType.CHOOSEFROMLIST){
 				if(options.getOptions().size() >= 2){
 					this.script = facade.addQuestionToScript(script, question, questionType, 
 							options.getOptions());
+					this.addQuestion = false;
+					this.question = "";
 					
 				} else{
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add, at least, two options.", "");
@@ -164,8 +168,10 @@ public class ScriptBean implements Serializable{
 
 			} else {
 				this.script = facade.addQuestionToScript(script, question, questionType);
+				this.addQuestion = false;
+				this.question = "";
 			}
-			this.addQuestion = false;
+			
 		}
 
 	}

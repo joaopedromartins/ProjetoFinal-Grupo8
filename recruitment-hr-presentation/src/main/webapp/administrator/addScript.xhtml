@@ -137,10 +137,10 @@
 
 			</p:dataTable>
 		</h:form>
-		
-		
-		
-		
+
+
+
+
 		<h:panelGroup id="panelGroupQuestion">
 			<h:form id="formAddQuestion" rendered="#{scriptBean.addQuestion}">
 				<p:panelGrid id="gridAddQuestion" columns="2">
@@ -215,9 +215,12 @@
 								<p:inputText id="option1" value="#{questionChoiceBean.option}" />
 							</h:panelGroup>
 
+
+
 							<p:commandButton id="buttonOption1" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptions  " />
+								process="@this :formAddQuestion:panelGroupMultiplechoice"
+								update=":formAddQuestion:tableOptions :formAddQuestion:panelGroupMultiplechoice " />
 
 
 						</p:panelGrid>
@@ -249,7 +252,8 @@
 
 							<p:commandButton id="buttonOption2" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptionsCheckboxes " />
+								process="@this :formAddQuestion:panelGroupcheckboxes"
+								update=":formAddQuestion:tableOptionsCheckboxes :formAddQuestion:panelGroupcheckboxes " />
 
 
 						</p:panelGrid>
@@ -272,7 +276,8 @@
 
 							<p:commandButton id="buttonOption3" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptionsList " />
+								process="@this :formAddQuestion:panelGroupList"
+								update=":formAddQuestion:tableOptionsList :formAddQuestion:panelGroupList" />
 
 
 						</p:panelGrid>
@@ -285,7 +290,7 @@
 					<p:spacer />
 					<p:commandButton id="saveQuestion" value="Done"
 						action="#{scriptBean.addQuestionToScript}" ajax="true"
-						update=":formListQuestions:orderListScript :formButtonAddQuestion:messageScript " />
+						update=":formListQuestions:orderListScript :formButtonAddQuestion :panelGroupQuestion " />
 
 				</p:panelGrid>
 
@@ -294,9 +299,9 @@
 		</h:panelGroup>
 		<h:form id="formButtonAddQuestion">
 			<p:messages id="messageScript" />
-			<p:commandButton id="addQuestion" value="Add question"
+			<p:commandButton id="addQuestion" value="Add question" rendered="#{scriptBean.addQuestion eq 'false'}"
 				action="#{scriptBean.showPanelAddQuestion()}"
-				update=":panelGroupQuestion :formButtonAddQuestion:messageScript" />
+				update=":panelGroupQuestion @form" />
 
 		</h:form>
 

@@ -67,7 +67,7 @@ public class QuestionChoiceBean implements Serializable {
 			options = new ArrayList<>();	
 		}
 		options.add(facade.newChoice(option)) ;
-		/*this.option="";*/
+		this.option="";
 
 	}
 }
