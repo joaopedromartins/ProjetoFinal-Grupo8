@@ -70,6 +70,15 @@ public class ScriptBean implements Serializable{
 	}
 
 	public void setTitle(String title) {
+		IScriptProxy proxy = facade.findTitleOfScript(title);
+		if (proxy == null){
+			this.script.setScriptTitle(title);
+			this.title = title;
+		} else  {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "The tile of Script already exist. Change title.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
+
 		this.title = title;
 	}
 
@@ -111,7 +120,7 @@ public class ScriptBean implements Serializable{
 
 
 	public IScriptProxy getScript() {
-		if ( script != null){
+		if ( script != null ){
 			return script;
 		} else {
 			this.script=facade.initialNewScript();
@@ -132,15 +141,23 @@ public class ScriptBean implements Serializable{
 			if ( questionType == QuestionType.SCALE){
 				this.script = facade.addQuestionToScript(script, question, questionType,
 						scale.getMin(), scale.getMax(), scale.getMinLabel(), scale.getMaxLabel());
+				this.addQuestion = false;
 			} else if ( questionType == QuestionType.CHECKBOXES || questionType == QuestionType.MULTIPLECHOICE ||
-					questionType == QuestionType.CHOOSEFROMLIST){		
-				this.script = facade.addQuestionToScript(script, question, questionType, 
-						options.getOptions());
+					questionType == QuestionType.CHOOSEFROMLIST){
+				if(options.getOptions().size() >= 2){
+					this.script = facade.addQuestionToScript(script, question, questionType, 
+							options.getOptions());
+					this.addQuestion = false;
+				} else{
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add, at least, two options.", "");
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				}
+
 			} else {
 				this.script = facade.addQuestionToScript(script, question, questionType);
+				this.addQuestion = false;
 			}
 
-			this.addQuestion = false;
 		}
 
 	}
@@ -163,13 +180,13 @@ public class ScriptBean implements Serializable{
 		System.out.println(questionDelete.getOrderNumber());
 		this.script = facade.deleteQuestion(this.script, questionDelete);
 	}
-	
+
 	public void onRowReorder(ReorderEvent event) {
 		int fromRow = event.getFromIndex() + 1;
 		int toRow  = event.getToIndex() + 1;
-		
+
 		this.script = facade.changeOrderOfQuestion (this.script, fromRow, toRow);
-        
+
 	}
 
 }
