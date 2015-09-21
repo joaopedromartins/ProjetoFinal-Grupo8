@@ -8,7 +8,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -202,6 +201,14 @@ public class ScriptBean implements Serializable{
 
 		this.script = facade.changeOrderOfQuestion (this.script, fromRow, toRow);
 
+	}
+	
+	public void deleteScript (IScriptProxy script){
+		if (script == null){
+			System.out.println("nao selecionou o script");
+		} else {
+			facade.deleteScript (script);
+		}
 	}
 
 }

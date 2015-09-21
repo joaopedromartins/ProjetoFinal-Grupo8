@@ -18,5 +18,7 @@ public interface IJobApplicationFacade {
 	
 	public List <IJobApplicationProxy> listOfAll ();
 	
+	public IJobApplicationProxy findId (long id);
+	
 	
 }

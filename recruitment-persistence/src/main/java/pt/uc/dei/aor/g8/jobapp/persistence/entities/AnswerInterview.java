@@ -16,32 +16,43 @@ public class AnswerInterview {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@OneToOne
-	private QuestionEntity question;
+	@Column
+	private String question;
+	
+	@Column
+	private String questionType;
 	
 	@Column
 	private String answer;
+	
 
-	
-	
 	
 	public AnswerInterview() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AnswerInterview(QuestionEntity question, String answer) {
+	public AnswerInterview(String question, String answer) {
 		super();
 		this.question = question;
 		this.answer = answer;
 	}
 
-	public QuestionEntity getQuestion() {
+	
+	public String getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(QuestionEntity question) {
+	public void setQuestion(String question) {
 		this.question = question;
+	}
+	
+	public String getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
 	}
 
 	public String getAnswer() {

@@ -27,4 +27,6 @@ public interface IScriptFacade {
 	
 	public IScriptProxy findTitleOfScript (String scriptTitle);
 
+	public IScriptProxy deleteScript(IScriptProxy script);
+
 }

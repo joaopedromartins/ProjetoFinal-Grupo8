@@ -39,4 +39,6 @@ public interface IJobApplicationProxy {
 	
 	public String getStatus();
 	public void setStatus(String status);
+	
+	public long getId();
 }

@@ -76,6 +76,14 @@ public class ScriptPersistenceService implements IScriptPersistenceService {
 		return proxyScript;
 	}
 
+	@Override
+	public IScriptProxy deleteScript(IScriptProxy script) {
+		ScriptEntity entity = getEntity(script);
+		entity = em.merge(entity);
+		em.remove(entity);	
+		return new ScriptProxy(entity);
+	}
+
 
 
 }

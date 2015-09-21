@@ -6,14 +6,113 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="jobApplicationId" value="#{jobApplicationBean.id}" />
+			<f:viewAction action="#{jobApplicationBean.findById()}" />
+		</f:metadata>
 		<h:outputText value="" />
 		<br />
 		<h:outputText value="Job Application detail" />
 
-		<h:form id="formEditInterview">
+		<h:form id="formDialogDetailJobApplication">
+			<h:panelGrid columns="2">
+				<p:panel id="positionJobApplicaton" header="Position Detail"
+					toggleable="true" toggleSpeed="500" widgetVar="panel"
+					style="margin-bottom:20px">
+
+					<h:panelGrid columns="2" cellpadding="10">
+
+						<h:outputText value="Position code:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.code}" />
+
+						<h:outputText value="Title:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.title}" />
 
 
+						<h:outputText value="Open Date:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.openDate}" />
 
+						<h:outputText value="Close Date:" />
+						<h:outputText value="#{positionBean.positionProxy.closeDate}" />
+
+						<h:outputText value="Location:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.stringLocalization}" />
+
+						<h:outputText value="Status:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.status.description}" />
+
+						<h:outputText value="Company:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.company}" />
+
+						<h:outputText value="Technical Area:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.technicalArea.description}" />
+					</h:panelGrid>
+
+				</p:panel>
+
+				<p:panel id="candidateJobApplicaton" header="Candidate Detail"
+					toggleable="true" toggleSpeed="500" widgetVar="panel2"
+					style="margin-bottom:20px">
+
+					<p:ajax event="toggle" />
+
+					<h:panelGrid columns="2" cellpadding="10">
+
+						<h:outputText value="Name :" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.candidateEntity.firstname}" />
+
+						<h:outputText value="Adress:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.address}" />
+
+
+						<h:outputText value="Degree:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.diploma}" />
+
+						<h:outputText value="Cover letter:" />
+						<h:outputLabel value="#{jobApplicationBean.jobApplication.letter}" />
+
+						<h:outputText value="School:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.school}" />
+
+						<h:outputText value="Phone:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.phone}" />
+
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>
+
+		</h:form>
+
+		<h:form id="forScheduleInterview">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Interviwer:" for="userInterviwer" />
+				<p:selectOneMenu id="userInterviwer"
+					value="#{jobApplicationBean.userInterviwer}" required="true"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{jobApplicationBean.possibleUserInterviwer}"
+						var="manager" itemLabel="#{manager.fullName}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Interview date:" for="interviewDate" />
+				<p:calendar id="interviewDate" value="#{jobApplicationBean.date}"
+					required="true" showOn="button" pattern="dd/MM/yyyy HH:mm" />
+				<!-- <p:calendar id="interviewDate" required="true" showOn="button"
+						value="#{jobApplicationBean.date}" pattern="dd/MM/yyyy" />
+					
+					<p:outputLabel value="Interview time:" for="interviewTime" />
+					<p:calendar id="interviewTime" value="#{jobApplicationBean.time}"
+						pattern="HH:mm" timeOnly="true" /> -->
+
+			</h:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>

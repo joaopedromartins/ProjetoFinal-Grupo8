@@ -107,4 +107,15 @@ public class ScripFacade implements IScriptFacade {
 		return null;
 	}
 
+
+
+
+	@Override
+	public IScriptProxy deleteScript(IScriptProxy script) {
+		service.deleteScript(script);
+		return null;
+	}
+	
+	
+
 }
