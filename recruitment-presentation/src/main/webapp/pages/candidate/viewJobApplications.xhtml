@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<meta charset="utf-8" />
+	<title>CriticalJobApplication</title>
+	<h:outputStylesheet library="css" name="style.css" />
+
+</h:head>
+<h:body>
+	<h:form id="formJobApplicationTable">
+		<p:dataTable id="tableJobApplications" var="jobapplication"
+			value="#{CandidateBean.listOfCandidateOpenJobApplication()}">
+			<f:facet name="header">
+	            <H1>View Job Application</H1>
+	        </f:facet>
+			
+			<p:column headerText="Title">
+				<h:outputText value="#{jobapplication.position.title}" />
+			</p:column>
+			<p:column headerText="Open Date">
+				<h:outputText value="#{jobapplication.position.openDate}" />
+			</p:column>
+			<p:column headerText="Location">
+				<h:outputText value="#{jobapplication.position.stringLocalization}" />
+			</p:column>
+			<p:column headerText="Status">
+				<h:outputText value="#{jobapplication.position.status.description}" />
+			</p:column>
+			<p:column headerText="Company">
+				<h:outputText value="#{jobapplication.position.company}" />
+			</p:column>
+			<p:column headerText="Technical Area">
+				<h:outputText value="#{jobapplication.position.technicalArea.description}" />
+			</p:column>
+		
+			
+		</p:dataTable>
+	</h:form>
+
+	
+			
+</h:body>
+</html>

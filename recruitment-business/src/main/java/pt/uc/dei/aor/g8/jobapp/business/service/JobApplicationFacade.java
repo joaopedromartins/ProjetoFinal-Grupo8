@@ -59,5 +59,8 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		return service.findAllJobApplication();
 	}
 	
-	
+	@Override
+	public List<IJobApplicationProxy> listOfJobApplicationByUsername(String username) {
+		return service.listOfAllCandidateJobApplication(username);
+	}
 }
