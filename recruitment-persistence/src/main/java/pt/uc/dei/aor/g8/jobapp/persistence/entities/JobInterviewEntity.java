@@ -33,7 +33,7 @@ public class JobInterviewEntity {
 	private JobApplicationEntity jobapplication;
 	
 	@OneToMany
-	private List<AnswerInterview> answer;
+	private List<AnswerInterviewEntity> answer;
 	
 
 	public JobInterviewEntity() {
@@ -49,7 +49,6 @@ public class JobInterviewEntity {
 		super();
 		this.interviewDate = interviewDate;
 		this.interviewer = interviewer;
-
 		this.jobapplication = jobapplication;
 		
 	}
@@ -82,24 +81,13 @@ public class JobInterviewEntity {
 		this.jobapplication = jobapplication;
 	}
 
-	public List<AnswerInterview> getAnswer() {
+	public List<AnswerInterviewEntity> getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(List<AnswerInterview> answer) {
+	public void setAnswer(List<AnswerInterviewEntity> answer) {
 		this.answer = answer;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-
-	
+		
 	
 }

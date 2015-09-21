@@ -5,12 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table (name="Answer")
-public class AnswerInterview {
+public class AnswerInterviewEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,12 +26,12 @@ public class AnswerInterview {
 	
 
 	
-	public AnswerInterview() {
+	public AnswerInterviewEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AnswerInterview(String question, String answer) {
+	public AnswerInterviewEntity(String question, String answer) {
 		super();
 		this.question = question;
 		this.answer = answer;

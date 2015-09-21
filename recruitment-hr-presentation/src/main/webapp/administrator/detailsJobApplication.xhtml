@@ -93,24 +93,25 @@
 		</h:form>
 
 		<h:form id="forScheduleInterview">
+			<p:growl id="growl" />
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Interviwer:" for="userInterviwer" />
 				<p:selectOneMenu id="userInterviwer"
-					value="#{jobApplicationBean.userInterviwer}" required="true"
-					converter="omnifaces.SelectItemsConverter">
-					<f:selectItems value="#{jobApplicationBean.possibleUserInterviwer}"
+					value="#{jobApplicationBean.interviewBean.userInterviwer}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems
+						value="#{jobApplicationBean.interviewBean.possibleUserInterviwer}"
 						var="manager" itemLabel="#{manager.fullName}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Interview date:" for="interviewDate" />
-				<p:calendar id="interviewDate" value="#{jobApplicationBean.date}"
-					required="true" showOn="button" pattern="dd/MM/yyyy HH:mm" />
-				<!-- <p:calendar id="interviewDate" required="true" showOn="button"
-						value="#{jobApplicationBean.date}" pattern="dd/MM/yyyy" />
-					
-					<p:outputLabel value="Interview time:" for="interviewTime" />
-					<p:calendar id="interviewTime" value="#{jobApplicationBean.time}"
-						pattern="HH:mm" timeOnly="true" /> -->
+				<p:calendar id="interviewDate"
+					value="#{jobApplicationBean.interviewBean.date}" required="true"
+					showOn="button" pattern="dd/MM/yyyy HH:mm" />
+
+				<p:commandButton value="Schedule interview"
+					action="#{jobApplicationBean.scheduleInterview}" 
+					update="growl"/>
 
 			</h:panelGrid>
 		</h:form>

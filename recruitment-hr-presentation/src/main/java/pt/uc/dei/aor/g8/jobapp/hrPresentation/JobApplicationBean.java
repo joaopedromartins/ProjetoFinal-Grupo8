@@ -1,22 +1,24 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
-import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
+import pt.uc.dei.aor.g8.jobapp.business.service.IJobInterviewFacade;
 
 @Named
 @ViewScoped
 public class JobApplicationBean implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -24,19 +26,18 @@ public class JobApplicationBean implements Serializable {
 	@EJB
 	private IJobApplicationFacade facade;
 	@EJB
-	private IUserFacade userFacade;
-	
-	private IJobApplicationProxy jobApplication;
-	private Date date;
-	private Date time;
+	private IJobInterviewFacade facadeInterview;
+	@Inject
+	private JobInterviewBean interviewBean;
 	private long id;
-	private IUserProxy userInterviwer;
+	private IJobApplicationProxy jobApplication;
+
 
 	public JobApplicationBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public List <IJobApplicationProxy> findALL(){
 		return facade.listOfAll();
 	}
@@ -48,7 +49,7 @@ public class JobApplicationBean implements Serializable {
 	public void setJobApplication(IJobApplicationProxy jobApplication) {
 		this.jobApplication = jobApplication;
 	}
-	
+
 	public void findById (){
 		this.jobApplication = facade.findId(id);
 	}
@@ -61,33 +62,27 @@ public class JobApplicationBean implements Serializable {
 		this.id = id;
 	}
 
-	public IUserProxy getUserInterviwer() {
-		return userInterviwer;
-	}
-	
-	public List <IUserProxy> getPossibleUserInterviwer(){
-		return userFacade.findInterviewers();
+	public JobInterviewBean getInterviewBean() {
+		return interviewBean;
 	}
 
-	public void setUserInterviwer(IUserProxy userInterviwer) {
-		this.userInterviwer = userInterviwer;
+	public void setInterviewBean(JobInterviewBean interviewBean) {
+		this.interviewBean = interviewBean;
 	}
 
-	public Date getDate() {
-		return date;
+	public void scheduleInterview (){
+		System.out.println("date interview: "+interviewBean.getDate());
+		IJobInterviewProxy interviewProxy = facadeInterview.newInterview(interviewBean.getDate(), interviewBean.getUserInterviwer(), jobApplication);
+		if (interviewProxy != null){
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Scheduled interview with succeed.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error on scheduled interview.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
 
-	public Date getTime() {
-		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
-	}
-	
 
 }
