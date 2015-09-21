@@ -26,9 +26,11 @@
 			<p:dataTable id="orderListScript" var="question"
 				converter="omnifaces.ListConverter"
 				value="#{scriptBean.script.questions}" draggableRows="true"
-				itemValue="#{question}" styleClass="scriptTable" rowStyleClass="rowClasses">
-				
-				<p:ajax event="rowReorder" listener="#{scriptBean.onRowReorder}" update="formListQuestions:orderListScript" />
+				itemValue="#{question}" styleClass="scriptTable"
+				rowStyleClass="rowClasses">
+
+				<p:ajax event="rowReorder" listener="#{scriptBean.onRowReorder}"
+					update="formListQuestions:orderListScript" />
 
 
 				<!-- <f:facet name="caption">Questions</f:facet> -->
@@ -102,23 +104,23 @@
 						<h:panelGrid id="questionScale"
 							rendered="#{question.questiontype eq 'SCALE'}"
 							style=" text-align: left;" columns="3">
-							
-								<p:spacer />
-								<ui:repeat value="#{scriptBean.getScaleValues(question)}"
-									var="scale">
-									<span class="radioLabel">#{scale} </span>
-								</ui:repeat>
-								<p:spacer />
 
-								<h:outputLabel value="#{question.scale.minLabel}" />
-								<h:selectOneRadio styleClass="radioLine">
+							<p:spacer />
+							<ui:repeat value="#{scriptBean.getScaleValues(question)}"
+								var="scale">
+								<span class="radioLabel">#{scale} </span>
+							</ui:repeat>
+							<p:spacer />
 
-									<f:selectItems itemDisabled="true" itemLabel=""
-										value="#{scriptBean.getScaleValues(question)}" />
+							<h:outputLabel value="#{question.scale.minLabel}" />
+							<h:selectOneRadio styleClass="radioLine">
 
-								</h:selectOneRadio>
-								<h:outputLabel value="#{question.scale.maxLabel}" />
-							
+								<f:selectItems itemDisabled="true" itemLabel=""
+									value="#{scriptBean.getScaleValues(question)}" />
+
+							</h:selectOneRadio>
+							<h:outputLabel value="#{question.scale.maxLabel}" />
+
 						</h:panelGrid>
 
 						<h:panelGrid>
@@ -212,7 +214,7 @@
 
 							<p:commandButton id="buttonOption1" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptions" />
+								update=":formAddQuestion:tableOptions :formAddQuestion:panelGroupInputText:option1 " />
 							<p:defaultCommand target="buttonOption1" />
 
 						</p:panelGrid>
@@ -244,7 +246,7 @@
 
 							<p:commandButton id="buttonOption2" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptionsCheckboxes" />
+								update=":formAddQuestion:tableOptionsCheckboxes :formAddQuestion:panelGroupcheckboxes:option2" />
 							<p:defaultCommand target="buttonOption2" />
 
 						</p:panelGrid>
@@ -262,12 +264,12 @@
 							<p:spacer />
 
 							<h:panelGroup id="panelGroupList">
-								<p:inputText id="option3" value="#{questionChoiceBean.option}"/>
+								<p:inputText id="option3" value="#{questionChoiceBean.option}" />
 							</h:panelGroup>
 
 							<p:commandButton id="buttonOption3" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptionsList" />
+								update=":formAddQuestion:tableOptionsList :formAddQuestion:panelGroupList:option3" />
 							<p:defaultCommand target="buttonOption3" />
 
 						</p:panelGrid>
@@ -280,7 +282,7 @@
 					<p:spacer />
 					<p:commandButton id="saveQuestion" value="Done"
 						action="#{scriptBean.addQuestionToScript}" ajax="true"
-						update=":formListQuestions:orderListScript :panelGroupQuestion messageScript" />
+						update=":formListQuestions:orderListScript :formAddQuestion:messageScript" />
 
 				</p:panelGrid>
 				<p:messages id="messageScript" />
@@ -290,7 +292,7 @@
 		<h:form id="formButtonAddQuestion">
 			<p:commandButton id="addQuestion" value="Add question"
 				action="#{scriptBean.showPanelAddQuestion()}"
-				update=":panelGroupQuestion" />
+				update=":panelGroupQuestion :formAddQuestion:messageScript" />
 
 		</h:form>
 
