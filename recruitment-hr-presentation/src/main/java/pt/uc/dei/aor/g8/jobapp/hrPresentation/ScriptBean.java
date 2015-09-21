@@ -79,6 +79,7 @@ public class ScriptBean implements Serializable{
 
 	public void verifyTitle() {
 		IScriptProxy proxy = facade.findTitleOfScript(title);
+		System.out.println(title);
 		if (proxy == null && !(("Untitled Script").equals(title))){
 			this.script.setScriptTitle(title);
 		} else  {

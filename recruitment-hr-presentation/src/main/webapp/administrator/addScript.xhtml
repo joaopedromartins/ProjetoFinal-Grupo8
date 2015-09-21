@@ -17,7 +17,7 @@
 
 			<p:outputLabel for="titleScript" value="Title:" />
 			<p:inputText id="titleScript" value="#{scriptBean.title}"
-				required="true" valueChangeListener="#{scriptBean.verifyTitle}" />
+				required="true"  />
 			<p:commandButton value="submit" action="#{scriptBean.verifyTitle}"
 				update=":formListQuestions:titleScript :formButtonAddQuestion:messageScript" />
 
