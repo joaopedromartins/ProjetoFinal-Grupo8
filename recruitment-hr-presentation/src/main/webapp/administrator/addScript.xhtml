@@ -258,10 +258,10 @@
 							rendered="#{scriptBean.questionType eq 'CHOOSEFROMLIST'}"
 							columns="2">
 
-							<h:dataTable id="tableOptionsList" var="option"
+							<h:dataTable id="tableOptionsList" var="options"
 								value="#{questionChoiceBean.options}">
 								<h:column>
-									<h:outputText value="#{option.option}" />
+									<h:outputText value="#{options.option}" />
 								</h:column>
 							</h:dataTable>
 							<p:spacer />
