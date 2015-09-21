@@ -80,8 +80,19 @@ public class ScripFacade implements IScriptFacade {
 
 
 
-	
+	@Override
+	public IScriptProxy deleteQuestion(IScriptProxy script, IQuestionProxy questionDelete) {
+		script.deleteQuestionOfListQuestion(questionDelete);
+		return service.updateScript(script);
+	}
 
 
+
+
+	@Override
+	public IScriptProxy changeOrderOfQuestion(IScriptProxy script, int fromRow, int toRow) {
+		script.changeOrderOfQuestion(fromRow,toRow);
+		return service.updateScript(script);
+	}
 
 }

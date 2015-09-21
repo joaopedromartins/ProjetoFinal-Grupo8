@@ -44,20 +44,7 @@ public class QuestionProxy implements IQuestionProxy, IEntityAware<QuestionEntit
 		this.entity = new QuestionEntity(question, questionType, optionsConverterProxyToEntity(options));
 	}
 	
-	@SuppressWarnings("unchecked")
-	private QuestionScaleEntity scaleConverterProxyToEntity (IQuestionScaleProxy proxy){
-		QuestionScaleEntity scaleEntity = ((IEntityAware<QuestionScaleEntity>)proxy).getEntity(); 
-		return scaleEntity;	
-	}
 	
-	@SuppressWarnings("unchecked")
-	private List<QuestionChoiceEntity> optionsConverterProxyToEntity (List<IQuestionChoiceProxy> proxy){
-		List<QuestionChoiceEntity> choiceEntity = new ArrayList<>();
-		for(IQuestionChoiceProxy qC: proxy){
-			choiceEntity.add(((IEntityAware<QuestionChoiceEntity>)qC).getEntity());
-		}			
-		return choiceEntity;
-	}
 
 	@Override
 	public QuestionEntity getEntity() {
@@ -108,6 +95,49 @@ public class QuestionProxy implements IQuestionProxy, IEntityAware<QuestionEntit
 	@Override
 	public String toString() {
 		return entity.toString();
+	}
+
+	@Override
+	public IQuestionScaleProxy getScale() {
+		return new QuestionScaleProxy (entity.getScale());
+	}
+
+
+	@Override
+	public void setScale(IQuestionScaleProxy scale) {
+		entity.setScale(scaleConverterProxyToEntity(scale));
+	}
+
+	@Override
+	public List<IQuestionChoiceProxy> getOptions() {
+		List <IQuestionChoiceProxy> proxy = new ArrayList<>();
+		
+		List <QuestionChoiceEntity> entityChoise = entity.getOptions();
+		for ( QuestionChoiceEntity qC: entityChoise){
+			proxy.add(new QuestionChoiceProxy(qC));
+		}
+		
+		return proxy;
+	}
+
+	@Override
+	public void setOptions(List<IQuestionChoiceProxy> options) {
+		entity.setOptions(optionsConverterProxyToEntity(options));
+	}
+	
+	@SuppressWarnings("unchecked")
+	private QuestionScaleEntity scaleConverterProxyToEntity (IQuestionScaleProxy proxy){
+		QuestionScaleEntity scaleEntity = ((IEntityAware<QuestionScaleEntity>)proxy).getEntity(); 
+		return scaleEntity;	
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<QuestionChoiceEntity> optionsConverterProxyToEntity (List<IQuestionChoiceProxy> proxy){
+		List<QuestionChoiceEntity> choiceEntity = new ArrayList<>();
+		for(IQuestionChoiceProxy qC: proxy){
+			choiceEntity.add(((IEntityAware<QuestionChoiceEntity>)qC).getEntity());
+		}			
+		return choiceEntity;
 	}
 
 }

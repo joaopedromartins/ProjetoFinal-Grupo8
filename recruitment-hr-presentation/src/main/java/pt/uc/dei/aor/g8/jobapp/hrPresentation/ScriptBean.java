@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.event.ReorderEvent;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
@@ -56,6 +59,10 @@ public class ScriptBean implements Serializable{
 	}
 
 
+	public void changeQuestionType (){
+		this.options.setOptions(new ArrayList<>());
+		this.question = null;
+	}
 
 
 	public String getTitle() {
@@ -140,6 +147,29 @@ public class ScriptBean implements Serializable{
 
 	public void showPanelAddQuestion(){
 		this.addQuestion = true;
+	}
+
+	public List<Integer> getScaleValues(IQuestionProxy question){
+		int max = question.getScale().getMaximum();
+		int min = question.getScale().getMinimum();
+		List<Integer> scale = new ArrayList<>();
+		for (int i = min; i<= max ; i++){
+			scale.add(i);
+		}
+		return scale;
+	}
+
+	public void deleteQuestion (IQuestionProxy questionDelete){
+		System.out.println(questionDelete.getOrderNumber());
+		this.script = facade.deleteQuestion(this.script, questionDelete);
+	}
+	
+	public void onRowReorder(ReorderEvent event) {
+		int fromRow = event.getFromIndex() + 1;
+		int toRow  = event.getToIndex() + 1;
+		
+		this.script = facade.changeOrderOfQuestion (this.script, fromRow, toRow);
+        
 	}
 
 }

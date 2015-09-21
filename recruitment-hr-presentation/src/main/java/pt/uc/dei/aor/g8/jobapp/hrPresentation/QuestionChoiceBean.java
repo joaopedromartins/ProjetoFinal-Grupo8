@@ -21,7 +21,7 @@ public class QuestionChoiceBean implements Serializable {
 	
 	@EJB
 	private IQuestionChoiceFacade facade;
-	private String option;
+	private String option = "";
 	private String optionNew;
 	private List <IQuestionChoiceProxy> options;
 	//private List <String> optionsChoice;

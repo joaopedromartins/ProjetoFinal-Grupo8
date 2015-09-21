@@ -1,0 +1,52 @@
+@CHARSET "ISO-8859-1";
+
+.radioLabel {
+	width: 27px;
+	display: inline-block;
+	text-align: center;
+}
+
+.radioLine>tbody>tr>td {
+	width: 7px;
+	display: inline-block;
+	border: none;
+}
+
+.radioLine>tbody>tr {
+	margin-left: -9px;
+	display: inline-block
+}
+
+.ui-orderlist ul.ui-orderlist-list {
+	width: 100%;
+	height: auto;
+}
+
+.ui-datatable.scriptTable .ui-datatable-data tr, .ui-datatable.scriptTable .ui-datatable-data-empty tr,
+	.ui-datatable.scriptTable .ui-datatable-data td, .ui-datatable.scriptTable .ui-datatable-data-empty td
+	{
+	border-style: none;
+}
+
+.ui-datatable.scriptTable .ui-datatable-data tr 
+table, .ui-datatable.scriptTable .ui-datatable-data tr 
+tbody {
+	display: inline-block
+}
+
+.ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {
+	border: 0px solid rgba(0, 0, 0, 0);
+}
+
+.radio, .checkbox {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.ui-sortable-helper * {
+	border: none !important;
+}
+
+.rowClasses {
+	background-color: white;
+}
