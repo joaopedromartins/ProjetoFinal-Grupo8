@@ -200,12 +200,12 @@
 					
 					
 					<h:outputText value="View CV:" />
+					<h:outputText value="#{jobApplicationBean.cvfilename}" />
 		            <h:form>
 			            <p:commandButton id="downloadLink" value="Download CV" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
 							<p:fileDownload value="#{jobApplicationBean.download}" />
 						</p:commandButton>
 					</h:form>
-					<!-- SPACE -->
 					
 					<p:outputLabel value="Change CV:" /> 
 					<p:fileUpload id="upload" 

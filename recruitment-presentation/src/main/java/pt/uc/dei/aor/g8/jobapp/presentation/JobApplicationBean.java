@@ -60,7 +60,8 @@ public class JobApplicationBean implements Serializable {
 	
 	private DefaultStreamedContent download;
 	
-	/*private String uploadDirectory="/cv/";*/
+	private String uploadDirectory="./cv";
+	private String cvfilename;
 	
 	
 	//constructors
@@ -163,6 +164,14 @@ public class JobApplicationBean implements Serializable {
 	    this.download = download;
 	}
 
+	public String getCvfilename() {
+		//cvWithoutPath();
+		return cvfilename;
+	}
+	public void setCvfilename(String cvfilename) {
+		this.cvfilename = cvfilename;
+	}
+
 	//methods
 	public String applyPosition() {
 		return "/pages/candidate/applyPosition?faces-redirect=true";
@@ -230,9 +239,9 @@ public class JobApplicationBean implements Serializable {
 	
 	public void copyFile(String fileName, InputStream in) {
 		try {
-			String filePrefix = /*uploadDirectory +*/ positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_";
+			String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_";
 			// write the inputStream to a FileOutputStream
-			OutputStream out = new FileOutputStream(new File("./cv", filePrefix + fileName));
+			OutputStream out = new FileOutputStream(new File(uploadDirectory , filePrefix + fileName));
 			
 
 			int read = 0;
@@ -247,7 +256,7 @@ public class JobApplicationBean implements Serializable {
 			out.close();
 			// TODO send to logger
 			System.out.println("New file created!");
-			this.cv = "./cv/" + filePrefix + fileName;
+			this.cv = uploadDirectory + "/" + filePrefix + fileName;
 		} catch (IOException e) {
 			// TODO send to logger
 			System.out.println(e.getMessage());
@@ -272,15 +281,34 @@ public class JobApplicationBean implements Serializable {
 		System.out.println("\n---------------------");
 		System.out.println("Edit Job Application:");
 		System.out.println("---------------------");
-		System.out.println("Address: \t"+jobApplicationProxy.getAddress() );
-		System.out.println("Address: \t"+jobApplicationProxy.getCity() );
-		System.out.println("Address: \t"+jobApplicationProxy.getCountry() );
-		System.out.println("Address: \t"+jobApplicationProxy.getPhone() );
-		System.out.println("Address: \t"+jobApplicationProxy.getDiploma() );
-		System.out.println("Address: \t"+jobApplicationProxy.getSchool() );
-		System.out.println("Address: \t"+jobApplicationProxy.getLetter() );
-		System.out.println("Address: \t"+jobApplicationProxy.getCv() );
-		System.out.println("Address: \t"+jobApplicationProxy.getJobApplicationSource().getChanelName() );
-		System.out.println("\n2");
+		if (jobApplicationProxy!=null) {
+			System.out.println("Address: \t"+jobApplicationProxy.getAddress() );
+			System.out.println("City: \t"+jobApplicationProxy.getCity() );
+			System.out.println("Country: \t"+jobApplicationProxy.getCountry() );
+			System.out.println("Phone: \t"+jobApplicationProxy.getPhone() );
+			System.out.println("Diploma: \t"+jobApplicationProxy.getDiploma() );
+			System.out.println("School: \t"+jobApplicationProxy.getSchool() );
+			System.out.println("Letter: \t"+jobApplicationProxy.getLetter() );
+			System.out.println("CV: \t"+jobApplicationProxy.getCv() );
+			// TODO Null pointer exception System.out.println("Source: \t"+jobApplicationProxy.getJobApplicationSource().getChanelName() );
+			System.out.println("\n");
+		}
+	}
+	
+	public void cvWithoutPath() {
+		int beginIndex = uploadDirectory.length();
+		int endIndex;
+		if (jobApplicationProxy==null) {
+			endIndex = beginIndex;
+		} else {
+			endIndex = jobApplicationProxy.getCv().length();
+		}
+		if (endIndex <= beginIndex) {
+			this.cvfilename = "";
+		} else {
+			this.cvfilename = "" + jobApplicationProxy.getCv().substring(beginIndex, endIndex);
+			// TODO logger
+			System.out.println("cv: " + this.cvfilename);
+		}
 	}
 }	
