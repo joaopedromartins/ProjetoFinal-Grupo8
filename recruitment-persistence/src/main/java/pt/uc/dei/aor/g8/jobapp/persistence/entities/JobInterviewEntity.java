@@ -22,7 +22,7 @@ public class JobInterviewEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column
 	private Date interviewDate;
 	
