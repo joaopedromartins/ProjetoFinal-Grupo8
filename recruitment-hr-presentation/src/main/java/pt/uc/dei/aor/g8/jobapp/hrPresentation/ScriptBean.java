@@ -79,9 +79,12 @@ public class ScriptBean implements Serializable{
 
 	public void verifyTitle() {
 		IScriptProxy proxy = facade.findTitleOfScript(title);
+		System.out.println("ja fui ao facade " + title);
 		if (proxy == null && !(("Untitled Script").equals(title))){
 			this.script.setScriptTitle(title);
+			System.out.println("guargei no script " + title);
 		} else  {
+			System.out.println("dou erro " + title);
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "The tile of Script already exist. Change title.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}

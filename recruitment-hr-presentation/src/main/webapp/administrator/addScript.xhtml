@@ -20,7 +20,7 @@
 				<p:inputText value="#{scriptBean.title}" required="true"
 					label="text" />
 				<p:ajax event="save" listener="#{scriptBean.verifyTitle}"
-					update="@form" />
+					update=":formButtonAddQuestion:messageScript" />
 			</p:inplace>
 
 			<p:dataTable id="orderListScript" var="question"
@@ -215,7 +215,7 @@
 							<p:commandButton id="buttonOption1" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
 								update=":formAddQuestion:tableOptions :formAddQuestion:panelGroupInputText:option1 " />
-							<p:defaultCommand target="buttonOption1" />
+							
 
 						</p:panelGrid>
 
@@ -247,7 +247,7 @@
 							<p:commandButton id="buttonOption2" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
 								update=":formAddQuestion:tableOptionsCheckboxes :formAddQuestion:panelGroupcheckboxes:option2" />
-							<p:defaultCommand target="buttonOption2" />
+							
 
 						</p:panelGrid>
 
@@ -270,7 +270,7 @@
 							<p:commandButton id="buttonOption3" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
 								update=":formAddQuestion:tableOptionsList :formAddQuestion:panelGroupList:option3" />
-							<p:defaultCommand target="buttonOption3" />
+							
 
 						</p:panelGrid>
 
@@ -282,17 +282,18 @@
 					<p:spacer />
 					<p:commandButton id="saveQuestion" value="Done"
 						action="#{scriptBean.addQuestionToScript}" ajax="true"
-						update=":formListQuestions:orderListScript :formAddQuestion:messageScript" />
+						update=":formListQuestions:orderListScript :formButtonAddQuestion:messageScript" />
 
 				</p:panelGrid>
-				<p:messages id="messageScript" />
+				
 			</h:form>
 
 		</h:panelGroup>
 		<h:form id="formButtonAddQuestion">
+			<p:messages id="messageScript" />
 			<p:commandButton id="addQuestion" value="Add question"
 				action="#{scriptBean.showPanelAddQuestion()}"
-				update=":panelGroupQuestion :formAddQuestion:messageScript" />
+				update=":panelGroupQuestion :formButtonAddQuestion:messageScript" />
 
 		</h:form>
 
