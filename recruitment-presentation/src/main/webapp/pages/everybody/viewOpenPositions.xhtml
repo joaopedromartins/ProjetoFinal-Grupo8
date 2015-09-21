@@ -8,7 +8,7 @@
 <h:head>
 
 	<meta charset="utf-8" />
-	<title>CriticalJobApplication</title>
+	<title>Critical Job Application</title>
 	<h:outputStylesheet library="css" name="style.css" />
 
 </h:head>
@@ -17,8 +17,8 @@
 		<p:dataTable id="tablePositions" var="position"
 			value="#{positionBean.listOfAllOpenPosition()}">
 			<f:facet name="header">
-            Positions
-        </f:facet>
+	            Positions
+	        </f:facet>
 			<p:column headerText="Position code">
 				<h:outputText value="#{position.code}" />
 			</p:column>
@@ -52,17 +52,16 @@
 						target="#{positionBean.positionProxy}" />
 				</p:commandButton>
 			</p:column>
-			
+
 			<p:column style="width:32px;text-align: center">
-				<p:commandButton 
-					icon="ui-icon-bookmark" 
-					action="#{jobApplicationBean.applyPosition}"  
+				<p:commandButton icon="ui-icon-bookmark"
+					action="#{jobApplicationBean.applyPosition}"
 					title="Apply Job Position">
 					<f:setPropertyActionListener value="#{position}"
 						target="#{jobApplicationBean.positionProxy}" />
 				</p:commandButton>
 			</p:column>
-			
+
 		</p:dataTable>
 	</h:form>
 
@@ -80,6 +79,9 @@
 				<h:outputText value="Title:" />
 				<h:outputText value="#{positionBean.positionProxy.title}" />
 
+				<h:outputText value="Description Position:" />
+				<h:outputText
+					value="#{positionBean.positionProxy.descriptionPosition}" />
 
 				<h:outputText value="Open Date:" />
 				<h:outputText value="#{positionBean.positionProxy.openDate}" />
@@ -88,21 +90,25 @@
 				<h:outputText value="#{positionBean.positionProxy.closeDate}" />
 
 				<h:outputText value="Location:" />
-				<h:outputText value="#{positionBean.positionProxy.stringLocalization}" />
+				<h:outputText
+					value="#{positionBean.positionProxy.stringLocalization}" />
 
 				<h:outputText value="Status:" />
-				<h:outputText value="#{positionBean.positionProxy.status.description}" />
+				<h:outputText
+					value="#{positionBean.positionProxy.status.description}" />
 
 				<h:outputText value="Company:" />
 				<h:outputText value="#{positionBean.positionProxy.company}" />
 
 				<h:outputText value="Technical Area:" />
-				<h:outputText value="#{positionBean.positionProxy.technicalArea.description}" />
+				<h:outputText
+					value="#{positionBean.positionProxy.technicalArea.description}" />
+
 
 			</p:panelGrid>
-			
+
 		</p:outputPanel>
 	</p:dialog>
-			
+
 </h:body>
 </html>

@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.presentation;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,11 +13,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -53,6 +56,9 @@ public class JobApplicationBean implements Serializable {
 	
 	private IPositionProxy positionProxy;
 	
+	private IJobApplicationProxy jobApplicationProxy;
+	
+	private DefaultStreamedContent download;
 	
 	/*private String uploadDirectory="/cv/";*/
 	
@@ -142,6 +148,21 @@ public class JobApplicationBean implements Serializable {
 	}
 	
 	
+	public IJobApplicationProxy getJobApplicationProxy() {
+		return jobApplicationProxy;
+	}
+	public void setJobApplicationProxy(IJobApplicationProxy jobApplicationProxy) {
+		this.jobApplicationProxy = jobApplicationProxy;
+	}
+	
+	public DefaultStreamedContent getDownload() throws Exception {
+	    System.out.println("GET = " + download.getName());
+	    return download;
+	}
+	public void setDownload(DefaultStreamedContent download) {
+	    this.download = download;
+	}
+
 	//methods
 	public String applyPosition() {
 		return "/pages/candidate/applyPosition?faces-redirect=true";
@@ -232,6 +253,34 @@ public class JobApplicationBean implements Serializable {
 			System.out.println(e.getMessage());
 		}
 	}
+		
 
+	public void prepDownload() throws Exception {
+	    File file = new File( jobApplicationProxy.getCv() );
+	    InputStream input = new FileInputStream(file);
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    setDownload(new DefaultStreamedContent(input, externalContext.getMimeType(file.getName()), file.getName()));
+	}
 	
+
+	public List<IJobApplicationProxy> listOfCandidateJobApplication(){
+		return jobApplicationFacade.listOfJobApplicationByUsername(loginBean.getUsername());
+	}
+	
+	public void editJobApplication() {
+		// TODO logger edit job application
+		System.out.println("\n---------------------");
+		System.out.println("Edit Job Application:");
+		System.out.println("---------------------");
+		System.out.println("Address: \t"+jobApplicationProxy.getAddress() );
+		System.out.println("Address: \t"+jobApplicationProxy.getCity() );
+		System.out.println("Address: \t"+jobApplicationProxy.getCountry() );
+		System.out.println("Address: \t"+jobApplicationProxy.getPhone() );
+		System.out.println("Address: \t"+jobApplicationProxy.getDiploma() );
+		System.out.println("Address: \t"+jobApplicationProxy.getSchool() );
+		System.out.println("Address: \t"+jobApplicationProxy.getLetter() );
+		System.out.println("Address: \t"+jobApplicationProxy.getCv() );
+		System.out.println("Address: \t"+jobApplicationProxy.getJobApplicationSource().getChanelName() );
+		System.out.println("\n2");
+	}
 }	
