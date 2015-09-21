@@ -15,31 +15,34 @@
 <h:body>
 	<h:form id="formJobApplicationTable">
 		<p:dataTable id="tableJobApplications" var="jobapplication"
-			value="#{CandidateBean.listOfCandidateOpenJobApplication()}">
+			value="#{candidateBean.listOfCandidateJobApplication()}">
 			<f:facet name="header">
 	            <H1>View Job Application</H1>
 	        </f:facet>
 			
 			<p:column headerText="Title">
-				<h:outputText value="#{jobapplication.position.title}" />
+				<h:outputText value="#{jobapplication.positionEntity.title}" />
 			</p:column>
 			<p:column headerText="Open Date">
-				<h:outputText value="#{jobapplication.position.openDate}" />
+				<h:outputText value="#{jobapplication.positionEntity.openDate}" />
 			</p:column>
 			<p:column headerText="Location">
-				<h:outputText value="#{jobapplication.position.stringLocalization}" />
+				<h:outputText value="#{jobapplication.positionEntity.stringLocalization}" />
 			</p:column>
 			<p:column headerText="Status">
-				<h:outputText value="#{jobapplication.position.status.description}" />
+				<h:outputText value="#{jobapplication.positionEntity.status.description}" />
 			</p:column>
 			<p:column headerText="Company">
-				<h:outputText value="#{jobapplication.position.company}" />
+				<h:outputText value="#{jobapplication.positionEntity.company}" />
 			</p:column>
 			<p:column headerText="Technical Area">
-				<h:outputText value="#{jobapplication.position.technicalArea.description}" />
+				<h:outputText value="#{jobapplication.positionEntity.technicalArea.description}" />
 			</p:column>
-		
-			
+			<p:column>
+				<h:outputText value="#{jobapplication.status}" />
+			</p:column>
+
+
 		</p:dataTable>
 	</h:form>
 

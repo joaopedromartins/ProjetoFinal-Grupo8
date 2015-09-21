@@ -36,13 +36,16 @@ public class CandidateBean implements Serializable {
 	}
 
 	//Getters e Setters
-
+	public List<IJobApplicationProxy> getListJobApplication() {
+		listOfCandidateJobApplication();
+		return listJobApplication;
+	}
 	
 	
 	
 	//methods
-	public List<IJobApplicationProxy> listOfCandidateOpenJobApplication(String username){
-		return this.listJobApplication=jobApplicationFacade.listOfJobApplicationByUsername(username);
+	public List<IJobApplicationProxy> listOfCandidateJobApplication(){
+		this.listJobApplication = jobApplicationFacade.listOfJobApplicationByUsername(loginBean.getUsername());
+		return this.listJobApplication;
 	}
-
 }	

@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -51,6 +52,7 @@ public class JobApplicationBean implements Serializable {
 	private String status;
 	
 	private IPositionProxy positionProxy;
+	
 	
 	/*private String uploadDirectory="/cv/";*/
 	
@@ -231,4 +233,5 @@ public class JobApplicationBean implements Serializable {
 		}
 	}
 
+	
 }	

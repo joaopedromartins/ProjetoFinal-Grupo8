@@ -21,16 +21,16 @@ import javax.persistence.Table;
 	@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
 				" where c.username like :login ") ,
-	@NamedQuery(name = "JobApplicattion.listOfAllJobApplicationToPositionCodeAndUsername", 
+	@NamedQuery(name = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
 				" inner join j.positionEntity p where c.username like :username and p.code like :code "),
 	@NamedQuery(name = "JobApplication.listOfAll", query = "SELECT jA FROM JobApplicationEntity jA "),
 })
 public class JobApplicationEntity {
 
-	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplicattion.listOfAllCandidateJobApplication";
-
-	public static final String LIST_OF_ALL_JOB_APPLICATION_TO_POSITION_CODE_AND_USERNAME = "JobApplicattion.listOfAllJobApplicationToPositionCodeAndUsername";
+	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplication.listOfAllCandidateJobApplication";
+	
+	public static final String LIST_OF_ALL_JOB_APPLICATION_TO_POSITION_CODE_AND_USERNAME = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername";
 
 	public static final String LIST_OF_ALL = "JobApplication.listOfAll";
 
