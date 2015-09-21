@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -70,16 +71,20 @@ public class ScriptBean implements Serializable{
 	}
 
 	public void setTitle(String title) {
+		
+
+		this.title = title;
+	}
+
+
+	public void verifyTitle() {
 		IScriptProxy proxy = facade.findTitleOfScript(title);
-		if (proxy == null){
+		if (proxy == null && !(("Untitled Script").equals(title))){
 			this.script.setScriptTitle(title);
-			this.title = title;
 		} else  {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "The tile of Script already exist. Change title.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-
-		this.title = title;
 	}
 
 	public boolean isAddQuestion() {
@@ -137,6 +142,7 @@ public class ScriptBean implements Serializable{
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Write title of Script.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
+
 			this.script.setScriptTitle(title);
 			if ( questionType == QuestionType.SCALE){
 				this.script = facade.addQuestionToScript(script, question, questionType,

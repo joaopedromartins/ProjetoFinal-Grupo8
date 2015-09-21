@@ -19,9 +19,9 @@
 			<p:inplace id="titleScript" editor="true">
 				<p:inputText value="#{scriptBean.title}" required="true"
 					label="text" />
+				<p:ajax event="save" listener="#{scriptBean.verifyTitle}"
+					update="@form" />
 			</p:inplace>
-
-
 
 			<p:dataTable id="orderListScript" var="question"
 				converter="omnifaces.ListConverter"
@@ -143,8 +143,8 @@
 			<h:form id="formAddQuestion" rendered="#{scriptBean.addQuestion}">
 				<p:panelGrid id="gridAddQuestion" columns="2">
 
-					<p:outputLabel value="Question:" />
-					<p:inputText value="#{scriptBean.question}" required="true" />
+					<p:outputLabel for="question" value="Question:" />
+					<p:inputText id="question" value="#{scriptBean.question}" required="true" />
 
 					<p:outputLabel value="Question:" />
 					<p:selectOneMenu value="#{scriptBean.questionType}"
