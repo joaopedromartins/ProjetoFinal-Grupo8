@@ -15,13 +15,11 @@
 			<h:outputText value="Add a Script" />
 			<br />
 
-			<h:outputLabel for="titleScript" value="Title:" />
-			<p:inplace id="titleScript" editor="true">
-				<p:inputText value="#{scriptBean.title}" required="true"
-					label="text" />
-				<p:ajax event="save" listener="#{scriptBean.verifyTitle}"
-					update=":formButtonAddQuestion:messageScript" />
-			</p:inplace>
+			<p:outputLabel for="titleScript" value="Title:" />
+			<p:inputText id="titleScript" value="#{scriptBean.title}"
+				required="true" valueChangeListener="#{scriptBean.verifyTitle}" />
+			<p:commandButton value="submit" action="#{scriptBean.verifyTitle}"
+				update=":formListQuestions:titleScript :formButtonAddQuestion:messageScript" />
 
 			<p:dataTable id="orderListScript" var="question"
 				converter="omnifaces.ListConverter"
@@ -139,12 +137,17 @@
 
 			</p:dataTable>
 		</h:form>
+		
+		
+		
+		
 		<h:panelGroup id="panelGroupQuestion">
 			<h:form id="formAddQuestion" rendered="#{scriptBean.addQuestion}">
 				<p:panelGrid id="gridAddQuestion" columns="2">
 
 					<p:outputLabel for="question" value="Question:" />
-					<p:inputText id="question" value="#{scriptBean.question}" required="true" />
+					<p:inputText id="question" value="#{scriptBean.question}"
+						required="true" />
 
 					<p:outputLabel value="Question:" />
 					<p:selectOneMenu value="#{scriptBean.questionType}"
@@ -205,7 +208,7 @@
 							</h:dataTable>
 							<p:spacer />
 
-							<h:panelGroup id="panelGroupInputText">
+							<h:panelGroup id="panelGroupMultiplechoice">
 								<h:selectOneRadio onclick="return false;" styleClass="radio">
 									<f:selectItem itemDisabled="true" />
 								</h:selectOneRadio>
@@ -214,8 +217,8 @@
 
 							<p:commandButton id="buttonOption1" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptions :formAddQuestion:panelGroupInputText:option1 " />
-							
+								update=":formAddQuestion:tableOptions  " />
+
 
 						</p:panelGrid>
 
@@ -246,8 +249,8 @@
 
 							<p:commandButton id="buttonOption2" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptionsCheckboxes :formAddQuestion:panelGroupcheckboxes:option2" />
-							
+								update=":formAddQuestion:tableOptionsCheckboxes " />
+
 
 						</p:panelGrid>
 
@@ -269,8 +272,8 @@
 
 							<p:commandButton id="buttonOption3" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptionsList :formAddQuestion:panelGroupList:option3" />
-							
+								update=":formAddQuestion:tableOptionsList " />
+
 
 						</p:panelGrid>
 
@@ -282,10 +285,10 @@
 					<p:spacer />
 					<p:commandButton id="saveQuestion" value="Done"
 						action="#{scriptBean.addQuestionToScript}" ajax="true"
-						update=":formListQuestions:orderListScript :formButtonAddQuestion:messageScript" />
+						update=":formListQuestions:orderListScript :formButtonAddQuestion:messageScript " />
 
 				</p:panelGrid>
-				
+
 			</h:form>
 
 		</h:panelGroup>

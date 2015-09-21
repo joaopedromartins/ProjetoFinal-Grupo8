@@ -79,13 +79,15 @@ public class ScriptBean implements Serializable{
 
 	public void verifyTitle() {
 		IScriptProxy proxy = facade.findTitleOfScript(title);
-		System.out.println("ja fui ao facade " + title);
 		if (proxy == null && !(("Untitled Script").equals(title))){
 			this.script.setScriptTitle(title);
-			System.out.println("guargei no script " + title);
 		} else  {
-			System.out.println("dou erro " + title);
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "The tile of Script already exist. Change title.", "");
+			if ( script.getScriptTitle() == null){
+				this.title = "Untitled Script"; 
+			} else {
+				this.title = script.getScriptTitle();
+			}
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "The title of Script already exist. Change title.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
@@ -141,22 +143,20 @@ public class ScriptBean implements Serializable{
 	}
 
 	public void addQuestionToScript (){
-		if(("Untitled Script").equals(title)){
+		if(("Untitled Script").equals(title)|| title == null){
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Write title of Script.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
-
-			this.script.setScriptTitle(title);
 			if ( questionType == QuestionType.SCALE){
 				this.script = facade.addQuestionToScript(script, question, questionType,
 						scale.getMin(), scale.getMax(), scale.getMinLabel(), scale.getMaxLabel());
-				this.addQuestion = false;
+			
 			} else if ( questionType == QuestionType.CHECKBOXES || questionType == QuestionType.MULTIPLECHOICE ||
 					questionType == QuestionType.CHOOSEFROMLIST){
 				if(options.getOptions().size() >= 2){
 					this.script = facade.addQuestionToScript(script, question, questionType, 
 							options.getOptions());
-					this.addQuestion = false;
+					
 				} else{
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add, at least, two options.", "");
 					FacesContext.getCurrentInstance().addMessage(null, message);
@@ -164,9 +164,8 @@ public class ScriptBean implements Serializable{
 
 			} else {
 				this.script = facade.addQuestionToScript(script, question, questionType);
-				this.addQuestion = false;
 			}
-
+			this.addQuestion = false;
 		}
 
 	}
