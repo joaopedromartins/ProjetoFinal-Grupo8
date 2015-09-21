@@ -79,4 +79,10 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		return proxy;
 	}
 
+	@Override
+	public IJobApplicationProxy findById(long id) {
+		JobApplicationEntity entity = em.find(JobApplicationEntity.class,id );
+		return new JobApplicationProxy(entity);
+	}
+
 }

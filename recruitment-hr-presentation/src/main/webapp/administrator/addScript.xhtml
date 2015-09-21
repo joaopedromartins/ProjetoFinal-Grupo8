@@ -15,20 +15,20 @@
 			<h:outputText value="Add a Script" />
 			<br />
 
-			<h:outputLabel for="titleScript" value="Title:" />
-			<p:inplace id="titleScript" editor="true">
-				<p:inputText value="#{scriptBean.title}" required="true"
-					label="text" />
-			</p:inplace>
-
-
+			<p:outputLabel for="titleScript" value="Title:" />
+			<p:inputText id="titleScript" value="#{scriptBean.title}"
+				required="true"  />
+			<p:commandButton value="submit" action="#{scriptBean.verifyTitle}"
+				update=":formListQuestions:titleScript :formButtonAddQuestion:messageScript" />
 
 			<p:dataTable id="orderListScript" var="question"
 				converter="omnifaces.ListConverter"
 				value="#{scriptBean.script.questions}" draggableRows="true"
-				itemValue="#{question}" styleClass="scriptTable" rowStyleClass="rowClasses">
-				
-				<p:ajax event="rowReorder" listener="#{scriptBean.onRowReorder}" update="formListQuestions:orderListScript" />
+				itemValue="#{question}" styleClass="scriptTable"
+				rowStyleClass="rowClasses">
+
+				<p:ajax event="rowReorder" listener="#{scriptBean.onRowReorder}"
+					update="formListQuestions:orderListScript" />
 
 
 				<!-- <f:facet name="caption">Questions</f:facet> -->
@@ -102,23 +102,23 @@
 						<h:panelGrid id="questionScale"
 							rendered="#{question.questiontype eq 'SCALE'}"
 							style=" text-align: left;" columns="3">
-							
-								<p:spacer />
-								<ui:repeat value="#{scriptBean.getScaleValues(question)}"
-									var="scale">
-									<span class="radioLabel">#{scale} </span>
-								</ui:repeat>
-								<p:spacer />
 
-								<h:outputLabel value="#{question.scale.minLabel}" />
-								<h:selectOneRadio styleClass="radioLine">
+							<p:spacer />
+							<ui:repeat value="#{scriptBean.getScaleValues(question)}"
+								var="scale">
+								<span class="radioLabel">#{scale} </span>
+							</ui:repeat>
+							<p:spacer />
 
-									<f:selectItems itemDisabled="true" itemLabel=""
-										value="#{scriptBean.getScaleValues(question)}" />
+							<h:outputLabel value="#{question.scale.minLabel}" />
+							<h:selectOneRadio styleClass="radioLine">
 
-								</h:selectOneRadio>
-								<h:outputLabel value="#{question.scale.maxLabel}" />
-							
+								<f:selectItems itemDisabled="true" itemLabel=""
+									value="#{scriptBean.getScaleValues(question)}" />
+
+							</h:selectOneRadio>
+							<h:outputLabel value="#{question.scale.maxLabel}" />
+
 						</h:panelGrid>
 
 						<h:panelGrid>
@@ -137,12 +137,17 @@
 
 			</p:dataTable>
 		</h:form>
+
+
+
+
 		<h:panelGroup id="panelGroupQuestion">
 			<h:form id="formAddQuestion" rendered="#{scriptBean.addQuestion}">
 				<p:panelGrid id="gridAddQuestion" columns="2">
 
-					<p:outputLabel value="Question:" />
-					<p:inputText value="#{scriptBean.question}" required="true" />
+					<p:outputLabel for="question" value="Question:" />
+					<p:inputText id="question" value="#{scriptBean.question}"
+						required="true" />
 
 					<p:outputLabel value="Question:" />
 					<p:selectOneMenu value="#{scriptBean.questionType}"
@@ -203,17 +208,20 @@
 							</h:dataTable>
 							<p:spacer />
 
-							<h:panelGroup id="panelGroupInputText">
+							<h:panelGroup id="panelGroupMultiplechoice">
 								<h:selectOneRadio onclick="return false;" styleClass="radio">
 									<f:selectItem itemDisabled="true" />
 								</h:selectOneRadio>
 								<p:inputText id="option1" value="#{questionChoiceBean.option}" />
 							</h:panelGroup>
 
+
+
 							<p:commandButton id="buttonOption1" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptions" />
-							<p:defaultCommand target="buttonOption1" />
+								process="@this :formAddQuestion:panelGroupMultiplechoice"
+								update=":formAddQuestion:tableOptions :formAddQuestion:panelGroupMultiplechoice " />
+
 
 						</p:panelGrid>
 
@@ -244,8 +252,9 @@
 
 							<p:commandButton id="buttonOption2" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptionsCheckboxes" />
-							<p:defaultCommand target="buttonOption2" />
+								process="@this :formAddQuestion:panelGroupcheckboxes"
+								update=":formAddQuestion:tableOptionsCheckboxes :formAddQuestion:panelGroupcheckboxes " />
+
 
 						</p:panelGrid>
 
@@ -253,22 +262,23 @@
 							rendered="#{scriptBean.questionType eq 'CHOOSEFROMLIST'}"
 							columns="2">
 
-							<h:dataTable id="tableOptionsList" var="option"
+							<h:dataTable id="tableOptionsList" var="options"
 								value="#{questionChoiceBean.options}">
 								<h:column>
-									<h:outputText value="#{option.option}" />
+									<h:outputText value="#{options.option}" />
 								</h:column>
 							</h:dataTable>
 							<p:spacer />
 
 							<h:panelGroup id="panelGroupList">
-								<p:inputText id="option3" value="#{questionChoiceBean.option}"/>
+								<p:inputText id="option3" value="#{questionChoiceBean.option}" />
 							</h:panelGroup>
 
 							<p:commandButton id="buttonOption3" value="Add option"
 								action="#{questionChoiceBean.addOptionToList()}"
-								update=":formAddQuestion:tableOptionsList" />
-							<p:defaultCommand target="buttonOption3" />
+								process="@this :formAddQuestion:panelGroupList"
+								update=":formAddQuestion:tableOptionsList :formAddQuestion:panelGroupList" />
+
 
 						</p:panelGrid>
 
@@ -280,17 +290,18 @@
 					<p:spacer />
 					<p:commandButton id="saveQuestion" value="Done"
 						action="#{scriptBean.addQuestionToScript}" ajax="true"
-						update=":formListQuestions:orderListScript :panelGroupQuestion messageScript" />
+						update=":formListQuestions:orderListScript :formButtonAddQuestion :panelGroupQuestion " />
 
 				</p:panelGrid>
-				<p:messages id="messageScript" />
+
 			</h:form>
 
 		</h:panelGroup>
 		<h:form id="formButtonAddQuestion">
-			<p:commandButton id="addQuestion" value="Add question"
+			<p:messages id="messageScript" />
+			<p:commandButton id="addQuestion" value="Add question" rendered="#{scriptBean.addQuestion eq 'false'}"
 				action="#{scriptBean.showPanelAddQuestion()}"
-				update=":panelGroupQuestion" />
+				update=":panelGroupQuestion @form" />
 
 		</h:form>
 

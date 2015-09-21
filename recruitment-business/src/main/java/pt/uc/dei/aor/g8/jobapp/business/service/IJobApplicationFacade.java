@@ -19,5 +19,9 @@ public interface IJobApplicationFacade {
 	public List <IJobApplicationProxy> listOfAll ();
 	
 	public List<IJobApplicationProxy> listOfJobApplicationByUsername(String username);
+
+	public IJobApplicationProxy findId (long id);
+	
+
 	
 }

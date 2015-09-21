@@ -95,4 +95,27 @@ public class ScripFacade implements IScriptFacade {
 		return service.updateScript(script);
 	}
 
+
+
+
+	@Override
+	public IScriptProxy findTitleOfScript(String scriptTitle) {
+		IScriptProxy script = service.findTitleOfScript(scriptTitle);
+		if (script != null){
+			return script;
+		}
+		return null;
+	}
+
+
+
+
+	@Override
+	public IScriptProxy deleteScript(IScriptProxy script) {
+		service.deleteScript(script);
+		return null;
+	}
+	
+	
+
 }

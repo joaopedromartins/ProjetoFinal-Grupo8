@@ -11,5 +11,9 @@ public interface IScriptPersistenceService {
 	public IScriptProxy saveScript(IScriptProxy newScript);
 	
 	public IScriptProxy updateScript(IScriptProxy updateScript);
+	
+	public IScriptProxy findTitleOfScript (String scriptTitle);
+	
+	public IScriptProxy deleteScript (IScriptProxy script);
 
 }

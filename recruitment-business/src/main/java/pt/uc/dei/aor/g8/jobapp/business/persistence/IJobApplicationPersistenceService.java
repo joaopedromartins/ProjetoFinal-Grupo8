@@ -16,4 +16,6 @@ public interface IJobApplicationPersistenceService {
 	
 	public List <IJobApplicationProxy> findAllJobApplication ();
 	
+	public IJobApplicationProxy findById (long id);
+	
 }

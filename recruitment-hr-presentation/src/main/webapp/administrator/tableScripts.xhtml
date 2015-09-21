@@ -27,6 +27,9 @@
 							target="#{scriptBean.script}" />
 
 					</p:commandButton>
+					<p:commandButton id="deleteQuestion" icon="ui-icon-trash"
+						process="@this" action="#{scriptBean.deleteScript(script)}"
+						update=":formTableScript:tableScripts" />
 				</p:column>
 			</p:dataTable>
 		</h:form>

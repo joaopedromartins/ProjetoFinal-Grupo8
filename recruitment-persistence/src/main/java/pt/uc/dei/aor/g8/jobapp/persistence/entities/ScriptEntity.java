@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -21,7 +22,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Script")
-@NamedQuery(name = "Script.listOfAllScripts", query = "SELECT s FROM ScriptEntity s")
+@NamedQueries({
+	@NamedQuery(name = "Script.listOfAllScripts", query = "SELECT s FROM ScriptEntity s"),
+	@NamedQuery(name = "Script.findTitle", query = "SELECT s FROM ScriptEntity s WHERE s.scriptTitle=:scriptTitle")
+})
 public class ScriptEntity implements Serializable{
 
 	/**
@@ -30,6 +34,7 @@ public class ScriptEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	public static final String LIST_OF_ALL_SCRIPTS = "Script.listOfAllScripts";
+	public static final String FIND_TITLE = "Script.findTitle";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -71,7 +76,7 @@ public class ScriptEntity implements Serializable{
 		question.setScript(this);
 		this.questions.add(question);
 	}
-	
+
 	public void addQuestionWithOrderToListQuestion (QuestionEntity question){
 		question.setScript(this);
 		this.questions.add(question);
@@ -89,13 +94,13 @@ public class ScriptEntity implements Serializable{
 			questionDelete.setScript(null);
 		}
 	}
-	
+
 	private QuestionEntity removeTheFirstOfSortedSet (){
 		QuestionEntity firstQuestion= questions.first();
 		questions.remove(firstQuestion);
 		return firstQuestion;
 	}
-	
+
 	public List <QuestionEntity> removeALLQuestion (){
 		List <QuestionEntity> questionList = new ArrayList<>();
 		while (questions.size() > 0){
