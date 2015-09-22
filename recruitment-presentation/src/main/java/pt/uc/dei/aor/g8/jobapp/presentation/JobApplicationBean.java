@@ -2,6 +2,7 @@ package pt.uc.dei.aor.g8.jobapp.presentation;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +62,6 @@ public class JobApplicationBean implements Serializable {
 	private DefaultStreamedContent download;
 	
 	private String uploadDirectory="./cv";
-	private String cvfilename;
 	
 	
 	//constructors
@@ -164,14 +164,7 @@ public class JobApplicationBean implements Serializable {
 	    this.download = download;
 	}
 
-	public String getCvfilename() {
-		//cvWithoutPath();
-		return cvfilename;
-	}
-	public void setCvfilename(String cvfilename) {
-		this.cvfilename = cvfilename;
-	}
-
+	
 	//methods
 	public String applyPosition() {
 		return "/pages/candidate/applyPosition?faces-redirect=true";
@@ -264,11 +257,18 @@ public class JobApplicationBean implements Serializable {
 	}
 		
 
-	public void prepDownload() throws Exception {
-	    File file = new File( jobApplicationProxy.getCv() );
-	    InputStream input = new FileInputStream(file);
-	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	    setDownload(new DefaultStreamedContent(input, externalContext.getMimeType(file.getName()), file.getName()));
+	public void prepDownload(){
+		try {
+			File file = new File( jobApplicationProxy.getCv() );
+		    InputStream input;
+			input = new FileInputStream(file);
+		    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		    setDownload(new DefaultStreamedContent(input, externalContext.getMimeType(file.getName()), file.getName()));
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -295,20 +295,5 @@ public class JobApplicationBean implements Serializable {
 		}
 	}
 	
-	public void cvWithoutPath() {
-		int beginIndex = uploadDirectory.length();
-		int endIndex;
-		if (jobApplicationProxy==null) {
-			endIndex = beginIndex;
-		} else {
-			endIndex = jobApplicationProxy.getCv().length();
-		}
-		if (endIndex <= beginIndex) {
-			this.cvfilename = "";
-		} else {
-			this.cvfilename = "" + jobApplicationProxy.getCv().substring(beginIndex, endIndex);
-			// TODO logger
-			System.out.println("cv: " + this.cvfilename);
-		}
-	}
+	
 }	

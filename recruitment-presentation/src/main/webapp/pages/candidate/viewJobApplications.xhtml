@@ -200,12 +200,12 @@
 					
 					
 					<h:outputText value="View CV:" />
-					<h:outputText value="#{jobApplicationBean.cvfilename}" />
-		            <h:form>
-			            <p:commandButton id="downloadLink" value="Download CV" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
-							<p:fileDownload value="#{jobApplicationBean.download}" />
-						</p:commandButton>
-					</h:form>
+					<h:outputText id="cvedit" value="#{jobApplicationBean.jobApplicationProxy.cv}" />
+		            
+		            <p:commandButton id="editdownloadLink" value="Download CV" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
+						<p:fileDownload value="#{jobApplicationBean.download}" />
+					</p:commandButton>
+					
 					
 					<p:outputLabel value="Change CV:" /> 
 					<p:fileUpload id="upload" 
@@ -222,8 +222,8 @@
 						requiredMessage="CV upload required" />
 					<p:message for="upload" />
 					
-					<h:outputText value="Note:" />
-					<h:outputText value="To change CV, you must upload file with diferent filename." />
+					<!-- SPACE -->
+					<h:outputText value="Note: To change CV, you must upload file with diferent filename." />
 					<!-- SPACE -->
 					
 					<p:outputLabel value="Source :" for="source" />
@@ -241,7 +241,8 @@
 
 					<p:commandButton value="Update"
 						action="#{jobApplicationBean.editJobApplication()}"
-						update=":formJobApplicationTable:tableJobApplications growl" />
+						update=":formJobApplicationTable:tableJobApplications 
+								formJobApplicationEdit:cvedit growl" />
 
 				</p:panelGrid>
 			</p:outputPanel>
