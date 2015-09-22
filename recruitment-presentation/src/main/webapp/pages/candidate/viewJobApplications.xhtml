@@ -164,38 +164,52 @@
 				
 				<p:panelGrid columns="3" id="jobApplicationEditPanelGrid">
 					<p:outputLabel value="Address :" for="address" />
-					<p:inputText id="address" value="#{jobApplicationBean.jobApplicationProxy.address}"
-						required="true" />
+					<p:inplace>
+						<p:inputText id="address" value="#{jobApplicationBean.jobApplicationProxy.address}"
+							required="true" />
+					</p:inplace>
 					<p:message for="address" />
 
 					<p:outputLabel value="City :" for="city" />
-					<p:inputText id="city" value="#{jobApplicationBean.jobApplicationProxy.city}"
-						required="true" />
+					<p:inplace>
+						<p:inputText id="city" value="#{jobApplicationBean.jobApplicationProxy.city}"
+							required="true" />
+					</p:inplace>
 					<p:message for="city" />
 
 					<p:outputLabel value="Country :" for="country" />
-					<p:inputText id="country" value="#{jobApplicationBean.jobApplicationProxy.country}"
-						required="true" />
+					<p:inplace>
+						<p:inputText id="country" value="#{jobApplicationBean.jobApplicationProxy.country}"
+							required="true" />
+					</p:inplace>
 					<p:message for="country" />
 
 					<p:outputLabel value="Phone :" for="phone" />
+					<p:inplace>
 					<p:inputText id="phone" value="#{jobApplicationBean.jobApplicationProxy.phone}"
 						required="false" />
+					</p:inplace>
 					<p:message for="phone" />
 
 					<p:outputLabel value="Diploma :" for="diploma" />
+					<p:inplace>
 					<p:inputText id="diploma" value="#{jobApplicationBean.jobApplicationProxy.diploma}"
 						required="true" />
+					</p:inplace>
 					<p:message for="diploma" />
 
 					<p:outputLabel value="School :" for="school" />
+					<p:inplace>
 					<p:inputText id="school" value="#{jobApplicationBean.jobApplicationProxy.school}"
 						required="true" />
+					</p:inplace>
 					<p:message for="school" />
 
 					<p:outputLabel value="Letter :" for="letter" />
-					<h:inputTextarea id="letter" value="#{jobApplicationBean.jobApplicationProxy.letter}"
-						required="true" />
+					<p:inplace>
+						<p:inputTextarea id="letter" value="#{jobApplicationBean.jobApplicationProxy.letter}"
+							required="true" />
+					</p:inplace>
 					<p:message for="letter" />
 					
 					<p:outputLabel value="Source :" for="source" />

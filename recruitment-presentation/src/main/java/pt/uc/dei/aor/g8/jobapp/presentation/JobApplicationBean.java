@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -232,7 +234,8 @@ public class JobApplicationBean implements Serializable {
 	
 	public void copyFile(String fileName, InputStream in) {
 		try {
-			String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_";
+			String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+			String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_" + timeStamp + "_";
 			// write the inputStream to a FileOutputStream
 			OutputStream out = new FileOutputStream(new File(uploadDirectory , filePrefix + fileName));
 			
@@ -292,6 +295,8 @@ public class JobApplicationBean implements Serializable {
 			System.out.println("CV: \t"+jobApplicationProxy.getCv() );
 			System.out.println("Source: \t"+jobApplicationProxy.getSource() );
 			System.out.println("\n");
+			
+			jobApplicationFacade.editJobApplication(jobApplicationProxy);
 		}
 	}
 	
