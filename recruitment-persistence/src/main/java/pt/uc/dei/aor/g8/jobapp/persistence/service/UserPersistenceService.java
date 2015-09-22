@@ -96,4 +96,11 @@ public class UserPersistenceService implements IUserPersistenceService {
 		return proxy;
 	}
 
+	@Override
+	public IUserProxy editUser(IUserProxy currentUser) {
+		UserEntity entity = getEntity(currentUser);
+		entity = em.merge(entity);
+		return new UserProxy(entity);
+	}
+
 }

@@ -50,3 +50,9 @@ tbody {
 .rowClasses {
 	background-color: white;
 }
+
+.ui-datatable table {
+    border-collapse: collapse;
+    width: 70%;
+    table-layout: auto;
+}

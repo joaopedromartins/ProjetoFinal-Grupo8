@@ -5,43 +5,53 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table (name="Answer")
-public class AnswerInterview {
+public class AnswerInterviewEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@OneToOne
-	private QuestionEntity question;
+	@Column
+	private String question;
+	
+	@Column
+	private String questionType;
 	
 	@Column
 	private String answer;
+	
 
 	
-	
-	
-	public AnswerInterview() {
+	public AnswerInterviewEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AnswerInterview(QuestionEntity question, String answer) {
+	public AnswerInterviewEntity(String question, String answer) {
 		super();
 		this.question = question;
 		this.answer = answer;
 	}
 
-	public QuestionEntity getQuestion() {
+	
+	public String getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(QuestionEntity question) {
+	public void setQuestion(String question) {
 		this.question = question;
+	}
+	
+	public String getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
 	}
 
 	public String getAnswer() {

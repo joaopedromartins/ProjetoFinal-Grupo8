@@ -54,7 +54,7 @@ public class UserBean implements Serializable {
 			this.isLogged = false;
 			request.logout();
 			request.getSession().invalidate();
-			
+
 		} catch (ServletException e) {
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Logout Failed", "");
@@ -80,6 +80,7 @@ public class UserBean implements Serializable {
 		this.username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
 		if ( username != null ){
 			this.currentUser = findUserByUsername();
+			this.email = currentUser.getEmail();
 			this.isLogged = true;
 			int numeroRoles=currentUser.getRoles().size();
 			String page;
@@ -104,6 +105,7 @@ public class UserBean implements Serializable {
 			if ( username != null ){
 				this.isLogged = true;
 				this.currentUser = findUserByUsername();
+				this.email = currentUser.getEmail();
 				return currentUser;
 			}else {
 				logout();
@@ -111,7 +113,7 @@ public class UserBean implements Serializable {
 			}
 		} else {
 			return this.currentUser;
-			
+
 		}
 	}
 
@@ -184,20 +186,83 @@ public class UserBean implements Serializable {
 	}
 
 
-	/*	
 
-	// editar informacao
-	public void editar() {
-		try {
-			userInterface.update(current);
+	public void editUser() {
+		String newEmail = currentUser.getEmail();
+		String newUsername = currentUser.getUsername();
+
+		if ( username.equals(newUsername) && email.equals(newEmail)){
+			userFacade.updateUser(currentUser);
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"User info updated successfully.", "");
+					"User updated successfully.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
-		} catch (Exception e) {
+			return;
+		} else if ( !username.equals(newUsername) && email.equals(newEmail)){
+			if(userFacade.findUserByUsername(newUsername) == null){
+				userFacade.updateUser(currentUser);
+				this.username = currentUser.getUsername();
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"User updated successfully.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return;
+			} else {
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Username already exist!!", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return;
+			}
+		} else if (username.equals(newUsername) && !email.equals(newEmail)){
+			if(userFacade.findUserByEmail(newEmail) == null){
+				userFacade.updateUser(currentUser);
+				this.email = currentUser.getEmail();
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"User info updated successfully.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return;
+			} else {
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Email already exist!!", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return;
+			}
+		} else if (!username.equals(newUsername) && !email.equals(newEmail)){
+			IUserProxy userEmail = userFacade.findUserByEmail(newEmail);
+			IUserProxy userUsername = userFacade.findUserByUsername(newUsername);
+			if(userEmail == null && userUsername == null ){
+				userFacade.updateUser(currentUser);
+				this.email = currentUser.getEmail();
+				this.username = currentUser.getUsername();
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"User updated successfully.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return;
 
+			}else if (userEmail != null && userUsername == null){
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Username already exist!!", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return;
+			}else if (userEmail == null && userUsername != null){
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Email already exist!!", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return;
+
+			} else {
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Email and Username already exists!!", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return;
+			}
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Error on upadate profile!!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			return;
 		}
-	}
 
+	}
+	/*
 	public void editarPass() {
 		try {
 			current.setPassword(password);

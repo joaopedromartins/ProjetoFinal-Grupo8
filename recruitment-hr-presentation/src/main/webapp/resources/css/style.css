@@ -1,12 +1,48 @@
 @CHARSET "ISO-8859-1";
 
+.ui-menu, .ui-menu .ui-menu-child {
+	background: white;
+	background: white;
+}
+
+.ui-menubar .ui-menuitem-link {
+	margin: 5px;
+}
+
+.ui-helper-clearfix:after {
+	content: none;
+}
 
 .ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {
- border: 0px solid rgba(0,0,0,0);   
+	border: 0px solid rgba(0, 0, 0, 0);
 }
 
-.radio, .checkbox{
+.radio, .checkbox {
 	display: inline-block;
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
+header {
+	padding: 5px 0px;
+	margin-bottom: 6px;
+	background-color: silver;
+	color: #fff;
+	box-shadow: 5px 5px 5px #ccc;
+}
+
+#login {
+	text-align: center;
+}
+
+.grid-login {
+	background-color: #f2f2f2;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	margin:auto;
+	padding: 10px;
+	margin-top: 200px;
+}
+
+.ui-menuitem ui-menubar-options ui-widget ui-corner-all{
+	padding-top: 2.5px
+}

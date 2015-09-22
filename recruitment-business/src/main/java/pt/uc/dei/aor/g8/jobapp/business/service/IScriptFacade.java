@@ -24,5 +24,9 @@ public interface IScriptFacade {
 	public IScriptProxy deleteQuestion (IScriptProxy script, IQuestionProxy question);
 
 	public IScriptProxy changeOrderOfQuestion(IScriptProxy script, int fromRow, int toRow);
+	
+	public IScriptProxy findTitleOfScript (String scriptTitle);
+
+	public IScriptProxy deleteScript(IScriptProxy script);
 
 }

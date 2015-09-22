@@ -30,7 +30,7 @@ public class ScriptPersistenceService implements IScriptPersistenceService {
 		TypedQuery<ScriptEntity> query = em.createNamedQuery(ScriptEntity.LIST_OF_ALL_SCRIPTS,
 				ScriptEntity.class);
 		List <ScriptEntity> entity = query.getResultList();
-		
+
 		List <IScriptProxy> proxy = new ArrayList<>();
 		for (ScriptEntity s: entity){
 			proxy.add(new ScriptProxy(s));
@@ -44,7 +44,7 @@ public class ScriptPersistenceService implements IScriptPersistenceService {
 		em.persist(entity);
 		return new ScriptProxy(entity);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private ScriptEntity getEntity(IScriptProxy scriptProxy) {
 		if (scriptProxy instanceof IEntityAware<?>) {
@@ -59,7 +59,31 @@ public class ScriptPersistenceService implements IScriptPersistenceService {
 		entity = em.merge(entity);
 		return new ScriptProxy(entity);
 	}
-	
-	
-		
+
+	@Override
+	public IScriptProxy findTitleOfScript(String scriptTitle) {
+		TypedQuery<ScriptEntity> query = em.createNamedQuery(ScriptEntity.FIND_TITLE,
+				ScriptEntity.class); 
+		query.setParameter("scriptTitle",scriptTitle);
+		List <ScriptEntity> entityScript = query.getResultList();
+
+		IScriptProxy proxyScript;
+		if( entityScript.size() == 1){
+			proxyScript = new ScriptProxy(entityScript.get(0));
+		} else {
+			proxyScript=null;
+		}
+		return proxyScript;
+	}
+
+	@Override
+	public IScriptProxy deleteScript(IScriptProxy script) {
+		ScriptEntity entity = getEntity(script);
+		entity = em.merge(entity);
+		em.remove(entity);	
+		return new ScriptProxy(entity);
+	}
+
+
+
 }

@@ -201,5 +201,10 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	public String toString() {
 		return entity.toString();
 	}
+
+	@Override
+	public long getId() {
+		return entity.getId();
+	}
 	
 }

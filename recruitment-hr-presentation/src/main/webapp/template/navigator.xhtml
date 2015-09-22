@@ -33,12 +33,16 @@
 					outcome="/administrator/scheduleInterview" icon="ui-icon-plus" />
 				<p:menuitem value="Edit Interview"
 					outcome="/administrator/editInterview" icon="ui-icon-pencil" />
-
 			</p:submenu>
-			<p:submenu label="Candidate">
+			<p:submenu label="Candidates">
+				<p:menuitem value="Candidates"
+					outcome="/administrator/tableCandidates" icon="ui-icon-search" />
+			</p:submenu>
+			<p:submenu label="Job Applications">
 				<p:menuitem value="Job Applications"
-					outcome="/administrator/tableJobApplication" icon="ui-icon-plus" />
+					outcome="/administrator/tableJobApplications" icon="ui-icon-search" />
 			</p:submenu>
+			
 			<p:submenu label="Notifications">
 				<p:menuitem value="View notifications"
 					outcome="/administrator/notifications" icon="ui-icon-search" />

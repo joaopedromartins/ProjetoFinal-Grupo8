@@ -1,0 +1,52 @@
+<ui:composition template="/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="style.css" />
+	</ui:define>
+
+	<ui:define name="content">
+		<h:outputText value="" />
+		<br />
+		<h:outputText value="Edit profile" />
+
+		<h:form id="formEditProfile">
+
+			<p:panelGrid id="gridEditUser" columns="3">
+				<p:outputLabel value="First Name:" for="firstname" />
+				<p:inputText id="firstname"
+					value="#{userBean.currentUser.firstname}" required="true" />
+				<p:message for="firstname" />
+
+				<p:outputLabel value="Last name:" for="lastname" />
+				<p:inputText id="lastname" value="#{userBean.currentUser.lastname}"
+					required="true" />
+				<p:message for="lastname" />
+
+				<p:outputLabel value="Username:" for="username" />
+				<p:inputText id="username" value="#{userBean.currentUser.username}"
+					required="true" />
+				<p:message for="username" />
+
+				<p:outputLabel value="Email:" for="email" />
+				<p:inputText id="email" value="#{userBean.currentUser.email}"
+					required="true">
+					<f:validator validatorId="emailValidator" />
+				</p:inputText>
+				<p:message for="email" />
+
+
+			</p:panelGrid>
+			<p:growl id="growl" />
+			<p:commandButton value="Save Update" action="#{userBean.editUser}"
+				update="gridEditUser growl" />
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>	

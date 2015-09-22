@@ -93,6 +93,15 @@ public class UserFacade implements IUserFacade {
 	}
 	
 	@Override
+	public IUserProxy findUserByEmail(String email) {
+		IUserProxy user = service.findUserByEmail(email);
+		if(user != null){
+			return user;
+		}
+		return null;
+	}
+	
+	@Override
 	public List<IUserProxy> findManagers() {
 		List <IUserProxy> managers = service.findManagers();
 		if (managers != null){
@@ -131,6 +140,15 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
+
+	@Override
+	public IUserProxy updateUser(IUserProxy currentUser) {
+
+		return service.editUser(currentUser);
+
+	}
+
+	
 
 	
 	

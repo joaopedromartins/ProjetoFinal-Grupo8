@@ -36,7 +36,7 @@ public class ScriptBean implements Serializable{
 
 	private IScriptProxy   script;
 
-	private boolean addQuestion=false; 
+	private boolean addQuestion = false; 
 
 	private String question;
 	private QuestionType questionType =QuestionType.TEXT;
@@ -70,7 +70,26 @@ public class ScriptBean implements Serializable{
 	}
 
 	public void setTitle(String title) {
+		
+
 		this.title = title;
+	}
+
+
+	public void verifyTitle() {
+		IScriptProxy proxy = facade.findTitleOfScript(title);
+		System.out.println(title);
+		if (proxy == null && !(("Untitled Script").equals(title))){
+			this.script.setScriptTitle(title);
+		} else  {
+			if ( script.getScriptTitle() == null){
+				this.title = "Untitled Script"; 
+			} else {
+				this.title = script.getScriptTitle();
+			}
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "The title of Script already exist. Change title.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
 	}
 
 	public boolean isAddQuestion() {
@@ -111,7 +130,7 @@ public class ScriptBean implements Serializable{
 
 
 	public IScriptProxy getScript() {
-		if ( script != null){
+		if ( script != null ){
 			return script;
 		} else {
 			this.script=facade.initialNewScript();
@@ -124,23 +143,35 @@ public class ScriptBean implements Serializable{
 	}
 
 	public void addQuestionToScript (){
-		if(("Untitled Script").equals(title)){
+		if(("Untitled Script").equals(title)|| title == null){
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Write title of Script.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
-			this.script.setScriptTitle(title);
 			if ( questionType == QuestionType.SCALE){
 				this.script = facade.addQuestionToScript(script, question, questionType,
 						scale.getMin(), scale.getMax(), scale.getMinLabel(), scale.getMaxLabel());
+				this.addQuestion = false;
+				this.question = "";
+			
 			} else if ( questionType == QuestionType.CHECKBOXES || questionType == QuestionType.MULTIPLECHOICE ||
-					questionType == QuestionType.CHOOSEFROMLIST){		
-				this.script = facade.addQuestionToScript(script, question, questionType, 
-						options.getOptions());
+					questionType == QuestionType.CHOOSEFROMLIST){
+				if(options.getOptions().size() >= 2){
+					this.script = facade.addQuestionToScript(script, question, questionType, 
+							options.getOptions());
+					this.addQuestion = false;
+					this.question = "";
+					
+				} else{
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Add, at least, two options.", "");
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				}
+
 			} else {
 				this.script = facade.addQuestionToScript(script, question, questionType);
+				this.addQuestion = false;
+				this.question = "";
 			}
-
-			this.addQuestion = false;
+			
 		}
 
 	}
@@ -163,13 +194,21 @@ public class ScriptBean implements Serializable{
 		System.out.println(questionDelete.getOrderNumber());
 		this.script = facade.deleteQuestion(this.script, questionDelete);
 	}
-	
+
 	public void onRowReorder(ReorderEvent event) {
 		int fromRow = event.getFromIndex() + 1;
 		int toRow  = event.getToIndex() + 1;
-		
+
 		this.script = facade.changeOrderOfQuestion (this.script, fromRow, toRow);
-        
+
+	}
+	
+	public void deleteScript (IScriptProxy script){
+		if (script == null){
+			System.out.println("nao selecionou o script");
+		} else {
+			facade.deleteScript (script);
+		}
 	}
 
 }
