@@ -4,8 +4,6 @@
 	width: 27px;
 	display: inline-block;
 	text-align: center;
-	right: 80px;
-	border-style: none
 }
 
 .radioLine>tbody>tr>td {
@@ -51,4 +49,10 @@ tbody {
 
 .rowClasses {
 	background-color: white;
+}
+
+.ui-datatable table {
+    border-collapse: collapse;
+    width: 70%;
+    table-layout: auto;
 }

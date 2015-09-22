@@ -93,6 +93,15 @@ public class UserFacade implements IUserFacade {
 	}
 	
 	@Override
+	public IUserProxy findUserByEmail(String email) {
+		IUserProxy user = service.findUserByEmail(email);
+		if(user != null){
+			return user;
+		}
+		return null;
+	}
+	
+	@Override
 	public List<IUserProxy> findManagers() {
 		List <IUserProxy> managers = service.findManagers();
 		if (managers != null){
@@ -133,24 +142,13 @@ public class UserFacade implements IUserFacade {
 	}
 
 	@Override
-	public String updateUser(IUserProxy currentUser) {
-		
-		IUserProxy userUsername = service.findUserByUsername(currentUser.getUsername());
-		IUserProxy userEmail = service.findUserByEmail(currentUser.getEmail());
+	public IUserProxy updateUser(IUserProxy currentUser) {
 
-		if ( userUsername == null && userEmail == null ){
-			service.editUser(currentUser);
-			return "User, " + currentUser.getFullName() + ", updated successfully.";  
-		} else if (userUsername == null && userEmail != null ){
-			return "Email already exists!!";
-		} else if (userUsername != null && userEmail == null ){
-			return "Username already exists!!";
-		} else if (userUsername != null && userEmail != null){
-			return "Username and email already exists!!";
-		}
-		return null;
+		return service.editUser(currentUser);
 
 	}
+
+	
 
 	
 	

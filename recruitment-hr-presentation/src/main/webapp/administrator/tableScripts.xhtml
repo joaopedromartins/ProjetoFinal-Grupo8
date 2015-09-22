@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="stylesheet">
-		<h:outputStylesheet library="css" name="style.css" />
+		<h:outputStylesheet library="css" name="script.css" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -25,7 +25,7 @@
 				</p:column>
 				<p:column style="width:88px;text-align: center">
 					<p:commandButton
-						update=":formTableScript:tableScripts :scriptDetail"
+						update=":formTableScript:tableScripts :scriptDetailPanelGrid"
 						oncomplete="PF('scriptView').show()" icon="ui-icon-search"
 						title="View">
 						<f:setPropertyActionListener value="#{script}"
@@ -38,114 +38,110 @@
 				</p:column>
 			</p:dataTable>
 		</h:form>
-		<p:dialog header="Script" widgetVar="scriptView" modal="true"
+		<p:dialog header="Script" widgetVar="scriptView" minimizable="true" maximizable="true"
 			showEffect="fade" hideEffect="fade" resizable="false">
-			<p:outputPanel id="scriptDetail" style="text-align:center;">
 
-				<p:dataTable id="scriptDetailPanelGrid" var="question"
-					converter="omnifaces.ListConverter"
-					value="#{scriptBean.script.questions}" styleClass="scriptTable"
-					rowStyleClass="rowClasses">
+			<p:dataTable id="scriptDetailPanelGrid" var="question"
+				converter="omnifaces.ListConverter" scrollable="true" scrollHeight="400"
+				value="#{scriptBean.script.questions}" styleClass="scriptTable"
+				rowStyleClass="rowClasses">
 
-					<f:facet name="header" style="width:80%;">#{scriptBean.script.scriptTitle}</f:facet>
+				<f:facet name="header" style="width:70%;">#{scriptBean.script.scriptTitle}</f:facet>
 
-					<p:column style="width:5%">
-						<h:outputText value="#{question.orderNumber}" />
-					</p:column>
+				<p:column style="width:5%">
+					<h:outputText value="#{question.orderNumber}" />
+				</p:column>
 
-					<p:column style="width:95%">
-						<h:outputText value="#{question.question}" />
-						<br />
-						<h:outputText value="#{question.questiontype}" />
-						<br />
-						<h:panelGroup id="typeOfQuestion">
+				<p:column style="width:95%">
+					<h:outputText value="#{question.question}" />
+					<h:panelGroup id="typeOfQuestion">
 
-							<h:panelGrid id="questionText"
-								rendered="#{question.questiontype eq 'TEXT'}" columns="1">
-								<p:inputText disabled="true" />
-							</h:panelGrid>
+						<h:panelGrid id="questionText"
+							rendered="#{question.questiontype eq 'TEXT'}" columns="1">
+							<p:inputText disabled="true" />
+						</h:panelGrid>
 
-							<h:panelGrid id="questionParagraph"
-								rendered="#{question.questiontype eq 'PARAGRAPH'}" columns="1">
-								<p:inputTextarea disabled="true" />
-							</h:panelGrid>
+						<h:panelGrid id="questionParagraph"
+							rendered="#{question.questiontype eq 'PARAGRAPH'}" columns="1">
+							<p:inputTextarea disabled="true" />
+						</h:panelGrid>
 
-							<h:panelGrid id="questionMultiplechoice"
-								rendered="#{question.questiontype eq 'MULTIPLECHOICE'}"
-								columns="1">
-								<h:dataTable id="MultichoiseOptions" var="option"
-									value="#{question.options}">
-									<p:column>
-										<h:selectOneRadio onclick="return false;" styleClass="radio">
-											<f:selectItem itemDisabled="true" />
-										</h:selectOneRadio>
-									</p:column>
-									<p:column>
-										<h:outputText value="#{option.option}" />
-									</p:column>
-								</h:dataTable>
-							</h:panelGrid>
+						<h:panelGrid id="questionMultiplechoice"
+							rendered="#{question.questiontype eq 'MULTIPLECHOICE'}"
+							columns="1">
+							<h:dataTable id="MultichoiseOptions" var="option"
+								value="#{question.options}">
+								<p:column>
+									<h:selectOneRadio onclick="return false;" styleClass="radio">
+										<f:selectItem itemDisabled="true" />
+									</h:selectOneRadio>
+								</p:column>
+								<p:column>
+									<h:outputText value="#{option.option}" />
+								</p:column>
+							</h:dataTable>
+						</h:panelGrid>
 
-							<h:panelGrid id="questionCheckboxes"
-								rendered="#{question.questiontype eq 'CHECKBOXES'}" columns="2">
+						<h:panelGrid id="questionCheckboxes"
+							rendered="#{question.questiontype eq 'CHECKBOXES'}" columns="2">
 
-								<h:dataTable id="optionsCheckboxes" var="option"
-									value="#{question.options}">
-									<p:column>
-										<h:selectManyCheckbox styleClass="checkbox">
-											<f:selectItem itemDisabled="true" itemValue="false"
-												itemLabel="" />
-										</h:selectManyCheckbox>
-									</p:column>
-									<p:column>
-										<h:outputText value="#{option.option}" />
-									</p:column>
-								</h:dataTable>
-							</h:panelGrid>
+							<h:dataTable id="optionsCheckboxes" var="option"
+								value="#{question.options}">
+								<p:column>
+									<h:selectManyCheckbox styleClass="checkbox">
+										<f:selectItem itemDisabled="true" itemValue="false"
+											itemLabel="" />
+									</h:selectManyCheckbox>
+								</p:column>
+								<p:column>
+									<h:outputText value="#{option.option}" />
+								</p:column>
+							</h:dataTable>
+						</h:panelGrid>
 
-							<h:panelGrid id="questionChooseFromList"
-								rendered="#{question.questiontype eq 'CHOOSEFROMLIST'}"
-								columns="1">
+						<h:panelGrid id="questionChooseFromList"
+							rendered="#{question.questiontype eq 'CHOOSEFROMLIST'}"
+							columns="1">
 
-								<h:dataTable id="optionsList" var="option"
-									value="#{question.options}">
-									<h:column>
-										<h:outputText value="#{option.option}" />
-									</h:column>
-								</h:dataTable>
-							</h:panelGrid>
+							<h:dataTable id="optionsList" var="option"
+								value="#{question.options}">
+								<h:column>
+									<h:outputText value="#{option.option}" />
+								</h:column>
+							</h:dataTable>
+						</h:panelGrid>
 
-							<h:panelGrid id="questionScale"
-								rendered="#{question.questiontype eq 'SCALE'}"
-								style=" text-align: left;" columns="3">
+						<h:panelGrid id="questionScale"
+							rendered="#{question.questiontype eq 'SCALE'}"
+							style=" text-align: left;" columns="3">
 
-								<p:spacer />
-								<ui:repeat value="#{scriptBean.getScaleValues(question)}"
-									var="scale">
-									<span class="radioLabel">#{scale} </span>
-								</ui:repeat>
-								<p:spacer />
+							<p:spacer />
+							<ui:repeat value="#{scriptBean.getScaleValues(question)}"
+								var="scale">
+								<span class="radioLabel">#{scale} </span>
+							</ui:repeat>
+							<p:spacer />
 
-								<h:outputLabel value="#{question.scale.minLabel}" />
-								<h:selectOneRadio styleClass="radioLine">
+							<h:outputLabel value="#{question.scale.minLabel}" />
+							<h:selectOneRadio styleClass="radioLine">
 
-									<f:selectItems itemDisabled="true" itemLabel=""
-										value="#{scriptBean.getScaleValues(question)}" />
+								<f:selectItems itemDisabled="true" itemLabel=""
+									value="#{scriptBean.getScaleValues(question)}" />
 
-								</h:selectOneRadio>
-								<h:outputLabel value="#{question.scale.maxLabel}" />
+							</h:selectOneRadio>
+							<h:outputLabel value="#{question.scale.maxLabel}" />
 
-							</h:panelGrid>
+						</h:panelGrid>
 
-							<h:panelGrid>
-							</h:panelGrid>
+						<h:panelGrid>
+						</h:panelGrid>
 
-						</h:panelGroup>
+					</h:panelGroup>
 
-					</p:column>
+				</p:column>
 
-				</p:dataTable>
-			</p:outputPanel>
+			</p:dataTable>
+
 		</p:dialog>
 	</ui:define>
 
