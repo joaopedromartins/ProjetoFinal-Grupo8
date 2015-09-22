@@ -290,7 +290,7 @@ public class JobApplicationBean implements Serializable {
 			System.out.println("School: \t"+jobApplicationProxy.getSchool() );
 			System.out.println("Letter: \t"+jobApplicationProxy.getLetter() );
 			System.out.println("CV: \t"+jobApplicationProxy.getCv() );
-			// TODO Null pointer exception System.out.println("Source: \t"+jobApplicationProxy.getJobApplicationSource().getChanelName() );
+			System.out.println("Source: \t"+jobApplicationProxy.getSource() );
 			System.out.println("\n");
 		}
 	}

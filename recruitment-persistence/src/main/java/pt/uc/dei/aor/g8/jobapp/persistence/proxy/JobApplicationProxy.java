@@ -131,14 +131,12 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	
 
 	@Override
-	public IJobAdvertisingChanelProxy getJobApplicationSource() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getSource() {
+		return entity.getJobPositionSource();
 	}
 	@Override
-	public void setJobApplicationSource(IJobAdvertisingChanelProxy jobApplicationSource) {
-		// TODO Auto-generated method stub
-		
+	public void setSource(String source) {
+		entity.setJobPositionSource(source);
 	}
 
 	@Override

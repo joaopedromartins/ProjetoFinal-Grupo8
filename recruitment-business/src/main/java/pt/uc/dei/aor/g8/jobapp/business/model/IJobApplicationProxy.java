@@ -34,8 +34,8 @@ public interface IJobApplicationProxy {
 	public String getCv() ;
 	public void setCv(String cv);
 	
-	public IJobAdvertisingChanelProxy getJobApplicationSource();
-	public void setJobApplicationSource(IJobAdvertisingChanelProxy jobApplicationSource);
+	public String getSource() ;
+	public void setSource(String source);
 	
 	public String getStatus();
 	public void setStatus(String status);

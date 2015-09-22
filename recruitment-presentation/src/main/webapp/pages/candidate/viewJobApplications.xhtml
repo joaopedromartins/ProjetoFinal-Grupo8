@@ -146,7 +146,7 @@
 					</h:form>
 		            
 					<h:outputText value="Source:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.jobApplicationSource.chanelName}" />
+					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.source}" />
 
 					<h:outputText value="Job Application Status:" />
 					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.status}" />
@@ -199,19 +199,19 @@
 					<p:message for="letter" />
 					
 					<p:outputLabel value="Source :" for="source" />
-					<p:selectOneMenu id="source" value="#{jobApplicationBean.jobApplicationProxy.jobApplicationSource}"
+					<p:selectOneMenu id="source" value="#{jobApplicationBean.jobApplicationProxy.source}"
 						required="true" converter="omnifaces.SelectItemsConverter">
 						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
 						<f:selectItems
 							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.jobAdvertisingChanel}"
 							var="channel" itemLabel="#{channel.chanelName}"
-							itemValue="#{channel}" />
+							itemValue="#{channel.chanelName}" />
 					</p:selectOneMenu>
 					<p:message for="source" />
 					
 					
 					<h:outputText value="View CV:" />		            
-		            <p:commandButton id="editdownloadLink" value="Download CV" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
+		            <p:commandButton id="editdownloadLink" value="Download" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
 						<p:fileDownload value="#{jobApplicationBean.download}" />
 					</p:commandButton>
 					<!-- SPACE -->
@@ -234,13 +234,13 @@
 					<!-- SPACE -->
 					<h:outputText value="Note: To change CV, you must upload file with diferent filename." />
 					<!-- SPACE -->
-					
-
+				</p:panelGrid>
+				<center>
 					<p:commandButton value="Update"
 						action="#{jobApplicationBean.editJobApplication()}"
 						update=":formJobApplicationTable:tableJobApplications growl" />
-
-				</p:panelGrid>
+				</center>
+				
 			</p:outputPanel>
 			<p:growl id="growl" />
 		</p:dialog>
