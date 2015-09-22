@@ -198,14 +198,23 @@
 						required="true" />
 					<p:message for="letter" />
 					
+					<p:outputLabel value="Source :" for="source" />
+					<p:selectOneMenu id="source" value="#{jobApplicationBean.jobApplicationProxy.jobApplicationSource}"
+						required="true" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
+						<f:selectItems
+							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.jobAdvertisingChanel}"
+							var="channel" itemLabel="#{channel.chanelName}"
+							itemValue="#{channel}" />
+					</p:selectOneMenu>
+					<p:message for="source" />
 					
-					<h:outputText value="View CV:" />
-					<h:outputText id="cvedit" value="#{jobApplicationBean.jobApplicationProxy.cv}" />
-		            
+					
+					<h:outputText value="View CV:" />		            
 		            <p:commandButton id="editdownloadLink" value="Download CV" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
 						<p:fileDownload value="#{jobApplicationBean.download}" />
 					</p:commandButton>
-					
+					<!-- SPACE -->
 					
 					<p:outputLabel value="Change CV:" /> 
 					<p:fileUpload id="upload" 
@@ -226,23 +235,10 @@
 					<h:outputText value="Note: To change CV, you must upload file with diferent filename." />
 					<!-- SPACE -->
 					
-					<p:outputLabel value="Source :" for="source" />
-					<p:selectOneMenu id="source" value="#{jobApplicationBean.jobApplicationProxy.jobApplicationSource}"
-						required="true" converter="omnifaces.SelectItemsConverter">
-						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
-						<f:selectItems
-							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.jobAdvertisingChanel}"
-							var="channel" itemLabel="#{channel.chanelName}"
-							itemValue="#{channel}" />
-					</p:selectOneMenu>
-					<p:message for="source" />
-
-
 
 					<p:commandButton value="Update"
 						action="#{jobApplicationBean.editJobApplication()}"
-						update=":formJobApplicationTable:tableJobApplications 
-								formJobApplicationEdit:cvedit growl" />
+						update=":formJobApplicationTable:tableJobApplications growl" />
 
 				</p:panelGrid>
 			</p:outputPanel>
