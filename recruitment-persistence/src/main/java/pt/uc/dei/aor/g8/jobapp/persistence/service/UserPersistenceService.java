@@ -19,8 +19,8 @@ public class UserPersistenceService implements IUserPersistenceService {
 
 	@PersistenceContext (unitName="recruitment")
 	private EntityManager em;
-	
-	
+
+
 	public UserPersistenceService() {
 	}
 
@@ -28,10 +28,10 @@ public class UserPersistenceService implements IUserPersistenceService {
 	public IUserProxy createUser(IUserProxy proxy) {
 		UserEntity entity = getEntity(proxy);
 		em.persist(entity);
-		
+
 		return new UserProxy(entity);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private UserEntity getEntity(IUserProxy userProxy) {
 		if (userProxy instanceof IEntityAware<?>) {
@@ -45,14 +45,14 @@ public class UserPersistenceService implements IUserPersistenceService {
 		TypedQuery <UserEntity> query = em.createNamedQuery(UserEntity.FIND_USER_BY_USERNAME, UserEntity.class);
 		query.setParameter("username",username);
 		List <UserEntity> entity = query.getResultList();
-		
+
 		IUserProxy proxy;
 		if( entity.size() == 1){
 			proxy = new UserProxy(entity.get(0));
 		} else {
 			proxy=null;
 		}
-		
+
 		return proxy;
 	}
 
@@ -61,14 +61,14 @@ public class UserPersistenceService implements IUserPersistenceService {
 		TypedQuery <UserEntity> query = em.createNamedQuery(UserEntity.FIND_USER_BY_EMAIL, UserEntity.class);
 		query.setParameter("email",email);
 		List <UserEntity> entity = query.getResultList();
-		
+
 		IUserProxy proxy;
 		if( entity.size() == 1){
 			proxy = new UserProxy(entity.get(0));
 		} else {
 			proxy=null;
 		}
-		
+
 		return proxy;
 	}
 
@@ -76,7 +76,7 @@ public class UserPersistenceService implements IUserPersistenceService {
 	public List<IUserProxy> findManagers() {
 		TypedQuery <UserEntity> query = em.createNamedQuery(UserEntity.FIND_MANAGER, UserEntity.class);
 		List <UserEntity> entity = query.getResultList();
-		
+
 		List <IUserProxy> proxy = new ArrayList<>();
 		for (UserEntity u: entity){
 			proxy.add(new UserProxy(u));
@@ -88,7 +88,7 @@ public class UserPersistenceService implements IUserPersistenceService {
 	public List<IUserProxy> findInterviewers() {
 		TypedQuery <UserEntity> query = em.createNamedQuery(UserEntity.FIND_INTERVIEWER, UserEntity.class);
 		List <UserEntity> entity = query.getResultList();
-		
+
 		List <IUserProxy> proxy = new ArrayList<>();
 		for (UserEntity u: entity){
 			proxy.add(new UserProxy(u));
@@ -101,6 +101,22 @@ public class UserPersistenceService implements IUserPersistenceService {
 		UserEntity entity = getEntity(currentUser);
 		entity = em.merge(entity);
 		return new UserProxy(entity);
+	}
+
+	@Override
+	public IUserProxy verifyPasswordOfUser(String username, String password) {
+		TypedQuery <UserEntity> query = em.createNamedQuery(UserEntity.VERIFY_PASSWORD_OF_USER,UserEntity.class);
+		query.setParameter("username",username);
+		query.setParameter("password",password);
+		List <UserEntity> entity = query.getResultList();
+
+		IUserProxy proxy;
+		if( entity.size() == 1){
+			proxy = new UserProxy(entity.get(0));
+		} else {
+			proxy=null;
+		}
+		return proxy;
 	}
 
 }

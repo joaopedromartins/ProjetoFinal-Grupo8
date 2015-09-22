@@ -27,6 +27,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 	@NamedQuery(name = "UserEntity.findUserByEmail", query = "SELECT u FROM UserEntity u WHERE u.email=:email"),
 	@NamedQuery(name = "UserEntity.findManager", query = "SELECT u FROM UserEntity u WHERE 'MANAGER' member of u.roles"),
 	@NamedQuery(name = "UserEntity.findInterviewer", query = "SELECT u FROM UserEntity u WHERE 'INTERVIEWER' member of u.roles"),
+	@NamedQuery(name = "UserEntity.verifyPassworOfUser", query = "SELECT u FROM UserEntity u Where u.username=:username AND u.password=:password")
 })
 public class UserEntity {
 	//private static final long serialVersionUID = 1L;
@@ -35,6 +36,7 @@ public class UserEntity {
 	public static final String FIND_USER_BY_EMAIL = "UserEntity.findUserByEmail";
 	public static final String FIND_MANAGER = "UserEntity.findManager";
 	public static final String FIND_INTERVIEWER = "UserEntity.findInterviewer";
+	public static final String VERIFY_PASSWORD_OF_USER = "UserEntity.verifyPassworOfUser";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -64,10 +66,10 @@ public class UserEntity {
 
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="managerPosition")
 	private List <PositionEntity> position;
-	
+
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="userReceiver")
 	private List <NotificationEntity> notification;
-	
+
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="interviewer" )
 	private List <JobInterviewEntity> interview;
 
@@ -134,7 +136,7 @@ public class UserEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public List<PositionEntity> getPosition() {
 		return position;
 	}
@@ -194,8 +196,8 @@ public class UserEntity {
 	public String toString() {
 		return "UserEntity [lastname=" + lastname + ", firstname=" + firstname + "]";
 	}
-	
-	
+
+
 
 
 }

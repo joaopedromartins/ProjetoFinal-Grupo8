@@ -32,6 +32,7 @@ public class UserBean implements Serializable {
 
 	private boolean isLogged;
 	private String password;
+	private String oldPassword;
 	private String username;
 	private String firstName;
 	private String lastName;
@@ -139,6 +140,14 @@ public class UserBean implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getOldpassword() {
+		return oldPassword;
+	}
+
+	public void setOldpassword(String oldpassword) {
+		this.oldPassword = oldpassword;
 	}
 
 	public String getUsername() {
@@ -261,6 +270,20 @@ public class UserBean implements Serializable {
 			return;
 		}
 
+	}
+
+	public void changePassword(){
+		String messageFacade = userFacade.changePassword(currentUser,oldPassword,password);
+
+		if (messageFacade.equals("sucess")) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Password changed with success.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, messageFacade, "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
 	}
 	/*
 	public void editarPass() {

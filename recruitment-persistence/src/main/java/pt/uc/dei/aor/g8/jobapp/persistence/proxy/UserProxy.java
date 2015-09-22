@@ -58,7 +58,7 @@ public class UserProxy implements IUserProxy, IEntityAware<UserEntity> {
 
 	@Override
 	public void setPassword(String password) {
-		entity.setUsername(password);	
+		entity.setPassword(password);	
 	}
 
 	@Override

@@ -45,7 +45,7 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	@ManyToOne
 	private ScriptEntity script;
 	
-	@OneToOne (cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne (cascade = CascadeType.ALL)
 	private QuestionScaleEntity scale;
 	
 	@OneToMany (cascade = CascadeType.ALL, fetch=FetchType.EAGER)
