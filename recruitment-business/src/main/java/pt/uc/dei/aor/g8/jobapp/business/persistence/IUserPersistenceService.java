@@ -11,5 +11,6 @@ public interface IUserPersistenceService {
 	public IUserProxy findUserByEmail (String email);
 	public List <IUserProxy> findManagers();
 	public List <IUserProxy> findInterviewers();
+	public IUserProxy editUser(IUserProxy currentUser);
 
 }

@@ -4,6 +4,8 @@
 	width: 27px;
 	display: inline-block;
 	text-align: center;
+	right: 80px;
+	border-style: none
 }
 
 .radioLine>tbody>tr>td {

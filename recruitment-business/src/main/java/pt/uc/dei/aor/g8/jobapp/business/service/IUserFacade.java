@@ -12,5 +12,6 @@ public interface IUserFacade {
 	public IUserProxy findUserByUsername(String username);
 	public List <IUserProxy> findManagers();
 	public List <IUserProxy> findInterviewers();
+	public String updateUser(IUserProxy currentUser);
 
 }

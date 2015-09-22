@@ -184,12 +184,10 @@ public class UserBean implements Serializable {
 	}
 
 
-	/*	
 
-	// editar informacao
-	public void editar() {
+	public void editUser() {
 		try {
-			userInterface.update(current);
+			userFacade.updateUser(currentUser);
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"User info updated successfully.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -197,7 +195,7 @@ public class UserBean implements Serializable {
 
 		}
 	}
-
+	/*
 	public void editarPass() {
 		try {
 			current.setPassword(password);

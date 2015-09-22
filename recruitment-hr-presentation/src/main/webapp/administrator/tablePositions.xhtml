@@ -4,14 +4,18 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="style.css" />
+	</ui:define>
 
 	<ui:define name="content">
 		<h:form id="formPositionsTable">
 			<p:dataTable id="tablePositions" var="position"
 				value="#{positionBean.listOfAllPosition()}">
 				<f:facet name="header">
-            Positions
-        </f:facet>
+            		Positions
+        		</f:facet>
 				<p:column headerText="Position code">
 					<h:outputText value="#{position.code}" />
 				</p:column>
