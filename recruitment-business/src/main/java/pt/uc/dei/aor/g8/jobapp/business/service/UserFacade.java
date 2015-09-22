@@ -38,7 +38,7 @@ public class UserFacade implements IUserFacade {
 	@Override
 	public String createUserWithOutPassword(String username, String lastname, String firstname, String email,
 			RoleType role) {
-		
+
 		IUserProxy userUsername = service.findUserByUsername(username);
 		IUserProxy userEmail = service.findUserByEmail(email);
 
@@ -46,15 +46,15 @@ public class UserFacade implements IUserFacade {
 			String passwordGenerate = passwordGenrate.autoGeneratePassword();
 			System.out.println( "Username, " + username + ", with password, " + passwordGenerate + ".");
 			String passwordEncripty = passEncript.encriptarPass(passwordGenerate);
-			
+
 			IUserProxy newUser = factory.user(username, passwordEncripty, lastname, firstname, email, rolesList(role));
 			service.createUser(newUser);
 			notification.createNotification("User Register"," Your registration have the following items:\nUsername - " 
-			+ username + "\nPassword - " + passwordGenerate + "", "", newUser);
+					+ username + "\nPassword - " + passwordGenerate + "", "", newUser);
 			mail.sendEmail(newUser.getEmail(), "jobappmailtest@gmail.com", "User Register", "Your registration have the following items:\nUsername - " 
 					+ username + "\nPassword - " + passwordGenerate + "");
 			return "sucess";  
-			
+
 		} else if (userUsername == null && userEmail != null ){
 			return "Email already exists!!";
 
@@ -65,7 +65,7 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
-	
+
 	private List<RoleType> rolesList(RoleType role){
 		List<RoleType> listroles = new ArrayList<>();
 		if(role == RoleType.ADMINISTRATOR){
@@ -80,8 +80,8 @@ public class UserFacade implements IUserFacade {
 		}
 		return listroles;
 	}
-	
-	
+
+
 
 	@Override
 	public IUserProxy findUserByUsername(String username) {
@@ -91,7 +91,7 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public IUserProxy findUserByEmail(String email) {
 		IUserProxy user = service.findUserByEmail(email);
@@ -100,7 +100,7 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public List<IUserProxy> findManagers() {
 		List <IUserProxy> managers = service.findManagers();
@@ -118,8 +118,8 @@ public class UserFacade implements IUserFacade {
 		}
 		return null;
 	}
-	
-	
+
+
 
 	@Override
 	public String createUser(String username, String password, String lastname, String firstname, String email,
@@ -132,7 +132,7 @@ public class UserFacade implements IUserFacade {
 			service.createUser(newUser);
 			return "User, " + username + ", registered successfully.";  
 		} else if (userUsername == null && userEmail != null ){
-			return "Email already exists!!";
+			
 		} else if (userUsername != null && userEmail == null ){
 			return "Username already exists!!";
 		} else if (userUsername != null && userEmail != null){
@@ -143,15 +143,28 @@ public class UserFacade implements IUserFacade {
 
 	@Override
 	public IUserProxy updateUser(IUserProxy currentUser) {
-
 		return service.editUser(currentUser);
 
 	}
 
-	
+	@Override
+	public String changePassword(IUserProxy currentUser, String oldPassword, String password) {
+		String oldPasswordEncrip = passEncript.encriptarPass(oldPassword);
+		IUserProxy proxyverify = service.verifyPasswordOfUser(currentUser.getUsername(), oldPasswordEncrip);
+		
+		if(proxyverify == null){
+			return "Old password incorrect.";
+		} else {
+			currentUser.setPassword(passEncript.encriptarPass(password));
+			service.editUser(currentUser);
+			return "sucess";
+		}
+	}
 
-	
-	
-	
+
+
+
+
+
 
 }
