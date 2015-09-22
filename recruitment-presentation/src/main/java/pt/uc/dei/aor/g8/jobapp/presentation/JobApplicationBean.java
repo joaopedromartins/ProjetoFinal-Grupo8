@@ -64,6 +64,7 @@ public class JobApplicationBean implements Serializable {
 	private DefaultStreamedContent download;
 	
 	private String uploadDirectory="./cv";
+	private String uploadedfilename="";
 	
 	
 	//constructors
@@ -167,6 +168,13 @@ public class JobApplicationBean implements Serializable {
 	}
 
 	
+	public String getUploadedfilename() {
+		return uploadedfilename;
+	}
+	public void setUploadedfilename(String uploadedfilename) {
+		this.uploadedfilename = uploadedfilename;
+	}
+
 	//methods
 	public String applyPosition() {
 		return "/pages/candidate/applyPosition?faces-redirect=true";
@@ -206,6 +214,39 @@ public class JobApplicationBean implements Serializable {
 		}
 	}
 	
+
+	public void editJobApplication() {
+		// TODO logger edit job application
+		System.out.println("\n---------------------");
+		System.out.println("Edit Job Application:");
+		System.out.println("---------------------");
+		if (jobApplicationProxy!=null) {
+			System.out.println("Address: \t"+jobApplicationProxy.getAddress() );
+			System.out.println("City: \t"+jobApplicationProxy.getCity() );
+			System.out.println("Country: \t"+jobApplicationProxy.getCountry() );
+			System.out.println("Phone: \t"+jobApplicationProxy.getPhone() );
+			System.out.println("Diploma: \t"+jobApplicationProxy.getDiploma() );
+			System.out.println("School: \t"+jobApplicationProxy.getSchool() );
+			System.out.println("Letter: \t"+jobApplicationProxy.getLetter() );
+			System.out.println("CV: \t"+jobApplicationProxy.getCv() );
+			System.out.println("Source: \t"+jobApplicationProxy.getSource() );
+			System.out.println("\n");
+
+			IJobApplicationProxy proxy;
+			proxy=jobApplicationFacade.editJobApplication(jobApplicationProxy);
+			if(proxy!=null){
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_INFO,
+						"Job Position updated successfully.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			} else {
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_ERROR,
+						"Error updating job position.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			}
+		}
+	}
 	
 //	private void redirect(String path){
 //        FacesContext context = FacesContext.getCurrentInstance();
@@ -222,9 +263,16 @@ public class JobApplicationBean implements Serializable {
 	public void upload(FileUploadEvent event ) {  
 		FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		
+		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_" + timeStamp + "_";
+		this.uploadedfilename=event.getFile().getFileName();
 		// Do what you want with the file        
 		try {
-			copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
+			copyFile(uploadDirectory, filePrefix + uploadedfilename, event.getFile().getInputstream());
+
+			this.cv = uploadDirectory + "/" + filePrefix + uploadedfilename;
+			
 		} catch (IOException e) {
 			// TODO send to logger
 			System.out.println(e.getMessage());
@@ -232,12 +280,11 @@ public class JobApplicationBean implements Serializable {
 	}  
 
 	
-	public void copyFile(String fileName, InputStream in) {
+	public void copyFile(String uploadDirectory, String fileName, InputStream in) {
 		try {
-			String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-			String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_" + timeStamp + "_";
+			
 			// write the inputStream to a FileOutputStream
-			OutputStream out = new FileOutputStream(new File(uploadDirectory , filePrefix + fileName));
+			OutputStream out = new FileOutputStream(new File(uploadDirectory , fileName));
 			
 
 			int read = 0;
@@ -252,12 +299,30 @@ public class JobApplicationBean implements Serializable {
 			out.close();
 			// TODO send to logger
 			System.out.println("New file created!");
-			this.cv = uploadDirectory + "/" + filePrefix + fileName;
 		} catch (IOException e) {
 			// TODO send to logger
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public void editUploadedFile(FileUploadEvent event ) {  
+		FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		
+		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_" + timeStamp + "_";
+		this.uploadedfilename=event.getFile().getFileName();
+		// Do what you want with the file        
+		try {
+			copyFile(uploadDirectory, filePrefix + uploadedfilename, event.getFile().getInputstream());
+
+			this.jobApplicationProxy.setCv(uploadDirectory + "/" + filePrefix + uploadedfilename);
+			
+		} catch (IOException e) {
+			// TODO send to logger
+			System.out.println(e.getMessage());
+		}
+	}  
 		
 
 	public void prepDownload(){
@@ -279,26 +344,6 @@ public class JobApplicationBean implements Serializable {
 		return jobApplicationFacade.listOfJobApplicationByUsername(loginBean.getUsername());
 	}
 	
-	public void editJobApplication() {
-		// TODO logger edit job application
-		System.out.println("\n---------------------");
-		System.out.println("Edit Job Application:");
-		System.out.println("---------------------");
-		if (jobApplicationProxy!=null) {
-			System.out.println("Address: \t"+jobApplicationProxy.getAddress() );
-			System.out.println("City: \t"+jobApplicationProxy.getCity() );
-			System.out.println("Country: \t"+jobApplicationProxy.getCountry() );
-			System.out.println("Phone: \t"+jobApplicationProxy.getPhone() );
-			System.out.println("Diploma: \t"+jobApplicationProxy.getDiploma() );
-			System.out.println("School: \t"+jobApplicationProxy.getSchool() );
-			System.out.println("Letter: \t"+jobApplicationProxy.getLetter() );
-			System.out.println("CV: \t"+jobApplicationProxy.getCv() );
-			System.out.println("Source: \t"+jobApplicationProxy.getSource() );
-			System.out.println("\n");
-			
-			jobApplicationFacade.editJobApplication(jobApplicationProxy);
-		}
-	}
 	
 	
 }	

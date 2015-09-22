@@ -45,7 +45,7 @@
 				<h:outputText value="#{jobapplication.status}" />
 			</p:column>
 
-			<p:column style="width:32px;text-align: center">
+			<p:column style="width:32px;text-align: center" headerText="Detail">
 				<p:commandButton
 					update=":formJobApplicationTable:tableJobApplications :positionDetail :jobapplicationDetail"
 					oncomplete="PF('jobApplicationView').show()" icon="ui-icon-search"
@@ -55,7 +55,7 @@
 				</p:commandButton>
 			</p:column>
 			
-			<p:column style="width:32px;text-align: center">
+			<p:column style="width:32px;text-align: center" headerText="Edit">
 				<p:commandButton update=":formJobApplicationEdit:jobApplicationEdit"
 					oncomplete="PF('jobApplicationEdit').show()" icon="ui-icon-pencil"
 					title="edit">
@@ -232,7 +232,7 @@
 					
 					<p:outputLabel value="Change CV:" /> 
 					<p:fileUpload id="upload" 
-						fileUploadListener="#{jobApplicationBean.upload}"
+						fileUploadListener="#{jobApplicationBean.editUploadedFile}"
 						auto="true"
 						mode="advanced" 
 						allowTypes="/(\.|\/)(pdf|doc?x|xps)$/" 
