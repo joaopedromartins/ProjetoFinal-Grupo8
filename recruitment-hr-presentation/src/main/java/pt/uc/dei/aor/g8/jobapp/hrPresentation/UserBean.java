@@ -274,7 +274,7 @@ public class UserBean implements Serializable {
 
 	public void changePassword(){
 		String messageFacade = userFacade.changePassword(currentUser,oldPassword,password);
-
+		
 		if (messageFacade.equals("sucess")) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Password changed with success.", "");
@@ -285,6 +285,20 @@ public class UserBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
+	
+	
+	public boolean isAdministrator() {
+		return currentUser.getRoles().contains(RoleType.ADMINISTRATOR);
+	}
+	
+	public boolean isManager() {
+		return currentUser.getRoles().contains(RoleType.MANAGER);
+	}
+	public boolean isInterviewer() {
+		return currentUser.getRoles().contains(RoleType.INTERVIEWER);
+	}
+	
+	
 	/*
 	public void editarPass() {
 		try {

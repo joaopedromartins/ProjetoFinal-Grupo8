@@ -25,4 +25,5 @@ public interface IUserProxy {
 	public void setEmail(String email);
 
 	public String getFullName ();
+	
 }

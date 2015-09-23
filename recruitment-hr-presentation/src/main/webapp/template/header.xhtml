@@ -6,20 +6,36 @@
 
 	<h:form id="forHeader">
 
-		<p:menubar style="width: auto; background-color:white; float:right; margin: 20px;">
-
+		<p:menubar
+			style="width: auto; background-color:white; float:right; margin: 20px;">
 			<p:submenu label="#{userBean.currentUser.firstname}">
-				<p:menuitem value="Edit profile" outcome="/administrator/editProfile" icon="ui-icon-pencil" />
-				<p:menuitem value="Change password" outcome="/administrator/changePassword" icon="ui-icon-pencil" />
-				<p:menuitem value="Notifications" outcome="/administrator/notifications"/>
+				<p:menuitem value="Edit profile"
+					outcome="/administrator/editProfile" icon="ui-icon-pencil" />
+				<p:menuitem value="Change password"
+					outcome="/administrator/changePassword" icon="ui-icon-pencil" />
+				<p:menuitem value="Notifications"
+					outcome="/administrator/notifications" />
+				<p:separator />
+
+				<p:menuitem value="Administrator"
+					rendered="#{userBean.administrator}"
+					icon="ui-icon-home" outcome="/administrator/administrator" />
+				<p:menuitem value="Manager"
+					rendered="#{userBean.manager}"
+					icon="ui-icon-home" outcome="/manager/manager" />
+				<p:menuitem value="Interviewer"
+					rendered="#{userBean.interviewer}"
+					icon="ui-icon-home" outcome="/interviewer/interviewer" />
+
+
 			</p:submenu>
 			<f:facet name="options">
 				<p:commandButton value="Logout" icon="ui-icon-power"
-					action="#{userBean.logout}"  />
+					action="#{userBean.logout}" />
 			</f:facet>
 
 		</p:menubar>
-		
+
 	</h:form>
 
 </ui:composition>
