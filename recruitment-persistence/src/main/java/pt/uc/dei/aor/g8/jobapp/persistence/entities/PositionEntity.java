@@ -32,7 +32,8 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 @NamedQueries({
 @NamedQuery(name = "Position.listOfAllPosition", query = "SELECT p FROM PositionEntity p"),
 @NamedQuery(name = "Position.listOfAllOpenPosition", query = "SELECT p FROM PositionEntity p where p.status like 'OPEN' "),
-@NamedQuery(name = "Position.lastPositionOfListPosition", query = "SELECT pE From PositionEntity pE WHERE pE.id = (SELECT MAX (p.id) FROM PositionEntity p) ")
+@NamedQuery(name = "Position.lastPositionOfListPosition", query = "SELECT pE From PositionEntity pE WHERE pE.id = (SELECT MAX (p.id) FROM PositionEntity p) "),
+@NamedQuery(name = "Position.listOfAllPositionManager", query ="SELECT p FROM PositionEntity p WHERE p.managerPosition=:manager" ),
 })
 public class PositionEntity implements Serializable{
 
@@ -45,6 +46,7 @@ public class PositionEntity implements Serializable{
 	public static final String LIST_OF_ALL_POSITION = "Position.listOfAllPosition";
 	public static final String LIST_OF_ALL_OPEN_POSITION = "Position.listOfAllOpenPosition";
 	public static final String LAST_POSITION_OF_LIST_POSITION = "Position.lastPositionOfListPosition";
+	public static final String LIST_OF_ALL_POSITION_MANAGER = "Position.listOfAllPositionManager";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

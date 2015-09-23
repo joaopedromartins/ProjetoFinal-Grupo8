@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
@@ -39,6 +40,8 @@ public class PositionBean implements Serializable {
 	private IPositionFacade positionFacade;
 	@EJB
 	private IUserFacade userFacade;
+	@Inject
+	private UserBean currentUser;
 		
 	private Date openDate=new Date();
 	private Date closeDate;	
@@ -55,11 +58,10 @@ public class PositionBean implements Serializable {
 	private List<IJobAdvertisingChanelProxy> jobAdvertisingChanel;
 	private List<IScriptProxy> scripts;
 	
-	
-
 	private List<IPositionProxy> listPosition;
 	private IPositionProxy positionProxy;
 
+	
 	public PositionBean() {
 		
 	}
@@ -265,6 +267,11 @@ public class PositionBean implements Serializable {
 	public void setScripts(List<IScriptProxy> script) {
 		this.scripts = new ArrayList<>();
 		this.scripts.addAll(script);
+	}
+	
+	public List <IPositionProxy> listOfALLPositionManager (){
+		this.listPosition = positionFacade.listOfAllPositionManager (currentUser.getCurrentUser());
+		return listPosition;
 	}
 	
 	

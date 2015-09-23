@@ -69,4 +69,10 @@ public class PositionFacade implements IPositionFacade {
 		return service.listOfAllOpenPosition();
 	}
 
+	@Override
+	public List<IPositionProxy> listOfAllPositionManager(IUserProxy currentUser) {
+		
+		return service.listOfAllPositionManager(currentUser);
+	}
+
 }

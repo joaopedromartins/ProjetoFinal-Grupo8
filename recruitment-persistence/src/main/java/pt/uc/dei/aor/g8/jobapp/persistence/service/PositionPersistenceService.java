@@ -9,8 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.IEntityAware;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.PositionProxy;
 
@@ -77,6 +79,7 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 		
 		return proxy;
 	}
+	
 
 	@Override
 	public IPositionProxy lasPositionOfListPosition() {
@@ -89,6 +92,28 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 		} else {
 			proxy=null;
 		}
+		return proxy;
+	}
+
+	@SuppressWarnings("unchecked")
+	private UserEntity getUserEntity(IUserProxy userProxy) {
+		if (userProxy instanceof IEntityAware<?>) {
+			return ((IEntityAware<UserEntity>) userProxy).getEntity();
+		}
+		throw new IllegalStateException();
+	}
+	
+	@Override
+	public List<IPositionProxy> listOfAllPositionManager(IUserProxy manager) {
+		TypedQuery<PositionEntity> query = em.createNamedQuery(PositionEntity.LIST_OF_ALL_POSITION_MANAGER, PositionEntity.class); 
+		query.setParameter("manager",getUserEntity(manager));
+		List<PositionEntity> entity = query.getResultList();
+		
+		List<IPositionProxy> proxy = new ArrayList<>();
+		for(PositionEntity p: entity){
+			proxy.add(new PositionProxy(p));
+		}
+		
 		return proxy;
 	}
 	

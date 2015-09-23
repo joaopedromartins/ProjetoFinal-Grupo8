@@ -23,4 +23,6 @@ public interface IPositionFacade {
 	public IPositionProxy editPosition(IPositionProxy positionProxy);
 
 	public List<IPositionProxy> listOfAllOpenPosition();
+
+	public List<IPositionProxy> listOfAllPositionManager(IUserProxy currentUser);
 }
