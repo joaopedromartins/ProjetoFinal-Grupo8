@@ -106,7 +106,7 @@ public class PositionBean implements Serializable {
 
 	public void creatNewPosition (){
 		IPositionProxy proxy;
-		proxy=positionFacade.creatNewPosition(openDate, closeDate, code, title, localization, status, numberOfposition, SLA, managerPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, scripts);
+		proxy=positionFacade.creatNewPosition(openDate, title, localization, status, numberOfposition, SLA, managerPosition, company, technicalArea, descriptionPosition, jobAdvertisingChanel, scripts);
 	
 		if(proxy!=null){
 			closeDate=null;

@@ -13,4 +13,6 @@ public interface IPositionPersistenceService {
 	public IPositionProxy editPosition(IPositionProxy positionProxy);
 
 	public List<IPositionProxy> listOfAllOpenPosition();
+	
+	public IPositionProxy lasPositionOfListPosition();
 }

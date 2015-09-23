@@ -77,4 +77,20 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 		
 		return proxy;
 	}
+
+	@Override
+	public IPositionProxy lasPositionOfListPosition() {
+		TypedQuery <PositionEntity> query = em.createNamedQuery(PositionEntity.LAST_POSITION_OF_LIST_POSITION,PositionEntity.class);
+		List <PositionEntity> entity = query.getResultList();
+		
+		IPositionProxy proxy;
+		if( entity.size() == 1){
+			proxy = new PositionProxy(entity.get(0));
+		} else {
+			proxy=null;
+		}
+		return proxy;
+	}
+	
+	
 }

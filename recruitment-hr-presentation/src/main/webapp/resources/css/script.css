@@ -56,3 +56,8 @@ tbody {
     width: 70%;
     table-layout: auto;
 }
+
+.scriptTable{
+	margin: auto;
+	display: block;
+}

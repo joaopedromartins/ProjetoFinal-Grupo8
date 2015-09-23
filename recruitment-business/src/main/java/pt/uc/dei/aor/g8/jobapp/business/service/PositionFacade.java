@@ -30,12 +30,20 @@ public class PositionFacade implements IPositionFacade {
 	}
 
 	@Override
-	public IPositionProxy creatNewPosition(Date openDate, Date closeDate, String code, String title,
+	public IPositionProxy creatNewPosition(Date openDate, String title,
 			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> script) {
+		
+		IPositionProxy lastPosition = service.lasPositionOfListPosition();
+		String code;
+		if(lastPosition == null){
+			code =""+1 ;
+		} else {
+			code = String.valueOf(Integer.parseInt( lastPosition.getCode()) + 1);
+		}
 
-		IPositionProxy newPosition= factory.position(openDate, closeDate, code, title, localization, status, 
+		IPositionProxy newPosition= factory.position(openDate, code, title, localization, status, 
 				numberOfposition, sLA, managerPosition, company, technicalArea, descriptionPosition,
 				jobAdvertisingChanel, script);
 		
