@@ -1,18 +1,17 @@
-<ui:composition template="/template/templateAdmin.xhtml"
+<ui:composition template="/template/templateMana.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<ui:define name="stylesheet">
-		<h:outputStylesheet library="css" name="style.css" />
-	</ui:define>
 
 	<ui:define name="content">
+
+		<h1>Positions Table</h1>
+
 		<h:form id="formPositionsTable">
 			<p:dataTable id="tablePositions" var="position"
-				value="#{positionBean.listOfAllPosition()}">
+				value="#{positionBean.listOfALLPositionManager()}">
 				<f:facet name="header">
             		Positions
         		</f:facet>
@@ -40,19 +39,11 @@
 				<p:column headerText="Technical Area">
 					<h:outputText value="#{position.technicalArea.description}" />
 				</p:column>
-				<p:column style="width:32px;text-align: center">
-					<p:commandButton
-						update=":formPositionsTable:tablePositions :positionDetail"
-						oncomplete="PF('positionView').show()" icon="ui-icon-search"
-						title="View">
-						<f:setPropertyActionListener value="#{position}"
-							target="#{positionBean.positionProxy}" />
-					</p:commandButton>
-				</p:column>
-				<p:column style="width:32px;text-align: center">
-					<p:commandButton update=":formPositionEdit:positionEdit"
-						oncomplete="PF('positionEdit').show()" icon="ui-icon-pencil"
-						title="edit">
+				
+				<p:column style="width:45px;text-align: center">
+					<p:commandButton update=":formPositionEdit:positionEdit "
+						oncomplete="PF('positionEdit').show()" icon="ui-icon-search"
+						title="View/Edit">
 						<f:setPropertyActionListener value="#{position}"
 							target="#{positionBean.positionProxy}" />
 					</p:commandButton>
@@ -60,56 +51,16 @@
 			</p:dataTable>
 		</h:form>
 
-		<p:dialog header="Position Info" widgetVar="positionView" modal="true"
-			showEffect="fade" hideEffect="fade" resizable="false">
-			<p:outputPanel id="positionDetail" style="text-align:center;">
-				<p:panelGrid columns="2" id="positionDetailPanelGrid">
-					<f:facet name="header">
-						<h:outputText value="#{positionBean.positionProxy.title}" />
-					</f:facet>
-
-					<h:outputText value="Position code:" />
-					<h:outputText value="#{positionBean.positionProxy.code}" />
-
-					<h:outputText value="Title:" />
-					<h:outputText value="#{positionBean.positionProxy.title}" />
-
-
-					<h:outputText value="Open Date:" />
-					<h:outputText value="#{positionBean.positionProxy.openDate}" />
-
-					<h:outputText value="Close Date:" />
-					<h:outputText value="#{positionBean.positionProxy.closeDate}" />
-
-					<h:outputText value="Location:" />
-					<h:outputText
-						value="#{positionBean.positionProxy.stringLocalization}" />
-
-					<h:outputText value="Status:" />
-					<h:outputText
-						value="#{positionBean.positionProxy.status.description}" />
-
-					<h:outputText value="Company:" />
-					<h:outputText value="#{positionBean.positionProxy.company}" />
-
-					<h:outputText value="Technical Area:" />
-					<h:outputText
-						value="#{positionBean.positionProxy.technicalArea.description}" />
-
-				</p:panelGrid>
-			</p:outputPanel>
-		</p:dialog>
-
 		<h:form id="formPositionEdit">
-			<p:dialog header="Position Edit" widgetVar="positionEdit"
+			<p:dialog header="Position View/Edit" widgetVar="positionEdit"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 				<p:outputPanel id="positionEdit" style="text-align:center;">
 					<p:panelGrid columns="4" id="positionEditPanelGrid">
 
 						<h:outputText value="Title:" />
 						<h:inputText id="title"
-							value="#{positionBean.positionProxy.title}" required="true" />
-
+							value="#{positionBean.positionProxy.title}" required="true"
+							disabled="true" />
 
 						<h:outputText value="Position code:" />
 						<h:inputText value="#{positionBean.positionProxy.code}"
@@ -120,15 +71,9 @@
 							disabled="true" />
 
 						<h:outputText value="Location:" />
-						<p:selectManyCheckbox id="localization"
-							collectionType="java.util.ArrayList"
-							value="#{positionBean.positionProxy.localization}"
-							converter="omnifaces.SelectItemsConverter" required="true">
-							<f:selectItems value="#{positionBean.getPossibleLocalization()}"
-								var="localization" itemLabel="#{localization.description}"
-								itemValue="#{localization}" />
-						</p:selectManyCheckbox>
-
+						<h:inputText
+							value="#{positionBean.positionProxy.stringLocalization}"
+							disabled="true" />
 
 						<h:outputText value="Status:" />
 						<p:selectOneMenu id="status"
@@ -139,7 +84,7 @@
 								var="status" itemLabel="#{status.description}"
 								itemValue="#{status}" />
 						</p:selectOneMenu>
-
+						
 						<h:outputText value="Company:" />
 						<h:inputText value="#{positionBean.positionProxy.company}"
 							disabled="true" />
@@ -152,30 +97,29 @@
 						<p:outputLabel value="Number of vacancy:" for="numberPositions" />
 						<p:spinner id="numberPositions"
 							value="#{positionBean.positionProxy.numberOfposition}"
-							required="true" min="1" />
+							disabled="true" />
 
 						<p:outputLabel value="SLA:" for="sla" />
 						<p:calendar id="sla" value="#{positionBean.positionProxy.SLA}"
-							required="true" />
+							disabled="true" />
 
 						<p:outputLabel value="Technical manager:" for="userManager" />
-						<p:selectOneMenu id="userManager"
-							value="#{positionBean.positionProxy.managerPosition}" 
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItems value="#{positionBean.possibleManagers}"
-								var="manager" itemLabel="#{manager.fullName}" />
-						</p:selectOneMenu>
+						<p:inputText id="userManager"
+							value="#{positionBean.positionProxy.managerPosition.fullName}"
+							disabled="true" />
 
 
 						<p:commandButton value="Update"
 							action="#{positionBean.editPosition()}"
 							update=":formPositionsTable:tablePositions growl" />
-
 					</p:panelGrid>
 				</p:outputPanel>
 				<p:growl id="growl" />
 			</p:dialog>
 
 		</h:form>
+
+
 	</ui:define>
+
 </ui:composition>

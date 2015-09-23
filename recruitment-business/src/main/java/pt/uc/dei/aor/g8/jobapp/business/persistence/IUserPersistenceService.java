@@ -14,5 +14,6 @@ public interface IUserPersistenceService {
 	public IUserProxy editUser(IUserProxy currentUser);
 	public IUserProxy verifyPasswordOfUser (String username, String password);
 	
+	
 
 }

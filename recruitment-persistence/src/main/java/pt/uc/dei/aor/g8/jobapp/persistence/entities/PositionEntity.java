@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -20,7 +19,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,7 +31,9 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 @Table(name = "Position")
 @NamedQueries({
 @NamedQuery(name = "Position.listOfAllPosition", query = "SELECT p FROM PositionEntity p"),
-@NamedQuery(name = "Position.listOfAllOpenPosition", query = "SELECT p FROM PositionEntity p where p.status like 'OPEN' ")
+@NamedQuery(name = "Position.listOfAllOpenPosition", query = "SELECT p FROM PositionEntity p where p.status like 'OPEN' "),
+@NamedQuery(name = "Position.lastPositionOfListPosition", query = "SELECT pE From PositionEntity pE WHERE pE.id = (SELECT MAX (p.id) FROM PositionEntity p) "),
+@NamedQuery(name = "Position.listOfAllPositionManager", query ="SELECT p FROM PositionEntity p WHERE p.managerPosition=:manager" ),
 })
 public class PositionEntity implements Serializable{
 
@@ -45,14 +45,15 @@ public class PositionEntity implements Serializable{
 
 	public static final String LIST_OF_ALL_POSITION = "Position.listOfAllPosition";
 	public static final String LIST_OF_ALL_OPEN_POSITION = "Position.listOfAllOpenPosition";
-
+	public static final String LAST_POSITION_OF_LIST_POSITION = "Position.lastPositionOfListPosition";
+	public static final String LIST_OF_ALL_POSITION_MANAGER = "Position.listOfAllPositionManager";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Temporal(TemporalType.DATE)
-	@Column
+	@Column (nullable=false)
 	private Date openDate;
 
 	@Temporal(TemporalType.DATE)
@@ -106,12 +107,11 @@ public class PositionEntity implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public PositionEntity(Date openDate, Date closeDate, String code, String title, List<Localization> localization,
+	public PositionEntity(Date openDate, String code, String title, List<Localization> localization,
 			Status status, int numberOfposition, Date sLA, UserEntity userPosition, String company, 
 			TechnicalArea technicalArea, String descriptionPosition, List<JobAdvertisingChanelEntity> jobAdvertisingChanel,
 			List<ScriptEntity> script) {
 		this.openDate = openDate;
-		this.closeDate = closeDate;
 		this.code = code;
 		this.title = title;
 		this.localization = localization;

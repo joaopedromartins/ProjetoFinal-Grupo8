@@ -1,4 +1,4 @@
-<ui:composition template="/template/template.xhtml"
+<ui:composition template="/template/templateAdmin.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -30,10 +30,6 @@
 				</p:selectOneMenu>
 				<p:message for="area" />
 
-				<p:outputLabel value="Position code:" for="code" />
-				<p:inputText id="code" value="#{positionBean.code}" required="true" />
-				<p:message for="code" />
-
 				<p:outputLabel value="Company:" for="company" />
 				<p:inputText id="company" value="#{positionBean.company}"
 					required="true" />
@@ -58,11 +54,6 @@
 				<p:calendar id="openDate" disabled="true"
 					value="#{positionBean.openDate}" pattern="dd/MM/yyyy" locale="pt" />
 				<p:message for="openDate" />
-
-				<p:outputLabel value="Close date position:" for="closeDate" />
-				<p:calendar id="closeDate" required="true"
-					value="#{positionBean.closeDate}" pattern="dd/MM/yyyy" locale="pt" />
-				<p:message for="closeDate" />
 
 				<p:outputLabel value="SLA:" for="sla" />
 				<p:calendar id="sla" required="true" value="#{positionBean.SLA}"
