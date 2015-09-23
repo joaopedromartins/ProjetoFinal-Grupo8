@@ -242,11 +242,12 @@
 						multiple="false" 
 						fileLimit="1"
 						required="true"
-						requiredMessage="CV upload required" />
+						requiredMessage="CV upload required"
+						update="fileuploaded" />
 					<p:message for="upload" />
 					
 					<!-- SPACE -->
-					<h:outputText value="Note: To change CV, you must upload file with diferent filename." />
+					<h:outputText id="fileuploaded" value="#{jobApplicationBean.uploadedfilename} " />
 					<!-- SPACE -->
 				</p:panelGrid>
 				<center>

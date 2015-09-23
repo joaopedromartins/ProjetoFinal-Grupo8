@@ -184,7 +184,7 @@ public class JobApplicationBean implements Serializable {
 		IJobApplicationProxy proxy;
 		proxy=jobApplicationFacade.createNewJobApplication(
 				 address,  city,  country, phone, diploma,
-				 school,  letter,  cv, source, status, loginBean.getUser(), positionProxy);
+				 school,  letter,  cv, source, status, loginBean.getCandidate(), positionProxy);
 		if(proxy!=null){
 			address=null;
 			city=null;
@@ -196,6 +196,7 @@ public class JobApplicationBean implements Serializable {
 			cv=null;
 			source=null;
 			status=null;
+			uploadedfilename="";
 						
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
@@ -239,6 +240,7 @@ public class JobApplicationBean implements Serializable {
 						FacesMessage.SEVERITY_INFO,
 						"Job Position updated successfully.", "");
 				FacesContext.getCurrentInstance().addMessage(null, message);
+				this.uploadedfilename="";
 			} else {
 				FacesMessage message = new FacesMessage(
 						FacesMessage.SEVERITY_ERROR,
@@ -265,7 +267,7 @@ public class JobApplicationBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_" + timeStamp + "_";
+		String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getCandidate().getUsername() + "_" + timeStamp + "_";
 		this.uploadedfilename=event.getFile().getFileName();
 		// Do what you want with the file        
 		try {
@@ -310,7 +312,7 @@ public class JobApplicationBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getUser().getUsername() + "_" + timeStamp + "_";
+		String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getCandidate().getUsername() + "_" + timeStamp + "_";
 		this.uploadedfilename=event.getFile().getFileName();
 		// Do what you want with the file        
 		try {
