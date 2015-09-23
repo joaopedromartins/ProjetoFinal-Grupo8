@@ -9,12 +9,16 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.ScriptEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.IEntityAware;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.PositionProxy;
+import pt.uc.dei.aor.g8.jobapp.persistence.proxy.ScriptProxy;
 
 
 @Stateless
@@ -114,6 +118,18 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 			proxy.add(new PositionProxy(p));
 		}
 		
+		return proxy;
+	}
+
+	@Override
+	public List<IScriptProxy> listScriptOfPosition(IPositionProxy positionProxy) {
+		PositionEntity entity = em.find(PositionEntity.class, positionProxy.getId());
+		List <ScriptEntity> entityScript = entity.getScript();
+		
+		List <IScriptProxy> proxy = new ArrayList<>();
+		for (ScriptEntity s: entityScript){
+			proxy.add(new ScriptProxy(s));
+		}		
 		return proxy;
 	}
 	

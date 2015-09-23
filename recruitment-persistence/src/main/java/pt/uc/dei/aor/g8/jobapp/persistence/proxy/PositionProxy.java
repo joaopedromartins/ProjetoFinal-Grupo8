@@ -234,10 +234,33 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	private List<ScriptEntity> scriptsConvertProxyToEntity(List<IScriptProxy> scripts) {
 		List<ScriptEntity> entityScripts = new ArrayList<>();
 
-		for(IScriptProxy jP : scripts){
-			entityScripts.add(((IEntityAware<ScriptEntity>)jP).getEntity());
+		for(IScriptProxy sP : scripts){
+			entityScripts.add(((IEntityAware<ScriptEntity>)sP).getEntity());
 		}
 		return entityScripts;
+	}
+
+	@Override
+	public List<IScriptProxy> getScript() {
+		List<IScriptProxy> proxy= new ArrayList<>();
+
+		List<ScriptEntity> entityScript = entity.getScript();
+
+		for ( ScriptEntity s: entityScript){
+			proxy.add(new ScriptProxy(s));
+		}
+		
+		return proxy;
+	}
+
+	@Override
+	public void setScript(List<IScriptProxy> script) {
+		entity.setScript(scriptsConvertProxyToEntity(script));
+	}
+
+	@Override
+	public long getId() {
+		return entity.getId();
 	}
 
 

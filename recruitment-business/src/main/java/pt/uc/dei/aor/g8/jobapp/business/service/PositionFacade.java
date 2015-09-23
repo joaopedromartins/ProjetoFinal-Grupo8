@@ -59,9 +59,7 @@ public class PositionFacade implements IPositionFacade {
 
 	@Override
 	public IPositionProxy editPosition(IPositionProxy positionProxy) {
-		
 		return service.editPosition(positionProxy);
-		
 	}
 
 	@Override
@@ -74,5 +72,13 @@ public class PositionFacade implements IPositionFacade {
 		
 		return service.listOfAllPositionManager(currentUser);
 	}
+
+	@Override
+	public List<IScriptProxy> listScriptOfPosition(IPositionProxy positionProxy) {
+		
+		return service.listScriptOfPosition(positionProxy);
+	}
+	
+	
 
 }

@@ -49,6 +49,7 @@ public interface IPositionProxy {
 	public List<IJobAdvertisingChanelProxy> getJobAdvertisingChanel();
 	public void setJobAdvertisingChanel(List<IJobAdvertisingChanelProxy> jobAdvertisingChanel);
 	
-	/*public List<ScriptEntity> getScript();
-	public void setScript(List<ScriptEntity> script);*/
+	public List<IScriptProxy> getScript();
+	public void setScript(List<IScriptProxy> script);
+	public long getId();
 }

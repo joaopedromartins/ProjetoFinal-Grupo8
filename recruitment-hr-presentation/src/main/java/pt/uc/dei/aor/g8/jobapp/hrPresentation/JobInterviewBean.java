@@ -13,6 +13,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobInterviewFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
@@ -35,10 +36,12 @@ public class JobInterviewBean implements Serializable{
 	
 	private Date date;
 	private IUserProxy userInterviwer;
+	private IScriptProxy scriptInterview;
 	private List <IJobInterviewProxy> inteviews;
 	private IPositionProxy position;
 	private ICandidateProxy candidate;
 	private IJobApplicationProxy jobApplication;
+	
 	
 	
 	
@@ -99,6 +102,14 @@ public class JobInterviewBean implements Serializable{
 		this.jobApplication = jobApplication;
 	}
 
+	public IScriptProxy getScriptInterview() {
+		return scriptInterview;
+	}
+
+	public void setScriptInterview(IScriptProxy scriptInterview) {
+		this.scriptInterview = scriptInterview;
+	}
+	
 	public List<IJobInterviewProxy> listOfAllInterviews (){
 		return interviewFacade.listOfAllInterviews();
 	}

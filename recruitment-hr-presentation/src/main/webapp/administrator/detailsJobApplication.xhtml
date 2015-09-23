@@ -36,8 +36,6 @@
 						<h:outputText
 							value="#{jobApplicationBean.jobApplication.positionEntity.openDate}" />
 
-						<h:outputText value="Close Date:" />
-						<h:outputText value="#{positionBean.positionProxy.closeDate}" />
 
 						<h:outputText value="Location:" />
 						<h:outputText
@@ -108,6 +106,16 @@
 				<p:calendar id="interviewDate"
 					value="#{jobApplicationBean.interviewBean.date}" required="true"
 					showOn="button" pattern="dd/MM/yyyy HH:mm" />
+					
+				<p:outputLabel value = "Script of Interview:"/>
+				<p:selectOneMenu id="scriptInterview"
+					value="#{jobApplicationBean.interviewBean.scriptInterview}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems
+						value="#{jobApplicationBean.listScripOfPosition()}"
+						var="script" itemLabel="#{script.scriptTitle}" />
+				</p:selectOneMenu>
+					
 
 				<p:commandButton value="Schedule interview"
 					action="#{jobApplicationBean.scheduleInterview}" 

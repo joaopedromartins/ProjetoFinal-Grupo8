@@ -12,8 +12,13 @@ import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobInterviewFacade;
+import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
+import pt.uc.dei.aor.g8.jobapp.business.service.IScriptFacade;
+import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 
 @Named
 @ViewScoped
@@ -25,6 +30,8 @@ public class JobApplicationBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private IJobApplicationFacade facade;
+	@EJB
+	private IPositionFacade positionFacade;
 	@EJB
 	private IJobInterviewFacade facadeInterview;
 	@Inject
@@ -72,7 +79,7 @@ public class JobApplicationBean implements Serializable {
 
 	public void scheduleInterview (){
 		System.out.println("date interview: "+interviewBean.getDate());
-		IJobInterviewProxy interviewProxy = facadeInterview.newInterview(interviewBean.getDate(), interviewBean.getUserInterviwer(), jobApplication);
+		IJobInterviewProxy interviewProxy = facadeInterview.newInterview(interviewBean.getDate(), interviewBean.getUserInterviwer(), jobApplication, interviewBean.getScriptInterview());
 		if (interviewProxy != null){
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Scheduled interview with succeed.", "");
@@ -81,6 +88,11 @@ public class JobApplicationBean implements Serializable {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error on scheduled interview.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
+	}
+	
+	public List <IScriptProxy> listScripOfPosition (){
+		
+		return positionFacade.listScriptOfPosition(jobApplication.getPositionEntity());
 	}
 
 

@@ -25,4 +25,6 @@ public interface IPositionFacade {
 	public List<IPositionProxy> listOfAllOpenPosition();
 
 	public List<IPositionProxy> listOfAllPositionManager(IUserProxy currentUser);
+	
+	public List <IScriptProxy> listScriptOfPosition (IPositionProxy positionProxy);
 }

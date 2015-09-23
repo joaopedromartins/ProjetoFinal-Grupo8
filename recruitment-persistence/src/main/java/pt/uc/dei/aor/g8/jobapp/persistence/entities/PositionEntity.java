@@ -30,10 +30,10 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 @Entity
 @Table(name = "Position")
 @NamedQueries({
-@NamedQuery(name = "Position.listOfAllPosition", query = "SELECT p FROM PositionEntity p"),
-@NamedQuery(name = "Position.listOfAllOpenPosition", query = "SELECT p FROM PositionEntity p where p.status like 'OPEN' "),
-@NamedQuery(name = "Position.lastPositionOfListPosition", query = "SELECT pE From PositionEntity pE WHERE pE.id = (SELECT MAX (p.id) FROM PositionEntity p) "),
-@NamedQuery(name = "Position.listOfAllPositionManager", query ="SELECT p FROM PositionEntity p WHERE p.managerPosition=:manager" ),
+	@NamedQuery(name = "Position.listOfAllPosition", query = "SELECT p FROM PositionEntity p"),
+	@NamedQuery(name = "Position.listOfAllOpenPosition", query = "SELECT p FROM PositionEntity p where p.status like 'OPEN' "),
+	@NamedQuery(name = "Position.lastPositionOfListPosition", query = "SELECT pE From PositionEntity pE WHERE pE.id = (SELECT MAX (p.id) FROM PositionEntity p) "),
+	@NamedQuery(name = "Position.listOfAllPositionManager", query ="SELECT p FROM PositionEntity p WHERE p.managerPosition=:manager" ),
 })
 public class PositionEntity implements Serializable{
 
@@ -87,21 +87,21 @@ public class PositionEntity implements Serializable{
 
 	@Column
 	private String company;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column
 	private TechnicalArea technicalArea;
 
 	@Column
 	private String descriptionPosition;
-	
+
 	@ManyToMany(fetch=FetchType.EAGER)
 	private List<JobAdvertisingChanelEntity> jobAdvertisingChanel;
 
 	@ManyToMany
 	private List<ScriptEntity> script;
-	
-	
+
+
 
 	public PositionEntity() {
 		// TODO Auto-generated constructor stub
@@ -122,10 +122,10 @@ public class PositionEntity implements Serializable{
 		this.company = company;
 		this.technicalArea = technicalArea;
 		this.descriptionPosition = descriptionPosition;
-		
+
 		this.jobAdvertisingChanel = new ArrayList<>();
 		this.jobAdvertisingChanel.addAll(jobAdvertisingChanel);
-		
+
 		this.script = script;
 	}
 
@@ -303,6 +303,10 @@ public class PositionEntity implements Serializable{
 
 	public void setScript(List<ScriptEntity> script) {
 		this.script = script;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 }

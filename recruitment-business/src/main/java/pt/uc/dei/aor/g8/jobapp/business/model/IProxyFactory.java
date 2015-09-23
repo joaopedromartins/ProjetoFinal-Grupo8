@@ -44,5 +44,5 @@ public interface IProxyFactory {
 
 	public IQuestionProxy question (String question, QuestionType questionType, List<IQuestionChoiceProxy> options);
 
-	public IJobInterviewProxy jobInterview (Date interviewDate, IUserProxy interviewer, IJobApplicationProxy jobapplication);
+	public IJobInterviewProxy jobInterview (Date interviewDate, IUserProxy interviewer, IJobApplicationProxy jobapplication , IScriptProxy script);
 }

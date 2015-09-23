@@ -38,6 +38,9 @@ public class JobInterviewEntity implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column
 	private Date interviewDate;
+	
+	@ManyToOne
+	private ScriptEntity scriptInterview;
 
 	@ManyToOne
 	private UserEntity interviewer;
@@ -58,12 +61,12 @@ public class JobInterviewEntity implements Serializable{
 
 
 	public JobInterviewEntity(Date interviewDate, UserEntity interviewer,
-			JobApplicationEntity jobapplication ) {
+			JobApplicationEntity jobapplication,ScriptEntity script ) {
 		super();
 		this.interviewDate = interviewDate;
 		this.interviewer = interviewer;
 		this.jobapplication = jobapplication;
-
+		this.scriptInterview = script;
 	}
 
 
@@ -100,6 +103,14 @@ public class JobInterviewEntity implements Serializable{
 
 	public void setAnswer(List<AnswerInterviewEntity> answer) {
 		this.answer = answer;
+	}
+
+	public ScriptEntity getScriptInterview() {
+		return scriptInterview;
+	}
+
+	public void setScriptInterview(ScriptEntity scriptInterview) {
+		this.scriptInterview = scriptInterview;
 	}
 
 

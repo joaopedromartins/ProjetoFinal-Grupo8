@@ -9,10 +9,12 @@ import javax.ejb.Stateless;
 import pt.uc.dei.aor.g8.jobapp.business.model.IAnswerInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.AnswerInterviewEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobApplicationEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobInterviewEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.ScriptEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 
 @Stateless
@@ -31,8 +33,8 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 		}
 	}
 	
-	public JobInterviewProxy(Date interviewDate, IUserProxy interviewer, IJobApplicationProxy jobapplication) {
-		this.entity = new JobInterviewEntity(interviewDate,userConverterProxyToEntity(interviewer),jobApplicationProxyToEntity(jobapplication));
+	public JobInterviewProxy(Date interviewDate, IUserProxy interviewer, IJobApplicationProxy jobapplication, IScriptProxy script) {
+		this.entity = new JobInterviewEntity(interviewDate,userConverterProxyToEntity(interviewer),jobApplicationProxyToEntity(jobapplication), scriptConvertProxyToEntity(script));
 	}
 	
 	
@@ -99,6 +101,13 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 			entityAnswer.add(((IEntityAware<AnswerInterviewEntity>) a).getEntity());
 		}
 		return entityAnswer;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	private ScriptEntity scriptConvertProxyToEntity(IScriptProxy script) {
+		ScriptEntity entityScript =((IEntityAware<ScriptEntity>)script).getEntity();	
+		return entityScript;
 	}
 
 }

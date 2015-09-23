@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobInterviewPersistenceService;
 
@@ -22,8 +23,8 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 	
 	@Override
 	public IJobInterviewProxy newInterview(Date interviewDate, IUserProxy userInterviewer,
-			IJobApplicationProxy jobapplication) {
-		IJobInterviewProxy newInterview = factory.jobInterview(interviewDate, userInterviewer, jobapplication);
+			IJobApplicationProxy jobapplication, IScriptProxy script) {
+		IJobInterviewProxy newInterview = factory.jobInterview(interviewDate, userInterviewer, jobapplication, script);
 		return service.newInterview(newInterview);
 	}
 

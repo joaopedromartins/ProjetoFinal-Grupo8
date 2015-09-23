@@ -170,7 +170,7 @@ public class PositionBean implements Serializable {
 
 
 	public List<Localization> getPossibleLocalization(){
-		return new ArrayList<Localization>(EnumSet.allOf(Localization.class));
+		return Arrays.asList(Localization.values());
 	}
 	
 	public List<Localization> getLocalization() {
