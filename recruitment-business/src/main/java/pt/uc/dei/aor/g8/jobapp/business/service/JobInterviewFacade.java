@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,6 +25,18 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 			IJobApplicationProxy jobapplication) {
 		IJobInterviewProxy newInterview = factory.jobInterview(interviewDate, userInterviewer, jobapplication);
 		return service.newInterview(newInterview);
+	}
+
+	@Override
+	public List<IJobInterviewProxy> listOfAllInterviews() {
+		
+		return service.listOfAllInterviews();
+	}
+
+	@Override
+	public List<IJobInterviewProxy> listInterviewsOfInterviewer(IUserProxy interviewer) {
+	
+		return service.listInterviewsOfInterview(interviewer);
 	}
 
 }

@@ -8,8 +8,176 @@
 	<ui:define name="content">
 
 		<h1>table Interviews</h1>
+		<h:form id="formInterviewsTable">
+			<p:dataTable id="tableInterviews" var="interview"
+				value="#{jobInterviewBean.listInterviewsOfInterviewer()}">
+				<f:facet name="header">
+            		Interviews
+        		</f:facet>
+
+				<p:columnGroup type="header">
+					<p:row>
+						<p:column rowspan="2" headerText="Data" />
+						<p:column rowspan="2" headerText="Answer" />
+						<p:column rowspan="2" headerText="DO Interview"/>
+						<p:column colspan="4" headerText="Position" />
+						<p:column colspan="4" headerText="Candidate" />
+					</p:row>
+					<p:row>
+						<p:column headerText="Code" />
+						<p:column headerText="Title" />
+						<p:column headerText="Tecnical Area" />
+						<p:column headerText="Details" />
 
 
+
+						<p:column headerText="Name" />
+						<p:column headerText="Cover letter" />
+						<p:column headerText="CV" />
+						<p:column headerText="Details" />
+
+					</p:row>
+				</p:columnGroup>
+				<p:column>
+					<h:outputText value="#{interview.interviewDate}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="resposta" />
+				</p:column>
+				<p:column>
+					<h:outputText value="fazer entrevista" />
+				</p:column>
+
+
+				<p:column>
+					<h:outputText
+						value="#{interview.jobapplication.positionEntity.code}" />
+				</p:column>
+				<p:column>
+					<h:outputText
+						value="#{interview.jobapplication.positionEntity.title}" />
+				</p:column>
+				<p:column>
+					<h:outputText
+						value="#{interview.jobapplication.positionEntity.technicalArea.description}" />
+				</p:column>
+				<p:column>
+					<p:commandButton
+						update=":formInterviewsTable:tableInterviews :positionDetail"
+						oncomplete="PF('positionView').show()" icon="ui-icon-search"
+						title="View">
+						<f:setPropertyActionListener
+							value="#{interview.jobapplication.positionEntity}"
+							target="#{jobInterviewBean.position}" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column>
+					<h:outputText
+						value="#{interview.jobapplication.candidateEntity.fullName}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{interview.jobapplication.letter}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{interview.jobapplication.cv}" />
+				</p:column>
+				<p:column>
+					<p:commandButton
+						update=":formInterviewsTable:tableInterviews :candidateDetail"
+						oncomplete="PF('candidateView').show()" icon="ui-icon-search"
+						title="View">
+						<f:setPropertyActionListener value="#{interview.jobapplication}"
+							target="#{jobInterviewBean.jobApplication}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+		<p:dialog header="Position Details" widgetVar="positionView"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="positionDetail" style="text-align:center;">
+				<p:panelGrid columns="2" id="positionDetailPanelGrid">
+
+					<h:outputText value="Position code:" />
+					<h:outputText value="#{jobInterviewBean.position.code}" />
+
+					<h:outputText value="Title:" />
+					<h:outputText value="#{jobInterviewBean.position.title}" />
+
+					<h:outputText value="Open Date:" />
+					<h:outputText value="#{jobInterviewBean.position.openDate}" />
+
+					<h:outputText value="Location:" />
+					<h:outputText
+						value="#{jobInterviewBean.position.stringLocalization}" />
+
+					<h:outputText value="Status:" />
+					<h:outputText
+						value="#{jobInterviewBean.position.status.description}" />
+
+					<h:outputText value="Company:" />
+					<h:outputText value="#{jobInterviewBean.position.company}" />
+
+					<h:outputText value="Technical Area:" />
+					<h:outputText
+						value="#{jobInterviewBean.position.technicalArea.description}" />
+
+					<h:outputLabel value="Number of vacancy:" />
+					<h:outputText value="#{jobInterviewBean.position.numberOfposition}" />
+
+					<h:outputLabel value="Description:" />
+					<h:outputText
+						value="#{jobInterviewBean.position.descriptionPosition}" />
+
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+		<p:dialog header="Candidate Details" widgetVar="candidateView"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="candidateDetail" style="text-align:center;">
+				<p:panelGrid columns="2" id="jobApplicationDetailPanelGrid">
+					<f:facet name="header">
+						<h:outputText value="Candidate Details:" />
+					</f:facet>
+					
+					<h:outputText value="Name:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.candidateEntity.fullName}" />
+
+					<h:outputText value="Address:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.address}" />
+
+					<h:outputText value="City:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.city}" />
+
+					<h:outputText value="Country:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.country}" />
+
+					<h:outputText value="Phone:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.phone}" />
+					
+					<h:outputText value="Phone:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.candidateEntity.email}" />
+
+					<h:outputText value="Diploma:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.diploma}" />
+
+					<h:outputText value="School:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.school}" />
+
+					<h:outputText value="Source:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.source}" />
+
+					<h:outputText value="Cover Letter:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.letter}" />
+
+					<h:outputText value="CV:" />
+					<h:outputText value="#{jobInterviewBean.jobApplication.cv}" />
+
+				</p:panelGrid>
+
+			</p:outputPanel>
+		</p:dialog>
 	</ui:define>
 
 </ui:composition>

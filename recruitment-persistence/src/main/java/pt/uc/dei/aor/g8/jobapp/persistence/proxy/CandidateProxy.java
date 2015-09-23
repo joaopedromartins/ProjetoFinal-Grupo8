@@ -96,6 +96,11 @@ public class CandidateProxy implements ICandidateProxy, IEntityAware<CandidateEn
 		entity.setMobile(mobile);
 	}
 
+	@Override
+	public String getFullName() {
+		String fullName = getFirstname()+ " " + getLastname();
+		return fullName;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

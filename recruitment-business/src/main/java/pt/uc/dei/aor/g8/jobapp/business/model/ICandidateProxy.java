@@ -16,4 +16,5 @@ public interface ICandidateProxy {
 	public void setEmail(String email);
 	public BigInteger getMobile();
 	public void setMobile(BigInteger mobile);
+	public String getFullName();
 }
