@@ -10,19 +10,25 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.ICandidatePersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.util.AutoGeneratePasswor;
 import pt.uc.dei.aor.g8.jobapp.business.util.EncryptPassword;
+import pt.uc.dei.aor.g8.jobapp.business.util.GmailMessage;
 
 @Stateless
 public class CandidateFacade implements ICandidateFacade {
 
 	@EJB
 	private IProxyFactory factory;
-
+	
 	@EJB
 	private ICandidatePersistenceService service;
+	
 	@EJB
 	private EncryptPassword passEncript;
+	
 	@EJB
 	private AutoGeneratePasswor passwordGenrate;
+	
+	@EJB
+	private GmailMessage mail;
 	//@EJB
 	//private INotificationFacade notification;
 
@@ -33,8 +39,6 @@ public class CandidateFacade implements ICandidateFacade {
 
 	@Override
 	public String createNewCandidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
-		// TODO  mudei te isto
-		// Ficou espetacular
 		ICandidateProxy candidateUsername = findCandidateByUsername(username);
 		ICandidateProxy candidateEmail = findCandidateByEmail(email);
 		String passwordEncript = passEncript.encriptarPass(password);
@@ -75,6 +79,58 @@ public class CandidateFacade implements ICandidateFacade {
 			return candidate;
 		}
 		return null;
+	}
+
+	@Override
+	public String sendRecoverMessageToEmail(String email) {
+		ICandidateProxy candidate = service.findCandidateByEmail(email);
+		if (candidate==null) {
+			return "There isn't an existing account associated with this email address";
+		} else {
+			String password=passwordGenrate.autoGeneratePassword();
+			ICandidateProxy candidateProxy=findCandidateByEmail(email);
+			candidateProxy.setPassword( passEncript.encriptarPass(password) );
+			editCandidate(candidateProxy);
+			
+			//Notify Candidate by email
+			mail.sendEmail(email, 
+				"jobappmailtest@gmail.com", 
+				"Recover Account",
+				"Dear " +  candidate.getFirstname() + ",\n" +
+				"There is an existing account associated with this email address.\n" +
+						"\nFor security resons your Password has been reset to a new one.\n" +
+						"\tUsername: " + candidate.getUsername() + "\n" +
+						"\tPassword: " + password +
+						"\n\nRegards," +
+						"\nAdministration Team"
+				);
+			
+			return "recover email to "+email+" has been sent with success.";
+		}
+	}
+
+	@Override
+	public String sendRegistrationCode(String registrationCode, String email) {
+
+		ICandidateProxy candidateProxy=findCandidateByEmail(email);
+		if(candidateProxy != null){
+			return "There is an existing account associated with this email address. Recover account.";
+		} else {
+			//Notify Candidate by email
+			mail.sendEmail(email, 
+				"jobappmailtest@gmail.com", 
+				"Recover Account",
+				"Dear Candidate,\n" +
+				"Use de following code to compleet your registration:\n" +
+				"There is an existing account associated with this email address.\n" +
+						"\tValidation Code: " + registrationCode + "\n" +
+						"\n\nRegards," +
+						"\nAdministration Team"
+				);
+			
+			return "recover email to "+email+" has been sent with success.";
+			
+		}
 	}
 
 }
