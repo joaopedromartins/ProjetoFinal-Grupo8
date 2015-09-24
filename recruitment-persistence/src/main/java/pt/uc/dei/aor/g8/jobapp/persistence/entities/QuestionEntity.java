@@ -1,7 +1,9 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,7 +51,7 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	private QuestionScaleEntity scale;
 	
 	@OneToMany (cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	private List <QuestionChoiceEntity> options;
+	private Set<QuestionChoiceEntity> options;
 
 	
 
@@ -74,7 +76,8 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 	public QuestionEntity (String question3, QuestionType questionType3, List<QuestionChoiceEntity> options ){
 		this.question = question3;
 		this.questiontype = questionType3;
-		this.options = options;	
+		this.options = new HashSet<>();
+		this.options.addAll(options);
 	}
 
 	public QuestionScaleEntity getScale() {
@@ -85,11 +88,11 @@ public class QuestionEntity implements Serializable,Comparable<QuestionEntity>{
 		this.scale = scale;
 	}
 
-	public List<QuestionChoiceEntity> getOptions() {
+	public Set<QuestionChoiceEntity> getOptions() {
 		return options;
 	}
 
-	public void setOptions(List<QuestionChoiceEntity> options) {
+	public void setOptions(Set<QuestionChoiceEntity> options) {
 		this.options = options;
 	}
 

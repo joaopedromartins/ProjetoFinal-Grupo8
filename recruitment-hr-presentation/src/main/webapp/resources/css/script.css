@@ -52,12 +52,22 @@ tbody {
 }
 
 .ui-datatable table {
-    border-collapse: collapse;
-    width: 70%;
-    table-layout: auto;
+	border-collapse: collapse;
+	table-layout: auto;
+	margin: auto !important;
 }
 
-.scriptTable{
+.scriptTable {
 	margin: auto;
-	display: block;
+	display: inline-block;
+}
+
+.ui-datatable-scrollable-header-box {
+	display: none !important
+}
+
+#formDoScript {
+	margin: auto;
+	display: flex;
+	display: -webkit-flex;
 }

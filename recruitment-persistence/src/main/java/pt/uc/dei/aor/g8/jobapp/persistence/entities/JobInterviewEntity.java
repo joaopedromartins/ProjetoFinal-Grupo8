@@ -2,10 +2,14 @@ package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,15 +52,17 @@ public class JobInterviewEntity implements Serializable{
 	@ManyToOne
 	private JobApplicationEntity jobapplication;
 
-	@OneToMany
-	private List<AnswerInterviewEntity> answer;
+	@OneToMany (cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<AnswerInterviewEntity> answer;
+	
+	@Column
+	private boolean finished = false;
 
 
 	public JobInterviewEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 
 
@@ -67,16 +73,14 @@ public class JobInterviewEntity implements Serializable{
 		this.interviewer = interviewer;
 		this.jobapplication = jobapplication;
 		this.scriptInterview = script;
+		this.finished = false;
 	}
-
 
 
 
 	public long getId() {
 		return id;
 	}
-
-
 
 
 	public Date getInterviewDate() {
@@ -104,12 +108,13 @@ public class JobInterviewEntity implements Serializable{
 		this.jobapplication = jobapplication;
 	}
 
-	public List<AnswerInterviewEntity> getAnswer() {
+	public Set<AnswerInterviewEntity> getAnswer() {
 		return answer;
 	}
 
 	public void setAnswer(List<AnswerInterviewEntity> answer) {
-		this.answer = answer;
+		this.answer = new HashSet<>();
+		this.answer.addAll(answer);
 	}
 
 	public ScriptEntity getScriptInterview() {
@@ -118,6 +123,16 @@ public class JobInterviewEntity implements Serializable{
 
 	public void setScriptInterview(ScriptEntity scriptInterview) {
 		this.scriptInterview = scriptInterview;
+	}
+
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 	}
 
 

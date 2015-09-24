@@ -46,3 +46,18 @@ header {
 .ui-menuitem ui-menubar-options ui-widget ui-corner-all{
 	padding-top: 2.5px
 }
+
+.answerTable{
+	    margin: auto;
+    display: flex;
+}
+.answerTable table{
+	margin: auto;
+    display: inline;
+}
+
+.answerTable>div{
+	margin: auto;
+    display: block;
+}  
+    

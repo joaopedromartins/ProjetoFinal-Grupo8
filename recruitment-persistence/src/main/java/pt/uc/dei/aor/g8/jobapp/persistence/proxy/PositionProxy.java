@@ -2,9 +2,13 @@
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
+
+
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
@@ -96,7 +100,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	@Override
 	public String getStringLocalization() {
 		String localizations="";
-		List<Localization> localization=entity.getLocalization();
+		Set<Localization> localization=entity.getLocalization();
 		for (Localization l: localization){
 			if(!localizations.equals("")){
 				localizations=localizations + ", " + l.getDescription();
@@ -109,14 +113,14 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 
 	@Override
 	public List<Localization> getLocalization() {
-		return entity.getLocalization();
+		return new ArrayList<>(entity.getLocalization());
 	}
 
 
 
 	@Override
 	public void setLocalization(List<Localization> localization) {
-		entity.setLocalization(localization);
+		entity.setLocalization(new HashSet<>(localization));
 	}
 
 	@Override

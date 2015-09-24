@@ -22,4 +22,7 @@ public interface IJobInterviewProxy {
 	public void setScriptInterview(IScriptProxy scriptInterview);
 	
 	public long getId();
+	
+	public boolean getFinished();
+	public void setFinhished (boolean finished);
 }

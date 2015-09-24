@@ -1,7 +1,9 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 
@@ -112,7 +114,7 @@ public class QuestionProxy implements IQuestionProxy, IEntityAware<QuestionEntit
 	public List<IQuestionChoiceProxy> getOptions() {
 		List <IQuestionChoiceProxy> proxy = new ArrayList<>();
 		
-		List <QuestionChoiceEntity> entityChoise = entity.getOptions();
+		Set <QuestionChoiceEntity> entityChoise = entity.getOptions();
 		for ( QuestionChoiceEntity qC: entityChoise){
 			proxy.add(new QuestionChoiceProxy(qC));
 		}
@@ -122,7 +124,7 @@ public class QuestionProxy implements IQuestionProxy, IEntityAware<QuestionEntit
 
 	@Override
 	public void setOptions(List<IQuestionChoiceProxy> options) {
-		entity.setOptions(optionsConverterProxyToEntity(options));
+		entity.setOptions(new HashSet<>(optionsConverterProxyToEntity(options)));
 	}
 	
 	@SuppressWarnings("unchecked")

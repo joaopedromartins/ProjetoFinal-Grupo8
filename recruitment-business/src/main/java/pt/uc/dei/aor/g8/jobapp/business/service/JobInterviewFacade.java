@@ -5,7 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IAnswerInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
@@ -19,6 +23,8 @@ import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobInterviewPersistenceServ
 @Stateless
 public class JobInterviewFacade implements IJobInterviewFacade {
 
+	private static final Logger log = LoggerFactory.getLogger(JobInterviewFacade.class);
+	
 	@EJB
 	private IProxyFactory factory;
 	@EJB
@@ -58,6 +64,19 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 			answers.add(factory.answerInterview((questions.get(i).getQuestion()),(questions.get(i).getQuestiontype().getDescription())));
 		}
 		return answers;
+	}
+
+	@Override
+	public IJobInterviewProxy saveAnswersOfScript(List<IAnswerInterviewProxy> answers, IJobInterviewProxy interview) {
+		try{
+			interview.setAnswer(answers);
+			interview.setFinhished(true);
+			return service.updateInterview(interview);
+			
+		}catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}	
 	}
 
 }

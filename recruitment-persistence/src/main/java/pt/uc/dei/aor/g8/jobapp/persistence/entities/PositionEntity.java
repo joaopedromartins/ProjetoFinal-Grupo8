@@ -3,7 +3,9 @@ package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -69,7 +71,7 @@ public class PositionEntity implements Serializable{
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="localization" )
 	@Enumerated(EnumType.STRING)
-	private List<Localization> localization;
+	private Set<Localization> localization;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name="Status")
@@ -114,7 +116,8 @@ public class PositionEntity implements Serializable{
 		this.openDate = openDate;
 		this.code = code;
 		this.title = title;
-		this.localization = localization;
+		this.localization = new HashSet<>();
+		this.localization.addAll(localization);
 		this.status = status;
 		this.numberOfposition = numberOfposition;
 		this.SLA = sLA;
@@ -182,13 +185,13 @@ public class PositionEntity implements Serializable{
 
 
 
-	public List<Localization> getLocalization() {
+	public Set<Localization> getLocalization() {
 		return localization;
 	}
 
 
 
-	public void setLocalization(List<Localization> localization) {
+	public void setLocalization(Set<Localization> localization) {
 		this.localization = localization;
 	}
 

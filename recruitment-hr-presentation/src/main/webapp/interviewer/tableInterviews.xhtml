@@ -19,7 +19,6 @@
 					<p:row>
 						<p:column rowspan="2" headerText="Data" />
 						<p:column rowspan="2" headerText="Answer" />
-						<p:column rowspan="2" headerText="DO Interview" />
 						<p:column colspan="4" headerText="Position" />
 						<p:column colspan="4" headerText="Candidate" />
 					</p:row>
@@ -39,15 +38,19 @@
 					</p:row>
 				</p:columnGroup>
 				<p:column>
-					<h:outputText value="#{interview.interviewDate}" />
+					<h:outputText value="#{interview.interviewDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
 				</p:column>
 				<p:column>
-					<h:outputText value="resposta" />
-				</p:column>
-				<p:column>
-					<p:link outcome="interview?faces-redirect=true" value="Start">
-						<f:param name="interviewId" value="#{interview.id}" />
-					</p:link>
+					<h:panelGroup id = "panelAnswer">
+						<p:link outcome="interview?faces-redirect=true" value="Start" rendered="#{interview.finished eq 'FALSE'}">
+							<f:param name="interviewId" value="#{interview.id}" />
+						</p:link>
+						<p:link outcome="answersView?faces-redirect=true" value="View" rendered="#{interview.finished eq 'TRUE'}">
+							<f:param name="interviewId" value="#{interview.id}" />
+						</p:link>
+					</h:panelGroup>
 				</p:column>
 
 
