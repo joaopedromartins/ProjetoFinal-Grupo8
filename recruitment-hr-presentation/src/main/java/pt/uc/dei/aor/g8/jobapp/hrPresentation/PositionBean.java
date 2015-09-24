@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -47,7 +47,7 @@ public class PositionBean implements Serializable {
 	private String code;
 	private String title;
 	private List<Localization> localization;
-	private Status status;
+	private StatusPosition status;
 	private int numberOfposition=1;
 	private Date SLA;
 	private IUserProxy managerPosition;
@@ -180,15 +180,15 @@ public class PositionBean implements Serializable {
 		this.localization = localization;
 	}
 
-	public List<Status> getPossibleStatus(){
-		return Arrays.asList(Status.values());
+	public List<StatusPosition> getPossibleStatus(){
+		return Arrays.asList(StatusPosition.values());
 	}
 	
-	public Status getStatus() {
+	public StatusPosition getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(StatusPosition status) {
 		this.status = status;
 	}
 	

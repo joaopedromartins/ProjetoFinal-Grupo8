@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 
 @Entity
 @Table(name = "JobApplication")
@@ -63,8 +68,10 @@ public class JobApplicationEntity {
 	@Column
 	private String cv;
 
+
+	@Enumerated(EnumType.STRING)
 	@Column
-	private String status;
+	private JobAppSituation situation;
 
 	@Column
 	private String jobPositionSource;
@@ -76,7 +83,10 @@ public class JobApplicationEntity {
 	private PositionEntity positionEntity;
 
 	@OneToMany (cascade=CascadeType.ALL , mappedBy="jobapplication")
-	private List <JobInterviewEntity> interviewers;
+	private List <JobInterviewEntity> interviews;
+	
+	@OneToOne
+	private ProposalEntity proposal;
 
 
 	//Constructors
@@ -86,8 +96,7 @@ public class JobApplicationEntity {
 
 	public JobApplicationEntity(
 			String address, String city, String country, BigInteger phone, String diploma,
-			String school, String letter, String cv, String source,
-			String status, CandidateEntity candidateEntity, PositionEntity positionEntity)  {
+			String school, String letter, String cv, String source, CandidateEntity candidateEntity, PositionEntity positionEntity)  {
 		super();
 		this.address = address;
 		this.city = city;
@@ -98,7 +107,7 @@ public class JobApplicationEntity {
 		this.letter = letter;
 		this.cv = cv;
 		this.jobPositionSource = source;
-		this.status = "Open";
+		this.situation = JobAppSituation.SUBMITTED;
 		this.candidateEntity = candidateEntity;
 		this.positionEntity = positionEntity;
 	}
@@ -178,11 +187,11 @@ public class JobApplicationEntity {
 		this.jobPositionSource = jobPositionSource;
 	}
 
-	public String getStatus() {
-		return status;
+	public JobAppSituation getSituation() {
+		return situation;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setSituation(JobAppSituation situation) {
+		this.situation = situation;
 	}
 
 	public void setCandidateEntity(CandidateEntity candidateEntity) {
@@ -196,6 +205,22 @@ public class JobApplicationEntity {
 		return id;
 	}
 
+
+	public List<JobInterviewEntity> getInterviews() {
+		return interviews;
+	}
+
+	public void setInterviews(List<JobInterviewEntity> interviewers) {
+		this.interviews = interviewers;
+	}
+
+	public ProposalEntity getProposal() {
+		return proposal;
+	}
+
+	public void setProposal(ProposalEntity proposal) {
+		this.proposal = proposal;
+	}
 
 	@Override
 	public int hashCode() {

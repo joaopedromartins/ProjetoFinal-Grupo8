@@ -1,6 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

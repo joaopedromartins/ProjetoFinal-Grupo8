@@ -47,6 +47,8 @@ public class NotificationEntity implements Serializable{
 	@Column
 	private String message;
 	
+	
+	
 	@Column 
 	private String signature;
 	

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 
 public interface IPositionProxy {
@@ -25,8 +25,8 @@ public interface IPositionProxy {
 	public String getStringLocalization();
 	public void setLocalization(List<Localization> localization);
 	
-	public Status getStatus();
-	public void setStatus(Status status);
+	public StatusPosition getStatus();
+	public void setStatus(StatusPosition status);
 	
 	public int getNumberOfposition();
 	public void setNumberOfposition(int numberOfposition);

@@ -26,7 +26,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 
 @Entity
@@ -75,7 +75,7 @@ public class PositionEntity implements Serializable{
 
 	@Enumerated(EnumType.STRING)
 	@Column(name="Status")
-	protected Status status;
+	protected StatusPosition status;
 
 	@Column
 	private int numberOfposition;
@@ -110,7 +110,7 @@ public class PositionEntity implements Serializable{
 	}
 
 	public PositionEntity(Date openDate, String code, String title, List<Localization> localization,
-			Status status, int numberOfposition, Date sLA, UserEntity userPosition, String company, 
+			StatusPosition status, int numberOfposition, Date sLA, UserEntity userPosition, String company, 
 			TechnicalArea technicalArea, String descriptionPosition, List<JobAdvertisingChanelEntity> jobAdvertisingChanel,
 			List<ScriptEntity> script) {
 		this.openDate = openDate;
@@ -195,12 +195,12 @@ public class PositionEntity implements Serializable{
 		this.localization = localization;
 	}
 
-	public Status getStatus() {
+	public StatusPosition getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(Status status) {
+	public void setStatus(StatusPosition status) {
 		this.status = status;
 	}
 

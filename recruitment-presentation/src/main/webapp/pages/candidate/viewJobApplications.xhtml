@@ -42,7 +42,7 @@
 					value="#{jobapplication.positionEntity.technicalArea.description}" />
 			</p:column>
 			<p:column headerText="Job Application Status">
-				<h:outputText value="#{jobapplication.status}" />
+				<h:outputText value="#{jobapplication.situation.description}" />
 			</p:column>
 
 			<p:column style="width:32px;text-align: center" headerText="Detail">
@@ -149,7 +149,7 @@
 					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.source}" />
 
 					<h:outputText value="Job Application Status:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.status}" />
+					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.situation.description}" />
 
 				</p:panelGrid>
 

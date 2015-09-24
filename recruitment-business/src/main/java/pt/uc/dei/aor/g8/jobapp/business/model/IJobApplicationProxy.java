@@ -1,6 +1,9 @@
 package pt.uc.dei.aor.g8.jobapp.business.model;
 
 import java.math.BigInteger;
+import java.util.List;
+
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 
 public interface IJobApplicationProxy {
 
@@ -37,8 +40,14 @@ public interface IJobApplicationProxy {
 	public String getSource() ;
 	public void setSource(String source);
 	
-	public String getStatus();
-	public void setStatus(String status);
+	public JobAppSituation getSituation();
+	public void setSituation(JobAppSituation situation);
 	
 	public long getId();
+	
+	public List<IJobInterviewProxy> getInterviews();
+	public void setInterviews(List<IJobInterviewProxy> interviews);
+	
+	public IProposalProxy getProposal();
+	public void setProposal(IProposalProxy proposal);
 }

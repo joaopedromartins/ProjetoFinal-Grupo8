@@ -1,15 +1,22 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IProposalProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.CandidateEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobApplicationEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobInterviewEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.ProposalEntity;
 
 @Stateless
 public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<JobApplicationEntity> {
@@ -17,32 +24,31 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	private JobApplicationEntity entity;
 
 	public JobApplicationProxy() {
-		
+
 	}
 
 	public JobApplicationProxy(String address, String city,
 			String country, BigInteger phone, String diploma, String school, String letter,
-			String cv, String source, String status, ICandidateProxy candidateProxy, IPositionProxy positionProxy)  {
+			String cv, String source, ICandidateProxy candidateProxy, IPositionProxy positionProxy)  {
+
 		this.entity = new JobApplicationEntity(address, city, country, phone, diploma, school, letter,
-				cv, source, status, 
-				candidateCoverterProxyToEntity(candidateProxy), 
-				positionCoverterProxyToEntity(positionProxy) );
+				cv, source, candidateCoverterProxyToEntity(candidateProxy),positionCoverterProxyToEntity(positionProxy) );
 	}
-	
-	
-	
+
+
+
 	@SuppressWarnings("unchecked")
 	private CandidateEntity candidateCoverterProxyToEntity (ICandidateProxy candidate){
 		CandidateEntity entity = ((IEntityAware<CandidateEntity>)candidate).getEntity();
 		return entity;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private PositionEntity positionCoverterProxyToEntity (IPositionProxy position){
 		PositionEntity entity = ((IEntityAware<PositionEntity>)position).getEntity();
 		return entity;
 	}
-	
+
 
 	public JobApplicationProxy (JobApplicationEntity jobApplication){
 		if (jobApplication==null){
@@ -52,7 +58,7 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 		}
 	}
 
-	
+
 	//Getters and Setters
 
 
@@ -127,7 +133,7 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	public void setCv(String cv) {
 		entity.setCv(cv);
 	}
-	
+
 
 	@Override
 	public String getSource() {
@@ -139,12 +145,12 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	}
 
 	@Override
-	public String getStatus() {
-		return entity.getStatus();
+	public JobAppSituation getSituation() {
+		return entity.getSituation();
 	}
 	@Override
-	public void setStatus(String status) {
-		entity.setStatus(status);
+	public void setSituation(JobAppSituation situation) {
+		entity.setSituation(situation);
 	}
 
 	@Override
@@ -157,43 +163,37 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 		ICandidateProxy proxy = new CandidateProxy(entity.getCandidateEntity());
 		return proxy;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setCandidateEntity(ICandidateProxy candidateJobApplication) {
 		entity.setCandidateEntity(((IEntityAware<CandidateEntity>)candidateJobApplication).getEntity());
-		
+
 	}
 
 	@Override
 	public IPositionProxy getPositionEntity() {
 		return new PositionProxy (entity.getPositionEntity());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setPositionEntity(IPositionProxy positionJobApplication) {
 		entity.setPositionEntity(((IEntityAware<PositionEntity>)positionJobApplication).getEntity());
-		
+
 	}
-
-	
-
-	
-	
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object o) {
 		return entity.equals(((IEntityAware<JobApplicationEntity>)o).getEntity());
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return entity.hashCode();
 	}
-	
+
 	@Override
 	public String toString() {
 		return entity.toString();
@@ -203,5 +203,46 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	public long getId() {
 		return entity.getId();
 	}
+
+	@Override
+	public List<IJobInterviewProxy> getInterviews() {
+		List<IJobInterviewProxy> proxy = new ArrayList<>();
+		List<JobInterviewEntity> entityInterviews = entity.getInterviews();
+		for(JobInterviewEntity jI: entityInterviews){
+			proxy.add(new JobInterviewProxy(jI));
+		}
+		return proxy;
+	}
+
+	@Override
+	public void setInterviews(List<IJobInterviewProxy> interviews) {
+		entity.setInterviews(interviewConvertProxyToEntity(interviews));
+	}
 	
+	@SuppressWarnings(value = "unchecked")
+	private List<JobInterviewEntity> interviewConvertProxyToEntity (List<IJobInterviewProxy> interviews ){
+		List <JobInterviewEntity> entity = new ArrayList<>();
+		for(IJobInterviewProxy jI: interviews){
+			entity.add(((IEntityAware<JobInterviewEntity>)jI).getEntity());
+		}
+		return entity;
+	} 
+
+	@Override
+	public IProposalProxy getProposal() {
+		ProposalEntity entityProposal = entity.getProposal();
+		return new ProposalProxy(entityProposal);
+	}
+
+	@Override
+	public void setProposal(IProposalProxy proposal) {
+		entity.setProposal(proposalConvertProxyToEntity(proposal));
+	}
+	
+	@SuppressWarnings("unchecked")
+	private ProposalEntity proposalConvertProxyToEntity (IProposalProxy proxy){
+		ProposalEntity entityProposal = ((IEntityAware<ProposalEntity>)proxy).getEntity();
+		return entityProposal;
+	}
+
 }

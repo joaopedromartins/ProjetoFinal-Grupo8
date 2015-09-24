@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IAnswerInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
@@ -18,6 +18,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.INotificationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IProposalProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionChoiceProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
@@ -35,7 +36,7 @@ public class ProxyFactory implements IProxyFactory {
 
 	@Override
 	public IPositionProxy position(Date openDate, String code, String title,
-			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
+			List<Localization> localization, StatusPosition status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> script) {
 		
@@ -97,10 +98,10 @@ public class ProxyFactory implements IProxyFactory {
 	
 	@Override
 	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
-			String diploma, String school, String letter, String cv, String source, String status,
+			String diploma, String school, String letter, String cv, String source,
 			ICandidateProxy candidate, IPositionProxy position) {
 		return new JobApplicationProxy( address,  city,  country,  phone,
-				 diploma,  school,  letter,  cv, source,  status, candidate, position);
+				 diploma,  school,  letter,  cv, source, candidate, position);
 	}
 
 	@Override
@@ -112,8 +113,12 @@ public class ProxyFactory implements IProxyFactory {
 
 	@Override
 	public IAnswerInterviewProxy answerInterview(String question, String questionType) {
-		
 		return new AnswerInterviewProxy(question,questionType);
+	}
+
+	@Override
+	public IProposalProxy proposalJobApplication(Date proposalDate, String proposal) {
+		return new ProposalProxy(proposalDate, proposal);
 	}
 
 }

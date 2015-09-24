@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.ejb.Stateless;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 import pt.uc.dei.aor.g8.jobapp.business.model.IAnswerInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
@@ -18,7 +20,9 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
 import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
+import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobInterviewPersistenceService;
+import pt.uc.dei.aor.g8.jobapp.business.util.GmailMessage;
 
 @Stateless
 public class JobInterviewFacade implements IJobInterviewFacade {
@@ -29,12 +33,43 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 	private IProxyFactory factory;
 	@EJB
 	private IJobInterviewPersistenceService service;
+	@EJB
+	private IJobApplicationPersistenceService applicationService;
+	@EJB
+	private INotificationFacade notification;
+	@EJB
+	private GmailMessage mail;
 	
 	@Override
 	public IJobInterviewProxy newInterview(Date interviewDate, IUserProxy userInterviewer,
 			IJobApplicationProxy jobapplication, IScriptProxy script) {
+		
 		IJobInterviewProxy newInterview = factory.jobInterview(interviewDate, userInterviewer, jobapplication, script);
-		return service.newInterview(newInterview);
+			
+		try {
+			newInterview = service.newInterview(newInterview);
+			jobapplication.setSituation(JobAppSituation.INTERVIEWING);
+			applicationService.editJobApplication(jobapplication);
+		} catch (EJBTransactionRolledbackException e) {
+			log.error(e.getMessage());
+			return null;
+		}
+		SimpleDateFormat date = new SimpleDateFormat( "dd/MM/yyyy - HH:mm " );
+		String dateFormat = date.format(interviewDate);
+		
+	/*	//Interviewer
+		notification.createNotification("Schedule Interview"," You have a interview, on " 
+				+ dateFormat + ", with  candidate , " + jobapplication.getCandidateEntity().getFullName() + ".\n You can see candidate information ", "", userInterviewer);
+		mail.sendEmail(newUser.getEmail(), "jobappmailtest@gmail.com", "User Register", "Your registration have the following items:\nUsername - " 
+				+ username + "\nPassword - " + passwordGenerate + "");
+		
+		//Candidate
+		mail.sendEmail(newUser.getEmail(), "jobappmailtest@gmail.com", "User Register", "Your registration have the following items:\nUsername - " 
+				+ username + "\nPassword - " + passwordGenerate + "");*/
+			
+	
+		
+		return newInterview;
 	}
 
 	@Override

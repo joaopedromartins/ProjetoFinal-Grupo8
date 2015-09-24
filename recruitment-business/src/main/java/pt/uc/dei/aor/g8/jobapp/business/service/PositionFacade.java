@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -31,7 +31,7 @@ public class PositionFacade implements IPositionFacade {
 
 	@Override
 	public IPositionProxy creatNewPosition(Date openDate, String title,
-			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
+			List<Localization> localization, StatusPosition status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> script) {
 		

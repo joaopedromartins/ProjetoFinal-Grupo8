@@ -7,19 +7,19 @@ import java.util.List;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 
 
 public interface IProxyFactory {
 
 	public IPositionProxy position(Date openDate, String code, String title,
-			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
+			List<Localization> localization, StatusPosition status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> script);
 
 	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
-			String diploma, String school, String letter, String cv, String source, String status, 
+			String diploma, String school, String letter, String cv, String source, 
 			ICandidateProxy candidate, IPositionProxy position);
 
 	public IJobAdvertisingChanelProxy jobAdvertisingChanel(String chanelName);
@@ -47,4 +47,6 @@ public interface IProxyFactory {
 	public IJobInterviewProxy jobInterview (Date interviewDate, IUserProxy interviewer, IJobApplicationProxy jobapplication , IScriptProxy script);
 	
 	public IAnswerInterviewProxy answerInterview (String question, String questionType);
+	
+	public IProposalProxy proposalJobApplication (Date proposalDate, String proposal);
 }

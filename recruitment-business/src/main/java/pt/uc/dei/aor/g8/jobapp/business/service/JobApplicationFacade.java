@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -33,7 +34,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 
 	@Override
 	public IJobApplicationProxy createNewJobApplication(String address, String city, String country, BigInteger phone,
-			String diploma, String school, String letter, String cv, String source, String status,
+			String diploma, String school, String letter, String cv, String source,
 			ICandidateProxy candidate, IPositionProxy position) {
 
 		//test if candidate is null
@@ -48,7 +49,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 
 		IJobApplicationProxy newJobApplication = factory.jobApplication(
 				address, city, country, phone, diploma,
-				school, letter, cv, source, status, candidate, position);
+				school, letter, cv, source, candidate, position);
 
 		IJobApplicationProxy returnJobApp = service.saveJobApplication(newJobApplication);
 
@@ -105,7 +106,8 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		} else if (jobApplicationProxy.getPositionEntity() == null) {
 			return null;
 			//test is job application status is Open to allow change
-		} else if (! jobApplicationProxy.getStatus().equals("Open")) {
+			//TODO depois de submetida não deveria ser editada
+		} else if (! (jobApplicationProxy.getSituation().equals(JobAppSituation.SUBMITTED))) {
 			return null;
 		}
 

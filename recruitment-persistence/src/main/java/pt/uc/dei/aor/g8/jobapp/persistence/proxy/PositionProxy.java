@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Localization;
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -32,14 +32,12 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	public PositionProxy(Date openDate, String code, String title,
-			List<Localization> localization, Status status, int numberOfposition, Date sLA, IUserProxy managerPosition,
+			List<Localization> localization, StatusPosition status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> scripts) {
-
-		//TODO mudar o null do script
+		
 		this.entity = new PositionEntity(openDate,code,title,localization,status,numberOfposition,sLA, userConverterProxyToEntity(managerPosition),
 				company,technicalArea,descriptionPosition, jobAdvertisingChanelConverterProxyToEntity(jobAdvertisingChanel),scriptsConvertProxyToEntity(scripts)); 
-
 	}
 
 
@@ -124,12 +122,12 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	@Override
-	public Status getStatus() {
+	public StatusPosition getStatus() {
 		return entity.getStatus();
 	}
 
 	@Override
-	public void setStatus(Status status) {
+	public void setStatus(StatusPosition status) {
 		entity.setStatus(status);
 	}
 

@@ -24,6 +24,7 @@ import javax.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
@@ -55,7 +56,7 @@ public class JobApplicationBean implements Serializable {
 	private String letter; 
 	private String cv;
 	private String source;
-	private String status;
+	private JobAppSituation situation;
 	
 	private IPositionProxy positionProxy;
 	
@@ -136,11 +137,11 @@ public class JobApplicationBean implements Serializable {
 		this.source = source;
 	}
 
-	public String getStatus() {
-		return status;
+	public JobAppSituation getStatus() {
+		return situation;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(JobAppSituation status) {
+		this.situation = status;
 	}
 
 	
@@ -184,7 +185,7 @@ public class JobApplicationBean implements Serializable {
 		IJobApplicationProxy proxy;
 		proxy=jobApplicationFacade.createNewJobApplication(
 				 address,  city,  country, phone, diploma,
-				 school,  letter,  cv, source, status, loginBean.getCandidate(), positionProxy);
+				 school,  letter,  cv, source, loginBean.getCandidate(), positionProxy);
 		if(proxy!=null){
 			address=null;
 			city=null;
@@ -195,7 +196,7 @@ public class JobApplicationBean implements Serializable {
 			letter=null; 
 			cv=null;
 			source=null;
-			status=null;
+			situation=null;
 			uploadedfilename="";
 						
 			FacesMessage message = new FacesMessage(

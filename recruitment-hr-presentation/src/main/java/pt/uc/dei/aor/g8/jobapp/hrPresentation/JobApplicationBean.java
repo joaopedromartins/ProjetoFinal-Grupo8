@@ -76,6 +76,7 @@ public class JobApplicationBean implements Serializable {
 
 	public void scheduleInterview (){
 		System.out.println("date interview: "+interviewBean.getDate());
+		
 		IJobInterviewProxy interviewProxy = facadeInterview.newInterview(interviewBean.getDate(), interviewBean.getUserInterviwer(), jobApplication, interviewBean.getScriptInterview());
 		if (interviewProxy != null){
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
