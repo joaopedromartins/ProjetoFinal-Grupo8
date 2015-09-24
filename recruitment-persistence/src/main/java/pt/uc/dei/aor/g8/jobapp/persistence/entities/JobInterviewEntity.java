@@ -72,6 +72,13 @@ public class JobInterviewEntity implements Serializable{
 
 
 
+	public long getId() {
+		return id;
+	}
+
+
+
+
 	public Date getInterviewDate() {
 		return interviewDate;
 	}

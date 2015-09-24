@@ -17,4 +17,9 @@ public interface IJobInterviewProxy {
 	
 	public List<IAnswerInterviewProxy> getAnswer();
 	public void setAnswer(List<IAnswerInterviewProxy> answer);
+	
+	public IScriptProxy getScriptInterview();
+	public void setScriptInterview(IScriptProxy scriptInterview);
+	
+	public long getId();
 }

@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.business.model;
 
+import java.util.List;
+
 public interface IAnswerInterviewProxy {
 
 	public String getQuestion();
@@ -8,6 +10,6 @@ public interface IAnswerInterviewProxy {
 	public String getQuestionType();
 	public void setQuestionType(String questionType);
 
-	public String getAnswer();
-	public void setAnswer(String answer);
+	public List<String> getAnswer();
+	public void setAnswer(List<String> answer);
 }

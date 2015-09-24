@@ -1,14 +1,17 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import pt.uc.dei.aor.g8.jobapp.business.model.IAnswerInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobInterviewPersistenceService;
@@ -38,6 +41,23 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 	public List<IJobInterviewProxy> listInterviewsOfInterviewer(IUserProxy interviewer) {
 	
 		return service.listInterviewsOfInterview(interviewer);
+	}
+
+	@Override
+	public IJobInterviewProxy findById(long id) {
+		return service.findById(id);
+	}
+
+	@Override
+	public List<IAnswerInterviewProxy> getListAnswers(IScriptProxy scriptInterview) {
+		int sizeListQuestions = scriptInterview.getQuestions().size();
+		List<IAnswerInterviewProxy> answers = new ArrayList<>();
+		List<IQuestionProxy> questions = scriptInterview.getQuestions();
+		
+		for (int i = 0; i<sizeListQuestions ; i++){
+			answers.add(factory.answerInterview((questions.get(i).getQuestion()),(questions.get(i).getQuestiontype().getDescription())));
+		}
+		return answers;
 	}
 
 }

@@ -11,6 +11,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.QuestionType;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.Status;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.TechnicalArea;
+import pt.uc.dei.aor.g8.jobapp.business.model.IAnswerInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
@@ -107,6 +108,12 @@ public class ProxyFactory implements IProxyFactory {
 			IJobApplicationProxy jobapplication, IScriptProxy script) {
 		
 		return new JobInterviewProxy(interviewDate, interviewer,jobapplication,script);
+	}
+
+	@Override
+	public IAnswerInterviewProxy answerInterview(String question, String questionType) {
+		
+		return new AnswerInterviewProxy(question,questionType);
 	}
 
 }

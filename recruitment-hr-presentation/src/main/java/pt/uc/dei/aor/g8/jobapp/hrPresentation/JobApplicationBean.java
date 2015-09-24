@@ -12,13 +12,10 @@ import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobInterviewFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IPositionFacade;
-import pt.uc.dei.aor.g8.jobapp.business.service.IScriptFacade;
-import pt.uc.dei.aor.g8.jobapp.business.service.IUserFacade;
 
 @Named
 @ViewScoped
@@ -64,7 +61,7 @@ public class JobApplicationBean implements Serializable {
 	public long getId() {
 		return id;
 	}
-
+	
 	public void setId(long id) {
 		this.id = id;
 	}

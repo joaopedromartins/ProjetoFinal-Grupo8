@@ -74,6 +74,12 @@ public class JobInterviewPersistenceService implements IJobInterviewPersistenceS
 		return proxy;
 	}
 
+	@Override
+	public IJobInterviewProxy findById(long id) {
+		JobInterviewEntity entity = em.find(JobInterviewEntity.class, id);
+		return new JobInterviewProxy(entity);
+	}
+
 
 
 }

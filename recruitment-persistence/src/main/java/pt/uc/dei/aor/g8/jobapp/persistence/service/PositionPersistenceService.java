@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IQuestionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;

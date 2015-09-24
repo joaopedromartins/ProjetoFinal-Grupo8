@@ -7,15 +7,22 @@
 
 	<ui:define name="content">
 
-		<h1>Interview</h1>
-		
-		<h:form id="formDoScript">
-		<p:dataTable id="script" var="question"
-				converter="omnifaces.ListConverter" scrollable="true" scrollHeight="400"
-				value="#{scriptBean.script.questions}" styleClass="scriptTable"
-				rowStyleClass="rowClasses">
+		<f:metadata>
+			<f:viewParam name="interviewId" value="#{jobInterviewBean.id}" />
+			<f:viewAction action="#{jobInterviewBean.findById()}" />
+		</f:metadata>
 
-				<f:facet name="header" style="width:70%;">#{scriptBean.script.scriptTitle}</f:facet>
+		<h1>Interview</h1>
+
+		<h:form id="formDoScript">
+			<p:dataTable id="script" var="question"
+				converter="omnifaces.ListConverter" scrollable="true"
+				scrollHeight="400"
+				value="#{jobInterviewBean.interview.scriptInterview.questions}"
+				styleClass="scriptTable" rowStyleClass="rowClasses"
+				rowIndexVar="index">
+
+				<f:facet name="header">#{jobInterviewBean.interview.scriptInterview.scriptTitle}</f:facet>
 
 				<p:column style="width:5%">
 					<h:outputText value="#{question.orderNumber}" />
@@ -27,57 +34,43 @@
 
 						<h:panelGrid id="questionText"
 							rendered="#{question.questiontype eq 'TEXT'}" columns="1">
-							<p:inputText disabled="true" />
+							<p:inputText value="#{jobInterviewBean.answers[index].answer}" />
 						</h:panelGrid>
 
 						<h:panelGrid id="questionParagraph"
 							rendered="#{question.questiontype eq 'PARAGRAPH'}" columns="1">
-							<p:inputTextarea disabled="true" />
+							<p:inputTextarea
+								value="#{jobInterviewBean.answers[index].answer}" />
 						</h:panelGrid>
 
 						<h:panelGrid id="questionMultiplechoice"
 							rendered="#{question.questiontype eq 'MULTIPLECHOICE'}"
 							columns="1">
-							<h:dataTable id="MultichoiseOptions" var="option"
-								value="#{question.options}">
-								<p:column>
-									<h:selectOneRadio onclick="return false;" styleClass="radio">
-										<f:selectItem itemDisabled="true" />
-									</h:selectOneRadio>
-								</p:column>
-								<p:column>
-									<h:outputText value="#{option.option}" />
-								</p:column>
-							</h:dataTable>
+							<p:selectOneRadio id="multiplechoiceRadio"
+								value="#{jobInterviewBean.answers[index].answer}"
+								styleClass="radio">
+								<f:selectItems value="#{question.options}" var="option"
+									itemLabel="#{option.option}" />
+							</p:selectOneRadio>
 						</h:panelGrid>
 
 						<h:panelGrid id="questionCheckboxes"
-							rendered="#{question.questiontype eq 'CHECKBOXES'}" columns="2">
-
-							<h:dataTable id="optionsCheckboxes" var="option"
-								value="#{question.options}">
-								<p:column>
-									<h:selectManyCheckbox styleClass="checkbox">
-										<f:selectItem itemDisabled="true" itemValue="false"
-											itemLabel="" />
-									</h:selectManyCheckbox>
-								</p:column>
-								<p:column>
-									<h:outputText value="#{option.option}" />
-								</p:column>
-							</h:dataTable>
+							rendered="#{question.questiontype eq 'CHECKBOXES'}" columns="1">
+							<p:selectManyCheckbox id="checkBoxes"
+								value="#{jobInterviewBean.answers[index].answer}">
+								<f:selectItems value="#{question.options}" var="option"
+									itemLabel="#{option.option}" />
+							</p:selectManyCheckbox>
 						</h:panelGrid>
 
 						<h:panelGrid id="questionChooseFromList"
 							rendered="#{question.questiontype eq 'CHOOSEFROMLIST'}"
 							columns="1">
-
-							<h:dataTable id="optionsList" var="option"
-								value="#{question.options}">
-								<h:column>
-									<h:outputText value="#{option.option}" />
-								</h:column>
-							</h:dataTable>
+							<p:selectManyButton id="optionsList"
+								value="#{jobInterviewBean.answers[index].answer}">
+								<f:selectItems value="#{question.options}" var="option"
+									itemLabel="#{option.option}" />
+							</p:selectManyButton>
 						</h:panelGrid>
 
 						<h:panelGrid id="questionScale"
@@ -92,14 +85,12 @@
 							<p:spacer />
 
 							<h:outputLabel value="#{question.scale.minLabel}" />
-							<h:selectOneRadio styleClass="radioLine">
-
-								<f:selectItems itemDisabled="true" itemLabel=""
+							<h:selectOneRadio styleClass="radioLine"
+								value="#{jobInterviewBean.answers[index].answer}">
+								<f:selectItems itemLabel=""
 									value="#{scriptBean.getScaleValues(question)}" />
-
 							</h:selectOneRadio>
 							<h:outputLabel value="#{question.scale.maxLabel}" />
-
 						</h:panelGrid>
 
 						<h:panelGrid>

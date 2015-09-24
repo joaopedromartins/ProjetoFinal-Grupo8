@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IAnswerInterviewProxy;
@@ -24,6 +26,12 @@ public class AnswerInterviewProxy implements IAnswerInterviewProxy, IEntityAware
 		}		
 	}
 
+
+
+
+	public AnswerInterviewProxy(String question, String questionType) {
+		this.entity = new AnswerInterviewEntity(question, questionType);
+	}
 
 	@Override
 	public AnswerInterviewEntity getEntity() {
@@ -51,12 +59,12 @@ public class AnswerInterviewProxy implements IAnswerInterviewProxy, IEntityAware
 	}
 
 	@Override
-	public String getAnswer() {
+	public List<String> getAnswer() {
 		return entity.getAnswer();
 	}
 
 	@Override
-	public void setAnswer(String answer) {
+	public void setAnswer(List<String> answer) {
 		entity.setAnswer(answer);
 	}
 	

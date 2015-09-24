@@ -109,5 +109,20 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 		ScriptEntity entityScript =((IEntityAware<ScriptEntity>)script).getEntity();	
 		return entityScript;
 	}
+	
+	@Override
+	public IScriptProxy getScriptInterview() {	
+		return new ScriptProxy(entity.getScriptInterview());
+	}
+	
+	@Override
+	public void setScriptInterview(IScriptProxy scriptInterview) {	
+		entity.setScriptInterview(scriptConvertProxyToEntity(scriptInterview));
+	}
+	@Override
+	public long getId() {
+		
+		return entity.getId();
+	}
 
 }

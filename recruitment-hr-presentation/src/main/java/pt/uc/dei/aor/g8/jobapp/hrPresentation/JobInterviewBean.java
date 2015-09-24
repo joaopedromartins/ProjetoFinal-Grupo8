@@ -9,6 +9,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import pt.uc.dei.aor.g8.jobapp.business.model.IAnswerInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
@@ -34,6 +35,8 @@ public class JobInterviewBean implements Serializable{
 	@Inject
 	private UserBean currentInterviewer;
 	
+
+	private List<IAnswerInterviewProxy> answers;
 	private Date date;
 	private IUserProxy userInterviwer;
 	private IScriptProxy scriptInterview;
@@ -41,10 +44,8 @@ public class JobInterviewBean implements Serializable{
 	private IPositionProxy position;
 	private ICandidateProxy candidate;
 	private IJobApplicationProxy jobApplication;
-	
-	
-	
-	
+	private long id;
+	private IJobInterviewProxy interview;
 	
 	public JobInterviewBean() {
 
@@ -110,6 +111,38 @@ public class JobInterviewBean implements Serializable{
 		this.scriptInterview = scriptInterview;
 	}
 	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public IJobInterviewProxy getInterview() {
+		return interview;
+	}
+
+	public void setInterview(IJobInterviewProxy interview) {
+		this.interview = interview;
+	}
+
+	public List<IAnswerInterviewProxy> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<IAnswerInterviewProxy> answers) {
+		this.answers = answers;
+	}
+
+	public void findById(){
+		this.interview = interviewFacade.findById(id);
+		System.out.println(id);
+		System.out.println(interview.getScriptInterview().getScriptTitle());
+		this.answers = interviewFacade.getListAnswers (interview.getScriptInterview());
+		System.out.println(answers.get(0).getQuestion());
+	}
+
 	public List<IJobInterviewProxy> listOfAllInterviews (){
 		return interviewFacade.listOfAllInterviews();
 	}
@@ -117,6 +150,10 @@ public class JobInterviewBean implements Serializable{
 	public List <IJobInterviewProxy> listInterviewsOfInterviewer (){
 		return interviewFacade.listInterviewsOfInterviewer(currentInterviewer.getCurrentUser());
 	}
+	
+	
+	
+
 	
 	
 

@@ -19,7 +19,7 @@
 					<p:row>
 						<p:column rowspan="2" headerText="Data" />
 						<p:column rowspan="2" headerText="Answer" />
-						<p:column rowspan="2" headerText="DO Interview"/>
+						<p:column rowspan="2" headerText="DO Interview" />
 						<p:column colspan="4" headerText="Position" />
 						<p:column colspan="4" headerText="Candidate" />
 					</p:row>
@@ -45,7 +45,9 @@
 					<h:outputText value="resposta" />
 				</p:column>
 				<p:column>
-					<h:outputText value="fazer entrevista" />
+					<p:link outcome="interview?faces-redirect=true" value="Start">
+						<f:param name="interviewId" value="#{interview.id}" />
+					</p:link>
 				</p:column>
 
 
@@ -140,9 +142,10 @@
 					<f:facet name="header">
 						<h:outputText value="Candidate Details:" />
 					</f:facet>
-					
+
 					<h:outputText value="Name:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.candidateEntity.fullName}" />
+					<h:outputText
+						value="#{jobInterviewBean.jobApplication.candidateEntity.fullName}" />
 
 					<h:outputText value="Address:" />
 					<h:outputText value="#{jobInterviewBean.jobApplication.address}" />
@@ -155,9 +158,10 @@
 
 					<h:outputText value="Phone:" />
 					<h:outputText value="#{jobInterviewBean.jobApplication.phone}" />
-					
+
 					<h:outputText value="Phone:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.candidateEntity.email}" />
+					<h:outputText
+						value="#{jobInterviewBean.jobApplication.candidateEntity.email}" />
 
 					<h:outputText value="Diploma:" />
 					<h:outputText value="#{jobInterviewBean.jobApplication.diploma}" />

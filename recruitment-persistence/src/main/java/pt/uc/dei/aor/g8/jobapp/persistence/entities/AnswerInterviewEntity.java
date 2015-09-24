@@ -1,6 +1,9 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +25,8 @@ public class AnswerInterviewEntity {
 	private String questionType;
 	
 	@Column
-	private String answer;
+	@ElementCollection
+	private List<String> answer;
 	
 
 	
@@ -31,10 +35,10 @@ public class AnswerInterviewEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AnswerInterviewEntity(String question, String answer) {
+	public AnswerInterviewEntity(String question, String questionType) {
 		super();
 		this.question = question;
-		this.answer = answer;
+		this.questionType = questionType;
 	}
 
 	
@@ -54,11 +58,11 @@ public class AnswerInterviewEntity {
 		this.questionType = questionType;
 	}
 
-	public String getAnswer() {
+	public List<String> getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(String answer) {
+	public void setAnswer(List<String> answer) {
 		this.answer = answer;
 	}
 
