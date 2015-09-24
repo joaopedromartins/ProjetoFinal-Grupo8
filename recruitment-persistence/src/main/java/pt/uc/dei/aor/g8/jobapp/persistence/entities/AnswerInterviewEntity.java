@@ -1,10 +1,14 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table (name="Answer")
 public class AnswerInterviewEntity {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,8 +30,8 @@ public class AnswerInterviewEntity {
 	private String questionType;
 	
 	@Column
-	@ElementCollection
-	private List<String> answer;
+	@ElementCollection (fetch = FetchType.EAGER)
+	private Set<String> answer;
 	
 
 	
@@ -39,6 +44,8 @@ public class AnswerInterviewEntity {
 		super();
 		this.question = question;
 		this.questionType = questionType;
+		this.answer = new HashSet<>();
+		answer.add("");
 	}
 
 	
@@ -58,12 +65,13 @@ public class AnswerInterviewEntity {
 		this.questionType = questionType;
 	}
 
-	public List<String> getAnswer() {
-		return answer;
+	public Set<String> getAnswer() {
+		return answer ;
 	}
 
 	public void setAnswer(List<String> answer) {
-		this.answer = answer;
+		this.answer = new HashSet<>();
+		this.answer.addAll(answer);
 	}
 
 }

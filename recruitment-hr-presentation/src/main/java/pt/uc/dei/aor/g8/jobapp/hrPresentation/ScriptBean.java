@@ -189,6 +189,16 @@ public class ScriptBean implements Serializable{
 		}
 		return scale;
 	}
+	
+	public List<String> getScaleValuesAnswers(IQuestionProxy question){
+		int max = question.getScale().getMaximum();
+		int min = question.getScale().getMinimum();
+		List<String> scale = new ArrayList<>();
+		for (int i = min; i<= max ; i++){
+			scale.add(String.valueOf(i));
+		}
+		return scale;
+	}
 
 	public void deleteQuestion (IQuestionProxy questionDelete){
 		System.out.println(questionDelete.getOrderNumber());

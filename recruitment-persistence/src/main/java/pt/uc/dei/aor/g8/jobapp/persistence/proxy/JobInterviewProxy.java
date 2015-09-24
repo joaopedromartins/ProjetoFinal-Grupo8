@@ -3,6 +3,7 @@ package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 
@@ -70,7 +71,7 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 	public List<IAnswerInterviewProxy> getAnswer() {
 		List <IAnswerInterviewProxy> proxy = new ArrayList<>();
 		
-		List <AnswerInterviewEntity> entityAnswer = entity.getAnswer();
+		Set <AnswerInterviewEntity> entityAnswer = entity.getAnswer();
 		for (AnswerInterviewEntity a: entityAnswer){
 			proxy.add(new AnswerInterviewProxy(a));
 		}
@@ -123,6 +124,14 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 	public long getId() {
 		
 		return entity.getId();
+	}
+	@Override
+	public boolean getFinished() {
+		return entity.isFinished();
+	}
+	@Override
+	public void setFinhished(boolean finished) {
+		entity.setFinished(finished);		
 	}
 
 }

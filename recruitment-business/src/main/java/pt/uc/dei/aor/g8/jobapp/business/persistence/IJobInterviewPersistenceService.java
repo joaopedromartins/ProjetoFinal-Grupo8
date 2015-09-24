@@ -15,4 +15,6 @@ public interface IJobInterviewPersistenceService {
 	public List <IJobInterviewProxy> listInterviewsOfInterview (IUserProxy interviewer);
 	
 	public IJobInterviewProxy findById(long id);
+
+	public IJobInterviewProxy updateInterview(IJobInterviewProxy interview);
 }

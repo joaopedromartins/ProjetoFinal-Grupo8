@@ -80,6 +80,13 @@ public class JobInterviewPersistenceService implements IJobInterviewPersistenceS
 		return new JobInterviewProxy(entity);
 	}
 
+	@Override
+	public IJobInterviewProxy updateInterview(IJobInterviewProxy interview) {
+		JobInterviewEntity entity = getEntity(interview);
+		entity = em.merge(entity);
+		return new JobInterviewProxy(entity);
+	}
+
 
 
 }

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,7 +37,6 @@ public class JobInterviewBean implements Serializable{
 	@Inject
 	private UserBean currentInterviewer;
 	
-
 	private List<IAnswerInterviewProxy> answers;
 	private Date date;
 	private IUserProxy userInterviwer;
@@ -137,10 +138,11 @@ public class JobInterviewBean implements Serializable{
 
 	public void findById(){
 		this.interview = interviewFacade.findById(id);
-		System.out.println(id);
-		System.out.println(interview.getScriptInterview().getScriptTitle());
 		this.answers = interviewFacade.getListAnswers (interview.getScriptInterview());
-		System.out.println(answers.get(0).getQuestion());
+	}
+	
+	public void findInterviewById(){
+	this.interview = interviewFacade.findById(id);
 	}
 
 	public List<IJobInterviewProxy> listOfAllInterviews (){
@@ -149,6 +151,21 @@ public class JobInterviewBean implements Serializable{
 	
 	public List <IJobInterviewProxy> listInterviewsOfInterviewer (){
 		return interviewFacade.listInterviewsOfInterviewer(currentInterviewer.getCurrentUser());
+	}
+	
+	public void saveAnswersOfScript(){
+		IJobInterviewProxy proxyInterview = interviewFacade.saveAnswersOfScript(answers,interview);
+		if(proxyInterview == null){
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error save interview.", "");
+			FacesContext.getCurrentInstance().addMessage("growl", message);	
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_INFO,
+					"Interview's answers saved successfully.", "");
+			FacesContext.getCurrentInstance().addMessage("growl", message);
+		}
 	}
 	
 	

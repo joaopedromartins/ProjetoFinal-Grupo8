@@ -20,4 +20,6 @@ public interface IJobInterviewFacade {
 	public IJobInterviewProxy findById(long id);
 
 	public List<IAnswerInterviewProxy> getListAnswers(IScriptProxy scriptInterview);
+
+	public IJobInterviewProxy saveAnswersOfScript(List<IAnswerInterviewProxy> answers, IJobInterviewProxy interview);
 }

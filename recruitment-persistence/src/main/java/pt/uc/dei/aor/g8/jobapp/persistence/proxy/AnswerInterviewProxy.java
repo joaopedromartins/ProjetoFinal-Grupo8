@@ -1,6 +1,8 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 
@@ -60,14 +62,31 @@ public class AnswerInterviewProxy implements IAnswerInterviewProxy, IEntityAware
 
 	@Override
 	public List<String> getAnswer() {
-		return entity.getAnswer();
+		List<String> answer = new ArrayList<>();
+		answer.addAll(entity.getAnswer());
+		return answer;
 	}
 
 	@Override
 	public void setAnswer(List<String> answer) {
 		entity.setAnswer(answer);
 	}
-	
-	
+
+	@Override
+	public String getAnswerToString() {
+		Set<String> answers = entity.getAnswer();
+		String answerList = "";
+		for (String a: answers) {
+			if ( !answerList.equals("")){
+				answerList = answerList +", " + a.toString() ;
+			} else {
+				answerList = answerList + a.toString() ;
+			}
+
+		}
+		return answerList;
+	}
+
+
 
 }

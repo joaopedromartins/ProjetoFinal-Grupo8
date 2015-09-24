@@ -12,4 +12,6 @@ public interface IAnswerInterviewProxy {
 
 	public List<String> getAnswer();
 	public void setAnswer(List<String> answer);
+	
+	public String getAnswerToString();
 }

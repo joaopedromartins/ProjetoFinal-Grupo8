@@ -5,6 +5,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="script.css" />
+	</ui:define>
 	<ui:define name="content">
 
 		<f:metadata>
@@ -17,7 +20,7 @@
 		<h:form id="formDoScript">
 			<p:dataTable id="script" var="question"
 				converter="omnifaces.ListConverter" scrollable="true"
-				scrollHeight="400"
+				tableStyle="width:auto"
 				value="#{jobInterviewBean.interview.scriptInterview.questions}"
 				styleClass="scriptTable" rowStyleClass="rowClasses"
 				rowIndexVar="index">
@@ -25,39 +28,43 @@
 				<f:facet name="header">#{jobInterviewBean.interview.scriptInterview.scriptTitle}</f:facet>
 
 				<p:column style="width:5%">
-					<h:outputText value="#{question.orderNumber}" />
+					<p:outputLabel value="#{question.orderNumber}" />
 				</p:column>
 
-				<p:column style="width:95%">
-					<h:outputText value="#{question.question}" />
+				<p:column>
+					<p:outputLabel value="#{question.question}" />
 					<h:panelGroup id="typeOfQuestion">
 
 						<h:panelGrid id="questionText"
 							rendered="#{question.questiontype eq 'TEXT'}" columns="1">
-							<p:inputText value="#{jobInterviewBean.answers[index].answer}" />
+							<p:inputText value="#{jobInterviewBean.answers[index].answer[0]}"
+								required="true" label="Question Text" />
 						</h:panelGrid>
 
 						<h:panelGrid id="questionParagraph"
 							rendered="#{question.questiontype eq 'PARAGRAPH'}" columns="1">
 							<p:inputTextarea
-								value="#{jobInterviewBean.answers[index].answer}" />
+								value="#{jobInterviewBean.answers[index].answer[0]}"
+								required="true" label="Question Paragraph" />
 						</h:panelGrid>
 
 						<h:panelGrid id="questionMultiplechoice"
 							rendered="#{question.questiontype eq 'MULTIPLECHOICE'}"
 							columns="1">
 							<p:selectOneRadio id="multiplechoiceRadio"
-								value="#{jobInterviewBean.answers[index].answer}"
-								styleClass="radio">
+								label="Question Choice"
+								value="#{jobInterviewBean.answers[index].answer[0]}"
+								converter="omnifaces.SelectItemsConverter" required="true">
 								<f:selectItems value="#{question.options}" var="option"
-									itemLabel="#{option.option}" />
+									itemLabel="#{option.option}" itemValue="#{option.option}" />
 							</p:selectOneRadio>
 						</h:panelGrid>
 
 						<h:panelGrid id="questionCheckboxes"
 							rendered="#{question.questiontype eq 'CHECKBOXES'}" columns="1">
-							<p:selectManyCheckbox id="checkBoxes"
-								value="#{jobInterviewBean.answers[index].answer}">
+							<p:selectManyCheckbox id="checkBoxes" label="Question checkBox"
+								value="#{jobInterviewBean.answers[index].answer}"
+								required="true" converter="omnifaces.SelectItemsConverter">
 								<f:selectItems value="#{question.options}" var="option"
 									itemLabel="#{option.option}" />
 							</p:selectManyCheckbox>
@@ -66,8 +73,9 @@
 						<h:panelGrid id="questionChooseFromList"
 							rendered="#{question.questiontype eq 'CHOOSEFROMLIST'}"
 							columns="1">
-							<p:selectManyButton id="optionsList"
-								value="#{jobInterviewBean.answers[index].answer}">
+							<p:selectManyButton id="optionsList" label="Question list"
+								value="#{jobInterviewBean.answers[index].answer}"
+								required="true" converter="omnifaces.SelectItemsConverter">
 								<f:selectItems value="#{question.options}" var="option"
 									itemLabel="#{option.option}" />
 							</p:selectManyButton>
@@ -84,13 +92,14 @@
 							</ui:repeat>
 							<p:spacer />
 
-							<h:outputLabel value="#{question.scale.minLabel}" />
-							<h:selectOneRadio styleClass="radioLine"
-								value="#{jobInterviewBean.answers[index].answer}">
+							<p:outputLabel value="#{question.scale.minLabel}" />
+							<p:selectOneRadio styleClass="radioLine" label="Question scale"
+								value="#{jobInterviewBean.answers[index].answer[0]}"
+								required="true" converter="omnifaces.SelectItemsConverter">
 								<f:selectItems itemLabel=""
-									value="#{scriptBean.getScaleValues(question)}" />
-							</h:selectOneRadio>
-							<h:outputLabel value="#{question.scale.maxLabel}" />
+									value="#{scriptBean.getScaleValuesAnswers(question)}" />
+							</p:selectOneRadio>
+							<p:outputLabel value="#{question.scale.maxLabel}" />
 						</h:panelGrid>
 
 						<h:panelGrid>
@@ -99,8 +108,14 @@
 					</h:panelGroup>
 
 				</p:column>
+				<f:facet name="footer">
+					<p:commandButton id="saveScript" value="Save Script"
+						action="#{jobInterviewBean.saveAnswersOfScript}"
+						update=":formDoScript:growl" icon="ui-icon-disk" />
+				</f:facet>
 
 			</p:dataTable>
+			<p:growl id="growl" />
 		</h:form>
 
 	</ui:define>
