@@ -11,100 +11,103 @@
 </h:head>
 
 <h:body>
-	<p:panelGrid columns="2">
+	<center>
 		<p:panel header="Login Required">
-			<p:panel styleClass="loginPanel">
-				<h:form id="loginForm"
-					onsubmit="document.loginForm.action = 'j_security_check';">
-					<center>
-						<p:panelGrid id="panelSignIn" columns="2">
-							<p:outputLabel value="Username" />
-							<input name="j_username" type="text" />
+			<h:form id="loginForm"
+				onsubmit="document.loginForm.action = 'j_security_check';">
+				<center>
+					<p:panelGrid id="panelSignIn" columns="2">
+						<p:outputLabel value="Username" />
+						<input name="j_username" type="text" />
 
-							<p:outputLabel value="Password" />
-							<input name="j_password" type="password" />
-						</p:panelGrid>
-						<br />
-						<h:commandButton value="SignIn" />
-						<br />
-					</center>
-				</h:form>
-			</p:panel>
+						<p:outputLabel value="Password" />
+						<input name="j_password" type="password" />
+					</p:panelGrid>
+					<br />
+					<p:commandButton value="SignIn" ajax="false" />
+					<br />
+				</center>
+			</h:form>
+		</p:panel>
+		
+		<br/>
 
-			<p:tabView orientation="top" header="Account Creation or Recover">
-				<p:tab title="SignIn">
-
-
-					<p:outputLabel
-						value="If you forget your username or password, press on recover account button." />
+		<p:tabView orientation="top" header="Account Creation or Recover">
+			<p:tab title="SignIn" orientation="top">
+				<center>
+					<br />
+					<p:outputLabel value="If you forget your username or password," />
+					<br />
+					<p:outputLabel value="press on recover account button." />
+					<br />
 					<br />
 					<p:commandButton update=":formRecover:panelRecover"
 						oncomplete="PF('candidaterecover').show()" value="Recover Account"
 						title="Click here to Recover Account" />
+					<br />
+				</center>
+			</p:tab>
 
-				</p:tab>
+			<p:tab title="SignUp" orientation="top">
+				<h:form id="formSignUp">
+					<center>
+						<p:messages />
+						<p:outputLabel value="New user registration" />
+						<p:panelGrid columns="3" id="panelSignUp">
 
-				<p:tab title="SignUp">
-					<h:form id="formSignUp">
-						<center>
-							<p:messages />
-							<p:outputLabel value="New user registration" />
-							<p:panelGrid columns="3" id="panelSignUp">
+							<p:outputLabel value="Username" for="username" />
+							<p:inputText id="username" required="true"
+								value="#{signUpBean.username}" />
+							<p:message for="username" />
 
-								<p:outputLabel value="Username" for="username" />
-								<p:inputText id="username" required="true"
-									value="#{signUpBean.username}" />
-								<p:message for="username" />
+							<p:outputLabel value="Password" for="password" />
+							<p:password id="password" required="true"
+								value="#{signUpBean.password}" feedback="true" weakLabel="Week"
+								goodLabel="Good" strongLabel="Strong"
+								promptLabel="Insert Password" inline="true"
+								match="retypepassword" />
+							<p:message for="password" />
 
-								<p:outputLabel value="Password" for="password" />
-								<p:password id="password" required="true"
-									value="#{signUpBean.password}" feedback="true" weakLabel="Week"
-									goodLabel="Good" strongLabel="Strong"
-									promptLabel="Insert Password" inline="true"
-									match="retypepassword" />
-								<p:message for="password" />
+							<p:outputLabel value="Retype Password" for="retypepassword" />
+							<p:password id="retypepassword" required="true" />
+							<p:message for="retypepassword" />
 
-								<p:outputLabel value="Retype Password" for="retypepassword" />
-								<p:password id="retypepassword" required="true" />
-								<p:message for="retypepassword" />
+							<p:outputLabel value="Firstname" for="firstname" />
+							<p:inputText id="firstname" required="true"
+								value="#{signUpBean.firstname}" />
+							<p:message for="firstname" />
 
-								<p:outputLabel value="Firstname" for="firstname" />
-								<p:inputText id="firstname" required="true"
-									value="#{signUpBean.firstname}" />
-								<p:message for="firstname" />
+							<p:outputLabel value="Lastname" for="lastname" />
+							<p:inputText id="lastname" required="true"
+								value="#{signUpBean.lastname}" />
+							<p:message for="lastname" />
 
-								<p:outputLabel value="Lastname" for="lastname" />
-								<p:inputText id="lastname" required="true"
-									value="#{signUpBean.lastname}" />
-								<p:message for="lastname" />
+							<p:outputLabel value="Email" for="email" />
+							<p:inputText id="email" required="true"
+								value="#{signUpBean.email}" />
+							<p:message for="email" />
 
-								<p:outputLabel value="Email" for="email" />
-								<p:inputText id="email" required="true"
-									value="#{signUpBean.email}" />
-								<p:message for="email" />
+							<p:outputLabel value="Mobile" for="mobile" />
+							<p:inputText id="mobile" required="true"
+								value="#{signUpBean.mobile}" />
+							<p:message for="mobile" />
+						</p:panelGrid>
 
-								<p:outputLabel value="Mobile" for="mobile" />
-								<p:inputText id="mobile" required="true"
-									value="#{signUpBean.mobile}" />
-								<p:message for="mobile" />
-							</p:panelGrid>
+						<br />
+						<p:commandButton update=":formValidation:panelValidation"
+							oncomplete="PF('validation').show()" value="Email validation"
+							title="Click here to email validation before SignUp a new Account"
+							action="#{signUpBean.generateAndSendRegistrationCode}">
+							<f:setPropertyActionListener value="#{signUpBean.username}"
+								target="#{signUpBean.username}" />
+						</p:commandButton>
+					</center>
+				</h:form>
 
-							<br />
-							<p:commandButton update=":formValidation:panelValidation"
-								oncomplete="PF('validation').show()" value="Email validation"
-								title="Click here to email validation before SignUp a new Account"
-								action="#{signUpBean.generateAndSendRegistrationCode}">
-								<f:setPropertyActionListener value="#{signUpBean.username}"
-									target="#{signUpBean.username}" />
-							</p:commandButton>
-						</center>
-					</h:form>
+			</p:tab>
 
-				</p:tab>
-
-			</p:tabView>
-		</p:panel>
-	</p:panelGrid>
+		</p:tabView>
+	</center>
 
 	<!-- Popup SignUP Email Validation -->
 	<h:form id="formValidation">
