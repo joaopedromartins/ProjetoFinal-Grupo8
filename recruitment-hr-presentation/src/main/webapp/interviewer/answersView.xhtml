@@ -16,26 +16,31 @@
 		</f:metadata>
 
 		<h1>Interview</h1>
+		<p:link outcome="detailCandidate?faces-redirect=true"
+			value="Back To Candidate Job Applications">
+			<f:param name="candidateId"
+				value="#{jobInterviewBean.interview.jobapplication.candidateEntity.id}" />
+		</p:link>
 
-		<h:panelGroup  style="margin: auto; display:table">
+		<h:panelGroup style="margin: auto; display:table">
 			<p:outputLabel value="Candidate:" />
 			<p:outputLabel
 				value="#{jobInterviewBean.interview.jobapplication.candidateEntity.fullName}" />
-			<p:spacer width="20" height="20" />	
+			<p:spacer width="20" height="20" />
 			<p:outputLabel value="Interviewer:" />
 			<p:outputLabel
 				value="#{jobInterviewBean.interview.interviewer.fullName}" />
-			<br/>
+			<br />
 			<p:outputLabel value="Date: " />
 			<p:outputLabel value="#{jobInterviewBean.interview.interviewDate}">
 				<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 			</p:outputLabel>
-			<p:spacer width="20" height="20" />	
+			<p:spacer width="20" height="20" />
 			<p:outputLabel value="Position code: " />
 			<p:outputLabel
 				value="#{jobInterviewBean.interview.jobapplication.positionEntity.code}" />
 			<p:spacer width="8" height="8" />
-			<p:outputLabel value="Position title: " />			
+			<p:outputLabel value="Position title: " />
 			<p:outputLabel
 				value="#{jobInterviewBean.interview.jobapplication.positionEntity.title}" />
 		</h:panelGroup>

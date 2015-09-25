@@ -2,6 +2,7 @@ package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -260,6 +261,11 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	@Override
 	public void setJobappSpontaneous(boolean jobappSpontaneous) {
 		entity.setJobappSpontaneous(jobappSpontaneous);
+	}
+
+	@Override
+	public Date getJobAppDate() {
+		return entity.getJobAppDate();
 	}
 
 }

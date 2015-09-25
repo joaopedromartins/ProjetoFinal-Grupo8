@@ -16,8 +16,81 @@
 		</f:metadata>
 
 		<h1>Detail Candidate</h1>
+		<h:form id="formDetailsCandidate">
+			<p:dataTable id="dataTableJobApp" var="jobApp"
+				value="#{candidateBean.jobAppsCandidate}">
+				<f:facet name="header">JOB APPLICATIONS - Expand rows to see detailed </f:facet>
+				<p:column style="width:16px">
+					<p:rowToggler />
+				</p:column>
+				<p:column headerText="Data">
+					<h:outputText value="#{jobApp.jobAppDate}">
+						<f:convertDateTime pattern="dd/MM/YYYY" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Status">
+					<h:outputText value="#{jobApp.situation}" />
+				</p:column>
+				<p:column headerText="Position (Code,Title,Status)">
+					<h:outputText value="#{jobApp.positionEntity.code}" />
+					<br />
+					<h:outputText value="#{jobApp.positionEntity.title}" />
+					<br />
+					<h:outputText value="#{jobApp.positionEntity.status}" />
+				</p:column>
 
-	
+				<p:rowExpansion>
+					<h:dataTable id="jobAppInterview" value="#{jobApp.interviews}"
+						var="interview" rendered="#{not empty jobApp.interviews}">
+						<f:facet name="header">
+							Interview(s)
+						</f:facet>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Date" />
+							</f:facet>
+							<h:outputText value="#{interview.interviewDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Answers" />
+							</f:facet>
+							<p:link outcome="answersView?faces-redirect=true" value="View">
+								<f:param name="interviewId" value="#{interview.id}" />
+							</p:link>
+						</h:column>
+					</h:dataTable>
+					<h:dataTable id="jobAppProposal" value="#{jobApp.proposal}"
+						var="proposal" rendered="#{not empty jobApp.proposal}">
+						<f:facet name="header">
+							Proposal
+						</f:facet>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Date" />
+							</f:facet>
+							<h:outputText value="#{proposal.proposalDate}" rendered="#{not empty proposal.proposalDate}">
+								<f:convertDateTime pattern="dd/MM/YYYY" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Status" />
+							</f:facet>
+							<h:outputText value="#{proposal.proposalStatus}" rendered="#{not empty proposal.proposalStatus}"/>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Observation" />
+							</f:facet>
+							<h:outputLabel value="#{proposal.proposal}" rendered="#{not empty proposal.proposal}"/>
+						</h:column>
+					</h:dataTable>
+				</p:rowExpansion>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 
 </ui:composition>
