@@ -25,7 +25,7 @@ public class CandidateEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+		
 	@Column(length = 255, nullable = false, unique = true)
     private String username;
 	

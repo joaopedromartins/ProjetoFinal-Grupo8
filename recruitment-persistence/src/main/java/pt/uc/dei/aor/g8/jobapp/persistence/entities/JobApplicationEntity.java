@@ -1,6 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
-import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 
@@ -36,21 +39,20 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 })
 public class JobApplicationEntity {
 
-	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplication.listOfAllCandidateJobApplication";
-	
+	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplication.listOfAllCandidateJobApplication";	
 	public static final String LIST_OF_ALL_JOB_APPLICATION_TO_POSITION_CODE_AND_USERNAME = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername";
-
 	public static final String LIST_OF_ALL = "JobApplication.listOfAll";
-	
 	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE = "JobApplication.listOfJobApplicationByCandidate";
-
 	public static final String LIST_OF_ALL_SPONTANEOUS_JOBAPPLICATION = "JobApplication.listOfAllSpontaneousJobApplication";
-	
 	public static final String FIND_SPONTANEOUS_JOBAPP_BY_CANDIDATE = "JobApplication.findJobAppSpontaneousByCandidate";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@Temporal(TemporalType.DATE)
+	@Column
+	private Date jobAppDate;
 
 	@Column(length = 255, nullable = false)
 	private String address;
@@ -76,7 +78,6 @@ public class JobApplicationEntity {
 	@Column
 	private String cv;
 
-
 	@Enumerated(EnumType.STRING)
 	@Column
 	private JobAppSituation situation;
@@ -90,12 +91,12 @@ public class JobApplicationEntity {
 	@ManyToOne
 	private PositionEntity positionEntity;
 
-	@OneToMany (cascade=CascadeType.ALL , mappedBy="jobapplication")
+	@OneToMany (cascade=CascadeType.ALL , mappedBy="jobapplication",fetch = FetchType.EAGER)
 	private List <JobInterviewEntity> interviews;
 	
 	@OneToOne
 	private ProposalEntity proposal;
-	
+
 	@Column
 	private boolean jobappSpontaneous = false;
 
@@ -109,6 +110,7 @@ public class JobApplicationEntity {
 			String address, String city, String country, String phone, String diploma,
 			String school, String letter, String cv, String source, CandidateEntity candidateEntity, PositionEntity positionEntity)  {
 		super();
+		this.jobAppDate = new Date();
 		this.address = address;
 		this.city = city;
 		this.country = country;
@@ -127,7 +129,8 @@ public class JobApplicationEntity {
 	public JobApplicationEntity(
 			String address, String city, String country, String phone, String diploma,
 			String school, String letter, String cv, String source, CandidateEntity candidateEntity)  {
-		super();
+
+		this.jobAppDate = new Date();
 		this.address = address;
 		this.city = city;
 		this.country = country;
@@ -145,6 +148,15 @@ public class JobApplicationEntity {
 
 
 	//Getters and Setters
+	
+	public Date getJobAppDate() {
+		return jobAppDate;
+	}
+
+	public void setJobAppDate(Date jobAppDate) {
+		this.jobAppDate = jobAppDate;
+	}
+
 	public CandidateEntity getCandidateEntity() {
 		return candidateEntity;
 	}

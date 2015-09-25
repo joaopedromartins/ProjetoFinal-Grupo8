@@ -23,15 +23,13 @@
 						<p:column colspan="4" headerText="Candidate" />
 					</p:row>
 					<p:row>
+
 						<p:column headerText="Code" />
 						<p:column headerText="Title" />
 						<p:column headerText="Tecnical Area" />
 						<p:column headerText="Details" />
 
-
-
 						<p:column headerText="Name" />
-						<p:column headerText="Cover letter" />
 						<p:column headerText="CV" />
 						<p:column headerText="Details" />
 
@@ -43,11 +41,13 @@
 					</h:outputText>
 				</p:column>
 				<p:column>
-					<h:panelGroup id = "panelAnswer">
-						<p:link outcome="interview?faces-redirect=true" value="Start" rendered="#{interview.finished eq 'FALSE'}">
+					<h:panelGroup id="panelAnswer">
+						<p:link outcome="interview?faces-redirect=true" value="Start"
+							rendered="#{interview.finished eq 'FALSE'}">
 							<f:param name="interviewId" value="#{interview.id}" />
 						</p:link>
-						<p:link outcome="answersView?faces-redirect=true" value="View" rendered="#{interview.finished eq 'TRUE'}">
+						<p:link outcome="answersView?faces-redirect=true" value="View"
+							rendered="#{interview.finished eq 'TRUE'}">
 							<f:param name="interviewId" value="#{interview.id}" />
 						</p:link>
 					</h:panelGroup>
@@ -85,13 +85,11 @@
 					<h:outputText value="#{interview.jobapplication.cv}" />
 				</p:column>
 				<p:column>
-					<p:commandButton
-						update=":formInterviewsTable:tableInterviews :candidateDetail"
-						oncomplete="PF('candidateView').show()" icon="ui-icon-search"
-						title="View">
-						<f:setPropertyActionListener value="#{interview.jobapplication}"
-							target="#{jobInterviewBean.jobApplication}" />
-					</p:commandButton>
+					<p:link outcome="detailCandidate?faces-redirect=true"
+						value="Candidate">
+						<f:param name="candidateId"
+							value="#{interview.jobapplication.candidateEntity.id}" />
+					</p:link>
 				</p:column>
 
 			</p:dataTable>
@@ -135,53 +133,7 @@
 				</p:panelGrid>
 			</p:outputPanel>
 		</p:dialog>
-		<p:dialog header="Candidate Details" widgetVar="candidateView"
-			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-			<p:outputPanel id="candidateDetail" style="text-align:center;">
-				<p:panelGrid columns="2" id="jobApplicationDetailPanelGrid">
-					<f:facet name="header">
-						<h:outputText value="Candidate Details:" />
-					</f:facet>
 
-					<h:outputText value="Name:" />
-					<h:outputText
-						value="#{jobInterviewBean.jobApplication.candidateEntity.fullName}" />
-
-					<h:outputText value="Address:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.address}" />
-
-					<h:outputText value="City:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.city}" />
-
-					<h:outputText value="Country:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.country}" />
-
-					<h:outputText value="Phone:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.phone}" />
-
-					<h:outputText value="Phone:" />
-					<h:outputText
-						value="#{jobInterviewBean.jobApplication.candidateEntity.email}" />
-
-					<h:outputText value="Diploma:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.diploma}" />
-
-					<h:outputText value="School:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.school}" />
-
-					<h:outputText value="Source:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.source}" />
-
-					<h:outputText value="Cover Letter:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.letter}" />
-
-					<h:outputText value="CV:" />
-					<h:outputText value="#{jobInterviewBean.jobApplication.cv}" />
-
-				</p:panelGrid>
-
-			</p:outputPanel>
-		</p:dialog>
 	</ui:define>
 
 </ui:composition>

@@ -7,4 +7,5 @@ public interface ICandidatePersistenceService {
 	public ICandidateProxy editCandidate(ICandidateProxy CandidateProxy);
 	public ICandidateProxy findCandidateByUsername(String username);
 	public ICandidateProxy findCandidateByEmail(String email);
+	public ICandidateProxy findById(long id);
 }

@@ -32,8 +32,18 @@ public class AnswerInterviewEntity {
 	@ElementCollection (fetch = FetchType.EAGER)
 	private Set<String> answer;
 	
-
+	@Column
+	private String individualAnswer;
 	
+	
+	public String getIndividualAnswer() {
+		return individualAnswer;
+	}
+
+	public void setIndividualAnswer(String individualAnswer) {
+		this.individualAnswer = individualAnswer;
+	}
+
 	public AnswerInterviewEntity() {
 		super();
 		// TODO Auto-generated constructor stub

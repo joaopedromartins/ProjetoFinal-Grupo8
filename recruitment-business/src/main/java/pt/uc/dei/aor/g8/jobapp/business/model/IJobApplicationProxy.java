@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.business.model;
 
+
+import java.util.Date;
 import java.util.List;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
@@ -52,4 +54,7 @@ public interface IJobApplicationProxy {
 	
 	public boolean isJobappSpontaneous();
 	public void setJobappSpontaneous(boolean jobappSpontaneous);
+	
+	public Date getJobAppDate();
+
 }

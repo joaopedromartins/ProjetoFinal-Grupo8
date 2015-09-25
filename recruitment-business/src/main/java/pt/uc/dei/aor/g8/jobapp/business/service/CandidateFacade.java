@@ -1,7 +1,11 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
@@ -13,6 +17,8 @@ import pt.uc.dei.aor.g8.jobapp.business.util.GmailMessage;
 @Stateless
 public class CandidateFacade implements ICandidateFacade {
 
+	private static final Logger log = LoggerFactory.getLogger(CandidateFacade.class);
+	
 	@EJB
 	private IProxyFactory factory;
 	
@@ -129,6 +135,19 @@ public class CandidateFacade implements ICandidateFacade {
 			return "Recover email to "+email+" has been sent with success.";
 			
 		}
+	}
+
+	@Override
+	public ICandidateProxy findCandidateById(long candidateId) {
+		try {
+			return service.findById(candidateId);
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
+		
+		
+		
 	}
 
 }

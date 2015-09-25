@@ -29,14 +29,14 @@ public class JobInterviewBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	private IUserFacade userFacade;
 	@EJB
 	private IJobInterviewFacade interviewFacade;
 	@Inject
 	private UserBean currentInterviewer;
-	
+
 	private List<IAnswerInterviewProxy> answers;
 	private Date date;
 	private IUserProxy userInterviwer;
@@ -45,9 +45,9 @@ public class JobInterviewBean implements Serializable{
 	private IPositionProxy position;
 	private ICandidateProxy candidate;
 	private IJobApplicationProxy jobApplication;
-	private long id;
+	private long interviewId;
 	private IJobInterviewProxy interview;
-	
+
 	public JobInterviewBean() {
 
 	}
@@ -55,7 +55,7 @@ public class JobInterviewBean implements Serializable{
 	public IUserProxy getUserInterviwer() {
 		return userInterviwer;
 	}
-	
+
 	public List <IUserProxy> getPossibleUserInterviwer(){
 		return userFacade.findInterviewers();
 	}
@@ -79,7 +79,7 @@ public class JobInterviewBean implements Serializable{
 	public void setInteviews(List<IJobInterviewProxy> inteviews) {
 		this.inteviews = inteviews;
 	}
-	
+
 	public IPositionProxy getPosition() {
 		return position;
 	}
@@ -111,15 +111,15 @@ public class JobInterviewBean implements Serializable{
 	public void setScriptInterview(IScriptProxy scriptInterview) {
 		this.scriptInterview = scriptInterview;
 	}
-	
+
 	public long getId() {
-		return id;
+		return interviewId;
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.interviewId = id;
 	}
-	
+
 	public IJobInterviewProxy getInterview() {
 		return interview;
 	}
@@ -137,22 +137,22 @@ public class JobInterviewBean implements Serializable{
 	}
 
 	public void findById(){
-		this.interview = interviewFacade.findById(id);
+		this.interview = interviewFacade.findById(interviewId);
 		this.answers = interviewFacade.getListAnswers (interview.getScriptInterview());
 	}
-	
+
 	public void findInterviewById(){
-	this.interview = interviewFacade.findById(id);
+		this.interview = interviewFacade.findById(interviewId);
 	}
 
 	public List<IJobInterviewProxy> listOfAllInterviews (){
 		return interviewFacade.listOfAllInterviews();
 	}
-	
+
 	public List <IJobInterviewProxy> listInterviewsOfInterviewer (){
 		return interviewFacade.listInterviewsOfInterviewer(currentInterviewer.getCurrentUser());
 	}
-	
+
 	public void saveAnswersOfScript(){
 		IJobInterviewProxy proxyInterview = interviewFacade.saveAnswersOfScript(answers,interview);
 		if(proxyInterview == null){
@@ -167,5 +167,5 @@ public class JobInterviewBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("growl", message);
 		}
 	}
-	
+
 }

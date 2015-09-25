@@ -74,8 +74,6 @@ public class UserEntity {
 	private List <JobInterviewEntity> interview;
 
 
-
-
 	//Constructors
 	public UserEntity() {
 	}
@@ -196,8 +194,5 @@ public class UserEntity {
 	public String toString() {
 		return "UserEntity [lastname=" + lastname + ", firstname=" + firstname + "]";
 	}
-
-
-
 
 }

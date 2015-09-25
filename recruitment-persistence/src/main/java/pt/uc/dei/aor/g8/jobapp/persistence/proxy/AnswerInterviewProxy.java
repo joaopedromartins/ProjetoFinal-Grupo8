@@ -74,6 +74,8 @@ public class AnswerInterviewProxy implements IAnswerInterviewProxy, IEntityAware
 
 	@Override
 	public String getAnswerToString() {
+		if (getQuestionType().equals("Choose from a list") || getQuestionType()
+				.equals("Check boxes")) {
 		Set<String> answers = entity.getAnswer();
 		String answerList = "";
 		for (String a: answers) {
@@ -85,8 +87,20 @@ public class AnswerInterviewProxy implements IAnswerInterviewProxy, IEntityAware
 
 		}
 		return answerList;
+		} else {
+			return getIndividualAnswer();
+		}
+		
 	}
 
+	@Override
+	public String getIndividualAnswer() {
+		return entity.getIndividualAnswer();
+	}
 
+	@Override
+	public void setIndividualAnswer(String answer) {
+		entity.setIndividualAnswer(answer);
+	}
 
 }

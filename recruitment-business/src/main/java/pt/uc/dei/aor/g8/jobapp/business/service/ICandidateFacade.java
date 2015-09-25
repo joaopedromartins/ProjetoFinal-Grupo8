@@ -15,4 +15,6 @@ public interface ICandidateFacade {
 	public String sendRecoverMessageToEmail(String email);
 	
 	public String sendRegistrationCode(String registrationCode, String email);
+	
+	public ICandidateProxy findCandidateById (long candidateId);
 }

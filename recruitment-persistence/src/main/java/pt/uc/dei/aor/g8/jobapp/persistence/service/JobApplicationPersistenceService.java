@@ -69,7 +69,6 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 
 	@Override
 	public List<IJobApplicationProxy> listOfAllCandidateJobApplication(String username) {
-		
 		TypedQuery <JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_CANDIDATE_JOB_APPLICATION, JobApplicationEntity.class);
 		query.setParameter( "login", username);
 		List <JobApplicationEntity> entity= query.getResultList();
@@ -105,6 +104,19 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 	public IJobApplicationProxy findById(long id) {
 		JobApplicationEntity entity = em.find(JobApplicationEntity.class,id );
 		return new JobApplicationProxy(entity);
+	}
+
+	@Override
+	public List<IJobApplicationProxy> listOfJobApplicationByCandidate(ICandidateProxy candidate) {
+		TypedQuery <JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_JOBAPPLICATION_BY_CANDIDATE, JobApplicationEntity.class);
+		query.setParameter( "candidate", candidateCoverterProxyToEntity(candidate));
+		List <JobApplicationEntity> entity = query.getResultList();
+		
+		List <IJobApplicationProxy> proxy = new ArrayList<>();
+		for (JobApplicationEntity jA: entity){
+			proxy.add(new JobApplicationProxy(jA));
+		}
+		return proxy;
 	}
 
 }
