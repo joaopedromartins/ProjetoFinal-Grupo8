@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.presentation;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 
@@ -8,6 +9,11 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.primefaces.context.RequestContext;
 
 import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
 import pt.uc.dei.aor.g8.jobapp.business.util.AutoGeneratePasswor;
@@ -107,6 +113,7 @@ public class SignUpBean implements Serializable {
 		System.out.println("email: \t" + email);
 		System.out.println("mobile: \t" + mobile);
 		
+				
 		if ( sendRegistrationCode.equals(appliedRegistrationCode)) {
 			messagebusiness=candidateFacade.createNewCandidate(username, password, lastname, firstname, email, mobile);
 		} else {
@@ -114,6 +121,45 @@ public class SignUpBean implements Serializable {
 		}
 
 		if (messagebusiness.equals("sucess")) {
+//			//update j_username & j_password
+//			RequestContext requestContext = RequestContext.getCurrentInstance();
+//			requestContext.addCallbackParam("loginForm:j_username", username);
+//			requestContext.addCallbackParam("loginForm:j_password", password);
+//			
+//			//update panel
+//			requestContext.update("loginForm:panelSignIn");
+//			
+//			requestContext.execute("loginForm:signin");
+			
+			
+			
+//			// login
+//			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+//			
+//			HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+//			
+//						
+//			//login
+//			try {
+//				request.login(username, password);
+//			} catch (ServletException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			//fechar janela de popup
+//			RequestContext requestContext = RequestContext.getCurrentInstance();
+//			requestContext.execute("PF('validation').hide();");
+//			
+//			// TODO redireccionar para a pagina que efectuou o pedido de autenticação
+//			try {
+//				response.sendRedirect(request.getContextPath() + "/pages/candidate/candidate.xhtml" );
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+					
+			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Candidate, " +firstname +" " + lastname +", created successfully.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -127,7 +173,7 @@ public class SignUpBean implements Serializable {
 			FacesMessage message = new FacesMessage( FacesMessage.SEVERITY_ERROR, messagebusiness,"");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-
+		return;
 	}
 
 	public void recover() {
@@ -136,20 +182,23 @@ public class SignUpBean implements Serializable {
 	}
 	
 	public void generateAndSendRegistrationCode() {
-		// TODO logger
-		System.out.println("generateAndSendRegistrationCode");
-		System.out.println("Send Registration Code: \t" + sendRegistrationCode);
-		System.out.println("Applied Registration Code: \t" + appliedRegistrationCode);
-		System.out.println("username: \t" + username);
-		System.out.println("password: \t" + password);
-		System.out.println("lastname: \t" + lastname);
-		System.out.println("firstname: \t" + firstname);
-		System.out.println("email: \t" + email);
-		System.out.println("mobile: \t" + mobile);
 		
 		this.sendRegistrationCode=generateCode.autoGeneratePassword();
 		String message = candidateFacade.sendRegistrationCode(this.sendRegistrationCode, this.email);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
-	}
+		
+		if (message.contains("Error:")) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage( FacesMessage.SEVERITY_ERROR, message,""));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage( FacesMessage.SEVERITY_INFO, message,""));
 
+			//Abre janela de popup
+			RequestContext requestContext = RequestContext.getCurrentInstance();
+			requestContext.execute("PF('validation').show();");
+			
+		}
+		
+		
+	}
+	
+	
 }

@@ -24,7 +24,7 @@
 						<input name="j_password" type="password" />
 					</p:panelGrid>
 					<br />
-					<p:commandButton value="SignIn" ajax="false" />
+					<p:commandButton id="signin" value="SignIn" ajax="false" />
 					<br />
 				</center>
 			</h:form>
@@ -51,9 +51,9 @@
 			<p:tab title="SignUp" orientation="top">
 				<h:form id="formSignUp">
 					<center>
-						<p:messages />
+						<p:messages id="messagesSignUp"/>
 						<p:outputLabel value="New user registration" />
-						<p:panelGrid columns="3" id="panelSignUp">
+						<p:panelGrid columns="3" id="panelgridSignUp">
 
 							<p:outputLabel value="Username" for="username" />
 							<p:inputText id="username" required="true"
@@ -94,8 +94,8 @@
 						</p:panelGrid>
 
 						<br />
-						<p:commandButton update=":formValidation:panelValidation"
-							oncomplete="PF('validation').show()" value="Email validation"
+						<p:commandButton update=":formValidation:panelValidation @form "
+							value="Email validation"
 							title="Click here to email validation before SignUp a new Account"
 							action="#{signUpBean.generateAndSendRegistrationCode}">
 							<f:setPropertyActionListener value="#{signUpBean.username}"
@@ -126,11 +126,11 @@
 					</p:panelGrid>
 					<br />
 					<p:commandButton value="SignUp" action="#{signUpBean.register}"
-						update="@form growl" />
+						update="@form growlEmailValidation" />
 				</center>
 
 			</p:outputPanel>
-			<p:growl id="growl" />
+			<p:growl id="growlEmailValidation" />
 		</p:dialog>
 	</h:form>
 

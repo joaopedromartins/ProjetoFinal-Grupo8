@@ -47,11 +47,11 @@ public class CandidateFacade implements ICandidateFacade {
 			service.saveCandidate(newCandidate);
 			return "sucess"; 
 		} else if (candidateUsername == null && candidateEmail != null ) {
-			return "Email already exists!!";	
+			return "Error: Email already exists!!";	
 		} else if (candidateUsername != null && candidateEmail == null ){
-			return "Username already exists!!";
+			return "Error: Username already exists!!";
 		} else if (candidateUsername != null && candidateEmail != null){
-			return "Username and email already exists!!";
+			return "Error: Username and email already exists!!";
 		}
 		return null;
 	}
@@ -85,7 +85,7 @@ public class CandidateFacade implements ICandidateFacade {
 	public String sendRecoverMessageToEmail(String email) {
 		ICandidateProxy candidate = service.findCandidateByEmail(email);
 		if (candidate==null) {
-			return "There isn't an existing account associated with this email address";
+			return "Error: There isn't an existing account associated with this email address";
 		} else {
 			String password=passwordGenrate.autoGeneratePassword();
 			ICandidateProxy candidateProxy=findCandidateByEmail(email);
@@ -105,7 +105,7 @@ public class CandidateFacade implements ICandidateFacade {
 						"\nAdministration Team"
 				);
 			
-			return "recover email to "+email+" has been sent with success.";
+			return "Recover email to "+email+" has been sent with success.";
 		}
 	}
 
@@ -114,7 +114,7 @@ public class CandidateFacade implements ICandidateFacade {
 
 		ICandidateProxy candidateProxy=findCandidateByEmail(email);
 		if(candidateProxy != null){
-			return "There is an existing account associated with this email address. Recover account.";
+			return "Error: There is an existing account associated with this email address. Recover account.";
 		} else {
 			//Notify Candidate by email
 			mail.sendEmail(email, 
@@ -128,7 +128,7 @@ public class CandidateFacade implements ICandidateFacade {
 						"\nAdministration Team"
 				);
 			
-			return "recover email to "+email+" has been sent with success.";
+			return "Recover email to "+email+" has been sent with success.";
 			
 		}
 	}
