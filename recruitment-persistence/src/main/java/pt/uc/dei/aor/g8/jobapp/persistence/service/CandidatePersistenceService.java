@@ -23,8 +23,6 @@ public class CandidatePersistenceService implements ICandidatePersistenceService
 
 	}
 	
-	
-
 	@SuppressWarnings("unchecked")
 	private CandidateEntity getEntity(ICandidateProxy candidateProxy) {
 		if (candidateProxy instanceof IEntityAware<?>) {
@@ -77,6 +75,14 @@ public class CandidatePersistenceService implements ICandidatePersistenceService
 		}
 		
 		return proxy;
+	}
+
+
+
+	@Override
+	public ICandidateProxy findById(long id) {
+		CandidateEntity entity = em.find(CandidateEntity.class, id);
+		return new CandidateProxy(entity);
 	}
 
 	

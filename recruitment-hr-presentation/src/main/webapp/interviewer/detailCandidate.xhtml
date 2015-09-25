@@ -11,8 +11,8 @@
 	<ui:define name="content">
 
 		<f:metadata>
-			<f:viewParam name="candidateId" value="#{jobInterviewBean.id}" />
-			<f:viewAction action="#{jobInterviewBean.findInterviewById()}" />
+			<f:viewParam name="candidateId" value="#{candidateBean.candidateId}" />
+			<f:viewAction action="#{candidateBean.findCandidateById()}" />
 		</f:metadata>
 
 		<h1>Detail Candidate</h1>

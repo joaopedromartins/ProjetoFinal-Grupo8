@@ -10,6 +10,8 @@ public interface IJobApplicationPersistenceService {
 	public IJobApplicationProxy saveJobApplication(IJobApplicationProxy newJobApplication);
 
 	public List<IJobApplicationProxy> listOfAllCandidateJobApplication(String username);
+	
+	public List<IJobApplicationProxy> listOfJobApplicationByCandidate(ICandidateProxy candidate);
 
 	public IJobApplicationProxy editJobApplication(IJobApplicationProxy jobApplicationProxy);
 

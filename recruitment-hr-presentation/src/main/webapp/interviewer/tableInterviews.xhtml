@@ -43,11 +43,13 @@
 					</h:outputText>
 				</p:column>
 				<p:column>
-					<h:panelGroup id = "panelAnswer">
-						<p:link outcome="interview?faces-redirect=true" value="Start" rendered="#{interview.finished eq 'FALSE'}">
+					<h:panelGroup id="panelAnswer">
+						<p:link outcome="interview?faces-redirect=true" value="Start"
+							rendered="#{interview.finished eq 'FALSE'}">
 							<f:param name="interviewId" value="#{interview.id}" />
 						</p:link>
-						<p:link outcome="answersView?faces-redirect=true" value="View" rendered="#{interview.finished eq 'TRUE'}">
+						<p:link outcome="answersView?faces-redirect=true" value="View"
+							rendered="#{interview.finished eq 'TRUE'}">
 							<f:param name="interviewId" value="#{interview.id}" />
 						</p:link>
 					</h:panelGroup>
@@ -85,13 +87,17 @@
 					<h:outputText value="#{interview.jobapplication.cv}" />
 				</p:column>
 				<p:column>
-					<p:commandButton
+					<p:link outcome="detailCandidate?faces-redirect=true" value="Detail">
+						<f:param name="candidateId" value="#{interview.jobapplication.candidateEntity.id}" />
+					</p:link>
+
+					<!-- <p:commandButton
 						update=":formInterviewsTable:tableInterviews :candidateDetail"
 						oncomplete="PF('candidateView').show()" icon="ui-icon-search"
 						title="View">
 						<f:setPropertyActionListener value="#{interview.jobapplication}"
 							target="#{jobInterviewBean.jobApplication}" />
-					</p:commandButton>
+					</p:commandButton> -->
 				</p:column>
 
 			</p:dataTable>

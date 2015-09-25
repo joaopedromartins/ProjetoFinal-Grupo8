@@ -4,7 +4,11 @@ import java.math.BigInteger;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
@@ -17,6 +21,7 @@ import pt.uc.dei.aor.g8.jobapp.business.util.GmailMessage;
 @Stateless
 public class JobApplicationFacade implements IJobApplicationFacade {
 
+	private static final Logger log = LoggerFactory.getLogger(JobApplicationFacade.class);
 	@EJB
 	private IProxyFactory factory;
 
@@ -206,5 +211,15 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 	@Override
 	public List<IJobApplicationProxy> listOfJobApplicationByUsername(String username) {
 		return service.listOfAllCandidateJobApplication(username);
+	}
+
+	@Override
+	public List<IJobApplicationProxy> listOfJobApplicationByCandidate(ICandidateProxy candidate) {		
+		try {
+			return service.listOfJobApplicationByCandidate(candidate);
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
 	}
 }
