@@ -8,8 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.CandidateEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobApplicationEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.IEntityAware;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.JobApplicationProxy;
@@ -42,6 +44,26 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		List<JobApplicationEntity> entity= query.getResultList();
 		
 		return !entity.isEmpty();
+	}
+	
+	public IJobApplicationProxy spontaneousJobApllicationByCandidate(ICandidateProxy candidate){
+		TypedQuery<JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.FIND_SPONTANEOUS_JOBAPP_BY_CANDIDATE, JobApplicationEntity.class);
+		query.setParameter( "candidateEntity", candidateCoverterProxyToEntity(candidate));
+		List <JobApplicationEntity> entity = query.getResultList();
+		
+		IJobApplicationProxy proxy;
+		if( entity.size() == 1){
+			proxy = new JobApplicationProxy(entity.get(0));
+		} else {
+			proxy=null;
+		}
+		return proxy;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private CandidateEntity candidateCoverterProxyToEntity (ICandidateProxy candidate){
+		CandidateEntity entity = ((IEntityAware<CandidateEntity>)candidate).getEntity();
+		return entity;
 	}
 
 

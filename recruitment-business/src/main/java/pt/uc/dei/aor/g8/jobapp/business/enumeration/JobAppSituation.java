@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.business.enumeration;
 
 public enum JobAppSituation {
+	SPONTANEOUS ("Spontaneous"),
 	SUBMITTED ("Submitted"),
 	INTERVIEWING ("Interviewing"),
 	OFFER_PROCESS ("Negotiation"),

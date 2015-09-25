@@ -21,6 +21,10 @@ public interface IProxyFactory {
 	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
 			String diploma, String school, String letter, String cv, String source, 
 			ICandidateProxy candidate, IPositionProxy position);
+	
+	public IJobApplicationProxy spontaneousJobApplication(String address, String city, String country, BigInteger phone,
+			String diploma, String school, String letter, String cv, String source, 
+			ICandidateProxy candidate);
 
 	public IJobAdvertisingChanelProxy jobAdvertisingChanel(String chanelName);
 
