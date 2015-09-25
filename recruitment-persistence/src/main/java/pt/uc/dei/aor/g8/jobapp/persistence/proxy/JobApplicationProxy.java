@@ -34,8 +34,13 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 		this.entity = new JobApplicationEntity(address, city, country, phone, diploma, school, letter,
 				cv, source, candidateCoverterProxyToEntity(candidateProxy),positionCoverterProxyToEntity(positionProxy) );
 	}
-
-
+	
+	public JobApplicationProxy(String address, String city, String country, BigInteger phone, String diploma,
+			String school, String letter, String cv, String source, ICandidateProxy candidate) {
+		
+		this.entity = new JobApplicationEntity(address, city, country, phone, diploma, school, letter,
+				cv, source, candidateCoverterProxyToEntity(candidate));
+	}
 
 	@SuppressWarnings("unchecked")
 	private CandidateEntity candidateCoverterProxyToEntity (ICandidateProxy candidate){
@@ -61,6 +66,8 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 
 	//Getters and Setters
 
+
+	
 
 	@Override
 	public String getAddress() {
@@ -243,6 +250,16 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	private ProposalEntity proposalConvertProxyToEntity (IProposalProxy proxy){
 		ProposalEntity entityProposal = ((IEntityAware<ProposalEntity>)proxy).getEntity();
 		return entityProposal;
+	}
+
+	@Override
+	public boolean isJobappSpontaneous() {
+		return entity.isJobappSpontaneous();
+	}
+
+	@Override
+	public void setJobappSpontaneous(boolean jobappSpontaneous) {
+		entity.setJobappSpontaneous(jobappSpontaneous);
 	}
 
 }

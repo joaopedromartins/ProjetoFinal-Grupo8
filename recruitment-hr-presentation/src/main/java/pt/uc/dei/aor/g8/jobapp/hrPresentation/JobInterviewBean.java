@@ -168,10 +168,4 @@ public class JobInterviewBean implements Serializable{
 		}
 	}
 	
-	
-	
-
-	
-	
-
 }

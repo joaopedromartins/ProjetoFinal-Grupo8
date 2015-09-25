@@ -39,7 +39,7 @@ public class ProxyFactory implements IProxyFactory {
 			List<Localization> localization, StatusPosition status, int numberOfposition, Date sLA, IUserProxy managerPosition,
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> script) {
-		
+
 		return new PositionProxy (openDate,code,title,localization,status,numberOfposition,sLA, managerPosition,company,technicalArea,descriptionPosition, jobAdvertisingChanel,script);
 	}
 
@@ -51,10 +51,10 @@ public class ProxyFactory implements IProxyFactory {
 	@Override
 	public IUserProxy user(String username, String password, String lastname, String firstname, String email,
 			List<RoleType> roles) {
-		
+
 		return new UserProxy(username,password,lastname,firstname,email,roles);
 	}
-	
+
 	@Override
 	public ICandidateProxy candidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
 		return new CandidateProxy (username, password, lastname, firstname, email, mobile);
@@ -74,12 +74,12 @@ public class ProxyFactory implements IProxyFactory {
 	public IQuestionProxy question(String question, QuestionType questionType) {
 		return new QuestionProxy(question,questionType);
 	}
-	
+
 	@Override
 	public IQuestionProxy question(String question, QuestionType questionType, IQuestionScaleProxy newScale) {
 		return new QuestionProxy(question,questionType,newScale);
 	}
-	
+
 	@Override
 	public IQuestionProxy question(String question, QuestionType questionType, List<IQuestionChoiceProxy> options) {
 		return new QuestionProxy(question,questionType,options);
@@ -95,19 +95,26 @@ public class ProxyFactory implements IProxyFactory {
 	public IQuestionChoiceProxy choise(String option) {
 		return new QuestionChoiceProxy (option) ;
 	}
-	
+
 	@Override
 	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
 			String diploma, String school, String letter, String cv, String source,
 			ICandidateProxy candidate, IPositionProxy position) {
 		return new JobApplicationProxy( address,  city,  country,  phone,
-				 diploma,  school,  letter,  cv, source, candidate, position);
+				diploma,  school,  letter,  cv, source, candidate, position);
+	}
+
+	@Override
+	public IJobApplicationProxy spontaneousJobApplication(String address, String city, String country, BigInteger phone,
+			String diploma, String school, String letter, String cv, String source, ICandidateProxy candidate) {
+
+		return new JobApplicationProxy(address,  city,  country,  phone, diploma,  school,  letter,  cv, source, candidate);
 	}
 
 	@Override
 	public IJobInterviewProxy jobInterview(Date interviewDate, IUserProxy interviewer,
 			IJobApplicationProxy jobapplication, IScriptProxy script) {
-		
+
 		return new JobInterviewProxy(interviewDate, interviewer,jobapplication,script);
 	}
 
@@ -120,5 +127,7 @@ public class ProxyFactory implements IProxyFactory {
 	public IProposalProxy proposalJobApplication(Date proposalDate, String proposal) {
 		return new ProposalProxy(proposalDate, proposal);
 	}
+
+
 
 }

@@ -5,11 +5,19 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="style.css" />
+	</ui:define>
 	<ui:define name="content">
 
-		<h1>Detail Interview</h1>
+		<f:metadata>
+			<f:viewParam name="candidateId" value="#{jobInterviewBean.id}" />
+			<f:viewAction action="#{jobInterviewBean.findInterviewById()}" />
+		</f:metadata>
 
+		<h1>Detail Candidate</h1>
 
+	
 	</ui:define>
 
 </ui:composition>

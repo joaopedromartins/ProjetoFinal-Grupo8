@@ -50,4 +50,7 @@ public interface IJobApplicationProxy {
 	
 	public IProposalProxy getProposal();
 	public void setProposal(IProposalProxy proposal);
+	
+	public boolean isJobappSpontaneous();
+	public void setJobappSpontaneous(boolean jobappSpontaneous);
 }

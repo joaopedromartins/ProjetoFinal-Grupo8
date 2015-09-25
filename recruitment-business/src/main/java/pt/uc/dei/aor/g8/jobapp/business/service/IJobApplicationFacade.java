@@ -13,6 +13,9 @@ public interface IJobApplicationFacade {
 			String address, String city, String country, BigInteger phone, String diploma,
 			String school, String letter, String cv, String source, ICandidateProxy candidate,
 			IPositionProxy position) ;
+	public IJobApplicationProxy creatSpontaneousJobApplication(String address, String city, String country, BigInteger phone,
+			String diploma, String school, String letter, String cv, String source,
+			ICandidateProxy candidate);
 
 	public IJobApplicationProxy editJobApplication(IJobApplicationProxy jobApplicationProxy);
 

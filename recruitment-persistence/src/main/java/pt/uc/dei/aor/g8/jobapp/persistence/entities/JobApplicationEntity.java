@@ -30,6 +30,9 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
 				" inner join j.positionEntity p where c.username like :username and p.code like :code "),
 	@NamedQuery(name = "JobApplication.listOfAll", query = "SELECT jA FROM JobApplicationEntity jA "),
+	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate"),
+	@NamedQuery(name = "JobApplication.listOfAllSpontaneousJobApplication", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.jobappSpontaneous = TRUE"),
+	@NamedQuery(name = "JobApplication.findJobAppSpontaneousByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.jobappSpontaneous = TRUE"),
 })
 public class JobApplicationEntity {
 
@@ -38,7 +41,12 @@ public class JobApplicationEntity {
 	public static final String LIST_OF_ALL_JOB_APPLICATION_TO_POSITION_CODE_AND_USERNAME = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername";
 
 	public static final String LIST_OF_ALL = "JobApplication.listOfAll";
+	
+	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE = "JobApplication.listOfJobApplicationByCandidate";
 
+	public static final String LIST_OF_ALL_SPONTANEOUS_JOBAPPLICATION = "JobApplication.listOfAllSpontaneousJobApplication";
+	
+	public static final String FIND_SPONTANEOUS_JOBAPP_BY_CANDIDATE = "JobApplication.findJobAppSpontaneousByCandidate";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -87,6 +95,8 @@ public class JobApplicationEntity {
 	
 	@OneToOne
 	private ProposalEntity proposal;
+	
+	private boolean jobappSpontaneous = false;
 
 
 	//Constructors
@@ -110,6 +120,26 @@ public class JobApplicationEntity {
 		this.situation = JobAppSituation.SUBMITTED;
 		this.candidateEntity = candidateEntity;
 		this.positionEntity = positionEntity;
+		this.jobappSpontaneous = false;
+	}
+	
+	public JobApplicationEntity(
+			String address, String city, String country, BigInteger phone, String diploma,
+			String school, String letter, String cv, String source, CandidateEntity candidateEntity)  {
+		super();
+		this.address = address;
+		this.city = city;
+		this.country = country;
+		this.phone = phone;
+		this.diploma = diploma;
+		this.school = school;
+		this.letter = letter;
+		this.cv = cv;
+		this.jobPositionSource = source;
+		this.candidateEntity = candidateEntity;
+		this.situation = JobAppSituation.SPONTANEOUS;	
+		this.positionEntity = null;
+		this.jobappSpontaneous = true;
 	}
 
 
@@ -220,6 +250,14 @@ public class JobApplicationEntity {
 
 	public void setProposal(ProposalEntity proposal) {
 		this.proposal = proposal;
+	}
+
+	public boolean isJobappSpontaneous() {
+		return jobappSpontaneous;
+	}
+
+	public void setJobappSpontaneous(boolean jobappSpontaneous) {
+		this.jobappSpontaneous = jobappSpontaneous;
 	}
 
 	@Override
