@@ -18,18 +18,18 @@ public interface IProxyFactory {
 			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> script);
 
-	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
+	public IJobApplicationProxy jobApplication(String address, String city, String country, String phone,
 			String diploma, String school, String letter, String cv, String source, 
 			ICandidateProxy candidate, IPositionProxy position);
 	
-	public IJobApplicationProxy spontaneousJobApplication(String address, String city, String country, BigInteger phone,
+	public IJobApplicationProxy spontaneousJobApplication(String address, String city, String country, String phone,
 			String diploma, String school, String letter, String cv, String source, 
 			ICandidateProxy candidate);
 
 	public IJobAdvertisingChanelProxy jobAdvertisingChanel(String chanelName);
 
 
-	public ICandidateProxy candidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile);
+	public ICandidateProxy candidate(String username, String password, String lastname, String firstname, String email, String mobile, String linkedInAddress);
 
 	public IUserProxy user(String username, String password, String lastname, String firstname, String email,
 			List<RoleType> roles);

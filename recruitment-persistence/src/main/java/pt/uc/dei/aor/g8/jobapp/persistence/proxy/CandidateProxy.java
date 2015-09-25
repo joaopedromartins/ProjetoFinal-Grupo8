@@ -1,7 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
-import java.math.BigInteger;
-
 import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
@@ -16,8 +14,8 @@ public class CandidateProxy implements ICandidateProxy, IEntityAware<CandidateEn
 
 	}
 
-	public CandidateProxy(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
-		this.entity = new CandidateEntity(username, password, lastname, firstname, email, mobile);
+	public CandidateProxy(String username, String password, String lastname, String firstname, String email, String mobile, String linkedinAddress) {
+		this.entity = new CandidateEntity(username, password, lastname, firstname, email, mobile, linkedinAddress);
 	}
 
 	public CandidateProxy (CandidateEntity candidate){
@@ -87,15 +85,25 @@ public class CandidateProxy implements ICandidateProxy, IEntityAware<CandidateEn
 	}
 
 	@Override
-	public BigInteger getMobile() {
+	public String getMobile() {
 		return entity.getMobile();
 	}
 
 	@Override
-	public void setMobile(BigInteger mobile) {
+	public void setMobile(String mobile) {
 		entity.setMobile(mobile);
 	}
 
+
+	@Override
+	public String getLinkedinAddress() {
+		return entity.getLinkedinAddress();
+	}
+
+	@Override
+	public void setLinkedinAddress(String linkedinAddress) {
+		entity.setLinkedinAddress(linkedinAddress);
+	}
 	@Override
 	public String getFullName() {
 		String fullName = getFirstname()+ " " + getLastname();

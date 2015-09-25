@@ -33,7 +33,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 	}
 
 	@Override
-	public IJobApplicationProxy createNewJobApplication(String address, String city, String country, BigInteger phone,
+	public IJobApplicationProxy createNewJobApplication(String address, String city, String country, String phone,
 			String diploma, String school, String letter, String cv, String source,
 			ICandidateProxy candidate, IPositionProxy position) {
 
@@ -96,7 +96,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 
 
 	@Override
-	public IJobApplicationProxy creatSpontaneousJobApplication(String address, String city, String country, BigInteger phone,
+	public IJobApplicationProxy creatSpontaneousJobApplication(String address, String city, String country, String phone,
 			String diploma, String school, String letter, String cv, String source,
 			ICandidateProxy candidate) {
 

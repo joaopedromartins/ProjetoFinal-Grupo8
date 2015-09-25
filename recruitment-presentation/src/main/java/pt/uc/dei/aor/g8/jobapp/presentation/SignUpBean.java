@@ -1,17 +1,12 @@
 package pt.uc.dei.aor.g8.jobapp.presentation;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.math.BigInteger;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.context.RequestContext;
 
@@ -35,7 +30,8 @@ public class SignUpBean implements Serializable {
 	private String firstname;
 	private String lastname;
 	private String email;
-	private BigInteger mobile;
+	private String mobile;
+	private String linkedinAddress;
 	private String sendRegistrationCode;
 	private String appliedRegistrationCode;
 
@@ -70,14 +66,20 @@ public class SignUpBean implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public BigInteger getMobile() {
+	
+	public String getMobile() {
 		return mobile;
 	}
-	public void setMobile(BigInteger mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
-
+	public String getLinkedinAddress() {
+		return linkedinAddress;
+	}
+	public void setLinkedinAddress(String linkedinAddress) {
+		this.linkedinAddress = linkedinAddress;
+	}
 
 	public String getSendRegistrationCode() {
 		if (sendRegistrationCode==null) {
@@ -115,7 +117,7 @@ public class SignUpBean implements Serializable {
 		
 				
 		if ( sendRegistrationCode.equals(appliedRegistrationCode)) {
-			messagebusiness=candidateFacade.createNewCandidate(username, password, lastname, firstname, email, mobile);
+			messagebusiness=candidateFacade.createNewCandidate(username, password, lastname, firstname, email, mobile, linkedinAddress);
 		} else {
 			messagebusiness = "Validation Code Error.";
 		}

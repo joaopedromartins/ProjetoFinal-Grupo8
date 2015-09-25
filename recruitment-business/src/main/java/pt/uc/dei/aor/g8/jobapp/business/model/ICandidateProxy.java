@@ -1,6 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.business.model;
 
-import java.math.BigInteger;
 
 public interface ICandidateProxy {
 	public long getId();
@@ -14,7 +13,9 @@ public interface ICandidateProxy {
 	public void setFirstname(String firstname);
 	public String getEmail();
 	public void setEmail(String email);
-	public BigInteger getMobile();
-	public void setMobile(BigInteger mobile);
+	public String getMobile();
+	public void setMobile(String mobile);
+	public String getLinkedinAddress();
+	public void setLinkedinAddress(String linkedinAddress);
 	public String getFullName();
 }

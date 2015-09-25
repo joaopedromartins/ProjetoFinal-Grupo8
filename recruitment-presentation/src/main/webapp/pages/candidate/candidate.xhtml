@@ -1,17 +1,75 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-	<h:head>
-		<title>Secured Candidate Area</title>
-	</h:head>
-	<h:body>
+<h:head>
+	<title>Secured Candidate Area</title>
+</h:head>
+<h:body>
+	<center>
 		<h1>Hello Candidate</h1>
-		<br /> 
-		<h:link outcome="/pages/candidate/viewJobApplications.xhtml" value="View Job Applications" />
+		<br/>
+		<p:tabView orientation="top" header="Account Details">
+
+			<p:tab title="Personal Information" orientation="top">
+				<h:form id="formSignUp">
+					<center>
+						<p:messages id="messagesSignUp" />
+						<p:outputLabel value="Candidate details" />
+						
+						<p:panelGrid columns="3" id="panelgridSignUp">
+
+							<p:outputLabel value="Username" />
+							<p:outputLabel value="#{LoginBean.candidate.username}" />
+							<p:commandButton value="change" />
+							
+							<p:outputLabel value="Firstname" for="firstname" />
+							<p:inputText id="firstname" required="true"
+								value="#{LoginBean.candidate.firstname}" />
+							<p:message for="firstname" />
+
+							<p:outputLabel value="Lastname" for="lastname" />
+							<p:inputText id="lastname" required="true"
+								value="#{LoginBean.candidate.lastname}" />
+							<p:message for="lastname" />
+
+							<p:outputLabel value="Mobile" for="mobile" />
+							<p:inputText id="mobile" required="true"
+								value="#{LoginBean.candidate.mobile}" />
+							<p:message for="mobile" />
+							
+							<p:outputLabel value="Email" for="email" />
+							<p:inputText id="email" required="true"
+								value="#{LoginBean.candidate.email}" />
+							<p:message for="email" />
+							
+						</p:panelGrid>
+
+						
+					</center>
+				</h:form>
+
+			</p:tab>
+
+			<p:tab title="Spontaneous Job Application" orientation="top">
+
+
+			</p:tab>
+
+		</p:tabView>
+
+		<br />
+		<h:link outcome="/pages/candidate/viewJobApplications.xhtml"
+			value="View Job Applications" />
+		<br />
+		<h:link
+			outcome="/pages/candidate/applySpontaneousJobApplication.xhtml"
+			value="View Job Applications" />
 		<br />
 		<h:link outcome="/index" value="Back to Homepage" />
-	</h:body>
+	</center>
+</h:body>
 </html>

@@ -10,10 +10,10 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 public interface IJobApplicationFacade {
 
 	public IJobApplicationProxy createNewJobApplication(
-			String address, String city, String country, BigInteger phone, String diploma,
+			String address, String city, String country, String phone, String diploma,
 			String school, String letter, String cv, String source, ICandidateProxy candidate,
 			IPositionProxy position) ;
-	public IJobApplicationProxy creatSpontaneousJobApplication(String address, String city, String country, BigInteger phone,
+	public IJobApplicationProxy creatSpontaneousJobApplication(String address, String city, String country, String phone,
 			String diploma, String school, String letter, String cv, String source,
 			ICandidateProxy candidate);
 

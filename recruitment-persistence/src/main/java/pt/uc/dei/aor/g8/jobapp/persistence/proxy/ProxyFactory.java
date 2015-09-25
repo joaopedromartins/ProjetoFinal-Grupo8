@@ -56,8 +56,8 @@ public class ProxyFactory implements IProxyFactory {
 	}
 
 	@Override
-	public ICandidateProxy candidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
-		return new CandidateProxy (username, password, lastname, firstname, email, mobile);
+	public ICandidateProxy candidate(String username, String password, String lastname, String firstname, String email, String mobile, String linkedinAddress) {
+		return new CandidateProxy (username, password, lastname, firstname, email, mobile, linkedinAddress);
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class ProxyFactory implements IProxyFactory {
 	}
 
 	@Override
-	public IJobApplicationProxy jobApplication(String address, String city, String country, BigInteger phone,
+	public IJobApplicationProxy jobApplication(String address, String city, String country, String phone,
 			String diploma, String school, String letter, String cv, String source,
 			ICandidateProxy candidate, IPositionProxy position) {
 		return new JobApplicationProxy( address,  city,  country,  phone,
@@ -105,7 +105,7 @@ public class ProxyFactory implements IProxyFactory {
 	}
 
 	@Override
-	public IJobApplicationProxy spontaneousJobApplication(String address, String city, String country, BigInteger phone,
+	public IJobApplicationProxy spontaneousJobApplication(String address, String city, String country, String phone,
 			String diploma, String school, String letter, String cv, String source, ICandidateProxy candidate) {
 
 		return new JobApplicationProxy(address,  city,  country,  phone, diploma,  school,  letter,  cv, source, candidate);

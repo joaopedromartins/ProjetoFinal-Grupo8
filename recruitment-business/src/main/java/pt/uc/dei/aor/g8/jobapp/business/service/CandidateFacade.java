@@ -1,7 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
-import java.math.BigInteger;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -38,12 +36,12 @@ public class CandidateFacade implements ICandidateFacade {
 	}
 
 	@Override
-	public String createNewCandidate(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
+	public String createNewCandidate(String username, String password, String lastname, String firstname, String email, String mobile, String linkedinAddress) {
 		ICandidateProxy candidateUsername = findCandidateByUsername(username);
 		ICandidateProxy candidateEmail = findCandidateByEmail(email);
 		String passwordEncript = passEncript.encriptarPass(password);
 		if (candidateUsername == null && candidateEmail == null && passwordEncript != null){
-			ICandidateProxy newCandidate = factory.candidate(username, passwordEncript , lastname, firstname, email, mobile);
+			ICandidateProxy newCandidate = factory.candidate(username, passwordEncript , lastname, firstname, email, mobile, linkedinAddress);
 			service.saveCandidate(newCandidate);
 			return "sucess"; 
 		} else if (candidateUsername == null && candidateEmail != null ) {

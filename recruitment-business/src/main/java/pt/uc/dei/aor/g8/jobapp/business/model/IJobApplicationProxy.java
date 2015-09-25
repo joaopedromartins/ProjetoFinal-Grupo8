@@ -1,6 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.business.model;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
@@ -22,8 +21,8 @@ public interface IJobApplicationProxy {
 	public String getCountry() ;
 	public void setCountry(String country) ;
 	
-	public BigInteger getPhone();
-	public void setPhone(BigInteger phone) ;
+	public String getPhone();
+	public void setPhone(String phone) ;
 	
 	public String getDiploma();
 	public void setDiploma(String diploma);

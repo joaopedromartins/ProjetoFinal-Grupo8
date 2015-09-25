@@ -32,7 +32,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAll", query = "SELECT jA FROM JobApplicationEntity jA "),
 	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate"),
 	@NamedQuery(name = "JobApplication.listOfAllSpontaneousJobApplication", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.jobappSpontaneous = TRUE"),
-	@NamedQuery(name = "JobApplication.findJobAppSpontaneousByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.jobappSpontaneous = TRUE"),
+	@NamedQuery(name = "JobApplication.findJobAppSpontaneousByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidateEntity AND jA.jobappSpontaneous = TRUE"),
 })
 public class JobApplicationEntity {
 
@@ -62,7 +62,7 @@ public class JobApplicationEntity {
 	private String country;
 
 	@Column(length = 15)
-	private BigInteger phone;
+	private String phone;
 
 	@Column(length = 60, nullable = false)
 	private String diploma;
@@ -96,6 +96,7 @@ public class JobApplicationEntity {
 	@OneToOne
 	private ProposalEntity proposal;
 	
+	@Column
 	private boolean jobappSpontaneous = false;
 
 
@@ -105,7 +106,7 @@ public class JobApplicationEntity {
 	}
 
 	public JobApplicationEntity(
-			String address, String city, String country, BigInteger phone, String diploma,
+			String address, String city, String country, String phone, String diploma,
 			String school, String letter, String cv, String source, CandidateEntity candidateEntity, PositionEntity positionEntity)  {
 		super();
 		this.address = address;
@@ -124,7 +125,7 @@ public class JobApplicationEntity {
 	}
 	
 	public JobApplicationEntity(
-			String address, String city, String country, BigInteger phone, String diploma,
+			String address, String city, String country, String phone, String diploma,
 			String school, String letter, String cv, String source, CandidateEntity candidateEntity)  {
 		super();
 		this.address = address;
@@ -173,10 +174,10 @@ public class JobApplicationEntity {
 		this.country = country;
 	}
 
-	public BigInteger getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(BigInteger phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

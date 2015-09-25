@@ -50,7 +50,7 @@ public class JobApplicationBean implements Serializable {
 	private String address;
 	private String city;
 	private String country;
-	private BigInteger phone;
+	private String phone;
 	private String diploma;
 	private String school;
 	private String letter; 
@@ -95,10 +95,10 @@ public class JobApplicationBean implements Serializable {
 		this.country = country;
 	}
 
-	public BigInteger getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(BigInteger phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -215,6 +215,42 @@ public class JobApplicationBean implements Serializable {
 			return "/pages/candidate/applyPosition";
 		}
 	}
+	
+	
+	public String applySpontaneousJobApplication() {
+		IJobApplicationProxy proxy;
+		proxy=jobApplicationFacade.creatSpontaneousJobApplication(address,  city,  country, phone, diploma,
+				 school,  letter,  cv, source, loginBean.getCandidate());
+		if(proxy!=null){
+			address=null;
+			city=null;
+			country=null;
+			phone=null;
+			diploma=null;
+			school=null;
+			letter=null; 
+			cv=null;
+			source=null;
+			situation=null;
+			uploadedfilename="";
+						
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_INFO,
+					"Job Position applied successfully.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			
+			// vai para a pagina ver candidaturas
+			return "/pages/candidate/candidate";
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error applying job position.\nPlease check if you applied already to this position.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			//Volta à mesma pagina
+			return "/pages/candidate/applyPosition";
+		}
+	}
+	
 	
 
 	public void editJobApplication() {

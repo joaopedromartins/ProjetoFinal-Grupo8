@@ -28,14 +28,14 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	}
 
 	public JobApplicationProxy(String address, String city,
-			String country, BigInteger phone, String diploma, String school, String letter,
+			String country, String phone, String diploma, String school, String letter,
 			String cv, String source, ICandidateProxy candidateProxy, IPositionProxy positionProxy)  {
 
 		this.entity = new JobApplicationEntity(address, city, country, phone, diploma, school, letter,
 				cv, source, candidateCoverterProxyToEntity(candidateProxy),positionCoverterProxyToEntity(positionProxy) );
 	}
 	
-	public JobApplicationProxy(String address, String city, String country, BigInteger phone, String diploma,
+	public JobApplicationProxy(String address, String city, String country, String phone, String diploma,
 			String school, String letter, String cv, String source, ICandidateProxy candidate) {
 		
 		this.entity = new JobApplicationEntity(address, city, country, phone, diploma, school, letter,
@@ -97,14 +97,14 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	}
 
 	@Override
-	public BigInteger getPhone() {
+	public String getPhone() {
 		return entity.getPhone();
 	}
 	@Override
-	public void setPhone(BigInteger phone) {
+	public void setPhone(String phone) {
 		entity.setPhone(phone);
 	}
-
+	
 	@Override
 	public String getDiploma() {
 		return entity.getDiploma();
@@ -261,5 +261,7 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 	public void setJobappSpontaneous(boolean jobappSpontaneous) {
 		entity.setJobappSpontaneous(jobappSpontaneous);
 	}
+
+	
 
 }

@@ -42,7 +42,11 @@ public class CandidateEntity {
     private String email;
 		
 	@Column(length = 15)
-    private BigInteger mobile;
+    private String mobile;
+	
+	@Column(length = 255)
+    private String linkedinAddress;
+	
 	
 	@Column
     private String role;
@@ -54,7 +58,7 @@ public class CandidateEntity {
 	}
 
 
-	public CandidateEntity(String username, String password, String lastname, String firstname, String email, BigInteger mobile) {
+	public CandidateEntity(String username, String password, String lastname, String firstname, String email, String mobile, String linkedinAddress) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -62,6 +66,7 @@ public class CandidateEntity {
 		this.firstname = firstname;
 		this.email = email;
 		this.mobile = mobile;
+		this.linkedinAddress = linkedinAddress;
 		this.role = "CANDIDATE";
 	}
 	
@@ -108,11 +113,18 @@ public class CandidateEntity {
 		this.email = email;
 	}
 
-	public BigInteger getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
-	public void setMobile(BigInteger mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+	
+	public String getLinkedinAddress() {
+		return linkedinAddress;
+	}
+	public void setLinkedinAddress(String linkedinAddress) {
+		this.linkedinAddress = linkedinAddress;
 	}
 
 }
