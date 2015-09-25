@@ -94,7 +94,7 @@ public class JobApplicationEntity {
 	@OneToMany (cascade=CascadeType.ALL , mappedBy="jobapplication",fetch = FetchType.EAGER)
 	private List <JobInterviewEntity> interviews;
 	
-	@OneToOne
+	@OneToOne (cascade=CascadeType.ALL)
 	private ProposalEntity proposal;
 
 	@Column

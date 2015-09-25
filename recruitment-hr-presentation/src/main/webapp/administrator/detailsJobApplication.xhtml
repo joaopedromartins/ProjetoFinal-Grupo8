@@ -91,7 +91,6 @@
 		</h:form>
 
 		<h:form id="forScheduleInterview">
-			<p:growl id="growl" />
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Interviwer:" for="userInterviwer" />
 				<p:selectOneMenu id="userInterviwer"
@@ -124,5 +123,28 @@
 			</h:panelGrid>
 			
 		</h:form>
+		<h:form id="formProposal">
+			<p:growl id="growl" />
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Proposal Status:" for="proposalStatus" />
+				<p:selectOneMenu id="proposalStatus"
+					value="#{proposalBean.status}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems
+						value="#{proposalBean.possibleStatusProposal()}"
+						var="status" itemLabel="#{status.description}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Observations:" for="observation"/>
+				<p:inputTextarea id = "observation" value="#{proposalBean.observation}"/>
+					
+
+				<p:commandButton value="Save Proposal"
+					action="#{proposalBean.saveProposal(jobApplicationBean.jobApplication)}" 
+					update="growl"/>
+
+			</h:panelGrid>
+			
+		</h:form>
+		<p:growl id = "growl"/>
 	</ui:define>
 </ui:composition>

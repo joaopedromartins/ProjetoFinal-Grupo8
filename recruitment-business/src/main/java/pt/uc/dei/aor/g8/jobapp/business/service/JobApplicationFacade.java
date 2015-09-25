@@ -1,6 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
-import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,9 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.ProposalStatus;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IProposalProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.util.GmailMessage;
@@ -221,5 +223,18 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 			log.error(e.getMessage());
 			return null;
 		}
+	}
+	
+	@Override
+	public IJobApplicationProxy saveProposal(ProposalStatus status, String observation, IJobApplicationProxy jobApp){
+		try {
+			IProposalProxy proposal = factory.proposalJobApplication(new Date(), observation);
+			jobApp.setProposal(proposal);
+			return service.editJobApplication(jobApp);
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
+		
 	}
 }

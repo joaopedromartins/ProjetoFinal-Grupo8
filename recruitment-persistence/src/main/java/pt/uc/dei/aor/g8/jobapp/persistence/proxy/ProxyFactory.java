@@ -1,6 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.proxy;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
-import java.math.BigInteger;
 import java.util.List;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.ProposalStatus;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -26,7 +26,8 @@ public interface IJobApplicationFacade {
 	public IJobApplicationProxy findId (long id);
 	
 	public List<IJobApplicationProxy> listOfJobApplicationByCandidate (ICandidateProxy candidate);
-
+	
+	public IJobApplicationProxy saveProposal(ProposalStatus status, String observation, IJobApplicationProxy jobApp);
 
 
 }
