@@ -59,13 +59,19 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 		
 	/*	//Interviewer
 		notification.createNotification("Schedule Interview"," You have a interview, on " 
-				+ dateFormat + ", with  candidate , " + jobapplication.getCandidateEntity().getFullName() + ".\n You can see candidate information ", "", userInterviewer);
-		mail.sendEmail(newUser.getEmail(), "jobappmailtest@gmail.com", "User Register", "Your registration have the following items:\nUsername - " 
-				+ username + "\nPassword - " + passwordGenerate + "");
+				+ dateFormat + ", with  candidate , " + jobapplication.getCandidateEntity().getFullName() + ".\n You can see candidate information ", "", userInterviewer);*/
 		
-		//Candidate
-		mail.sendEmail(newUser.getEmail(), "jobappmailtest@gmail.com", "User Register", "Your registration have the following items:\nUsername - " 
-				+ username + "\nPassword - " + passwordGenerate + "");*/
+		String msgEmail ="<p>Interview for position "+
+				jobapplication.getPositionEntity().getTitle()+" was created and assigned you as interviewer.</p>"+
+				"<p>Date: "+dateFormat+"</p>"+
+				"<p>Candidate: "+jobapplication.getCandidateEntity().getFullName()+"</p>"+
+				"<p>Interviewers: "+userInterviewer.getFullName()+
+				"<p><a href='http://localhost:8080/CriticalJobApplicationHR/interviewer/detailCandidate.xhtml?candidateId="+
+				jobapplication.getCandidateEntity().getId()+"'>Details</a></p>";
+		mail.sendEmail(userInterviewer.getEmail(), "jobappmailtest@gmail.com","Shedule Interview" ,msgEmail);
+		
+		/*//Candidate
+		mail.sendEmail(jobapplication.getCandidateEntity().getEmail(), "jobappmailtest@gmail.com", "Interview schedules", "You have interview on " + dateFormat	+ "\nPassword - " + passwordGenerate + "");*/
 			
 	
 		

@@ -31,12 +31,13 @@ public class GmailMessage {
 
 		try {
 
-			Message message = new MimeMessage(gmailSession);
+			MimeMessage message = new MimeMessage(gmailSession);
 			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(to));
 			message.setSubject(subject);
-			message.setText(content);
+			//message.setText(content);
+			message.setText(content, "utf-8", "html");
 
 			Transport.send(message);
 
@@ -44,6 +45,7 @@ public class GmailMessage {
 
 		} catch (MessagingException e) {
 			//log.error("Error while sending email : " + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
