@@ -23,6 +23,7 @@ public class GmailMessage {
 	 */
 	public GmailMessage() {
 	}
+	
 
 	@Asynchronous
 	public void sendEmail(String to, String from, String subject, String content) {
@@ -36,7 +37,30 @@ public class GmailMessage {
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(to));
 			message.setSubject(subject);
-			//message.setText(content);
+			message.setText(content);
+
+			Transport.send(message);
+
+			//log.debug("Email was sent");
+
+		} catch (MessagingException e) {
+			//log.error("Error while sending email : " + e.getMessage());
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Asynchronous
+	public void sendEmailHTML(String to, String from, String subject, String content) {
+
+		//log.info("Sending Email from " + from + " to " + to + " : " + subject);
+
+		try {
+
+			MimeMessage message = new MimeMessage(gmailSession);
+			message.setFrom(new InternetAddress(from));
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(to));
+			message.setSubject(subject);
 			message.setText(content, "utf-8", "html");
 
 			Transport.send(message);

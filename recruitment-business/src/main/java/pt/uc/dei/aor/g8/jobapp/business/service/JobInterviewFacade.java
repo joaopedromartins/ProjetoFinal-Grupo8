@@ -68,7 +68,7 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 				"<p>Interviewers: "+userInterviewer.getFullName()+
 				"<p><a href='http://localhost:8080/CriticalJobApplicationHR/interviewer/detailCandidate.xhtml?candidateId="+
 				jobapplication.getCandidateEntity().getId()+"'>Details</a></p>";
-		mail.sendEmail(userInterviewer.getEmail(), "jobappmailtest@gmail.com","Shedule Interview" ,msgEmail);
+		mail.sendEmailHTML(userInterviewer.getEmail(), "jobappmailtest@gmail.com","Shedule Interview" ,msgEmail);
 		
 		/*//Candidate
 		mail.sendEmail(jobapplication.getCandidateEntity().getEmail(), "jobappmailtest@gmail.com", "Interview schedules", "You have interview on " + dateFormat	+ "\nPassword - " + passwordGenerate + "");*/
