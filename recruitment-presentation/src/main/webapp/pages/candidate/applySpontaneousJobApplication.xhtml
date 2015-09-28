@@ -81,7 +81,7 @@
 						required="true" converter="omnifaces.SelectItemsConverter">
 						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
 						<f:selectItems
-							value="#{jobApplicationBean.positionProxy.jobAdvertisingChanel}"
+							value="#{jobApplicationBean.allJobAdvertisingChanel}"
 							var="channel" itemLabel="#{channel.chanelName}"
 							itemValue="#{channel.chanelName}" />
 					</p:selectOneMenu>

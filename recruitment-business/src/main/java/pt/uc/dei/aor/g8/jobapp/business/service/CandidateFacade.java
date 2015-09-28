@@ -116,25 +116,20 @@ public class CandidateFacade implements ICandidateFacade {
 	@Override
 	public String sendRegistrationCode(String registrationCode, String email) {
 
-		ICandidateProxy candidateProxy=findCandidateByEmail(email);
-		if(candidateProxy != null){
-			return "Error: There is an existing account associated with this email address. Recover account.";
-		} else {
-			//Notify Candidate by email
-			mail.sendEmail(email, 
-				"jobappmailtest@gmail.com", 
-				"Recover Account",
-				"Dear Candidate,\n" +
-				"Use de following code to compleet your registration:\n" +
-				"There is an existing account associated with this email address.\n" +
-						"\tValidation Code: " + registrationCode + "\n" +
-						"\n\nRegards," +
-						"\nAdministration Team"
-				);
+		//Notify Candidate by email
+		mail.sendEmail(email, 
+			"jobappmailtest@gmail.com", 
+			"Mail Validation",
+			"Dear Candidate,\n" +
+			"Use de following code to complete your registration:\n" +
+					"\tValidation Code: " + registrationCode + "\n" +
+					"\n\nRegards," +
+					"\nAdministration Team"
+			);
+		
+		return "Registration code to "+email+" has been sent with success.";
 			
-			return "Recover email to "+email+" has been sent with success.";
-			
-		}
+		
 	}
 
 	@Override

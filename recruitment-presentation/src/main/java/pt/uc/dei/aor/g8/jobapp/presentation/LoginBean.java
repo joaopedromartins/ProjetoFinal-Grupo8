@@ -34,8 +34,17 @@ public class LoginBean implements Serializable {
 	public ICandidateProxy getCandidate() {
 		if (candidate == null) {
 			String username = getUsername();
+			// TODO logger
+			System.out.println("Get Candidate:");
+			System.out.println("Username:" + username);
 			if ( username != null ){	
 				candidate = candidateFacade.findCandidateByUsername(username);
+				// TODO logger
+				System.out.println("Firstname:" + candidate.getFirstname());
+				System.out.println("Lastname:" + candidate.getLastname());
+				System.out.println("Username:" + candidate.getUsername());
+				System.out.println("Email:" + candidate.getEmail());
+				System.out.println("LinkedIn:" + candidate.getLinkedinAddress());
 				return candidate;
 			} else {
 				logout();

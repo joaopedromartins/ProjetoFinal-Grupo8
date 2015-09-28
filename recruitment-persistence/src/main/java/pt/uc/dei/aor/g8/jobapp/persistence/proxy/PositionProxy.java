@@ -97,16 +97,20 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 
 	@Override
 	public String getStringLocalization() {
-		String localizations="";
 		Set<Localization> localization=entity.getLocalization();
-		for (Localization l: localization){
-			if(!localizations.equals("")){
-				localizations=localizations + ", " + l.getDescription();
-			} else {
-				localizations = l.getDescription();
+		if (localization.size() < 1) {
+			return " ";
+		} else {
+			String localizations="";
+			for (Localization l: localization){
+				if(localizations.equals("")){
+					localizations = "" + l.getDescription();
+				} else {
+					localizations=localizations + ", " + l.getDescription();
+				}
 			}
+			return localizations; 
 		}
-		return localizations; 
 	}
 
 	@Override

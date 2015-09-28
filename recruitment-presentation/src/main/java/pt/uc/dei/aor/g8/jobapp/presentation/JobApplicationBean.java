@@ -25,9 +25,11 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobAdvertisingChanelProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.ICandidateFacade;
+import pt.uc.dei.aor.g8.jobapp.business.service.IJobAdversitingChanelFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
 
 
@@ -43,6 +45,9 @@ public class JobApplicationBean implements Serializable {
 	
 	@EJB
 	private ICandidateFacade candidateFacade;
+	
+	@EJB 
+	private IJobAdversitingChanelFacade jobAdvertisingChanelFacade;
 	
 	@Inject
 	private LoginBean loginBean;
@@ -66,6 +71,8 @@ public class JobApplicationBean implements Serializable {
 	
 	private String uploadDirectory="./cv";
 	private String uploadedfilename="";
+	
+	private List<IJobAdvertisingChanelProxy> allJobAdvertisingChanel;
 	
 	
 	//constructors
@@ -175,6 +182,15 @@ public class JobApplicationBean implements Serializable {
 	public void setUploadedfilename(String uploadedfilename) {
 		this.uploadedfilename = uploadedfilename;
 	}
+
+	public List<IJobAdvertisingChanelProxy> getAllJobAdvertisingChanel() {
+		if (allJobAdvertisingChanel==null) {
+			this.allJobAdvertisingChanel = jobAdvertisingChanelFacade.listOfAllChanel();
+		}
+		return allJobAdvertisingChanel;
+	}
+
+	
 
 	//methods
 	public String applyPosition() {

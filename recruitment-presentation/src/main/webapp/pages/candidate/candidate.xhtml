@@ -10,7 +10,7 @@
 </h:head>
 <h:body>
 	<center>
-		<h1>Hello Candidate</h1>
+		<p:outputLabel value="#{LoginBean.getUsername}" />
 		<br/>
 		<p:tabView orientation="top" header="Account Details">
 
@@ -67,7 +67,7 @@
 		<br />
 		<h:link
 			outcome="/pages/candidate/applySpontaneousJobApplication.xhtml"
-			value="View Job Applications" />
+			value="Apply Spontaneous Job Applications" />
 		<br />
 		<h:link outcome="/index" value="Back to Homepage" />
 	</center>
