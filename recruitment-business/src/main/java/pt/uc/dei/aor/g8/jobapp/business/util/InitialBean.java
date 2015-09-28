@@ -37,7 +37,7 @@ public class InitialBean {
 		roles.add(RoleType.INTERVIEWER);
 
 		String password = passwordEncrypt.encriptarPass("admin");
-		userFacade.createUser("admin", password, "lastname", "firstname", "admin@gmail.com", roles );
+		userFacade.createUser("admin", password, "lastname", "firstname", "jobappmailtest@gmail.com", roles );
 		
 	}
 
