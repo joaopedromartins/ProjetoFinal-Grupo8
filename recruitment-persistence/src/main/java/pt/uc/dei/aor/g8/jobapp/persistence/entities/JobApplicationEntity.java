@@ -28,7 +28,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 @NamedQueries({
 	@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
-				" where c.username like :login ") ,
+				" where c.username like :login and j.jobappSpontaneous = FALSE") ,
 	@NamedQuery(name = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
 				" inner join j.positionEntity p where c.username like :username and p.code like :code "),

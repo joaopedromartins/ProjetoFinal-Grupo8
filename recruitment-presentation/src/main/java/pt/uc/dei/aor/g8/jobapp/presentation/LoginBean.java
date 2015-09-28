@@ -31,30 +31,43 @@ public class LoginBean implements Serializable {
 	
 	// Getters and Setters
 	
-	public ICandidateProxy getCandidate() {
+	public void currentCandidate() {
 		if (candidate == null) {
 			String username = getUsername();
 			// TODO logger
 			System.out.println("Get Candidate:");
 			System.out.println("Username:" + username);
 			if ( username != null ){	
-				candidate = candidateFacade.findCandidateByUsername(username);
+				this.candidate = candidateFacade.findCandidateByUsername(username);
 				// TODO logger
 				System.out.println("Firstname:" + candidate.getFirstname());
 				System.out.println("Lastname:" + candidate.getLastname());
 				System.out.println("Username:" + candidate.getUsername());
 				System.out.println("Email:" + candidate.getEmail());
 				System.out.println("LinkedIn:" + candidate.getLinkedinAddress());
-				return candidate;
+				
 			} else {
 				logout();
-				return null;
+				this.candidate=null;
+				
 			}
-		} else {
-			return this.candidate;
-		}
+		} 
+			
 	}
 	
+	public ICandidateProxy getCandidate() {
+		if( candidate == null){
+			currentCandidate();
+			
+		} 
+		return candidate;
+		
+	}
+	
+	public void setCandidate(ICandidateProxy candidate) {
+		this.candidate = candidate;
+	}
+
 	public String getUsername() {
 		return FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
 	}
@@ -82,5 +95,7 @@ public class LoginBean implements Serializable {
 		}
 		return "/index?faces-redirect=true";
 	}
+
+	
 }
 
