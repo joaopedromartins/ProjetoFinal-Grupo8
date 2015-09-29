@@ -34,8 +34,8 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 		}
 	}
 	
-	public JobInterviewProxy(Date interviewDate, IUserProxy interviewer, IJobApplicationProxy jobapplication, IScriptProxy script) {
-		this.entity = new JobInterviewEntity(interviewDate,userConverterProxyToEntity(interviewer),jobApplicationProxyToEntity(jobapplication), scriptConvertProxyToEntity(script));
+	public JobInterviewProxy(Date interviewDate, List<IUserProxy> interviewers, IJobApplicationProxy jobapplication, IScriptProxy script) {
+		this.entity = new JobInterviewEntity(interviewDate,userConverterProxyToEntity(interviewers),jobApplicationProxyToEntity(jobapplication), scriptConvertProxyToEntity(script));
 	}
 	
 	
@@ -52,12 +52,36 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 		entity.setInterviewDate(interviewDate);
 	}
 	@Override
-	public IUserProxy getInterviewer() {
-		return new UserProxy(entity.getInterviewer());
+	public List<IUserProxy> getInterviewers() {
+		List <IUserProxy> proxyUser = new ArrayList<>();
+		
+		List <UserEntity> entityUser = entity.getInterviewers();
+		for (UserEntity i: entityUser){
+			proxyUser.add(new UserProxy(i));
+		}
+		return proxyUser;
+	}
+	
+	@Override
+	public String getInterviewersAsString (){
+		List<IUserProxy> interviwers= getInterviewers();
+		if (interviwers.size() < 1) {
+			return " ";
+		} else {
+			String listInterviwers="";
+			for (IUserProxy uI: interviwers){
+				if(listInterviwers.equals("")){
+					listInterviwers = "" + uI.getFullName();
+				} else {
+					listInterviwers=listInterviwers + ", " + uI.getFullName();
+				}
+			}
+			return listInterviwers; 
+		}
 	}
 	@Override
-	public void setInterviewer(IUserProxy interviewer) {
-		entity.setInterviewer(userConverterProxyToEntity(interviewer));
+	public void setInterviewers(List<IUserProxy> interviewers) {
+		entity.setInterviewers(userConverterProxyToEntity(interviewers));
 	}
 	@Override
 	public IJobApplicationProxy getJobapplication() {
@@ -83,8 +107,13 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 	}
 	
 	@SuppressWarnings( "unchecked" )
-	private UserEntity userConverterProxyToEntity ( IUserProxy proxy){
-		UserEntity entityUser = ((IEntityAware<UserEntity>)proxy).getEntity();
+	private List<UserEntity> userConverterProxyToEntity ( List<IUserProxy> proxyUsers){
+		List <UserEntity> entityUser = new ArrayList<>();
+		
+		for (IUserProxy i: proxyUsers){
+			entityUser.add(((IEntityAware<UserEntity>)i).getEntity());
+		}
+		
 		return entityUser;
 	}
 	

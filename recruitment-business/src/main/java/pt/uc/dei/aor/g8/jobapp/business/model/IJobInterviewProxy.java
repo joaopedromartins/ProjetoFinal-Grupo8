@@ -8,8 +8,9 @@ public interface IJobInterviewProxy {
 	public Date getInterviewDate();
 	public void setInterviewDate(Date interviewDate);
 
-	public IUserProxy getInterviewer();
-	public void setInterviewer(IUserProxy interviewer);
+	public List<IUserProxy> getInterviewers();
+	public String getInterviewersAsString ();
+	public void setInterviewers(List<IUserProxy> interviewers);
 
 
 	public IJobApplicationProxy getJobapplication();

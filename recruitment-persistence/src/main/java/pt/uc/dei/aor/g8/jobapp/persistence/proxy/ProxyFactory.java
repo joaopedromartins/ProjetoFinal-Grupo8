@@ -111,10 +111,10 @@ public class ProxyFactory implements IProxyFactory {
 	}
 
 	@Override
-	public IJobInterviewProxy jobInterview(Date interviewDate, IUserProxy interviewer,
+	public IJobInterviewProxy jobInterview(Date interviewDate, List<IUserProxy> interviewers,
 			IJobApplicationProxy jobapplication, IScriptProxy script) {
 
-		return new JobInterviewProxy(interviewDate, interviewer,jobapplication,script);
+		return new JobInterviewProxy(interviewDate, interviewers,jobapplication,script);
 	}
 
 	@Override

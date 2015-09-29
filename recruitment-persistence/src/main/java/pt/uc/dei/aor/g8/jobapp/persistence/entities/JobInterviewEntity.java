@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,10 +26,10 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Interview")
 @NamedQueries({
-	@NamedQuery(name = "Interview.listOfAllInterviews", query = "SELECT i FROM JobInterviewEntity i"),
-	@NamedQuery(name = "Interview.listInterviewsOfInterviewer", query = "SELECT i FROM JobInterviewEntity i where i.interviewer=:interviewer"),
+	@NamedQuery(name = "Interview.listOfAllInterviews", query = "SELECT i FROM JobInterviewEntity i"), 
+	@NamedQuery(name = "Interview.listInterviewsOfInterviewer", query = "SELECT i FROM JobInterviewEntity i where :interviewer member of i.interviewers"),
 })
-public class JobInterviewEntity implements Serializable{
+public class JobInterviewEntity implements Serializable{ 
 	
 	public static final String LIST_OF_ALL_INTERVIEWS = "Interview.listOfAllInterviews";
 	public static final String LIST_INTERVIEWS_OF_INTERVIEWER = "Interview.listInterviewsOfInterviewer";
@@ -46,8 +48,8 @@ public class JobInterviewEntity implements Serializable{
 	@ManyToOne
 	private ScriptEntity scriptInterview;
 
-	@ManyToOne
-	private UserEntity interviewer;
+	@ManyToMany (fetch = FetchType.EAGER)
+	private Set<UserEntity> interviewers;
 
 	@ManyToOne
 	private JobApplicationEntity jobapplication;
@@ -66,11 +68,12 @@ public class JobInterviewEntity implements Serializable{
 
 
 
-	public JobInterviewEntity(Date interviewDate, UserEntity interviewer,
+	public JobInterviewEntity(Date interviewDate, List<UserEntity> interviewers,
 			JobApplicationEntity jobapplication,ScriptEntity script ) {
 		super();
 		this.interviewDate = interviewDate;
-		this.interviewer = interviewer;
+		this.interviewers = new HashSet<>();
+		this.interviewers.addAll(interviewers);
 		this.jobapplication = jobapplication;
 		this.scriptInterview = script;
 		this.finished = false;
@@ -91,12 +94,13 @@ public class JobInterviewEntity implements Serializable{
 		this.interviewDate = interviewDate;
 	}
 
-	public UserEntity getInterviewer() {
-		return interviewer;
+	public List<UserEntity> getInterviewers() {
+		return  new ArrayList<>(interviewers);
 	}
 
-	public void setInterviewer(UserEntity interviewer) {
-		this.interviewer = interviewer;
+	public void setInterviewers(List<UserEntity> interviewers) {
+		this.interviewers = new HashSet<>();
+		this.interviewers.addAll(interviewers);
 	}
 
 

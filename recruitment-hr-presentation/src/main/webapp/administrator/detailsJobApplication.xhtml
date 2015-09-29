@@ -93,58 +93,56 @@
 		<h:form id="forScheduleInterview">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Interviwer:" for="userInterviwer" />
-				<p:selectOneMenu id="userInterviwer"
+				<p:selectManyMenu id="userInterviwer"
 					value="#{jobApplicationBean.interviewBean.userInterviwer}"
-					required="true" converter="omnifaces.SelectItemsConverter">
+					required="true" converter="omnifaces.SelectItemsConverter"
+					filter="true" filterMatchMode="contains" showCheckbox="true">
 					<f:selectItems
 						value="#{jobApplicationBean.interviewBean.possibleUserInterviwer}"
 						var="manager" itemLabel="#{manager.fullName}" />
-				</p:selectOneMenu>
+				</p:selectManyMenu>
 
 				<p:outputLabel value="Interview date:" for="interviewDate" />
 				<p:calendar id="interviewDate"
 					value="#{jobApplicationBean.interviewBean.date}" required="true"
 					showOn="button" pattern="dd/MM/yyyy HH:mm" />
-					
-				<p:outputLabel value = "Script of Interview:"/>
+
+				<p:outputLabel value="Script of Interview:" />
 				<p:selectOneMenu id="scriptInterview"
 					value="#{jobApplicationBean.interviewBean.scriptInterview}"
 					required="true" converter="omnifaces.SelectItemsConverter">
-					<f:selectItems
-						value="#{jobApplicationBean.listScripOfPosition()}"
+					<f:selectItems value="#{jobApplicationBean.listScripOfPosition()}"
 						var="script" itemLabel="#{script.scriptTitle}" />
 				</p:selectOneMenu>
-					
+
 
 				<p:commandButton value="Schedule interview"
-					action="#{jobApplicationBean.scheduleInterview}" 
-					update="growl"/>
+					action="#{jobApplicationBean.scheduleInterview}" update="growl" />
 
 			</h:panelGrid>
-			
+
 		</h:form>
 		<h:form id="formProposal">
 			<p:growl id="growl" />
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Proposal Status:" for="proposalStatus" />
-				<p:selectOneMenu id="proposalStatus"
-					value="#{proposalBean.status}"
+				<p:selectOneMenu id="proposalStatus" value="#{proposalBean.status}"
 					required="true" converter="omnifaces.SelectItemsConverter">
-					<f:selectItems
-						value="#{proposalBean.possibleStatusProposal()}"
+					<f:selectItems value="#{proposalBean.possibleStatusProposal()}"
 						var="status" itemLabel="#{status.description}" />
 				</p:selectOneMenu>
-				<p:outputLabel value="Observations:" for="observation"/>
-				<p:inputTextarea id = "observation" value="#{proposalBean.observation}"/>
-					
+				<p:outputLabel value="Observations:" for="observation" />
+				<p:inputTextarea id="observation"
+					value="#{proposalBean.observation}" />
+
 
 				<p:commandButton value="Save Proposal"
-					action="#{proposalBean.saveProposal(jobApplicationBean.jobApplication)}" 
-					update="growl"/>
+					action="#{proposalBean.saveProposal(jobApplicationBean.jobApplication)}"
+					update="growl" />
 
 			</h:panelGrid>
-			
+
 		</h:form>
-		<p:growl id = "growl"/>
+		<p:growl id="growl" />
 	</ui:define>
 </ui:composition>

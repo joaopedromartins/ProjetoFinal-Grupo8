@@ -11,7 +11,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 
 public interface IJobInterviewFacade {
 
-	public IJobInterviewProxy newInterview (Date interviewDate, IUserProxy userInterview, IJobApplicationProxy jobapplication, IScriptProxy script);
+	public IJobInterviewProxy newInterview (Date interviewDate, List<IUserProxy> userInterviewers, IJobApplicationProxy jobapplication, IScriptProxy script);
 	
 	public List <IJobInterviewProxy> listOfAllInterviews ();
 	

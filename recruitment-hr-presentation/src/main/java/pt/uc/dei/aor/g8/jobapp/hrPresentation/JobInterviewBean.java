@@ -39,7 +39,7 @@ public class JobInterviewBean implements Serializable{
 
 	private List<IAnswerInterviewProxy> answers;
 	private Date date;
-	private IUserProxy userInterviwer;
+	private List<IUserProxy> userInterviwer;
 	private IScriptProxy scriptInterview;
 	private List <IJobInterviewProxy> inteviews;
 	private IPositionProxy position;
@@ -52,7 +52,7 @@ public class JobInterviewBean implements Serializable{
 
 	}
 
-	public IUserProxy getUserInterviwer() {
+	public List<IUserProxy> getUserInterviwer() {
 		return userInterviwer;
 	}
 
@@ -60,7 +60,7 @@ public class JobInterviewBean implements Serializable{
 		return userFacade.findInterviewers();
 	}
 
-	public void setUserInterviwer(IUserProxy userInterviwer) {
+	public void setUserInterviwer(List<IUserProxy> userInterviwer) {
 		this.userInterviwer = userInterviwer;
 	}
 

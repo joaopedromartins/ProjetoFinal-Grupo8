@@ -41,10 +41,10 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 	private GmailMessage mail;
 	
 	@Override
-	public IJobInterviewProxy newInterview(Date interviewDate, IUserProxy userInterviewer,
+	public IJobInterviewProxy newInterview(Date interviewDate, List<IUserProxy> userInterviewers,
 			IJobApplicationProxy jobapplication, IScriptProxy script) {
 		
-		IJobInterviewProxy newInterview = factory.jobInterview(interviewDate, userInterviewer, jobapplication, script);
+		IJobInterviewProxy newInterview = factory.jobInterview(interviewDate, userInterviewers, jobapplication, script);
 			
 		try {
 			newInterview = service.newInterview(newInterview);
@@ -60,15 +60,17 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 	/*	//Interviewer
 		notification.createNotification("Schedule Interview"," You have a interview, on " 
 				+ dateFormat + ", with  candidate , " + jobapplication.getCandidateEntity().getFullName() + ".\n You can see candidate information ", "", userInterviewer);*/
+		for (IUserProxy i:userInterviewers){
+			String msgEmail ="<p>Interview for position "+
+					jobapplication.getPositionEntity().getTitle()+" was created and assigned you as interviewer.</p>"+
+					"<p>Date: "+dateFormat+"</p>"+
+					"<p>Candidate: "+jobapplication.getCandidateEntity().getFullName()+"</p>"+
+					"<p>Interviewers: "+i.getFullName()+
+					"<p><a href='http://localhost:8080/CriticalJobApplicationHR/interviewer/detailCandidate.xhtml?candidateId="+
+					jobapplication.getCandidateEntity().getId()+"'>Details</a></p>";
+			mail.sendEmailHTML(i.getEmail(), "jobappmailtest@gmail.com","Shedule Interview" ,msgEmail);
+		}
 		
-		String msgEmail ="<p>Interview for position "+
-				jobapplication.getPositionEntity().getTitle()+" was created and assigned you as interviewer.</p>"+
-				"<p>Date: "+dateFormat+"</p>"+
-				"<p>Candidate: "+jobapplication.getCandidateEntity().getFullName()+"</p>"+
-				"<p>Interviewers: "+userInterviewer.getFullName()+
-				"<p><a href='http://localhost:8080/CriticalJobApplicationHR/interviewer/detailCandidate.xhtml?candidateId="+
-				jobapplication.getCandidateEntity().getId()+"'>Details</a></p>";
-		mail.sendEmailHTML(userInterviewer.getEmail(), "jobappmailtest@gmail.com","Shedule Interview" ,msgEmail);
 		
 		/*//Candidate
 		mail.sendEmail(jobapplication.getCandidateEntity().getEmail(), "jobappmailtest@gmail.com", "Interview schedules", "You have interview on " + dateFormat	+ "\nPassword - " + passwordGenerate + "");*/

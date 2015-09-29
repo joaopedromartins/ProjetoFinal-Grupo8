@@ -1,6 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.business.model;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public interface IProxyFactory {
 
 	public IQuestionProxy question (String question, QuestionType questionType, List<IQuestionChoiceProxy> options);
 
-	public IJobInterviewProxy jobInterview (Date interviewDate, IUserProxy interviewer, IJobApplicationProxy jobapplication , IScriptProxy script);
+	public IJobInterviewProxy jobInterview (Date interviewDate, List<IUserProxy> interviewers, IJobApplicationProxy jobapplication , IScriptProxy script);
 	
 	public IAnswerInterviewProxy answerInterview (String question, String questionType);
 	

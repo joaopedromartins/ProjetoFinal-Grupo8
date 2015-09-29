@@ -1,7 +1,5 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
-import java.math.BigInteger;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

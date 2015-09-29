@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -70,7 +71,7 @@ public class UserEntity {
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="userReceiver")
 	private List <NotificationEntity> notification;
 
-	@OneToMany ( cascade=CascadeType.ALL , mappedBy="interviewer" )
+	@ManyToMany ( cascade=CascadeType.ALL , mappedBy="interviewers" )
 	private List <JobInterviewEntity> interview;
 
 

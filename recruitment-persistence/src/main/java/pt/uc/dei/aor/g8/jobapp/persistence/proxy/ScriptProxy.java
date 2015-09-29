@@ -143,10 +143,4 @@ public class ScriptProxy implements IScriptProxy, IEntityAware<ScriptEntity> {
 	}
 
 
-
-
-
-
-
-
 }
