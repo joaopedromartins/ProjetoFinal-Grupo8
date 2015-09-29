@@ -66,6 +66,10 @@ public class CandidateBean implements Serializable{
 				
 	}
 	
+	public List <ICandidateProxy> allCandidates(){
+		return facade.allCandidates();
+	}
+	
 	
 
 }

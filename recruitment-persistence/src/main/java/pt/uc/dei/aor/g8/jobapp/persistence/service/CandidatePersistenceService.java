@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -83,6 +84,18 @@ public class CandidatePersistenceService implements ICandidatePersistenceService
 	public ICandidateProxy findById(long id) {
 		CandidateEntity entity = em.find(CandidateEntity.class, id);
 		return new CandidateProxy(entity);
+	}
+
+	@Override
+	public List<ICandidateProxy> allCandidate() {
+		TypedQuery <CandidateEntity> query = em.createNamedQuery(CandidateEntity.ALL_CANDIDATES, CandidateEntity.class);
+		List <CandidateEntity> entity = query.getResultList();
+		
+		List <ICandidateProxy> proxy = new ArrayList<>();
+		for(CandidateEntity c: entity){
+			proxy.add(new CandidateProxy(c));
+		}
+		return proxy;
 	}
 
 	

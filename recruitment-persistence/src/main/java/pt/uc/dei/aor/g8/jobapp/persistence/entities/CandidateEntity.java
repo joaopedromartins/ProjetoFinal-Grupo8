@@ -13,12 +13,14 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name = "CandidateEntity.findCandidateByUsername", query = "SELECT c FROM CandidateEntity c WHERE c.username=:username"),
 	@NamedQuery(name = "CandidateEntity.findCandidateByEmail", query = "SELECT c FROM CandidateEntity c WHERE c.email=:email"),
+	@NamedQuery ( name = "CandidateEntity.allCandidates", query = "SELECT c FROM CandidateEntity c")
 })
 @Table(name = "Candidate")
 public class CandidateEntity {
 	
 	public static final String FIND_CANDIDATE_BY_USERNAME = "CandidateEntity.findCandidateByUsername";
 	public static final String FIND_CANDIDATE_BY_EMAIL = "CandidateEntity.findCandidateByEmail";
+	public static final String ALL_CANDIDATES = "CandidateEntity.allCandidates";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

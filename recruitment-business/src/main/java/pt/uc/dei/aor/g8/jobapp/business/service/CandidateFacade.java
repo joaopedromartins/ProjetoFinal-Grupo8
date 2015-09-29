@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
@@ -143,6 +145,16 @@ public class CandidateFacade implements ICandidateFacade {
 		
 		
 		
+	}
+
+	@Override
+	public List<ICandidateProxy> allCandidates() {
+		try {
+			return service.allCandidate();
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
 	}
 
 }

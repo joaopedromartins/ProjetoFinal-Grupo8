@@ -9,6 +9,27 @@
 
 		<h:form id="formTableCandidates">
 		
+			<p:dataTable id="tableCandidates"
+				value="#{candidateBean.allCandidates()}" var="candidate">
+				
+				<p:column headerText="Name:">
+					<p:outputLabel value="#{candidate.fullName}" />
+				</p:column>
+				
+				<p:column headerText="Linkedin:">
+					<p:link href="#{candidate.linkedinAddress}" target="_blank" value="Linkendin" />
+				</p:column>
+				
+				<p:column headerText="Email">
+					<p:outputLabel value="#{candidate.email}" />
+				</p:column>
+				
+				<p:column headerText = "Mobile:">
+					<p:outputLabel value="#{candidate.mobile}" />
+				</p:column>
+			
+			</p:dataTable>
+
 
 		</h:form>
 	</ui:define>
