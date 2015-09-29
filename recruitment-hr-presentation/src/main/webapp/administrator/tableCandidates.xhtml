@@ -6,9 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="content">
-
-		<h:form id="formTableCandidates">
-		
+	<h1>List of all Candidates</h1>
+		<h:form id="formTableCandidates">		
 			<p:dataTable id="tableCandidates"
 				value="#{candidateBean.allCandidates()}" var="candidate">
 				
@@ -27,10 +26,8 @@
 				<p:column headerText = "Mobile:">
 					<p:outputLabel value="#{candidate.mobile}" />
 				</p:column>
-			
+				
 			</p:dataTable>
-
-
 		</h:form>
 	</ui:define>
 </ui:composition>
