@@ -92,6 +92,10 @@ public class JobApplicationBean implements Serializable {
 		
 		return positionFacade.listScriptOfPosition(jobApplication.getPositionEntity());
 	}
+	
+	public List<IJobApplicationProxy> findALLSpontaneous(){
+		return facade.listOfAllSpontaneous();
+	}
 
 
 

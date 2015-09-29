@@ -119,4 +119,16 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		return proxy;
 	}
 
+	@Override
+	public List<IJobApplicationProxy> listOfAllSpontaneous() {
+		TypedQuery <JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_SPONTANEOUS_JOBAPPLICATION, JobApplicationEntity.class);
+		List <JobApplicationEntity> entity = query.getResultList();
+		
+		List <IJobApplicationProxy> proxy = new ArrayList<>();
+		for (JobApplicationEntity jA: entity){
+			proxy.add(new JobApplicationProxy(jA));
+		}
+		return proxy;
+	}
+
 }

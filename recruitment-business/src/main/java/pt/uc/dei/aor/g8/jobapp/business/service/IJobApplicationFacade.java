@@ -28,6 +28,8 @@ public interface IJobApplicationFacade {
 	public List<IJobApplicationProxy> listOfJobApplicationByCandidate (ICandidateProxy candidate);
 	
 	public IJobApplicationProxy saveProposal(ProposalStatus status, String observation, IJobApplicationProxy jobApp);
+	
+	public List<IJobApplicationProxy> listOfAllSpontaneous();
 
 
 }

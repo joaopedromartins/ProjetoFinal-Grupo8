@@ -1,0 +1,61 @@
+<ui:composition template="/template/templateAdmin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		<h1>Spontaneous Job Applications</h1>
+
+
+
+		<h:form id="formSpontaneousjobApplication">
+
+			<p:dataTable id="gridSpontaneousJobApplication"
+				value="#{jobApplicationBean.findALLSpontaneous()}" var="jobApplication">
+				
+				<p:column headerText="Date:">
+					<p:outputLabel value="#{jobApplication.jobAppDate}" />
+				</p:column>
+				<p:column headerText="Name">
+					<p:outputLabel value="#{jobApplication.candidateEntity.fullName}" />
+				</p:column>
+				<p:column headerText="City">
+					<p:outputLabel value="#{jobApplication.city}" />
+				</p:column>
+				<p:column headerText="Diploma">
+					<p:outputLabel value="#{jobApplication.diploma}" />
+				</p:column>
+				<p:column headerText="School">
+					<p:outputLabel value="#{jobApplication.school}" />
+				</p:column>
+				<p:column headerText="Letter">
+					<p:outputLabel value="#{jobApplication.letter}" />
+				</p:column>
+				<p:column headerText="Cv">
+					<p:outputLabel value="#{jobApplication.cv}" />
+				</p:column>
+				<p:column headerText="Email">
+					<p:outputLabel value="#{jobApplication.candidateEntity.email}" />
+				</p:column>
+				<p:column headerText="Phone">
+					<p:outputLabel value="#{jobApplication.phone}" />
+				</p:column>
+				
+				
+				
+
+				<!-- <p:column headerText="Detail">
+					<p:link outcome="detailsJobApplication?faces-redirect=true"
+						value="ui-icon-search Search">
+						<f:param name="jobApplicationId" value="#{jobApplication.id}" />
+					</p:link>
+				</p:column> -->
+
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
