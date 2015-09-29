@@ -86,6 +86,9 @@ public class PositionEntity implements Serializable{
 
 	@ManyToOne
 	private UserEntity managerPosition;
+	
+	@ManyToOne
+	private UserEntity adminPosition;
 
 	@Column
 	private String company;
@@ -110,7 +113,7 @@ public class PositionEntity implements Serializable{
 	}
 
 	public PositionEntity(Date openDate, String code, String title, List<Localization> localization,
-			StatusPosition status, int numberOfposition, Date sLA, UserEntity userPosition, String company, 
+			StatusPosition status, int numberOfposition, Date sLA, UserEntity managerPosition,UserEntity adminPosition, String company, 
 			TechnicalArea technicalArea, String descriptionPosition, List<JobAdvertisingChanelEntity> jobAdvertisingChanel,
 			List<ScriptEntity> script) {
 		this.openDate = openDate;
@@ -121,7 +124,8 @@ public class PositionEntity implements Serializable{
 		this.status = status;
 		this.numberOfposition = numberOfposition;
 		this.SLA = sLA;
-		this.managerPosition = userPosition;
+		this.managerPosition = managerPosition;
+		this.adminPosition = adminPosition;
 		this.company = company;
 		this.technicalArea = technicalArea;
 		this.descriptionPosition = descriptionPosition;
@@ -138,58 +142,37 @@ public class PositionEntity implements Serializable{
 		return openDate;
 	}
 
-
-
 	public void setOpenDate(Date openDate) {
 		this.openDate = openDate;
 	}
-
-
 
 	public Date getCloseDate() {
 		return closeDate;
 	}
 
-
-
-
 	public void setCloseDate(Date closeDate) {
 		this.closeDate = closeDate;
 	}
-
-
 
 	public String getCode() {
 		return code;
 	}
 
-
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-
-
 
 	public String getTitle() {
 		return title;
 	}
 
-
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-
-
 	public Set<Localization> getLocalization() {
 		return localization;
 	}
-
-
 
 	public void setLocalization(Set<Localization> localization) {
 		this.localization = localization;
@@ -199,95 +182,72 @@ public class PositionEntity implements Serializable{
 		return status;
 	}
 
-
 	public void setStatus(StatusPosition status) {
 		this.status = status;
 	}
-
-
 
 	public int getNumberOfposition() {
 		return numberOfposition;
 	}
 
 
-
 	public void setNumberOfposition(int numberOfposition) {
 		this.numberOfposition = numberOfposition;
 	}
-
-
 
 	public Date getSLA() {
 		return SLA;
 	}
 
-
-
-
 	public void setSLA(Date sLA) {
 		SLA = sLA;
 	}
-
-
-
 
 	public UserEntity getManagerPosition() {
 		return managerPosition;
 	}
 
-
-
 	public void setManagerPosition(UserEntity userPosition) {
 		this.managerPosition = userPosition;
 	}
+	
+	public UserEntity getAdminPosition() {
+		return adminPosition;
+	}
 
-
+	public void setAdminPosition(UserEntity adminPosition) {
+		this.adminPosition = adminPosition;
+	}
+	
+	
 
 	public String getCompany() {
 		return company;
 	}
 
-
-
 	public void setCompany(String company) {
 		this.company = company;
 	}
-
-
-
 
 	public TechnicalArea getTechnicalArea() {
 		return technicalArea;
 	}
 
-
-
 	public void setTechnicalArea(TechnicalArea technicalArea) {
 		this.technicalArea = technicalArea;
 	}
-
-
 
 	public String getDescriptionPosition() {
 		return descriptionPosition;
 	}
 
-
-
-
 	public void setDescriptionPosition(String descriptionPosition) {
 		this.descriptionPosition = descriptionPosition;
 	}
 
-
-
 	public List<JobAdvertisingChanelEntity> getJobAdvertisingChanel() {
 		return jobAdvertisingChanel;
 	}
-
-
-
 
 	public void setJobAdvertisingChanel(List<JobAdvertisingChanelEntity> jobAdvertisingChanel) {
 		this.jobAdvertisingChanel = new ArrayList<>();
@@ -295,14 +255,9 @@ public class PositionEntity implements Serializable{
 
 	}
 
-
-
-
 	public List<ScriptEntity> getScript() {
 		return script;
 	}
-
-
 
 	public void setScript(List<ScriptEntity> script) {
 		this.script = script;

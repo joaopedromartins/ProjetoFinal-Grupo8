@@ -33,11 +33,11 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 
 	public PositionProxy(Date openDate, String code, String title,
 			List<Localization> localization, StatusPosition status, int numberOfposition, Date sLA, IUserProxy managerPosition,
-			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
+			IUserProxy adminPosition, String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> scripts) {
 		
 		this.entity = new PositionEntity(openDate,code,title,localization,status,numberOfposition,sLA, userConverterProxyToEntity(managerPosition),
-				company,technicalArea,descriptionPosition, jobAdvertisingChanelConverterProxyToEntity(jobAdvertisingChanel),scriptsConvertProxyToEntity(scripts)); 
+				userConverterProxyToEntity(adminPosition),company,technicalArea,descriptionPosition, jobAdvertisingChanelConverterProxyToEntity(jobAdvertisingChanel),scriptsConvertProxyToEntity(scripts)); 
 	}
 
 
@@ -226,9 +226,22 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	}
 
 	@Override
-	public void setManagerPosition(IUserProxy userPosition) {
-		entity.setManagerPosition(userConverterProxyToEntity(userPosition));
+	public void setManagerPosition(IUserProxy managerPosition) {
+		entity.setManagerPosition(userConverterProxyToEntity(managerPosition));
 	}
+	
+	@Override
+	public IUserProxy getAdminPosition() {
+		UserEntity entityUser = entity.getAdminPosition();
+		IUserProxy proxy = new UserProxy(entityUser);
+		return proxy;
+	}
+
+	@Override
+	public void setAdminPosition(IUserProxy adminPosition) {
+		entity.setAdminPosition(userConverterProxyToEntity(adminPosition));
+	}
+
 	
 	@SuppressWarnings( "unchecked" )
 	private UserEntity userConverterProxyToEntity ( IUserProxy proxy){
@@ -269,6 +282,7 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 		return entity.getId();
 	}
 
+	
 
 
 

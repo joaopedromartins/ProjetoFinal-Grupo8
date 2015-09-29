@@ -32,7 +32,7 @@ public class PositionFacade implements IPositionFacade {
 	@Override
 	public IPositionProxy creatNewPosition(Date openDate, String title,
 			List<Localization> localization, StatusPosition status, int numberOfposition, Date sLA, IUserProxy managerPosition,
-			String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
+			IUserProxy adminPosition,String company, TechnicalArea technicalArea, String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel,
 			List<IScriptProxy> script) {
 		
 		IPositionProxy lastPosition = service.lasPositionOfListPosition();
@@ -44,7 +44,7 @@ public class PositionFacade implements IPositionFacade {
 		}
 
 		IPositionProxy newPosition= factory.position(openDate, code, title, localization, status, 
-				numberOfposition, sLA, managerPosition, company, technicalArea, descriptionPosition,
+				numberOfposition, sLA, managerPosition, adminPosition, company, technicalArea, descriptionPosition,
 				jobAdvertisingChanel, script);
 		
 		

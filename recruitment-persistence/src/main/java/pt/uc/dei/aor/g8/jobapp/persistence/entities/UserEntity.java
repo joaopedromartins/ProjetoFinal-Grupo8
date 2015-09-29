@@ -66,7 +66,10 @@ public class UserEntity {
 	private List<RoleType> roles;
 
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="managerPosition")
-	private List <PositionEntity> position;
+	private List <PositionEntity> positionManager;
+	
+	@OneToMany ( cascade=CascadeType.ALL , mappedBy="adminPosition")
+	private List <PositionEntity> positionAdmin;
 
 	@OneToMany ( cascade=CascadeType.ALL , mappedBy="userReceiver")
 	private List <NotificationEntity> notification;
@@ -136,12 +139,20 @@ public class UserEntity {
 		this.email = email;
 	}
 
-	public List<PositionEntity> getPosition() {
-		return position;
+	public List<PositionEntity> getPositionManager() {
+		return positionManager;
 	}
 
-	public void setPosition(List<PositionEntity> position) {
-		this.position = position;
+	public void setPositionManager(List<PositionEntity> positionManager) {
+		this.positionManager = positionManager;
+	}
+
+	public List<PositionEntity> getPositionAdmin() {
+		return positionAdmin;
+	}
+
+	public void setPositionAdmin(List<PositionEntity> positionAdmin) {
+		this.positionAdmin = positionAdmin;
 	}
 
 	public List<NotificationEntity> getNotification() {

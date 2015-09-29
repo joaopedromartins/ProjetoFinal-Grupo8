@@ -15,7 +15,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 public interface IPositionFacade {
 
 	public IPositionProxy creatNewPosition(Date openDate, String title, List<Localization> localization, StatusPosition status,
-			int numberOfposition, Date sLA, IUserProxy managerPosition, String company, TechnicalArea technicalArea,
+			int numberOfposition, Date sLA, IUserProxy managerPosition,IUserProxy adminPosition, String company, TechnicalArea technicalArea,
 			String descriptionPosition, List<IJobAdvertisingChanelProxy> jobAdvertisingChanel, List<IScriptProxy> script);
 
 	public List<IPositionProxy> listOfAllPosition();
