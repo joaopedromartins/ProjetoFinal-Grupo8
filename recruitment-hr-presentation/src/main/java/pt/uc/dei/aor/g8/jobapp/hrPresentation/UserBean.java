@@ -39,6 +39,8 @@ public class UserBean implements Serializable {
 	private String email;
 	private List<RoleType> roles;
 	private IUserProxy currentUser;
+	private IUserProxy selectUser;
+	private RoleType role;
 
 	@EJB
 	private IUserFacade userFacade;
@@ -99,7 +101,6 @@ public class UserBean implements Serializable {
 		}
 	}
 
-
 	public IUserProxy getCurrentUser(){
 		if ( currentUser == null){
 			this.username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
@@ -118,13 +119,9 @@ public class UserBean implements Serializable {
 		}
 	}
 
-
-
 	public IUserProxy findUserByUsername (){
 		return userFacade.findUserByUsername(username);	
 	}
-
-
 
 	public boolean isLogged() {
 		return isLogged;
@@ -194,8 +191,27 @@ public class UserBean implements Serializable {
 		this.roles = rolesUser;
 	}
 
+	public IUserProxy getSelectUser() {
+		return selectUser;
+	}
 
+	public void setSelectUser(IUserProxy selectUser) {
+		this.selectUser = selectUser;
+	}
 
+	public RoleType getRole() {
+		return role;
+	}
+
+	public void setRole(RoleType role) {
+		this.role = role;
+	}
+
+	public List<IUserProxy> allUser(){
+		return userFacade.allUser();
+	}
+	
+	
 	public void editUser() {
 		String newEmail = currentUser.getEmail();
 		String newUsername = currentUser.getUsername();
@@ -269,7 +285,6 @@ public class UserBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			return;
 		}
-
 	}
 
 	public void changePassword(){
@@ -298,34 +313,28 @@ public class UserBean implements Serializable {
 		return currentUser.getRoles().contains(RoleType.INTERVIEWER);
 	}
 	
-	
-	/*
-	public void editarPass() {
-		try {
-			current.setPassword(password);
-			userInterface.updatePassword(current);
-			password = "";
+	public void deleteUser(IUserProxy user){
+		if (userFacade.deleteUser(user) != null) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Password updated successfully.", "");
+					"User deleted with success.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
-		} catch (Exception e) {
-
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Error on delete user.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}	
+	}
+	
+	public void editUserSelected(){
+		if (userFacade.editUserSelected(selectUser, role) != null) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"User changed with success.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Error on edit user.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
-
-	// apagar conta
-	public String deleteAccount() {
-		try {
-			userInterface.delete(current);
-			return endSession();
-
-		} catch (Exception e) {
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR,
-					"Could not delete user account", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		}
-		return null;
-	}*/
-
+	
 }

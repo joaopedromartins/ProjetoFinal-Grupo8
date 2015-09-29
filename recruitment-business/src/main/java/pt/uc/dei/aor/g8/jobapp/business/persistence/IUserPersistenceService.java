@@ -13,7 +13,7 @@ public interface IUserPersistenceService {
 	public List <IUserProxy> findInterviewers();
 	public IUserProxy editUser(IUserProxy currentUser);
 	public IUserProxy verifyPasswordOfUser (String username, String password);
-	
-	
+	public List<IUserProxy> allUser();
+	public IUserProxy deleteUser (IUserProxy user);
 
 }

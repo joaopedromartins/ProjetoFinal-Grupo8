@@ -15,5 +15,8 @@ public interface IUserFacade {
 	public List <IUserProxy> findInterviewers();
 	public IUserProxy updateUser(IUserProxy currentUser);
 	public String changePassword(IUserProxy currentUser, String oldPassword, String password);
+	public List<IUserProxy> allUser();
+	public IUserProxy deleteUser(IUserProxy selectUser);
+	public IUserProxy editUserSelected(IUserProxy selectUser, RoleType role);
 
 }

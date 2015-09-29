@@ -12,6 +12,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IUserPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.IEntityAware;
+import pt.uc.dei.aor.g8.jobapp.persistence.proxy.ScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.UserProxy;
 
 @Stateless
@@ -117,6 +118,26 @@ public class UserPersistenceService implements IUserPersistenceService {
 			proxy=null;
 		}
 		return proxy;
+	}
+
+	@Override
+	public List<IUserProxy> allUser() {
+		TypedQuery <UserEntity> query = em.createNamedQuery(UserEntity.ALL_USER, UserEntity.class);
+		List <UserEntity> entity = query.getResultList();
+
+		List <IUserProxy> proxy = new ArrayList<>();
+		for (UserEntity u: entity){
+			proxy.add(new UserProxy(u));
+		}
+		return proxy;
+	}
+
+	@Override
+	public IUserProxy deleteUser(IUserProxy user) {
+		UserEntity entity = getEntity(user);
+		entity = em.merge(entity);
+		em.remove(entity);
+		return new UserProxy(entity);
 	}
 
 }

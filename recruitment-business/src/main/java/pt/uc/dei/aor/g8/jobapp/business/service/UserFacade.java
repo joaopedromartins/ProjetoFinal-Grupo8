@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
@@ -17,9 +21,10 @@ import pt.uc.dei.aor.g8.jobapp.business.util.GmailMessage;
 @Stateless
 public class UserFacade implements IUserFacade {
 
+	private static final Logger log = LoggerFactory.getLogger(UserFacade.class);
+	
 	@EJB
 	private IProxyFactory factory;
-
 	@EJB
 	private IUserPersistenceService service;
 	@EJB
@@ -159,6 +164,37 @@ public class UserFacade implements IUserFacade {
 			service.editUser(currentUser);
 			return "sucess";
 		}
+	}
+
+	@Override
+	public List<IUserProxy> allUser() {
+		try{
+			return service.allUser();	
+		}catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}	
+	}
+
+	@Override
+	public IUserProxy deleteUser(IUserProxy selectUser) {
+		try{
+			return service.deleteUser(selectUser);	
+		}catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}	
+	}
+
+	@Override
+	public IUserProxy editUserSelected(IUserProxy selectUser, RoleType role) {
+		try{
+			selectUser.setRoles(rolesList(role));
+			return service.editUser(selectUser);	
+		}catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}	
 	}
 
 

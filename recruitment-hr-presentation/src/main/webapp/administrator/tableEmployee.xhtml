@@ -7,8 +7,73 @@
 
 	<ui:define name="content">
 
-		<h:form id="formTableEmployee">
-		
+		<h:form id="formEditEmployee">
+			<p:dataTable id="tableEditCandidates" value="#{userBean.allUser()}"
+				var="user">
+				<p:column headerText="Name">
+					<p:outputLabel value="#{user.fullName}" />
+				</p:column>
+				<p:column headerText="Email">
+					<p:outputLabel value="#{user.email}" />
+				</p:column>
+				<p:column headerText="Roles">
+					<p:outputLabel value="#{user.roles}" />
+				</p:column>
+				<p:column headerText="Edit/Delete">
+					<p:commandButton
+						update=":formEditEmployee:tableEditCandidates :formEditEmployee:gridEditUser"
+						oncomplete="PF('userEdit').show()" icon="ui-icon-search"
+						title="Edit">
+						<f:setPropertyActionListener value="#{user}"
+							target="#{userBean.selectUser}" />
+
+					</p:commandButton>
+					<p:commandButton id="deleteUser" icon="ui-icon-trash"
+						process="@this" action="#{userBean.deleteUser(user)}"
+						update=":formEditEmployee:tableEditCandidates :formEditEmployee:growl" />
+
+				</p:column>
+
+
+			</p:dataTable>
+
+			<p:dialog header="User" widgetVar="userEdit" minimizable="true"
+				maximizable="true" showEffect="fade" hideEffect="fade"
+				resizable="false">
+
+				<p:panelGrid id="gridEditUser" columns="2">
+					<p:outputLabel value="First Name:" for="firstname" />
+					<p:inputText id="firstname"
+						value="#{userBean.selectUser.firstname}" disabled="true" />
+
+					<p:outputLabel value="Last name:" for="lastname" />
+					<p:inputText id="lastname" value="#{userBean.selectUser.lastname}"
+						disabled="true" />
+
+					<p:outputLabel value="Username:" for="username" />
+					<p:inputText id="username" value="#{userBean.selectUser.username}"
+						disabled="true" />
+
+					<p:outputLabel value="Email:" for="email" />
+					<p:inputText id="email" value="#{userBean.selectUser.email}"
+						disabled="true">
+						<f:validator validatorId="emailValidator" />
+					</p:inputText>
+
+					<p:outputLabel value="Employer type:" for="employerType" />
+					<p:selectOneMenu id="employerType" value="#{userBean.role}"
+						required="true" converter="omnifaces.SelectItemsConverter">
+						<f:selectItems value="#{registerUserBean.getPossibleRoles()}"
+							var="roles" itemLabel="#{roles.description}" itemValue="#{roles}" />
+					</p:selectOneMenu>
+
+					<p:growl id="growl" />
+					<p:commandButton value="Save"
+						action="#{userBean.editUserSelected()}"
+						update=":formEditEmployee:tableEditCandidates :formEditEmployee:gridEditUser :formEditEmployee:growl" />
+
+				</p:panelGrid>
+			</p:dialog>
 
 		</h:form>
 	</ui:define>

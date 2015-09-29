@@ -46,6 +46,11 @@ public class UserProxy implements IUserProxy, IEntityAware<UserEntity> {
 	}
 
 	@Override
+	public void setRoles(List<RoleType> roles) {
+		entity.setRoles(roles);
+	}
+	
+	@Override
 	public String getUsername() {
 		return entity.getUsername();
 	}
@@ -114,6 +119,8 @@ public class UserProxy implements IUserProxy, IEntityAware<UserEntity> {
 		UserEntity entityUser = ((IEntityAware<UserEntity>)proxy).getEntity();
 		return entityUser;
 	}
+
+	
 	
 	
 

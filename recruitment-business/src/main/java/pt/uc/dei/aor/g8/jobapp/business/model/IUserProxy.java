@@ -7,6 +7,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.RoleType;
 public interface IUserProxy {
 	
 	public List<RoleType> getRoles();
+	public void setRoles(List<RoleType> roles);
 
 	public String getUsername();
 	public void setUsername(String username);
