@@ -10,7 +10,7 @@
 		<h:form id="formViewjobApplication">
 
 			<p:dataTable id="gridJobApplication"
-				value="#{jobApplicationBean.findALL()}" var="jobApplication">
+				value="#{jobApplicationBean.listOfAllAppNOTSpontaneousSituation()}" var="jobApplication">
 				<p:column headerText="Position">
 					<p:outputLabel value="#{jobApplication.positionEntity.code}" />
 					<br />

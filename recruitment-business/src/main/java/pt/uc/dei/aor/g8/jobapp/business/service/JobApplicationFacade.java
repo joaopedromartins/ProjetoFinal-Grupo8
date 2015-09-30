@@ -324,4 +324,14 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		}
 	}
 
+	@Override
+	public List<IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation() {
+		try {
+			return service.listOfAllAppNotSituationSpontaneous();
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
+	}
+
 }

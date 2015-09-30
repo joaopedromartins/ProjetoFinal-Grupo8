@@ -28,16 +28,17 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 @NamedQueries({
 	@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
-				" where c.username like :login and j.jobappSpontaneous = FALSE") ,
+				" where c.username like :login and j.situation NOT LIKE 'SPONTANEOUS'") ,
 	@NamedQuery(name = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
 				" inner join j.positionEntity p where c.username like :username and p.code like :code "),
 	@NamedQuery(name = "JobApplication.listOfAll", query = "SELECT jA FROM JobApplicationEntity jA "),
-	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate"),
+	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.situation NOT LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.listOfAllSpontaneousJobApplication", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.jobappSpontaneous = TRUE"),
 	@NamedQuery(name = "JobApplications.listOfAllSpontaneousSituation", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'SPONTANEOUS'"),
-	@NamedQuery(name = "JobApplication.findJobAppSpontaneousByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidateEntity AND jA.jobappSpontaneous = TRUE"),
+	@NamedQuery(name = "JobApplication.findJobAppSpontaneousSituationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidateEntity AND jA.situation LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidateAndPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.positionEntity=:position"),
+	@NamedQuery(name = "JobApplication.listOfAllApplicationNotSituationSpontaneous", query = "SELECT jA FROM JobApplicationEntity jA Where jA.situation NOT LIKE 'SPONTANEOUS'"),
 })
 public class JobApplicationEntity {
 
@@ -47,8 +48,9 @@ public class JobApplicationEntity {
 	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE = "JobApplication.listOfJobApplicationByCandidate";
 	public static final String LIST_OF_ALL_SPONTANEOUS_JOBAPPLICATION = "JobApplication.listOfAllSpontaneousJobApplication";
 	public static final String LIST_OF_ALL_SPONTANEOUS_SITUATION = "JobApplications.listOfAllSpontaneousSituation";
-	public static final String FIND_SPONTANEOUS_JOBAPP_BY_CANDIDATE = "JobApplication.findJobAppSpontaneousByCandidate";
+	public static final String FIND_SPONTANEOUS_JOBAPP_BY_CANDIDATE = "JobApplication.findJobAppSpontaneousSituationByCandidate";
 	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE_AND_POSITION = "JobApplication.listOfJobApplicationByCandidateAndPosition";
+	public static final String LIST_OF_ALL_APPLICATION_NOT_SITUATION_SPONTANEOUS ="JobApplication.listOfAllApplicationNotSituationSpontaneous" ;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

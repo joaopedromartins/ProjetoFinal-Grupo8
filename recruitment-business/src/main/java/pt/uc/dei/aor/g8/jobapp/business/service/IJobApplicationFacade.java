@@ -34,6 +34,8 @@ public interface IJobApplicationFacade {
 	public List<IJobApplicationProxy> listOfAllSpontaneousSituation();
 	
 	public String submitPositionOnSpontaneousApplication(IJobApplicationProxy jobApplication);
+	
+	public List <IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation ();
 
 
 }

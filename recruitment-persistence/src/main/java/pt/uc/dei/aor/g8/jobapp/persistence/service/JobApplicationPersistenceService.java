@@ -167,5 +167,18 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		PositionEntity entity = ((IEntityAware<PositionEntity>)position).getEntity();
 		return entity;
 	}
+	
+	@Override
+	public List <IJobApplicationProxy> listOfAllAppNotSituationSpontaneous (){
+		TypedQuery <JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_APPLICATION_NOT_SITUATION_SPONTANEOUS, JobApplicationEntity.class);
+		List <JobApplicationEntity> entity = query.getResultList();
+		
+		List <IJobApplicationProxy> proxy = new ArrayList<>();
+		for (JobApplicationEntity jA: entity){
+			proxy.add(new JobApplicationProxy(jA));
+		}
+		return proxy;
+	}
+
 
 }

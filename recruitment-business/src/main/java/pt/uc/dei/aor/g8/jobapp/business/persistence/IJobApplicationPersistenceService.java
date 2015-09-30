@@ -30,5 +30,7 @@ public interface IJobApplicationPersistenceService {
 
 	public IJobApplicationProxy findJobApplicationByCandidateAndPosition(ICandidateProxy candidate,
 			IPositionProxy position);
+
+	public List<IJobApplicationProxy> listOfAllAppNotSituationSpontaneous();
 	
 }

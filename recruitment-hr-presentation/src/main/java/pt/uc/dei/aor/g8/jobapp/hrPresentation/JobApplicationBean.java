@@ -47,6 +47,10 @@ public class JobApplicationBean implements Serializable {
 	public List <IJobApplicationProxy> findALL(){
 		return facade.listOfAll();
 	}
+	
+	public List<IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation(){
+		return facade.listOfAllAppNOTSpontaneousSituation();
+	}
 
 	public IJobApplicationProxy getJobApplication() {
 		return jobApplication;
