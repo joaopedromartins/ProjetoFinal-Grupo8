@@ -28,6 +28,9 @@ public class LoginBean implements Serializable {
 	
 	private ICandidateProxy candidate;
 	
+	private String password;
+	private String oldPassword;
+	
 	
 	// Getters and Setters
 	
@@ -58,12 +61,9 @@ public class LoginBean implements Serializable {
 	public ICandidateProxy getCandidate() {
 		if( candidate == null){
 			currentCandidate();
-			
 		} 
 		return candidate;
-		
 	}
-	
 	public void setCandidate(ICandidateProxy candidate) {
 		this.candidate = candidate;
 	}
@@ -72,6 +72,20 @@ public class LoginBean implements Serializable {
 		return FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
 	}
 	
+	public String getOldPassword() {
+		return oldPassword;
+	}
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	
 	//methods
 	
@@ -96,6 +110,19 @@ public class LoginBean implements Serializable {
 		return "/index?faces-redirect=true";
 	}
 
-	
+	public void changePassword(){
+		// TODO add metodo changePassword(candidate,oldPassword,password)
+		String messageFacade = candidateFacade.changePassword(candidate,oldPassword,password);
+		
+		if (messageFacade.equals("sucess")) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Password changed with success.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, messageFacade, "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
+	}
 }
 

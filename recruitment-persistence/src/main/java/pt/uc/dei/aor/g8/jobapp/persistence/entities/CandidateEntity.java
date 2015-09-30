@@ -13,7 +13,8 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name = "CandidateEntity.findCandidateByUsername", query = "SELECT c FROM CandidateEntity c WHERE c.username=:username"),
 	@NamedQuery(name = "CandidateEntity.findCandidateByEmail", query = "SELECT c FROM CandidateEntity c WHERE c.email=:email"),
-	@NamedQuery ( name = "CandidateEntity.allCandidates", query = "SELECT c FROM CandidateEntity c")
+	@NamedQuery(name = "CandidateEntity.allCandidates", query = "SELECT c FROM CandidateEntity c"),
+	@NamedQuery(name = "CandidateEntity.verifyPassworOfCandidate", query = "SELECT c FROM CandidateEntity c WHERE c.username=:username AND c.password=:password")
 })
 @Table(name = "Candidate")
 public class CandidateEntity {
@@ -21,6 +22,8 @@ public class CandidateEntity {
 	public static final String FIND_CANDIDATE_BY_USERNAME = "CandidateEntity.findCandidateByUsername";
 	public static final String FIND_CANDIDATE_BY_EMAIL = "CandidateEntity.findCandidateByEmail";
 	public static final String ALL_CANDIDATES = "CandidateEntity.allCandidates";
+	public static final String VERIFY_PASSWORD_OF_CANDIDATE = "CandidateEntity.verifyPassworOfCandidate";
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

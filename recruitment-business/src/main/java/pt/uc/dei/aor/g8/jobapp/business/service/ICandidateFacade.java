@@ -21,4 +21,6 @@ public interface ICandidateFacade {
 	public ICandidateProxy findCandidateById (long candidateId);
 
 	public List<ICandidateProxy> allCandidates();
+	
+	public String changePassword(ICandidateProxy candidate, String oldPassword, String password);
 }

@@ -11,4 +11,5 @@ public interface ICandidatePersistenceService {
 	public ICandidateProxy findCandidateByEmail(String email);
 	public ICandidateProxy findById(long id);
 	public List<ICandidateProxy> allCandidate();
+	public ICandidateProxy verifyPasswordOfCandidate(String username, String password);
 }
