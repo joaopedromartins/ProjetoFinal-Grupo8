@@ -44,9 +44,6 @@ public class JobApplicationBean implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List <IJobApplicationProxy> findALL(){
-		return facade.listOfAll();
-	}
 	
 	public List<IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation(){
 		return facade.listOfAllAppNOTSpontaneousSituation();

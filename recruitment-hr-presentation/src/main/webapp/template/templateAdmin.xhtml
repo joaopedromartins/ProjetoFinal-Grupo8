@@ -61,6 +61,8 @@
 								outcome="/administrator/editTemplate" icon="ui-icon-pencil" />
 						</p:submenu>
 						<p:submenu label="Reports">
+							<p:menuitem value="reports" outcome="/administrator/reports"
+								icon="ui-icon-search" />
 						</p:submenu>
 						<p:submenu label="User">
 							<p:menuitem value="New user" outcome="/administrator/addEmployee"
@@ -77,8 +79,8 @@
 						<p:submenu label="Script">
 							<p:menuitem value="New Script"
 								action="#{scriptBean.initialNewScript()}" icon="ui-icon-pencil" />
-							<p:menuitem value="Scripts"
-								outcome="/administrator/tableScripts" icon="ui-icon-search" />
+							<p:menuitem value="Scripts" outcome="/administrator/tableScripts"
+								icon="ui-icon-search" />
 						</p:submenu>
 						<p:submenu label="Interviewers">
 							<p:menuitem value="Shedule Interview"

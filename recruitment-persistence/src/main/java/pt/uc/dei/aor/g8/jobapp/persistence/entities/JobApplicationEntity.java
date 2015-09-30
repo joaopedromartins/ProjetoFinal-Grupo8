@@ -32,25 +32,27 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
 				" inner join j.positionEntity p where c.username like :username and p.code like :code "),
-	@NamedQuery(name = "JobApplication.listOfAll", query = "SELECT jA FROM JobApplicationEntity jA "),
 	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.situation NOT LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.listOfAllSpontaneousJobApplication", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.jobappSpontaneous = TRUE"),
 	@NamedQuery(name = "JobApplications.listOfAllSpontaneousSituation", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.findJobAppSpontaneousSituationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidateEntity AND jA.situation LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidateAndPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.positionEntity=:position"),
 	@NamedQuery(name = "JobApplication.listOfAllApplicationNotSituationSpontaneous", query = "SELECT jA FROM JobApplicationEntity jA Where jA.situation NOT LIKE 'SPONTANEOUS'"),
+	@NamedQuery(name = "JobApplication.listOfAllAppBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobAppDate BETWEEN :startDate AND :endDate"),
+	@NamedQuery(name = "JobApplication.listOfAllAppSpontaneousBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobappSpontaneous = TRUE AND jA.jobAppDate BETWEEN :startDate AND :endDate"),
 })
 public class JobApplicationEntity {
 
 	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplication.listOfAllCandidateJobApplication";	
 	public static final String LIST_OF_ALL_JOB_APPLICATION_TO_POSITION_CODE_AND_USERNAME = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername";
-	public static final String LIST_OF_ALL = "JobApplication.listOfAll";
 	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE = "JobApplication.listOfJobApplicationByCandidate";
 	public static final String LIST_OF_ALL_SPONTANEOUS_JOBAPPLICATION = "JobApplication.listOfAllSpontaneousJobApplication";
 	public static final String LIST_OF_ALL_SPONTANEOUS_SITUATION = "JobApplications.listOfAllSpontaneousSituation";
 	public static final String FIND_SPONTANEOUS_JOBAPP_BY_CANDIDATE = "JobApplication.findJobAppSpontaneousSituationByCandidate";
 	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE_AND_POSITION = "JobApplication.listOfJobApplicationByCandidateAndPosition";
 	public static final String LIST_OF_ALL_APPLICATION_NOT_SITUATION_SPONTANEOUS ="JobApplication.listOfAllApplicationNotSituationSpontaneous" ;
+	public static final String LIST_OF_ALL_APP_BETWEEN_DATES = "JobApplication.listOfAllAppBetweenDates";
+	public static final String LIST_OF_ALL_APP_SPONTANEOUS_BETWEEN_DATES = "JobApplication.listOfAllAppSpontaneousBetweenDates";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

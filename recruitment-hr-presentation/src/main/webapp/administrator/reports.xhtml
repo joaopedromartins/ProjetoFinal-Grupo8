@@ -1,0 +1,48 @@
+<ui:composition template="/template/templateAdmin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h1>Reports</h1>
+
+		<h:form id="formReports">
+
+			<p:panel id="spontaneousApp" header="Spontaneous Applications"
+				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panelSpontaneous" style="margin-bottom:20px">
+				<p:ajax event="toggle" />
+
+				<p:outputLabel value="From:" />
+				<p:calendar value="#{reportBean.startDate}" navigator="true"
+					pattern="MMM-yyyy" />
+				<p:outputLabel value="To:" />
+				<p:calendar value="#{reportBean.endDate}" navigator="true"
+					pattern="MMM-yyyy" />
+				<p:commandButton value="Generate"
+					action="#{reportBean.listOfAllAppSpontaneousBetweenDates()}"
+					update=":formReports:resultSpontaneous" />
+
+				<p:dataTable id="resultSpontaneous"
+					value="#{reportBean.spontaneousApp}"
+					var="result">
+					<p:column headerText="Date">
+						<p:outputLabel value="#{result.key}" />
+					</p:column>
+					<p:column headerText="Quantity">
+						<p:outputLabel value="#{result.value}" />
+					</p:column>
+
+
+				</p:dataTable>
+
+			</p:panel>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+

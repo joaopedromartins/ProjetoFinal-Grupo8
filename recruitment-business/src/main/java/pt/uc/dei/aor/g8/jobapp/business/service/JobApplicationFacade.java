@@ -199,10 +199,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		return returnJobApp;
 	}
 
-	@Override
-	public List<IJobApplicationProxy> listOfAll() {
-		return service.findAllJobApplication();
-	}
+	
 
 	@Override
 	public IJobApplicationProxy findId(long id) {

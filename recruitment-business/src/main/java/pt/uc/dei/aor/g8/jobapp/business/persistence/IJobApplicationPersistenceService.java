@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.business.persistence;
 
+import java.util.Date;
 import java.util.List;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
@@ -20,8 +21,6 @@ public interface IJobApplicationPersistenceService {
 	
 	public IJobApplicationProxy spontaneousJobApllicationByCandidate(ICandidateProxy candidate);
 	
-	public List <IJobApplicationProxy> findAllJobApplication ();
-	
 	public IJobApplicationProxy findById (long id);
 
 	public List<IJobApplicationProxy> listOfAllSpontaneous();
@@ -31,6 +30,10 @@ public interface IJobApplicationPersistenceService {
 	public IJobApplicationProxy findJobApplicationByCandidateAndPosition(ICandidateProxy candidate,
 			IPositionProxy position);
 
-	public List<IJobApplicationProxy> listOfAllAppNotSituationSpontaneous();
+	public List <IJobApplicationProxy> listOfAllAppNotSituationSpontaneous();
+	
+	public List <IJobApplicationProxy> listOfAllAppBetweenDates(Date startDate, Date endDate);
+	
+	public List <IJobApplicationProxy> listOfAllAppSpontaneousBetweenDates (Date startDate, Date endDate);
 	
 }
