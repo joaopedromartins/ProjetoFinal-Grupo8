@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +16,11 @@ import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceSe
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobInterviewPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IProposalPresistenceService;
+import pt.uc.dei.aor.g8.jobapp.business.util.ResultReport;
 
 @Stateless
 public class ReportsFacade implements IReportsFacade {
-	
+
 	@EJB
 	private IJobApplicationPersistenceService appService;
 	@EJB
@@ -27,35 +29,37 @@ public class ReportsFacade implements IReportsFacade {
 	private IProposalPresistenceService proposalService;
 	@EJB
 	private IJobInterviewPersistenceService interviewService;
-	
+	@EJB
+	private ResultReport result;
+
 	public ReportsFacade() {
 	}
 
 	@Override
-	public HashMap<Date,Integer> listOfAllAppSpontaneousBetweenDates(Date startDate, Date endDate) {
+	public List<ResultReport> listOfAllAppSpontaneousBetweenDates(Date startDate, Date endDate) {
 		DateTime start = new DateTime(startDate);
-		
-				System.out.println("facade" + start);
-		
+
+		System.out.println("facade" + start);
+
 		DateTime end = new DateTime(endDate);
-		
-				System.out.println("facade" + end);
-		
+
+		System.out.println("facade" + end);
+
 		int months = Months.monthsBetween(start, end ).getMonths();
-		
-				System.out.println("facade" + months);
-		
-		HashMap<Date, Integer> spontaneousApp = new HashMap<>();
+
+		System.out.println("facade" + months);
+
+		List<ResultReport> spontaneousApp = new ArrayList<>();
 		Integer quantity;
 		for (int i = 0 ; i < months ; i++){
 			List <IJobApplicationProxy> proxy = appService.listOfAllAppSpontaneousBetweenDates(start.plusMonths(i).toDate(), start.plusMonths(i+1).toDate());
-			
+
 			if( proxy == null){
 				quantity = 0;
 			} else {
 				quantity = proxy.size();
 			}
-			spontaneousApp.put(start.plusMonths(i).toDate(), quantity);
+			spontaneousApp.add(new ResultReport(start.plusMonths(i).toDate(), quantity));
 			System.out.println("key" + start.plusMonths(i).toDate() + "value" + quantity );
 		}
 		System.out.println("facade" + spontaneousApp);
@@ -63,19 +67,19 @@ public class ReportsFacade implements IReportsFacade {
 	}
 
 	@Override
-	public HashMap<Date,Integer> listOfAllAppBetweenDates(Date startDate, Date endDate) {
+	public List<ResultReport> listOfAllAppBetweenDates(Date startDate, Date endDate) {
 		DateTime start = new DateTime(startDate);
 		DateTime end = new DateTime(endDate);
 		int months = Months.monthsBetween(start, end ).getMonths();
-		HashMap<Date, Integer> app = new HashMap<>();
+		List<ResultReport> app = new ArrayList<>();
 		Integer quantity;
 		for (int i = 0 ; i < months ; i++){
 			quantity =  (appService.listOfAllAppSpontaneousBetweenDates(start.plusMonths(i).toDate(), start.plusMonths(i+1).toDate())).size();
-			app.put(start.plusMonths(i).toDate(), quantity);
+			app.add(new ResultReport(start.plusMonths(i).toDate(), quantity));
 		}
 		return app;
 	}
-	
+
 
 
 }
