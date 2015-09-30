@@ -102,8 +102,8 @@ public class JobApplicationBean implements Serializable {
 		return positionFacade.listScriptOfPosition(jobApplication.getPositionEntity());
 	}
 	
-	public List<IJobApplicationProxy> findALLSpontaneous(){
-		return facade.listOfAllSpontaneous();
+	public List<IJobApplicationProxy> findALLSpontaneousSituation(){
+		return facade.listOfAllSpontaneousSituation();
 	}
 	
 	public List<IPositionProxy> allPositionOpen (){
@@ -112,14 +112,15 @@ public class JobApplicationBean implements Serializable {
 	
 	public void submitPosition(){
 		this.jobApplication.setPositionEntity(submitPosition);
-		if (facade.submitPositionOnSpontaneousApplication(jobApplication) != null){
+		String msg = facade.submitPositionOnSpontaneousApplication(jobApplication);
+		if ( msg.equals("sucess")){
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Submit position save with succeed.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error on save submit.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		}
+			FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, "");
+			FacesContext.getCurrentInstance().addMessage(null, message2);
+		} 
 	}
 
 

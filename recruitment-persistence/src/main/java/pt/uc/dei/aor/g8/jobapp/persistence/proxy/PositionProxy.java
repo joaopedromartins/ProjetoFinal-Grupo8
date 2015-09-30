@@ -281,9 +281,22 @@ public class PositionProxy implements IPositionProxy, IEntityAware<PositionEntit
 	public long getId() {
 		return entity.getId();
 	}
-
 	
+	@Override
+	public int hashCode() {
+		return entity.hashCode();
+	}
 
 
+	@Override
+	public boolean equals(Object obj) {	
+		return entity.equals(positionConverterProxyToEntity((PositionProxy)obj));
+	}
+	
+	@SuppressWarnings( "unchecked" )
+	private PositionEntity positionConverterProxyToEntity ( IPositionProxy proxy){
+		PositionEntity entityPosition = ((IEntityAware<PositionEntity>)proxy).getEntity();
+		return entityPosition;
+	}
 
 }

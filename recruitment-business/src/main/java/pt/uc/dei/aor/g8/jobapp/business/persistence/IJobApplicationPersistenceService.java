@@ -4,6 +4,7 @@ import java.util.List;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 
 public interface IJobApplicationPersistenceService {
 	
@@ -24,5 +25,10 @@ public interface IJobApplicationPersistenceService {
 	public IJobApplicationProxy findById (long id);
 
 	public List<IJobApplicationProxy> listOfAllSpontaneous();
+	
+	public List<IJobApplicationProxy> listOfAllSpontaneousSituation();
+
+	public IJobApplicationProxy findJobApplicationByCandidateAndPosition(ICandidateProxy candidate,
+			IPositionProxy position);
 	
 }

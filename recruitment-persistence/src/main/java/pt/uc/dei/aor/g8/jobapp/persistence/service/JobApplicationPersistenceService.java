@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.CandidateEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobApplicationEntity;
@@ -127,6 +128,35 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		List <IJobApplicationProxy> proxy = new ArrayList<>();
 		for (JobApplicationEntity jA: entity){
 			proxy.add(new JobApplicationProxy(jA));
+		}
+		return proxy;
+	}
+
+	@Override
+	public List<IJobApplicationProxy> listOfAllSpontaneousSituation() {
+		TypedQuery <JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_SPONTANEOUS_SITUATION, JobApplicationEntity.class);
+		List <JobApplicationEntity> entity = query.getResultList();
+		
+		List <IJobApplicationProxy> proxy = new ArrayList<>();
+		for (JobApplicationEntity jA: entity){
+			proxy.add(new JobApplicationProxy(jA));
+		}
+		return proxy;
+	}
+
+	@Override
+	public IJobApplicationProxy findJobApplicationByCandidateAndPosition(ICandidateProxy candidate,
+			IPositionProxy position) {
+		TypedQuery<JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_JOBAPPLICATION_BY_CANDIDATE_AND_POSITION, JobApplicationEntity.class);
+		query.setParameter( "candidate", candidate);
+		query.setParameter( "position", position);
+		List <JobApplicationEntity> entity = query.getResultList();
+		
+		IJobApplicationProxy proxy;
+		if( entity.size() == 1){
+			proxy = new JobApplicationProxy(entity.get(0));
+		} else {
+			proxy=null;
 		}
 		return proxy;
 	}

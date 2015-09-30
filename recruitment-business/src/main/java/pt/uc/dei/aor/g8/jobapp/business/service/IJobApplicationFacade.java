@@ -31,7 +31,9 @@ public interface IJobApplicationFacade {
 	
 	public List<IJobApplicationProxy> listOfAllSpontaneous();
 	
-	public IJobApplicationProxy submitPositionOnSpontaneousApplication(IJobApplicationProxy jobApplication);
+	public List<IJobApplicationProxy> listOfAllSpontaneousSituation();
+	
+	public String submitPositionOnSpontaneousApplication(IJobApplicationProxy jobApplication);
 
 
 }

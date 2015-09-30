@@ -35,7 +35,9 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAll", query = "SELECT jA FROM JobApplicationEntity jA "),
 	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate"),
 	@NamedQuery(name = "JobApplication.listOfAllSpontaneousJobApplication", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.jobappSpontaneous = TRUE"),
+	@NamedQuery(name = "JobApplications.listOfAllSpontaneousSituation", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.findJobAppSpontaneousByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidateEntity AND jA.jobappSpontaneous = TRUE"),
+	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidateAndPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.positionEntity=:position"),
 })
 public class JobApplicationEntity {
 
@@ -44,7 +46,9 @@ public class JobApplicationEntity {
 	public static final String LIST_OF_ALL = "JobApplication.listOfAll";
 	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE = "JobApplication.listOfJobApplicationByCandidate";
 	public static final String LIST_OF_ALL_SPONTANEOUS_JOBAPPLICATION = "JobApplication.listOfAllSpontaneousJobApplication";
+	public static final String LIST_OF_ALL_SPONTANEOUS_SITUATION = "JobApplications.listOfAllSpontaneousSituation";
 	public static final String FIND_SPONTANEOUS_JOBAPP_BY_CANDIDATE = "JobApplication.findJobAppSpontaneousByCandidate";
+	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE_AND_POSITION = "JobApplication.listOfJobApplicationByCandidateAndPosition";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -10,7 +10,7 @@
 		<h1>Spontaneous Job Applications</h1>
 		<h:form id="formSpontaneousjobApplication">
 			<p:dataTable id="gridSpontaneousJobApplication"
-				value="#{jobApplicationBean.findALLSpontaneous()}"
+				value="#{jobApplicationBean.findALLSpontaneousSituation()}"
 				var="jobApplication">
 				<p:column headerText="Date:">
 					<p:outputLabel value="#{jobApplication.jobAppDate}" />
@@ -21,16 +21,18 @@
 				<p:column headerText="City">
 					<p:outputLabel value="#{jobApplication.city}" />
 				</p:column>
-				<p:column headerText="Diploma">
+				<p:column headerText="Diploma/School">
 					<p:outputLabel value="#{jobApplication.diploma}" />
-				</p:column>
-				<p:column headerText="School">
 					<p:outputLabel value="#{jobApplication.school}" />
 				</p:column>
-				<p:column headerText="Letter">
-					<p:outputLabel value="#{jobApplication.letter}" />
-				</p:column>
-				<p:column headerText="Cv">
+				<p:column headerText="Letter/CV">
+					<p:commandButton update=":formSpontaneousjobApplication:letterPanel"
+						oncomplete="PF('letter').show('#{component.clientId}')"
+						icon="Letter" title="View">
+						<f:setPropertyActionListener value="#{jobApplication}"
+							target="#{jobApplicationBean.jobApplication}" />
+					</p:commandButton>
+					<br/>
 					<p:outputLabel value="#{jobApplication.cv}" />
 				</p:column>
 				<p:column headerText="Email">
@@ -48,18 +50,27 @@
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
+			<p:overlayPanel widgetVar="letter" showEffect="fade" hideEffect="fade"
+				dismissable="false" showCloseIcon="true">
+				<p:outputPanel id="letterPanel" style="text-align:center;">
+					<p:outputLabel value="Letter:" />
+					<br/>
+					<p:outputLabel value="#{jobApplicationBean.jobApplication.letter}" />
+				</p:outputPanel>
+			</p:overlayPanel>
 			<p:dialog header="Submit position" widgetVar="positionSubmit"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-				<p:panelGrid columns="4" id="gridPositionSubmit">
+				<p:panelGrid columns="2" id="gridPositionSubmit">
 					<p:outputLabel value="Name:" />
-					<p:outputLabel value="#{jobApplication.candidateEntity.fullName}" />
-					
+					<p:outputLabel
+						value="#{jobApplicationBean.jobApplication.candidateEntity.fullName}" />
+
 					<p:outputLabel value="Diploma:" />
-					<p:outputLabel value="#{jobApplication.diploma}" />
-					
+					<p:outputLabel value="#{jobApplicationBean.jobApplication.diploma}" />
+
 					<p:outputLabel value="Letter:" />
-					<p:outputLabel value="#{jobApplication.letter}" />
-					
+					<p:outputLabel value="#{jobApplicationBean.jobApplication.letter}" />
+
 					<p:outputLabel value="Submit position:" />
 					<p:selectOneMenu id="position"
 						converter="omnifaces.SelectItemsConverter"
@@ -68,8 +79,8 @@
 							var="position" itemLabel="#{position.title}"
 							itemValue="#{position}" />
 					</p:selectOneMenu>
-					
-					<br/>
+
+					<br />
 					<p:commandButton value="Save Submit"
 						action="#{jobApplicationBean.submitPosition()}"
 						update=":formSpontaneousjobApplication:gridSpontaneousJobApplication :formSpontaneousjobApplication:growl" />
