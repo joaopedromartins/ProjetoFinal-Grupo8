@@ -1,11 +1,13 @@
 package pt.uc.dei.aor.g8.jobapp.business.service;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
+
+import pt.uc.dei.aor.g8.jobapp.business.util.ResultReport;
 
 public interface IReportsFacade {
 
-	public HashMap<Date,Integer> listOfAllAppSpontaneousBetweenDates(Date startDate, Date endDate);
+	public List<ResultReport> listOfAllAppSpontaneousBetweenDates(Date startDate, Date endDate);
 	
-	public HashMap<Date,Integer> listOfAllAppBetweenDates(Date startDate, Date endDate);
+	public List<ResultReport> listOfAllAppBetweenDates(Date startDate, Date endDate);
 }

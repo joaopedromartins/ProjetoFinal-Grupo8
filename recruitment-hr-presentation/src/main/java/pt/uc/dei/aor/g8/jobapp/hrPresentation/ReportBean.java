@@ -3,12 +3,14 @@ package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.service.IReportsFacade;
+import pt.uc.dei.aor.g8.jobapp.business.util.ResultReport;
 
 @Named
 @ViewScoped
@@ -23,7 +25,7 @@ public class ReportBean implements Serializable{
 	private IReportsFacade reportsFacade;
 	private Date startDate;
 	private Date endDate;
-	private HashMap<Date, Integer> spontaneousApp;
+	private List<ResultReport> spontaneousApp;
 	
 	public ReportBean() {
 		super();
@@ -45,10 +47,10 @@ public class ReportBean implements Serializable{
 	public Date getLocalDate() {
 		return new Date();
 	}
-	public HashMap<Date, Integer> getSpontaneousApp() {
+	public List<ResultReport> getSpontaneousApp() {
 		return spontaneousApp;
 	}
-	public void setSpontaneousApp(HashMap<Date, Integer> spontaneousApp) {
+	public void setSpontaneousApp(List<ResultReport> spontaneousApp) {
 		this.spontaneousApp = spontaneousApp;
 	}
 	public void listOfAllAppSpontaneousBetweenDates (){
