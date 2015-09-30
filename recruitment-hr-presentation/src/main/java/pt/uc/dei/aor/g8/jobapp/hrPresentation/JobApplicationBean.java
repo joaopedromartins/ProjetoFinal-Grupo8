@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobApplicationFacade;
 import pt.uc.dei.aor.g8.jobapp.business.service.IJobInterviewFacade;
@@ -35,6 +36,7 @@ public class JobApplicationBean implements Serializable {
 	private JobInterviewBean interviewBean;
 	private long id;
 	private IJobApplicationProxy jobApplication;
+	private IPositionProxy submitPosition;
 
 
 	public JobApplicationBean() {
@@ -74,6 +76,14 @@ public class JobApplicationBean implements Serializable {
 		this.interviewBean = interviewBean;
 	}
 
+	public IPositionProxy getSubmitPosition() {
+		return submitPosition;
+	}
+
+	public void setSubmitPosition(IPositionProxy submitPosition) {
+		this.submitPosition = submitPosition;
+	}
+
 	public void scheduleInterview (){
 		System.out.println("date interview: "+interviewBean.getDate());
 		
@@ -88,13 +98,28 @@ public class JobApplicationBean implements Serializable {
 		}
 	}
 	
-	public List <IScriptProxy> listScripOfPosition (){
-		
+	public List <IScriptProxy> listScripOfPosition (){	
 		return positionFacade.listScriptOfPosition(jobApplication.getPositionEntity());
 	}
 	
 	public List<IJobApplicationProxy> findALLSpontaneous(){
 		return facade.listOfAllSpontaneous();
+	}
+	
+	public List<IPositionProxy> allPositionOpen (){
+		return positionFacade.listOfAllOpenPosition();
+	}
+	
+	public void submitPosition(){
+		this.jobApplication.setPositionEntity(submitPosition);
+		if (facade.submitPositionOnSpontaneousApplication(jobApplication) != null){
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Submit position save with succeed.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error on save submit.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
 	}
 
 

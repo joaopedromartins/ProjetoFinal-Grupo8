@@ -11,10 +11,7 @@
 			<f:viewParam name="jobApplicationId" value="#{jobApplicationBean.id}" />
 			<f:viewAction action="#{jobApplicationBean.findById()}" />
 		</f:metadata>
-		<h:outputText value="" />
-		<br />
-		<h:outputText value="Job Application detail" />
-
+		<h1>Job Application Detail</h1>
 		<h:form id="formDialogDetailJobApplication">
 			<h:panelGrid columns="2">
 				<p:panel id="positionJobApplicaton" header="Position Detail"

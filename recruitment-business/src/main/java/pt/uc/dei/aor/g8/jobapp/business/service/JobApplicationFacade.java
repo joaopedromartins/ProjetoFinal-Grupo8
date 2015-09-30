@@ -224,7 +224,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public IJobApplicationProxy saveProposal(ProposalStatus status, String observation, IJobApplicationProxy jobApp){
 		try {
@@ -235,7 +235,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 			log.error(e.getMessage());
 			return null;
 		}
-		
+
 	}
 
 	@Override
@@ -247,4 +247,67 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 			return null;
 		}
 	}
+
+	@Override
+	public IJobApplicationProxy submitPositionOnSpontaneousApplication(IJobApplicationProxy jobApplication) {
+		if (jobApplication == null) {
+			return null;
+			//test if candidate is null	
+		} else if (jobApplication.getCandidateEntity() == null) {
+			return null;
+			//test if position is null	
+		} else if (jobApplication.getPositionEntity() == null) {
+			return null;
+		} else if (! (jobApplication.getSituation().equals(JobAppSituation.SPONTANEOUS))) {
+			return null;
+		}
+		try {
+			jobApplication.setSituation(JobAppSituation.SUBMITTED);
+			IJobApplicationProxy proxy = service.editJobApplication(jobApplication);
+
+			//Notify Position Manager on HR Application
+			notification.createNotification("Job Application Modification",
+					"Job Application Submission Details:\n" + 
+							"\tPosition: \t"+ jobApplication.getPositionEntity().getTitle() + "\t(Code: " + 
+							jobApplication.getPositionEntity().getCode() + ")\n" +
+							"\tCandidate: \t" + jobApplication.getCandidateEntity().getFirstname() + " " + 
+							jobApplication.getCandidateEntity().getLastname() ,
+							"Message sent automaticaly.\nDo not reply to this address.",
+							jobApplication.getPositionEntity().getManagerPosition() );
+			//Notify Manager by email
+			mail.sendEmail(jobApplication.getCandidateEntity().getEmail(), 
+					"jobappmailtest@gmail.com",  
+					"Job Application Submission Details " + jobApplication.getPositionEntity().getTitle(),
+					"Dear " +  jobApplication.getPositionEntity().getManagerPosition().getFullName() + ",\n" +
+							"Job Application Submission Details:\n" + 
+							"\tPosition: \t"+ jobApplication.getPositionEntity().getTitle() + "\t(Code: " + jobApplication.getPositionEntity().getCode() + ")\n" +
+							"\tCandidate: \t" + jobApplication.getCandidateEntity().getFullName()+ "\n\n" +
+					"Message sent automaticaly.\nDo not reply to this address." );
+
+
+			//Notify Candidate by email
+			mail.sendEmail(jobApplication.getCandidateEntity().getEmail(), 
+					"jobappmailtest@gmail.com", 
+					"Spontaneous Job Application Submitted to a Position",
+					"Dear " +  jobApplication.getCandidateEntity().getFullName() + ",\n" +
+							"Your spontaneous application had submitted for position, "+ jobApplication.getPositionEntity().getTitle() + ". " + 
+							"We are presently in the process of reviewing each applicants resume. " + 
+							"Due to the high level of interest in the position, we will not be able to interview every applicant. " +
+							"A review of each application will be made to determine which of the applicants will be invited to come for an interview.\n" +
+							"Objective criteria, based upon the duties of "  + 
+							jobApplication.getPositionEntity().getTitle() +
+							", are being used for this review process.\n" +
+							"We anticipate that we will be back in touch with you until " + 
+							jobApplication.getPositionEntity().getSLA().toString() +
+							" to inform you of the results of this process. " + 
+							"We appreciate your patience, and hope you can understand our desire to ensure that every applicant receives full consideration." +
+							"\n\nRegards,\n" + 
+							jobApplication.getPositionEntity().getManagerPosition().getFullName());
+			return proxy;
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
+	}
+
 }

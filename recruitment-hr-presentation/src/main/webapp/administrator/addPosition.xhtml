@@ -11,10 +11,8 @@
 
 	<ui:define name="content">
 		<p:growl id="growl"/>
+		<h1>Add a Position</h1>
 		<h:form id="formAddPosition">
-			<h:outputText value="Hello Human Resources" />
-			<br />
-			<h:outputText value="Add a Position" />
 			<p:panelGrid id="gridPosition" columns="3">
 				<p:outputLabel value="Title :" for="title" />
 				<p:inputText id="title" value="#{positionBean.title}"

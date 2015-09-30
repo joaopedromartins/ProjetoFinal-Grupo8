@@ -8,14 +8,10 @@
 	<ui:define name="content">
 
 		<h1>Spontaneous Job Applications</h1>
-
-
-
 		<h:form id="formSpontaneousjobApplication">
-
 			<p:dataTable id="gridSpontaneousJobApplication"
-				value="#{jobApplicationBean.findALLSpontaneous()}" var="jobApplication">
-				
+				value="#{jobApplicationBean.findALLSpontaneous()}"
+				var="jobApplication">
 				<p:column headerText="Date:">
 					<p:outputLabel value="#{jobApplication.jobAppDate}" />
 				</p:column>
@@ -43,18 +39,44 @@
 				<p:column headerText="Phone">
 					<p:outputLabel value="#{jobApplication.phone}" />
 				</p:column>
-				
-				
-				
-
-				<!-- <p:column headerText="Detail">
-					<p:link outcome="detailsJobApplication?faces-redirect=true"
-						value="ui-icon-search Search">
-						<f:param name="jobApplicationId" value="#{jobApplication.id}" />
-					</p:link>
-				</p:column> -->
-
+				<p:column headerText="Submit">
+					<p:commandButton
+						update=":formSpontaneousjobApplication:gridSpontaneousJobApplication :formSpontaneousjobApplication:gridPositionSubmit"
+						oncomplete="PF('positionSubmit').show()" value="Position">
+						<f:setPropertyActionListener value="#{jobApplication}"
+							target="#{jobApplicationBean.jobApplication}" />
+					</p:commandButton>
+				</p:column>
 			</p:dataTable>
+			<p:dialog header="Submit position" widgetVar="positionSubmit"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:panelGrid columns="4" id="gridPositionSubmit">
+					<p:outputLabel value="Name:" />
+					<p:outputLabel value="#{jobApplication.candidateEntity.fullName}" />
+					
+					<p:outputLabel value="Diploma:" />
+					<p:outputLabel value="#{jobApplication.diploma}" />
+					
+					<p:outputLabel value="Letter:" />
+					<p:outputLabel value="#{jobApplication.letter}" />
+					
+					<p:outputLabel value="Submit position:" />
+					<p:selectOneMenu id="position"
+						converter="omnifaces.SelectItemsConverter"
+						value="#{jobApplicationBean.submitPosition}">
+						<f:selectItems value="#{jobApplicationBean.allPositionOpen()}"
+							var="position" itemLabel="#{position.title}"
+							itemValue="#{position}" />
+					</p:selectOneMenu>
+					
+					<br/>
+					<p:commandButton value="Save Submit"
+						action="#{jobApplicationBean.submitPosition()}"
+						update=":formSpontaneousjobApplication:gridSpontaneousJobApplication :formSpontaneousjobApplication:growl" />
+
+				</p:panelGrid>
+			</p:dialog>
+			<p:growl id="growl" />
 		</h:form>
 
 	</ui:define>

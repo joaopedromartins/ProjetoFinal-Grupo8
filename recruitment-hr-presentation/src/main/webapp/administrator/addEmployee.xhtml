@@ -6,10 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="content">
-
+		<h1>Add a Employer</h1>
 		<h:form id="formAddUser">
-			<h:outputText value="Add a Employer" />
-			<br />
 			<p:panelGrid id="gridNewUser" columns="3">
 				<p:outputLabel value="First Name:" for="firstname" />
 				<p:inputText id="firstname" value="#{registerUserBean.firstName}"

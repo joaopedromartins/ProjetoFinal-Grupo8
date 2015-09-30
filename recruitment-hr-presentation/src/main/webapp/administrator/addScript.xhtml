@@ -10,14 +10,12 @@
 	</ui:define>
 
 	<ui:define name="content">
-
+		<h1>Add a Script</h1>
 		<h:form id="formListQuestions">
-			<h:outputText value="Add a Script" />
-			<br />
 
 			<p:outputLabel for="titleScript" value="Title:" />
 			<p:inputText id="titleScript" value="#{scriptBean.title}"
-				required="true"  />
+				required="true" />
 			<p:commandButton value="submit" action="#{scriptBean.verifyTitle}"
 				update=":formListQuestions:titleScript :formButtonAddQuestion:messageScript" />
 
@@ -297,7 +295,8 @@
 		</h:panelGroup>
 		<h:form id="formButtonAddQuestion">
 			<p:messages id="messageScript" />
-			<p:commandButton id="addQuestion" value="Add question" rendered="#{scriptBean.addQuestion eq 'false'}"
+			<p:commandButton id="addQuestion" value="Add question"
+				rendered="#{scriptBean.addQuestion eq 'false'}"
 				action="#{scriptBean.showPanelAddQuestion()}"
 				update=":panelGroupQuestion @form" />
 

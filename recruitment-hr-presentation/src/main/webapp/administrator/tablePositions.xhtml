@@ -4,12 +4,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 	<ui:define name="stylesheet">
 		<h:outputStylesheet library="css" name="style.css" />
 	</ui:define>
 
 	<ui:define name="content">
+		<h1>List of Positions</h1>
 		<h:form id="formPositionsTable">
 			<p:dataTable id="tablePositions" var="position"
 				value="#{positionBean.listOfAllPosition()}">
@@ -160,7 +161,7 @@
 
 						<p:outputLabel value="Technical manager:" for="userManager" />
 						<p:selectOneMenu id="userManager"
-							value="#{positionBean.positionProxy.managerPosition}" 
+							value="#{positionBean.positionProxy.managerPosition}"
 							converter="omnifaces.SelectItemsConverter">
 							<f:selectItems value="#{positionBean.possibleManagers}"
 								var="manager" itemLabel="#{manager.fullName}" />
