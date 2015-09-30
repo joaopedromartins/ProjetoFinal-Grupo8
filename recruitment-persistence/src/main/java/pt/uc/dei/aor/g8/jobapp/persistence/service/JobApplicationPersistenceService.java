@@ -14,6 +14,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.CandidateEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobApplicationEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.IEntityAware;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.JobApplicationProxy;
 
@@ -148,8 +149,8 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 	public IJobApplicationProxy findJobApplicationByCandidateAndPosition(ICandidateProxy candidate,
 			IPositionProxy position) {
 		TypedQuery<JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_JOBAPPLICATION_BY_CANDIDATE_AND_POSITION, JobApplicationEntity.class);
-		query.setParameter( "candidate", candidate);
-		query.setParameter( "position", position);
+		query.setParameter( "candidate", candidateCoverterProxyToEntity(candidate));
+		query.setParameter( "position", positionCoverterProxyToEntity(position));
 		List <JobApplicationEntity> entity = query.getResultList();
 		
 		IJobApplicationProxy proxy;
@@ -159,6 +160,12 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 			proxy=null;
 		}
 		return proxy;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private PositionEntity positionCoverterProxyToEntity (IPositionProxy position){
+		PositionEntity entity = ((IEntityAware<PositionEntity>)position).getEntity();
+		return entity;
 	}
 
 }

@@ -319,7 +319,7 @@ public class JobApplicationBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getCandidate().getUsername() + "_" + timeStamp + "_";
+		String filePrefix = "CV_" + loginBean.getCandidate().getUsername() + "_" + timeStamp + "_";
 		this.uploadedfilename=event.getFile().getFileName();
 		// Do what you want with the file        
 		try {

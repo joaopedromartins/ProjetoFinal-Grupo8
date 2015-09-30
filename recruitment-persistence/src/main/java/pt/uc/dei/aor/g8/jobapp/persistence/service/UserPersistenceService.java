@@ -12,7 +12,6 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IUserPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.IEntityAware;
-import pt.uc.dei.aor.g8.jobapp.persistence.proxy.ScriptProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.UserProxy;
 
 @Stateless
