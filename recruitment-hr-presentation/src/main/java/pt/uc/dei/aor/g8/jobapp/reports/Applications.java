@@ -8,6 +8,8 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.time.DateUtils;
+
 import pt.uc.dei.aor.g8.jobapp.business.service.IReportsFacade;
 import pt.uc.dei.aor.g8.jobapp.business.util.ConvertStringToDate;
 import pt.uc.dei.aor.g8.jobapp.business.util.ResultReport;
@@ -53,18 +55,19 @@ public class Applications implements Serializable{
 	}
 	public void setFrom(String from) {
 		this.from = from;
-		this.startDateApp = converter.converterStringToDate("01 "+from);
+		this.startDateApp = converter.converterStringToDate(from +"-01");
 	}
 	public String getTo() {
 		return to;
 	}
 	public void setTo(String to) {
 		this.to = to;
-		this.endDateApp = converter.converterStringToDate("01 "+to);
+		this.endDateApp = converter.converterStringToDate(to+"-01");
 	}
 	public void listOfAllAppBetweenDates (){
-		System.out.println("entre na função que vai buscar hashMap");
-		this.app =  reportsFacade.listOfAllAppBetweenDates(startDateApp, endDateApp);
+		System.out.println("entre na função que vai buscar hashMap " +DateUtils.addMonths(endDateApp, 1) );
+		
+		this.app =  reportsFacade.listOfAllAppBetweenDates(startDateApp, DateUtils.addMonths(endDateApp, 1));
 	}
 
 }

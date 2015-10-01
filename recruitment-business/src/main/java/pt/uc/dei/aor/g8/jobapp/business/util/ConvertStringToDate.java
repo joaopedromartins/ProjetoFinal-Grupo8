@@ -11,11 +11,13 @@ import javax.ejb.Stateless;
 public class ConvertStringToDate {
 	
 	public Date converterStringToDate (String date){
+		System.out.println( date );
 		DateFormat formatter;
 		Date convertedDate;
-		formatter = new SimpleDateFormat("dd MMMM yyyy");
+		formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			convertedDate = (Date)formatter.parse(date);
+			System.out.println( convertedDate );
 			return convertedDate;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

@@ -55,14 +55,14 @@ public class SpontaneousApp implements Serializable{
 	}
 	public void setFrom(String from) {
 		this.from = from;
-		this.startDateSpontaneousApp = converter.converterStringToDate("01 "+from);
+		this.startDateSpontaneousApp = converter.converterStringToDate(from+"-01");
 	}
 	public String getTo() {
 		return to;
 	}
 	public void setTo(String to) {
 		this.to = to;
-		this.endDateSpontaneousApp = converter.converterStringToDate("01 "+to);
+		this.endDateSpontaneousApp = converter.converterStringToDate(to+"-01");
 	}
 	public void listOfAllAppSpontaneousBetweenDates (){
 		System.out.println("entre na função que vai buscar hashMap");

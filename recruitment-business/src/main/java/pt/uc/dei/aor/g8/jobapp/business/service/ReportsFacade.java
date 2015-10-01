@@ -38,11 +38,11 @@ public class ReportsFacade implements IReportsFacade {
 	public List<ResultReport> listOfAllAppSpontaneousBetweenDates(Date startDate, Date endDate) {
 		DateTime start = new DateTime(startDate);
 
-		System.out.println("facade" + start);
+		System.out.println("facade" + start.toString());
 
 		DateTime end = new DateTime(endDate);
-
-		System.out.println("facade" + end);
+		end.plus(Months.ONE);
+		System.out.println("facade" + end.toString());
 
 		int months = Months.monthsBetween(start, end ).getMonths();
 
@@ -59,7 +59,7 @@ public class ReportsFacade implements IReportsFacade {
 				quantity = proxy.size();
 			}
 			spontaneousApp.add(new ResultReport(start.plusMonths(i).toDate(), quantity));
-			System.out.println("key" + start.plusMonths(i).toDate() + "value" + quantity );
+			System.out.println("key " + start.plusMonths(i).toDate() + "value" + quantity );
 		}
 		System.out.println("facade" + spontaneousApp);
 		return spontaneousApp;
@@ -68,7 +68,9 @@ public class ReportsFacade implements IReportsFacade {
 	@Override
 	public List<ResultReport> listOfAllAppBetweenDates(Date startDate, Date endDate) {
 		DateTime start = new DateTime(startDate);
+		System.out.println("facade" + start.toString());
 		DateTime end = new DateTime(endDate);
+		System.out.println("facade" + end);
 		int months = Months.monthsBetween(start, end ).getMonths();
 		List<ResultReport> app = new ArrayList<>();
 		Integer quantity;

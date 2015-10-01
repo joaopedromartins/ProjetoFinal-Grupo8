@@ -29,15 +29,15 @@
 				<p:outputLabel value="From:" />
 				<p:inputText value="#{spontaneousApp.from}"
 					styleClass="monthPicker">
-					<f:convertDateTime pattern="MMM yyyy" />
+					
 				</p:inputText>
 				<p:outputLabel value="To:" />
 				<p:inputText value="#{spontaneousApp.to}"
 					styleClass="monthPicker">
-					<f:convertDateTime pattern="MMM yyyy" />
+					
 				</p:inputText>
 				<p:commandButton value="Generate"
-					action="#{reportBean.listOfAllAppSpontaneousBetweenDates()}"
+					action="#{spontaneousApp.listOfAllAppSpontaneousBetweenDates()}"
 					update=":formReportAppSpontaneous:resultSpontaneous :formReports:msg" />
 
 				<p:dataTable id="resultSpontaneous"
@@ -63,25 +63,25 @@
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:inputText value="#{applications.startDateApp}"
+				<p:inputText value="#{applications.from}"
 					styleClass="monthPicker">
-					<f:convertDateTime pattern="MMM yyyy" />
+					
 				</p:inputText>
 				<p:outputLabel value="To:" />
-				<p:inputText value="#{applications.endDateApp}"
+				<p:inputText value="#{applications.to}"
 					styleClass="monthPicker">
-					<f:convertDateTime pattern="MMM yyyy" />
+					
 				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{applications.listOfAllAppBetweenDates()}"
 					update=":formReportApp:resultApp :formReports:msg" />
 
-				<p:dataTable id="resultApp" value="#{reportBean.app}" var="result">
+				<p:dataTable id="resultApp" value="#{applications.app}" var="result1">
 					<p:column headerText="Date">
-						<p:outputLabel value="#{result.date}" />
+						<p:outputLabel value="#{result1.date}" />
 					</p:column>
 					<p:column headerText="Quantity">
-						<p:outputLabel value="#{result.quantity}" />
+						<p:outputLabel value="#{result1.quantity}" />
 					</p:column>
 
 
@@ -98,12 +98,11 @@
 				<p:outputLabel value="From:" />
 				<p:inputText value="#{reportBean.startDateApp}"
 					styleClass="monthPicker">
-					<f:convertDateTime pattern="MMM yyyy" />
 				</p:inputText>
 				<p:outputLabel value="To:" />
 				<p:inputText value="#{reportBean.endDateApp}"
 					styleClass="monthPicker">
-					<f:convertDateTime pattern="MMM yyyy" />
+					
 				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppBetweenDates()}"

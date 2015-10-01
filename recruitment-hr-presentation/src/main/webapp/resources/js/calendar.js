@@ -18,7 +18,7 @@ thisCalendar.datepicker('setDate', new Date(year, month, 1));
 $(document).ready(function()
 		{   
 		    $(".monthPicker").datepicker({
-		        dateFormat: 'MM yy',
+		        dateFormat: 'yy-mm',
 		        changeMonth: true,
 		        changeYear: true,
 		        showButtonPanel: true,
@@ -26,7 +26,7 @@ $(document).ready(function()
 		        onClose: function(dateText, inst) {
 		            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 		            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-		            $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+		            $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month, 1)));
 		        }
 		    });
 
