@@ -188,6 +188,7 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 	@Override
 	public List<IJobApplicationProxy> listOfAllAppSpontaneousBetweenDates(Date startDate, Date endDate) {
 		TypedQuery <JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_APP_SPONTANEOUS_BETWEEN_DATES, JobApplicationEntity.class);
+		
 		query.setParameter("startDate", startDate);
 		query.setParameter("endDate", endDate);
 		List <JobApplicationEntity> entity = query.getResultList();

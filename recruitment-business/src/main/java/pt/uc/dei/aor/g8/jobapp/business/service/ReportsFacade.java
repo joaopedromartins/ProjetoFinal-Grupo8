@@ -50,7 +50,7 @@ public class ReportsFacade implements IReportsFacade {
 
 		List<ResultReport> spontaneousApp = new ArrayList<>();
 		Integer quantity;
-		for (int i = 0 ; i < months ; i++){
+		for (int i = 0 ; i <= months ; i++){
 			List <IJobApplicationProxy> proxy = appService.listOfAllAppSpontaneousBetweenDates(start.plusMonths(i).toDate(), start.plusMonths(i+1).toDate());
 
 			if( proxy == null){
@@ -72,8 +72,8 @@ public class ReportsFacade implements IReportsFacade {
 		int months = Months.monthsBetween(start, end ).getMonths();
 		List<ResultReport> app = new ArrayList<>();
 		Integer quantity;
-		for (int i = 0 ; i < months ; i++){
-			List <IJobApplicationProxy> proxy = appService.listOfAllAppSpontaneousBetweenDates(start.plusMonths(i).toDate(), start.plusMonths(i+1).toDate());
+		for (int i = 0 ; i <= months ; i++){
+			List <IJobApplicationProxy> proxy = appService.listOfAllAppBetweenDates(start.plusMonths(i).toDate(), start.plusMonths(i+1).toDate());
 			if( proxy == null){
 				quantity = 0;
 			} else {
