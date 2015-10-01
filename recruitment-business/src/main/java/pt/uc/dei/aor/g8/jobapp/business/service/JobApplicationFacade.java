@@ -211,6 +211,11 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 	public List<IJobApplicationProxy> listOfJobApplicationByUsername(String username) {
 		return service.listOfAllCandidateJobApplication(username);
 	}
+	
+	@Override
+	public IJobApplicationProxy spontaneousJobApplicationByUsername(String username) {
+		return service.candidateSpontaneousJobApplication(username);
+	}
 
 	@Override
 	public List<IJobApplicationProxy> listOfJobApplicationByCandidate(ICandidateProxy candidate) {		

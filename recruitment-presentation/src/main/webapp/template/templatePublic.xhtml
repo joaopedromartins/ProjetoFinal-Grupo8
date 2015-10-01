@@ -23,7 +23,7 @@
 						style="width: auto; background-color:white; float:right; margin: 20px;">
 						<p:submenu label="Menu">
 							<p:menuitem value="SignIn"
-								icon="ui-icon-pencil"
+								icon="ui-icon-person"
 								outcome="/pages/everybody/signin" />
 							<p:menuitem value="SignUp"
 								icon="ui-icon-pencil"
@@ -38,7 +38,7 @@
 								outcome="/pages/everybody/company" />
 						</p:submenu>
 						<f:facet name="options">
-							<p:commandButton value="Signin" icon="ui-icon-person"
+							<p:commandButton value="SignIn" icon="ui-icon-person"
 								action="/pages/everybody/signin" />
 						</f:facet>
 						
@@ -59,7 +59,7 @@
 					<p:panelMenu>
 						<p:submenu label="Account" >
 							<p:menuitem value="SignIn"
-								icon="ui-icon-pencil"
+								icon="ui-icon-person"
 								outcome="/pages/everybody/signin" />
 							<p:menuitem value="SignUp"
 								icon="ui-icon-pencil"
@@ -67,11 +67,14 @@
 						</p:submenu>
 						<p:submenu label="Position">
 							<p:menuitem value="View Open Positions" 
+								icon="ui-icon-search"
 								outcome="/pages/everybody/viewOpenPositions" />
 						</p:submenu>
-						<p:menuitem value="Homepage"
+						<p:submenu label="Company">
+							<p:menuitem value="About Us"
 								icon="ui-icon-home"
 								outcome="/pages/everybody/company" />
+						</p:submenu>
 									
 					</p:panelMenu>
 				</h:form>

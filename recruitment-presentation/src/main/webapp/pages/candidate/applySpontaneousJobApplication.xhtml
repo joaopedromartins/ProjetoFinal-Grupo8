@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/template/templateCandidate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-
-	<meta charset="utf-8" />
-	<title>CriticalJobApplication</title>
-	<h:outputStylesheet library="css" name="style.css" />
-
-</h:head>
-<h:body>
-	<p:outputLabel value="Hello #{loginBean.candidate.username}" />
+	<ui:define name="content">
+	<p:outputLabel value="Hello #{jobApplicationBean.spontaneousJobApplicationProxy.candidateEntity.firstname}," />
 	<br />
 	<p:panel header="Applying Spontaneous Job Application">
 
@@ -23,42 +16,62 @@
 				<p:panelGrid id="gridPosition" columns="3">
 					<p:outputLabel value="Address :" for="address" />
 					<p:inputText id="address" value="#{jobApplicationBean.address}"
-						required="true" />
+						required="true" readonly="#{jobApplicationBean.existsSpontaneous}" />
 					<p:message for="address" />
 
 					<p:outputLabel value="City :" for="city" />
 					<p:inputText id="city" value="#{jobApplicationBean.city}"
-						required="true" />
+						required="true" readonly="#{jobApplicationBean.existsSpontaneous}" />
 					<p:message for="city" />
 
 					<p:outputLabel value="Country :" for="country" />
 					<p:inputText id="country" value="#{jobApplicationBean.country}"
-						required="true" />
+						required="true" readonly="#{jobApplicationBean.existsSpontaneous}" />
 					<p:message for="country" />
 
 					<p:outputLabel value="Phone :" for="phone" />
 					<p:inputText id="phone" value="#{jobApplicationBean.phone}"
-						required="false" />
+						required="false" readonly="#{jobApplicationBean.existsSpontaneous}" />
 					<p:message for="phone" />
 
 					<p:outputLabel value="Diploma :" for="diploma" />
 					<p:inputText id="diploma" value="#{jobApplicationBean.diploma}"
-						required="true" />
+						required="true" readonly="#{jobApplicationBean.existsSpontaneous}" />
 					<p:message for="diploma" />
 
 					<p:outputLabel value="School :" for="school" />
 					<p:inputText id="school" value="#{jobApplicationBean.school}"
-						required="true" />
+						required="true" readonly="#{jobApplicationBean.existsSpontaneous}" />
 					<p:message for="school" />
 
 					<p:outputLabel value="Letter :" for="letter" />
 					<h:inputTextarea id="letter" value="#{jobApplicationBean.letter}"
-						required="true" />
+						required="true" readonly="#{jobApplicationBean.existsSpontaneous}" />
 					<p:message for="letter" />
 					
-					<p:outputLabel value="Upload CV:" for="cvuploaded" /> 
-					<p:outputLabel id="cvuploaded" value="#{jobApplicationBean.uploadedfilename}" />
-					<p:message for="cvuploaded" />
+					<p:outputLabel value="Source :" for="sourcev" rendered="#{jobApplicationBean.existsSpontaneous}" />
+					<p:inputText id="sourcev" value="#{jobApplicationBean.source}"
+						required="true" readonly="#{jobApplicationBean.existsSpontaneous}" 
+						rendered="#{jobApplicationBean.existsSpontaneous}" />
+					<p:outputLabel value="   " rendered="#{jobApplicationBean.existsSpontaneous}" />
+					
+					<p:outputLabel value="Source :" for="source" rendered="#{!jobApplicationBean.existsSpontaneous}" />
+					<p:selectOneMenu id="source" value="#{jobApplicationBean.source}"
+						required="true" converter="omnifaces.SelectItemsConverter" 
+						rendered="#{!jobApplicationBean.existsSpontaneous}" >
+						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
+						<f:selectItems
+							value="#{jobApplicationBean.allJobAdvertisingChanel}"
+							var="channel" itemLabel="#{channel.chanelName}"
+							itemValue="#{channel.chanelName}" />
+					</p:selectOneMenu>
+					<p:message for="source" rendered="#{!jobApplicationBean.existsSpontaneous}" />
+					
+					<p:outputLabel value="Upload CV:" for="cvuploaded" 
+						rendered="#{!jobApplicationBean.existsSpontaneous}" /> 
+					<p:outputLabel id="cvuploaded" value="#{jobApplicationBean.uploadedfilename}" 
+						rendered="#{!jobApplicationBean.existsSpontaneous}" />
+					<p:message for="cvuploaded" rendered="#{!jobApplicationBean.existsSpontaneous}" />
 					
 					<!-- SPACE -->
 					<p:fileUpload id="upload" 
@@ -73,19 +86,11 @@
 						fileLimit="1"
 						required="true"
 						requiredMessage="CV upload required"
-						update="cvuploaded" />
-					<p:message for="upload" />
+						update="cvuploaded"
+						rendered="#{!jobApplicationBean.existsSpontaneous}"  />
+					<p:message for="upload" rendered="#{!jobApplicationBean.existsSpontaneous}" />
 					
-					<p:outputLabel value="Source :" for="source" />
-					<p:selectOneMenu id="source" value="#{jobApplicationBean.source}"
-						required="true" converter="omnifaces.SelectItemsConverter">
-						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
-						<f:selectItems
-							value="#{jobApplicationBean.allJobAdvertisingChanel}"
-							var="channel" itemLabel="#{channel.chanelName}"
-							itemValue="#{channel.chanelName}" />
-					</p:selectOneMenu>
-					<p:message for="source" />
+					
 					
 
 				</p:panelGrid>
@@ -93,9 +98,22 @@
 				<br />
 				<p:commandButton value="Apply"
 					action="#{jobApplicationBean.applySpontaneousJobApplication()}"
-					update="formApplyPosition growl" />
+					update="formApplyPosition growl" rendered="#{!jobApplicationBean.existsSpontaneous}" />
 			</center>
 		</h:form>
+		<center>
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Download CV:" rendered="#{jobApplicationBean.existsSpontaneous}" />
+	            <h:form>
+		            <p:commandButton id="downloadLink" value="Download" ajax="false" 
+		            		actionListener="#{jobApplicationBean.prepSpontaneusJobAppDownload}" 
+		            		rendered="#{jobApplicationBean.existsSpontaneous}" >
+						<p:fileDownload value="#{jobApplicationBean.download}" />
+					</p:commandButton>
+				</h:form>
+			</p:panelGrid>
+		</center>
 	</p:panel>
-</h:body>
-</html>
+
+	</ui:define>
+</ui:composition>

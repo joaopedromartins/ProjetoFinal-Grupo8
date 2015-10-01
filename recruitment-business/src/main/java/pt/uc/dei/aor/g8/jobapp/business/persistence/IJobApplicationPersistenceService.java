@@ -35,5 +35,7 @@ public interface IJobApplicationPersistenceService {
 	public List <IJobApplicationProxy> listOfAllAppBetweenDates(Date startDate, Date endDate);
 	
 	public List <IJobApplicationProxy> listOfAllAppSpontaneousBetweenDates (Date startDate, Date endDate);
+
+	public IJobApplicationProxy candidateSpontaneousJobApplication(String username);
 	
 }

@@ -65,6 +65,8 @@ public class JobApplicationBean implements Serializable {
 	private IPositionProxy positionProxy;
 	
 	private IJobApplicationProxy jobApplicationProxy;
+	private IJobApplicationProxy spontaneousJobApplicationProxy;
+	private Boolean existsSpontaneous;
 	
 	private DefaultStreamedContent download;
 	
@@ -191,6 +193,53 @@ public class JobApplicationBean implements Serializable {
 
 	
 
+	public IJobApplicationProxy getSpontaneousJobApplicationProxy() {
+		this.spontaneousJobApplicationProxy = jobApplicationFacade.spontaneousJobApplicationByUsername(loginBean.getUsername());
+		if (spontaneousJobApplicationProxy==null) {
+			spontaneousJobApplicationProxy = jobApplicationFacade.createNewJobApplication(
+					"",  "",  "", "", "",
+					"",  "",  "", "", loginBean.getCandidate(), null);
+			address=null;
+			city=null;
+			country=null;
+			phone=null;
+			diploma=null;
+			school=null;
+			letter=null; 
+			cv=null;
+			source=null;
+			situation=null;
+			uploadedfilename="";
+			setExistsSpontaneous(false);
+		}
+		else {
+			address=spontaneousJobApplicationProxy.getAddress();
+			city=spontaneousJobApplicationProxy.getCity();
+			country=spontaneousJobApplicationProxy.getCountry();
+			phone=spontaneousJobApplicationProxy.getPhone();
+			diploma=spontaneousJobApplicationProxy.getDiploma();
+			school=spontaneousJobApplicationProxy.getSchool();
+			letter=spontaneousJobApplicationProxy.getLetter(); 
+			cv = spontaneousJobApplicationProxy.getCv();
+			source=spontaneousJobApplicationProxy.getSource();
+			situation=spontaneousJobApplicationProxy.getSituation();
+			uploadedfilename="";
+			setExistsSpontaneous(true);
+		}
+		return this.spontaneousJobApplicationProxy;
+	}
+	public void setSpontaneousJobApplicationProxy(IJobApplicationProxy spontaneousJobApplicationProxy) {
+		this.spontaneousJobApplicationProxy = spontaneousJobApplicationProxy;
+	}
+
+	public Boolean getExistsSpontaneous() {
+		return existsSpontaneous;
+	}
+
+	public void setExistsSpontaneous(Boolean existsSpontaneous) {
+		this.existsSpontaneous = existsSpontaneous;
+	}
+
 	//methods
 	public String applyPosition() {
 		return "/pages/candidate/applyPosition?faces-redirect=true";
@@ -220,7 +269,7 @@ public class JobApplicationBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			
 			// vai para a pagina ver candidaturas
-			return "/pages/candidate/candidate";
+			return "/pages/candidate/viewJobApplication";
 		} else {
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
@@ -234,36 +283,26 @@ public class JobApplicationBean implements Serializable {
 	
 	public String applySpontaneousJobApplication() {
 		IJobApplicationProxy proxy;
-		proxy=jobApplicationFacade.creatSpontaneousJobApplication(address,  city,  country, phone, diploma,
-				 school,  letter,  cv, source, loginBean.getCandidate());
+		proxy=jobApplicationFacade.creatSpontaneousJobApplication(address, 
+				city, country, phone, diploma, school, letter, cv, source,
+				loginBean.getCandidate());
+		
 		if(proxy!=null){
-			address=null;
-			city=null;
-			country=null;
-			phone=null;
-			diploma=null;
-			school=null;
-			letter=null; 
-			cv=null;
-			source=null;
-			situation=null;
-			uploadedfilename="";
-						
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
-					"Job Position applied successfully.", "");
+					"Spontaneous Job Position applied successfully.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			
-			// vai para a pagina ver candidaturas
-			return "/pages/candidate/candidate";
+			
 		} else {
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
 					"Error applying job position.\nPlease check if you applied already to this position.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
-			//Volta à mesma pagina
-			return "/pages/candidate/applyPosition";
+			
 		}
+		//Volta à mesma pagina
+		return "/pages/candidate/viewSpontaneousJobApplication";
 	}
 	
 	
@@ -273,7 +312,7 @@ public class JobApplicationBean implements Serializable {
 		System.out.println("\n---------------------");
 		System.out.println("Edit Job Application:");
 		System.out.println("---------------------");
-		if (jobApplicationProxy!=null) {
+		if (spontaneousJobApplicationProxy!=null) {
 			System.out.println("Address: \t"+jobApplicationProxy.getAddress() );
 			System.out.println("City: \t"+jobApplicationProxy.getCity() );
 			System.out.println("Country: \t"+jobApplicationProxy.getCountry() );
@@ -297,6 +336,45 @@ public class JobApplicationBean implements Serializable {
 				FacesMessage message = new FacesMessage(
 						FacesMessage.SEVERITY_ERROR,
 						"Error updating job position.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			}
+		}
+	}
+	
+	public void editSpontaneousJobApplication() {
+		
+		// TODO logger edit spontaneous job application
+		System.out.println("\n---------------------");
+		System.out.println("Edit Job Application:");
+		System.out.println("---------------------");
+		if (spontaneousJobApplicationProxy!=null) {
+			spontaneousJobApplicationProxy.setAddress(address);
+			spontaneousJobApplicationProxy.setCity(city);
+			spontaneousJobApplicationProxy.setCountry(country);
+			// TODO logger edit job application
+			System.out.println("Address: \t"+spontaneousJobApplicationProxy.getAddress() );
+			System.out.println("City: \t"+spontaneousJobApplicationProxy.getCity() );
+			System.out.println("Country: \t"+spontaneousJobApplicationProxy.getCountry() );
+			System.out.println("Phone: \t"+spontaneousJobApplicationProxy.getPhone() );
+			System.out.println("Diploma: \t"+spontaneousJobApplicationProxy.getDiploma() );
+			System.out.println("School: \t"+spontaneousJobApplicationProxy.getSchool() );
+			System.out.println("Letter: \t"+spontaneousJobApplicationProxy.getLetter() );
+			System.out.println("CV: \t"+spontaneousJobApplicationProxy.getCv() );
+			System.out.println("Source: \t"+spontaneousJobApplicationProxy.getSource() );
+			System.out.println("\n");
+
+			IJobApplicationProxy proxy;
+			proxy=jobApplicationFacade.editJobApplication(spontaneousJobApplicationProxy);
+			if(proxy!=null){
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_INFO,
+						"Spontaneous Job Position updated successfully.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				this.uploadedfilename="";
+			} else {
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_ERROR,
+						"Error updating spontaneous job position.", "");
 				FacesContext.getCurrentInstance().addMessage(null, message);
 			}
 		}
@@ -364,7 +442,7 @@ public class JobApplicationBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String filePrefix = positionProxy.getCode() + "_CV_" + loginBean.getCandidate().getUsername() + "_" + timeStamp + "_";
+		String filePrefix = "CV_" + loginBean.getCandidate().getUsername() + "_" + timeStamp + "_";
 		this.uploadedfilename=event.getFile().getFileName();
 		// Do what you want with the file        
 		try {
@@ -393,11 +471,24 @@ public class JobApplicationBean implements Serializable {
 		}
 	}
 	
+	public void prepSpontaneusJobAppDownload(){
+		try {
+			File file = new File( spontaneousJobApplicationProxy.getCv() );
+		    InputStream input;
+			input = new FileInputStream(file);
+		    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		    setDownload(new DefaultStreamedContent(input, externalContext.getMimeType(file.getName()), file.getName()));
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	public List<IJobApplicationProxy> listOfCandidateJobApplication(){
 		return jobApplicationFacade.listOfJobApplicationByUsername(loginBean.getUsername());
 	}
-	
 	
 	
 }	

@@ -20,6 +20,8 @@ public interface IJobApplicationFacade {
 	public IJobApplicationProxy editJobApplication(IJobApplicationProxy jobApplicationProxy);
 
 	public List<IJobApplicationProxy> listOfJobApplicationByUsername(String username);
+	
+	public IJobApplicationProxy spontaneousJobApplicationByUsername(String username);
 
 	public IJobApplicationProxy findId (long id);
 	
@@ -34,6 +36,6 @@ public interface IJobApplicationFacade {
 	public String submitPositionOnSpontaneousApplication(IJobApplicationProxy jobApplication);
 	
 	public List <IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation ();
-
-
+	
+	
 }

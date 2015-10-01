@@ -1,0 +1,126 @@
+<ui:composition template="/template/templateCandidate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<p:outputLabel value="Hello #{loginBean.candidate.username}" />
+		<br />
+		<p:outputLabel
+			value="Hello #{jobApplicationBean.spontaneousJobApplicationProxy.candidateEntity.firstname}" />
+		<br />
+		<p:panel header="Applying Spontaneous Job Application">
+
+
+
+			<h:form id="formJobSpontaneousApplicationEdit">
+
+
+
+				<p:panelGrid columns="3" id="jobApplicationEditPanelGrid">
+					<p:outputLabel value="Address :" for="address" />
+					<p:inplace>
+						<p:inputText id="address"
+							value="#{jobApplicationBean.address}"
+							required="true" />
+					</p:inplace>
+					<p:message for="address" />
+
+					<p:outputLabel value="City :" for="city" />
+					<p:inplace>
+						<p:inputText id="city"
+							value="#{jobApplicationBean.city}"
+							required="true" />
+					</p:inplace>
+					<p:message for="city" />
+
+					<p:outputLabel value="Country :" for="country" />
+					<p:inplace>
+						<p:inputText id="country"
+							value="#{jobApplicationBean.country}"
+							required="true" />
+					</p:inplace>
+					<p:message for="country" />
+
+					<p:outputLabel value="Phone :" for="phone" />
+					<p:inplace>
+						<p:inputText id="phone"
+							value="#{jobApplicationBean.phone}"
+							required="false" />
+					</p:inplace>
+					<p:message for="phone" />
+
+					<p:outputLabel value="Diploma :" for="diploma" />
+					<p:inplace>
+						<p:inputText id="diploma"
+							value="#{jobApplicationBean.diploma}"
+							required="true" />
+					</p:inplace>
+					<p:message for="diploma" />
+
+					<p:outputLabel value="School :" for="school" />
+					<p:inplace>
+						<p:inputText id="school"
+							value="#{jobApplicationBean.school}"
+							required="true" />
+					</p:inplace>
+					<p:message for="school" />
+
+					<p:outputLabel value="Letter :" for="letter" />
+					<p:inplace>
+						<p:inputTextarea id="letter"
+							value="#{jobApplicationBean.letter}"
+							required="true" />
+					</p:inplace>
+					<p:message for="letter" />
+					
+					
+					<p:outputLabel value="Source :" for="source" />
+					<p:selectOneMenu id="source" value="#{jobApplicationBean.source}"
+						required="true" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
+						<f:selectItems
+							value="#{jobApplicationBean.allJobAdvertisingChanel}"
+							var="channel" itemLabel="#{channel.chanelName}"
+							itemValue="#{channel.chanelName}" />
+					</p:selectOneMenu>
+					<p:message for="source" />
+
+					<h:outputText value="View CV:" />
+					<p:commandButton id="editdownloadLink" value="Download"
+						ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
+						<p:fileDownload value="#{jobApplicationBean.download}" />
+					</p:commandButton>
+					<!-- SPACE -->
+
+					<p:outputLabel value="Change CV:" />
+					<p:fileUpload id="upload"
+						fileUploadListener="#{jobApplicationBean.editUploadedFile}"
+						auto="true" mode="advanced" allowTypes="/(\.|\/)(pdf|doc?x|xps)$/"
+						sizeLimit="1000000" description="Select Your CV"
+						dragDropSupport="true" multiple="false" fileLimit="1"
+						required="true" requiredMessage="CV upload required"
+						update="fileuploaded" />
+					<p:message for="upload" />
+
+					<!-- SPACE -->
+					<h:outputText id="fileuploaded"
+						value="#{jobApplicationBean.uploadedfilename} " />
+					<!-- SPACE -->
+				</p:panelGrid>
+				<center>
+					<p:commandButton value="Update"
+						action="#{jobApplicationBean.applySpontaneousJobApplication()}"
+						update="@form growl" />
+				</center>
+
+				
+				<p:growl id="growl" />
+
+			</h:form>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

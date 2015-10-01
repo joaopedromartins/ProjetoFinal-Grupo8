@@ -29,6 +29,9 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
 				" where c.username like :login and j.situation NOT LIKE 'SPONTANEOUS'") ,
+	@NamedQuery(name = "JobApplication.listOfAllCandidateSpontaneousJobApplication", 
+	query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
+		" where c.username like :login and j.situation LIKE 'SPONTANEOUS'") ,
 	@NamedQuery(name = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
 				" inner join j.positionEntity p where c.username like :username and p.code like :code "),
@@ -44,6 +47,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 public class JobApplicationEntity {
 
 	public static final String LIST_OF_ALL_CANDIDATE_JOB_APPLICATION = "JobApplication.listOfAllCandidateJobApplication";	
+	public static final String LIST_SPONTANEOUS_JOB_APPLICATION_BY_USERNAME = "JobApplication.listOfAllCandidateSpontaneousJobApplication";
 	public static final String LIST_OF_ALL_JOB_APPLICATION_TO_POSITION_CODE_AND_USERNAME = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername";
 	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE = "JobApplication.listOfJobApplicationByCandidate";
 	public static final String LIST_OF_ALL_SPONTANEOUS_JOBAPPLICATION = "JobApplication.listOfAllSpontaneousJobApplication";
@@ -53,6 +57,7 @@ public class JobApplicationEntity {
 	public static final String LIST_OF_ALL_APPLICATION_NOT_SITUATION_SPONTANEOUS ="JobApplication.listOfAllApplicationNotSituationSpontaneous" ;
 	public static final String LIST_OF_ALL_APP_BETWEEN_DATES = "JobApplication.listOfAllAppBetweenDates";
 	public static final String LIST_OF_ALL_APP_SPONTANEOUS_BETWEEN_DATES = "JobApplication.listOfAllAppSpontaneousBetweenDates";
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -35,8 +35,11 @@
 								outcome="/pages/candidate/viewOpenPositions" />
 							<p:menuitem value="View Job Applications"
 								outcome="/pages/candidate/viewJobApplications" />
-							<p:menuitem value="View/Apply Spontaneous Job Application"
+							<p:menuitem value="Apply/View Spontaneous Job Application"
 								outcome="/pages/candidate/applySpontaneousJobApplication" />
+							<p:menuitem value="Homepage"
+								icon="ui-icon-home"
+								outcome="/pages/candidate/company" />
 						</p:submenu>
 						<f:facet name="options">
 							<p:commandButton value="Logout" icon="ui-icon-power"
@@ -63,12 +66,16 @@
 								outcome="/pages/candidate/viewOpenPositions" />
 						</p:submenu>
 						<p:submenu label="Job Aplications">
-							<p:menuitem value="View/Apply Spontaneous Job Application"
+							<p:menuitem value="Apply/View Spontaneous Job Application"
 								outcome="/pages/candidate/applySpontaneousJobApplication" />
 							<p:menuitem value="View Job Applications"
 								outcome="/pages/candidate/viewJobApplications" />
 						</p:submenu>
-						
+						<p:submenu label="Company">
+							<p:menuitem value="About us"
+								icon="ui-icon-home"
+								outcome="/pages/candidate/company" />
+						</p:submenu>
 
 						
 					</p:panelMenu>
