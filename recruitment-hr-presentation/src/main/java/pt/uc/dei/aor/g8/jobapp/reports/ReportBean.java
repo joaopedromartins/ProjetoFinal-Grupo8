@@ -1,4 +1,4 @@
-package pt.uc.dei.aor.g8.jobapp.hrPresentation;
+package pt.uc.dei.aor.g8.jobapp.reports;
 
 import java.io.Serializable;
 import java.util.Date;

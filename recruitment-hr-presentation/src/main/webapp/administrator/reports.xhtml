@@ -4,6 +4,14 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<ui:define name="outputScript">
+		<h:outputScript  library="js" name="calendar.js" />
+	</ui:define>
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="reports.css" />
+	</ui:define>
 
 	<ui:define name="content">
 		<h1>Reports</h1>
@@ -68,6 +76,11 @@
 				</p:dataTable>
 
 			</p:panel>
+			
+			<h:outputLabel value="From:" for="from"/>
+			<h:inputText id = "from" styleClass="monthYearPicker" />
+			<h:outputLabel value="To:" for="to"/>
+			<h:inputText id = "to" styleClass="monthYearPicker" />
 
 
 			
