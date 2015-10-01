@@ -2,7 +2,6 @@ package pt.uc.dei.aor.g8.jobapp.business.service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -74,9 +73,16 @@ public class ReportsFacade implements IReportsFacade {
 		List<ResultReport> app = new ArrayList<>();
 		Integer quantity;
 		for (int i = 0 ; i < months ; i++){
-			quantity =  (appService.listOfAllAppSpontaneousBetweenDates(start.plusMonths(i).toDate(), start.plusMonths(i+1).toDate())).size();
+			List <IJobApplicationProxy> proxy = appService.listOfAllAppSpontaneousBetweenDates(start.plusMonths(i).toDate(), start.plusMonths(i+1).toDate());
+			if( proxy == null){
+				quantity = 0;
+			} else {
+				quantity = proxy.size();
+			}
 			app.add(new ResultReport(start.plusMonths(i).toDate(), quantity));
+			System.out.println("key" + start.plusMonths(i).toDate() + "value" + quantity );
 		}
+		System.out.println("facade" + app);
 		return app;
 	}
 

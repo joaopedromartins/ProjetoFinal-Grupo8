@@ -32,6 +32,5 @@ public class ResultReport {
 		this.quantity = quantity;
 	}
 	
-	
 
 }

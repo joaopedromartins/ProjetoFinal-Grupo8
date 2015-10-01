@@ -2,7 +2,6 @@ package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -26,6 +25,7 @@ public class ReportBean implements Serializable{
 	private Date startDate;
 	private Date endDate;
 	private List<ResultReport> spontaneousApp;
+	private List<ResultReport> app;
 	
 	public ReportBean() {
 		super();
@@ -53,9 +53,20 @@ public class ReportBean implements Serializable{
 	public void setSpontaneousApp(List<ResultReport> spontaneousApp) {
 		this.spontaneousApp = spontaneousApp;
 	}
+	public List<ResultReport> getApp() {
+		return app;
+	}
+	public void setApp(List<ResultReport> app) {
+		this.app = app;
+	}
 	public void listOfAllAppSpontaneousBetweenDates (){
 		System.out.println("entre na função que vai buscar hashMap");
 		this.spontaneousApp =  reportsFacade.listOfAllAppSpontaneousBetweenDates(startDate, endDate);
+	}
+	
+	public void listOfAllAppBetweenDates (){
+		System.out.println("entre na função que vai buscar hashMap");
+		this.app =  reportsFacade.listOfAllAppBetweenDates(startDate, endDate);
 	}
 	
 	

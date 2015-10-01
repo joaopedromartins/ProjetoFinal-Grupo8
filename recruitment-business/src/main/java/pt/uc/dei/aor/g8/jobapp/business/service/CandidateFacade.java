@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
-import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.ICandidatePersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.util.AutoGeneratePasswor;
 import pt.uc.dei.aor.g8.jobapp.business.util.EncryptPassword;
