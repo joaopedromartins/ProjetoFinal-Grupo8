@@ -1,5 +1,22 @@
 package pt.uc.dei.aor.g8.jobapp.reports;
 
-public class RejectCandidates {
+import java.io.Serializable;
+
+import javax.ejb.EJB;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
+import pt.uc.dei.aor.g8.jobapp.business.service.IReportsFacade;
+
+@Named
+@ViewScoped
+public class RejectCandidates implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@EJB
+	private IReportsFacade reportsFacade;
 
 }
