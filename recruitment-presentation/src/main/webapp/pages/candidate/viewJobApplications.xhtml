@@ -1,266 +1,263 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/template/templateCandidate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-
-	<meta charset="utf-8" />
-	<title>CriticalJobApplication</title>
-	<h:outputStylesheet library="css" name="style.css" />
-
-</h:head>
-<h:body>
-	<h:form id="formJobApplicationTable">
-		<p:dataTable id="tableJobApplications" var="jobapplication"
-			value="#{jobApplicationBean.listOfCandidateJobApplication()}">
-			<f:facet name="header">
-				<H1>View Job Application</H1>
-			</f:facet>
-
-			<p:column headerText="Title">
-				<h:outputText value="#{jobapplication.positionEntity.title}" />
-			</p:column>
-			<p:column headerText="Open Date">
-				<h:outputText value="#{jobapplication.positionEntity.openDate}" />
-			</p:column>
-			<p:column headerText="Location">
-				<h:outputText
-					value="#{jobapplication.positionEntity.stringLocalization}" /> 
-			</p:column>
-			<p:column headerText="Position Status">
-				<h:outputText
-					value="#{jobapplication.positionEntity.status.description}" />
-			</p:column>
-			<p:column headerText="Company">
-				<h:outputText value="#{jobapplication.positionEntity.company}" />
-			</p:column>
-			<p:column headerText="Technical Area">
-				<h:outputText
-					value="#{jobapplication.positionEntity.technicalArea.description}" />
-			</p:column>
-			<p:column headerText="Job Application Status">
-				<h:outputText value="#{jobapplication.situation.description}" />
-			</p:column>
-
-			<p:column style="width:32px;text-align: center" headerText="Detail">
-				<p:commandButton
-					update=":formJobApplicationTable:tableJobApplications :positionDetail :jobapplicationDetail"
-					oncomplete="PF('jobApplicationView').show()" icon="ui-icon-search"
-					title="View">
-					<f:setPropertyActionListener value="#{jobapplication}"
-						target="#{jobApplicationBean.jobApplicationProxy}" />
-				</p:commandButton>
-			</p:column>
-			
-			<p:column style="width:32px;text-align: center" headerText="Edit">
-				<p:commandButton update=":formJobApplicationEdit:jobApplicationEdit"
-					oncomplete="PF('jobApplicationEdit').show()" icon="ui-icon-pencil"
-					title="edit">
-					<f:setPropertyActionListener value="#{jobapplication}"
-						target="#{jobApplicationBean.jobApplicationProxy}" />
-				</p:commandButton>
-			</p:column>
-
-
-		</p:dataTable>
-	</h:form>
-
-	<p:dialog header="Job Application Info" widgetVar="jobApplicationView"
-		modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-
-		<p:panelGrid columns="2">
-			<p:outputPanel id="positionDetail" style="text-align:left;">
-				<p:panelGrid columns="2" id="positionDetailPanelGrid">
-					<f:facet name="header">
+	<ui:define name="content">
+		<h:outputText value="" />
+		<br />
+		<h:outputText value="" />
+		<br />
+		
+		<h:form id="formJobApplicationTable">
+			<p:dataTable id="tableJobApplications" var="jobapplication"
+				value="#{jobApplicationBean.listOfCandidateJobApplication()}">
+				<f:facet name="header">
+					<H1>View Job Application</H1>
+				</f:facet>
+	
+				<p:column headerText="Title">
+					<h:outputText value="#{jobapplication.positionEntity.title}" />
+				</p:column>
+				<p:column headerText="Open Date">
+					<h:outputText value="#{jobapplication.positionEntity.openDate}" />
+				</p:column>
+				<p:column headerText="Location">
+					<h:outputText
+						value="#{jobapplication.positionEntity.stringLocalization}" /> 
+				</p:column>
+				<p:column headerText="Position Status">
+					<h:outputText
+						value="#{jobapplication.positionEntity.status.description}" />
+				</p:column>
+				<p:column headerText="Company">
+					<h:outputText value="#{jobapplication.positionEntity.company}" />
+				</p:column>
+				<p:column headerText="Technical Area">
+					<h:outputText
+						value="#{jobapplication.positionEntity.technicalArea.description}" />
+				</p:column>
+				<p:column headerText="Job Application Status">
+					<h:outputText value="#{jobapplication.situation.description}" />
+				</p:column>
+	
+				<p:column style="width:32px;text-align: center" headerText="Detail">
+					<p:commandButton
+						update=":formJobApplicationTable:tableJobApplications :positionDetail :jobapplicationDetail"
+						oncomplete="PF('jobApplicationView').show()" icon="ui-icon-search"
+						title="View">
+						<f:setPropertyActionListener value="#{jobapplication}"
+							target="#{jobApplicationBean.jobApplicationProxy}" />
+					</p:commandButton>
+				</p:column>
+				
+				<p:column style="width:32px;text-align: center" headerText="Edit">
+					<p:commandButton update=":formJobApplicationEdit:jobApplicationEdit"
+						oncomplete="PF('jobApplicationEdit').show()" icon="ui-icon-pencil"
+						title="edit">
+						<f:setPropertyActionListener value="#{jobapplication}"
+							target="#{jobApplicationBean.jobApplicationProxy}" />
+					</p:commandButton>
+				</p:column>
+	
+	
+			</p:dataTable>
+		</h:form>
+	
+		<p:dialog header="Job Application Info" widgetVar="jobApplicationView"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+	
+			<p:panelGrid columns="2">
+				<p:outputPanel id="positionDetail" style="text-align:left;">
+					<p:panelGrid columns="2" id="positionDetailPanelGrid">
+						<f:facet name="header">
+							<h:outputText
+								value="#{jobApplicationBean.jobApplicationProxy.positionEntity.title} details:" />
+						</f:facet>
+	
+						<h:outputText value="Position code:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.code}" />
+	
+						<h:outputText value="Title:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.title}" />
+	
+						<h:outputText value="Description Position:" />
 						<h:outputText
-							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.title} details:" />
-					</f:facet>
-
-					<h:outputText value="Position code:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.code}" />
-
-					<h:outputText value="Title:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.title}" />
-
-					<h:outputText value="Description Position:" />
-					<h:outputText
-						value="#{jobApplicationBean.jobApplicationProxy.positionEntity.descriptionPosition}" />
-
-					<h:outputText value="Open Date:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.openDate}" />
-
-					<h:outputText value="Close Date:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.closeDate}" />
-
-					<h:outputText value="Location:" />
-					<h:outputText
-						value="#{jobApplicationBean.jobApplicationProxy.positionEntity.stringLocalization}" />
-
-					<h:outputText value="Status:" />
-					<h:outputText
-						value="#{jobApplicationBean.jobApplicationProxy.positionEntity.status.description}" />
-
-					<h:outputText value="Company:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.company}" />
-
-					<h:outputText value="Technical Area:" />
-					<h:outputText
-						value="#{jobApplicationBean.jobApplicationProxy.positionEntity.technicalArea.description}" />
-				</p:panelGrid>
-			</p:outputPanel>
-			<p:outputPanel id="jobapplicationDetail" style="text-align:left;">
-				<p:panelGrid columns="2" id="jobApplicationDetailPanelGrid">
-					<f:facet name="header">
-						<h:outputText value="Application Details:" />
-					</f:facet>
-
-					<h:outputText value="Address:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.address}" />
-
-					<h:outputText value="City:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.city}" />
-
-					<h:outputText value="Country:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.country}" />
-
-					<h:outputText value="Phone:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.phone}" />
-
-					<h:outputText value="Diploma:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.diploma}" />
-
-					<h:outputText value="School:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.school}" />
-
-					<h:outputText value="Cover Letter:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.letter}" />
-
-					<h:outputText value="CV:" />
-		            <h:form>
-			            <p:commandButton id="downloadLink" value="Download" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
+							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.descriptionPosition}" />
+	
+						<h:outputText value="Open Date:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.openDate}" />
+	
+						<h:outputText value="Close Date:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.closeDate}" />
+	
+						<h:outputText value="Location:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.stringLocalization}" />
+	
+						<h:outputText value="Status:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.status.description}" />
+	
+						<h:outputText value="Company:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.positionEntity.company}" />
+	
+						<h:outputText value="Technical Area:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.technicalArea.description}" />
+					</p:panelGrid>
+				</p:outputPanel>
+				<p:outputPanel id="jobapplicationDetail" style="text-align:left;">
+					<p:panelGrid columns="2" id="jobApplicationDetailPanelGrid">
+						<f:facet name="header">
+							<h:outputText value="Application Details:" />
+						</f:facet>
+	
+						<h:outputText value="Address:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.address}" />
+	
+						<h:outputText value="City:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.city}" />
+	
+						<h:outputText value="Country:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.country}" />
+	
+						<h:outputText value="Phone:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.phone}" />
+	
+						<h:outputText value="Diploma:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.diploma}" />
+	
+						<h:outputText value="School:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.school}" />
+	
+						<h:outputText value="Cover Letter:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.letter}" />
+	
+						<h:outputText value="CV:" />
+			            <h:form>
+				            <p:commandButton id="downloadLink" value="Download" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
+								<p:fileDownload value="#{jobApplicationBean.download}" />
+							</p:commandButton>
+						</h:form>
+			            
+						<h:outputText value="Source:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.source}" />
+	
+						<h:outputText value="Job Application Status:" />
+						<h:outputText value="#{jobApplicationBean.jobApplicationProxy.situation.description}" />
+	
+					</p:panelGrid>
+	
+				</p:outputPanel>
+			</p:panelGrid>
+		</p:dialog>
+		
+		<h:form id="formJobApplicationEdit">
+			<p:dialog header="Job Application Edit" widgetVar="jobApplicationEdit"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="jobApplicationEdit" style="text-align:left;">
+					
+					<p:panelGrid columns="3" id="jobApplicationEditPanelGrid">
+						<p:outputLabel value="Address :" for="address" />
+						<p:inplace>
+							<p:inputText id="address" value="#{jobApplicationBean.jobApplicationProxy.address}"
+								required="true" />
+						</p:inplace>
+						<p:message for="address" />
+	
+						<p:outputLabel value="City :" for="city" />
+						<p:inplace>
+							<p:inputText id="city" value="#{jobApplicationBean.jobApplicationProxy.city}"
+								required="true" />
+						</p:inplace>
+						<p:message for="city" />
+	
+						<p:outputLabel value="Country :" for="country" />
+						<p:inplace>
+							<p:inputText id="country" value="#{jobApplicationBean.jobApplicationProxy.country}"
+								required="true" />
+						</p:inplace>
+						<p:message for="country" />
+	
+						<p:outputLabel value="Phone :" for="phone" />
+						<p:inplace>
+						<p:inputText id="phone" value="#{jobApplicationBean.jobApplicationProxy.phone}"
+							required="false" />
+						</p:inplace>
+						<p:message for="phone" />
+	
+						<p:outputLabel value="Diploma :" for="diploma" />
+						<p:inplace>
+						<p:inputText id="diploma" value="#{jobApplicationBean.jobApplicationProxy.diploma}"
+							required="true" />
+						</p:inplace>
+						<p:message for="diploma" />
+	
+						<p:outputLabel value="School :" for="school" />
+						<p:inplace>
+						<p:inputText id="school" value="#{jobApplicationBean.jobApplicationProxy.school}"
+							required="true" />
+						</p:inplace>
+						<p:message for="school" />
+	
+						<p:outputLabel value="Letter :" for="letter" />
+						<p:inplace>
+							<p:inputTextarea id="letter" value="#{jobApplicationBean.jobApplicationProxy.letter}"
+								required="true" />
+						</p:inplace>
+						<p:message for="letter" />
+						
+						<p:outputLabel value="Source :" for="source" />
+						<p:selectOneMenu id="source" value="#{jobApplicationBean.jobApplicationProxy.source}"
+							required="true" converter="omnifaces.SelectItemsConverter">
+							<f:selectItem noSelectionOption="true" itemLabel="Select One" />
+							<f:selectItems
+								value="#{jobApplicationBean.jobApplicationProxy.positionEntity.jobAdvertisingChanel}"
+								var="channel" itemLabel="#{channel.chanelName}"
+								itemValue="#{channel.chanelName}" />
+						</p:selectOneMenu>
+						<p:message for="source" />
+						
+						
+						<h:outputText value="View CV:" />		            
+			            <p:commandButton id="editdownloadLink" value="Download" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
 							<p:fileDownload value="#{jobApplicationBean.download}" />
 						</p:commandButton>
-					</h:form>
-		            
-					<h:outputText value="Source:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.source}" />
-
-					<h:outputText value="Job Application Status:" />
-					<h:outputText value="#{jobApplicationBean.jobApplicationProxy.situation.description}" />
-
-				</p:panelGrid>
-
-			</p:outputPanel>
-		</p:panelGrid>
-	</p:dialog>
-	
-	<h:form id="formJobApplicationEdit">
-		<p:dialog header="Job Application Edit" widgetVar="jobApplicationEdit"
-			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-			<p:outputPanel id="jobApplicationEdit" style="text-align:left;">
-				
-				<p:panelGrid columns="3" id="jobApplicationEditPanelGrid">
-					<p:outputLabel value="Address :" for="address" />
-					<p:inplace>
-						<p:inputText id="address" value="#{jobApplicationBean.jobApplicationProxy.address}"
-							required="true" />
-					</p:inplace>
-					<p:message for="address" />
-
-					<p:outputLabel value="City :" for="city" />
-					<p:inplace>
-						<p:inputText id="city" value="#{jobApplicationBean.jobApplicationProxy.city}"
-							required="true" />
-					</p:inplace>
-					<p:message for="city" />
-
-					<p:outputLabel value="Country :" for="country" />
-					<p:inplace>
-						<p:inputText id="country" value="#{jobApplicationBean.jobApplicationProxy.country}"
-							required="true" />
-					</p:inplace>
-					<p:message for="country" />
-
-					<p:outputLabel value="Phone :" for="phone" />
-					<p:inplace>
-					<p:inputText id="phone" value="#{jobApplicationBean.jobApplicationProxy.phone}"
-						required="false" />
-					</p:inplace>
-					<p:message for="phone" />
-
-					<p:outputLabel value="Diploma :" for="diploma" />
-					<p:inplace>
-					<p:inputText id="diploma" value="#{jobApplicationBean.jobApplicationProxy.diploma}"
-						required="true" />
-					</p:inplace>
-					<p:message for="diploma" />
-
-					<p:outputLabel value="School :" for="school" />
-					<p:inplace>
-					<p:inputText id="school" value="#{jobApplicationBean.jobApplicationProxy.school}"
-						required="true" />
-					</p:inplace>
-					<p:message for="school" />
-
-					<p:outputLabel value="Letter :" for="letter" />
-					<p:inplace>
-						<p:inputTextarea id="letter" value="#{jobApplicationBean.jobApplicationProxy.letter}"
-							required="true" />
-					</p:inplace>
-					<p:message for="letter" />
+						<!-- SPACE -->
+						
+						<p:outputLabel value="Change CV:" /> 
+						<p:fileUpload id="upload" 
+							fileUploadListener="#{jobApplicationBean.editUploadedFile}"
+							auto="true"
+							mode="advanced" 
+							allowTypes="/(\.|\/)(pdf|doc?x|xps)$/" 
+							sizeLimit="1000000" 
+							description="Select Your CV" 
+							dragDropSupport="true"
+							multiple="false" 
+							fileLimit="1"
+							required="true"
+							requiredMessage="CV upload required"
+							update="fileuploaded" />
+						<p:message for="upload" />
+						
+						<!-- SPACE -->
+						<h:outputText id="fileuploaded" value="#{jobApplicationBean.uploadedfilename} " />
+						<!-- SPACE -->
+					</p:panelGrid>
+					<center>
+						<p:commandButton value="Update"
+							action="#{jobApplicationBean.editJobApplication()}"
+							update=":formJobApplicationTable:tableJobApplications growl" />
+					</center>
 					
-					<p:outputLabel value="Source :" for="source" />
-					<p:selectOneMenu id="source" value="#{jobApplicationBean.jobApplicationProxy.source}"
-						required="true" converter="omnifaces.SelectItemsConverter">
-						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
-						<f:selectItems
-							value="#{jobApplicationBean.jobApplicationProxy.positionEntity.jobAdvertisingChanel}"
-							var="channel" itemLabel="#{channel.chanelName}"
-							itemValue="#{channel.chanelName}" />
-					</p:selectOneMenu>
-					<p:message for="source" />
-					
-					
-					<h:outputText value="View CV:" />		            
-		            <p:commandButton id="editdownloadLink" value="Download" ajax="false" actionListener="#{jobApplicationBean.prepDownload}">
-						<p:fileDownload value="#{jobApplicationBean.download}" />
-					</p:commandButton>
-					<!-- SPACE -->
-					
-					<p:outputLabel value="Change CV:" /> 
-					<p:fileUpload id="upload" 
-						fileUploadListener="#{jobApplicationBean.editUploadedFile}"
-						auto="true"
-						mode="advanced" 
-						allowTypes="/(\.|\/)(pdf|doc?x|xps)$/" 
-						sizeLimit="1000000" 
-						description="Select Your CV" 
-						dragDropSupport="true"
-						multiple="false" 
-						fileLimit="1"
-						required="true"
-						requiredMessage="CV upload required"
-						update="fileuploaded" />
-					<p:message for="upload" />
-					
-					<!-- SPACE -->
-					<h:outputText id="fileuploaded" value="#{jobApplicationBean.uploadedfilename} " />
-					<!-- SPACE -->
-				</p:panelGrid>
-				<center>
-					<p:commandButton value="Update"
-						action="#{jobApplicationBean.editJobApplication()}"
-						update=":formJobApplicationTable:tableJobApplications growl" />
-				</center>
-				
-			</p:outputPanel>
-			<p:growl id="growl" />
-		</p:dialog>
+				</p:outputPanel>
+				<p:growl id="growl" />
+			</p:dialog>
+		</h:form>
 
-	</h:form>
-
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

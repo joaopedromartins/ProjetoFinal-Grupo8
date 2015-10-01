@@ -1,0 +1,102 @@
+<ui:composition template="/template/templatePublic.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<center>
+			<p:panel header="Signup Account">
+
+				<h:form id="formSignUp">
+					<center>
+						<p:messages id="messagesSignUp" />
+						<p:outputLabel value="New user registration" />
+						<p:panelGrid columns="3" id="panelgridSignUp">
+
+							<p:outputLabel value="Username" for="username" />
+							<p:inputText id="username" required="true"
+								value="#{signUpBean.username}" />
+							<p:message for="username" />
+
+							<p:outputLabel value="Password" for="password" />
+							<p:password id="password" required="true"
+								value="#{signUpBean.password}" feedback="true" weakLabel="Week"
+								goodLabel="Good" strongLabel="Strong"
+								promptLabel="Insert Password" inline="true"
+								match="retypepassword" />
+							<p:message for="password" />
+
+							<p:outputLabel value="Retype Password" for="retypepassword" />
+							<p:password id="retypepassword" required="true" />
+							<p:message for="retypepassword" />
+
+							<p:outputLabel value="Firstname" for="firstname" />
+							<p:inputText id="firstname" required="true"
+								value="#{signUpBean.firstname}" />
+							<p:message for="firstname" />
+
+							<p:outputLabel value="Lastname" for="lastname" />
+							<p:inputText id="lastname" required="true"
+								value="#{signUpBean.lastname}" />
+							<p:message for="lastname" />
+
+							<p:outputLabel value="Mobile" for="mobile" />
+							<p:inputText id="mobile" required="true"
+								value="#{signUpBean.mobile}" />
+							<p:message for="mobile" />
+
+							<p:outputLabel value="LinkedIn Address" for="linkedinAddress" />
+							<p:inputText id="linkedinAddress" required="false"
+								value="#{signUpBean.linkedinAddress}" />
+							<p:message for="linkedinAddress" />
+
+							<p:outputLabel value="Email" for="email" />
+							<p:inputText id="email" required="true"
+								value="#{signUpBean.email}" />
+							<p:message for="email" />
+
+						</p:panelGrid>
+
+						<br />
+						<p:commandButton update=":formValidation:panelValidation @form "
+							value="Email validation"
+							title="Click here to email validation before SignUp a new Account"
+							action="#{signUpBean.generateAndSendRegistrationCode}">
+							<f:setPropertyActionListener value="#{signUpBean.username}"
+								target="#{signUpBean.username}" />
+						</p:commandButton>
+					</center>
+				</h:form>
+
+
+
+				<!-- Popup SignUP Email Validation -->
+				<h:form id="formValidation">
+					<p:dialog header="Email validation" widgetVar="validation"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+
+						<p:outputPanel style="text-align:left;">
+							<center>
+								<p:messages />
+								<br />
+								<p:panelGrid columns="3" id="panelValidation">
+									<p:outputLabel value="Validation Code" for="code" />
+									<p:inputText id="code" required="true"
+										value="#{signUpBean.appliedRegistrationCode}" />
+									<p:message for="code" />
+								</p:panelGrid>
+								<br />
+								<p:commandButton value="SignUp" action="#{signUpBean.register}"
+									update="@form growlEmailValidation" />
+							</center>
+
+						</p:outputPanel>
+						<p:growl id="growlEmailValidation" />
+					</p:dialog>
+				</h:form>
+			</p:panel>
+		</center>
+	</ui:define>
+</ui:composition>

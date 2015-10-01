@@ -8,7 +8,7 @@
 	<module-name>recruitment-presentation</module-name>
 
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>/pages/everybody/company.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<servlet>

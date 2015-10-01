@@ -1,4 +1,4 @@
-<ui:composition template="/template/templatePublic.xhtml"
+<ui:composition template="/template/templateCandidate.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -15,7 +15,7 @@
 			<p:dataTable id="tablePositions" var="position"
 				value="#{positionBean.listOfAllOpenPosition()}">
 				<f:facet name="header">
-		            <H1>View Open Positions</H1>
+		            <H1>Positions</H1>
 		        </f:facet>
 				<p:column headerText="Position code">
 					<h:outputText value="#{position.code}" />

@@ -1,101 +1,93 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/template/templateCandidate.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
+	<ui:define name="content">
 
-	<meta charset="utf-8" />
-	<title>CriticalJobApplication</title>
-	<h:outputStylesheet library="css" name="style.css" />
 
-</h:head>
-<h:body>
-	<p:outputLabel value="Hello #{loginBean.candidate.username}" />
-	<br />
-	<p:panel header="Applying Job Position: #{jobApplicationBean.positionProxy.title}">
+		<p:outputLabel value="Hello #{loginBean.candidate.username}" />
+		<br />
+		<p:panel
+			header="Applying Job Position: #{jobApplicationBean.positionProxy.title}">
 
-		<h:form id="formApplyPosition" enctype="multipart/form-data">
-			<center>
-				
-				<p:panelGrid id="gridPosition" columns="3">
-					<p:outputLabel value="Address :" for="address" />
-					<p:inputText id="address" value="#{jobApplicationBean.address}"
-						required="true" />
-					<p:message for="address" />
+			<h:form id="formApplyPosition" enctype="multipart/form-data">
+				<center>
 
-					<p:outputLabel value="City :" for="city" />
-					<p:inputText id="city" value="#{jobApplicationBean.city}"
-						required="true" />
-					<p:message for="city" />
+					<p:panelGrid id="gridPosition" columns="3">
+						<p:outputLabel value="Address :" for="address" />
+						<p:inputText id="address" value="#{jobApplicationBean.address}"
+							required="true" />
+						<p:message for="address" />
 
-					<p:outputLabel value="Country :" for="country" />
-					<p:inputText id="country" value="#{jobApplicationBean.country}"
-						required="true" />
-					<p:message for="country" />
+						<p:outputLabel value="City :" for="city" />
+						<p:inputText id="city" value="#{jobApplicationBean.city}"
+							required="true" />
+						<p:message for="city" />
 
-					<p:outputLabel value="Phone :" for="phone" />
-					<p:inputText id="phone" value="#{jobApplicationBean.phone}"
-						required="false" />
-					<p:message for="phone" />
+						<p:outputLabel value="Country :" for="country" />
+						<p:inputText id="country" value="#{jobApplicationBean.country}"
+							required="true" />
+						<p:message for="country" />
 
-					<p:outputLabel value="Diploma :" for="diploma" />
-					<p:inputText id="diploma" value="#{jobApplicationBean.diploma}"
-						required="true" />
-					<p:message for="diploma" />
+						<p:outputLabel value="Phone :" for="phone" />
+						<p:inputText id="phone" value="#{jobApplicationBean.phone}"
+							required="false" />
+						<p:message for="phone" />
 
-					<p:outputLabel value="School :" for="school" />
-					<p:inputText id="school" value="#{jobApplicationBean.school}"
-						required="true" />
-					<p:message for="school" />
+						<p:outputLabel value="Diploma :" for="diploma" />
+						<p:inputText id="diploma" value="#{jobApplicationBean.diploma}"
+							required="true" />
+						<p:message for="diploma" />
 
-					<p:outputLabel value="Letter :" for="letter" />
-					<h:inputTextarea id="letter" value="#{jobApplicationBean.letter}"
-						required="true" />
-					<p:message for="letter" />
-					
-					<p:outputLabel value="Upload CV:" for="cvuploaded" /> 
-					<p:outputLabel id="cvuploaded" value="#{jobApplicationBean.uploadedfilename}" />
-					<p:message for="cvuploaded" />
-					
-					<!-- SPACE -->
-					<p:fileUpload id="upload" 
-						fileUploadListener="#{jobApplicationBean.upload}"
-						auto="true"
-						mode="advanced" 
-						allowTypes="/(\.|\/)(pdf|doc?x|xps)$/" 
-						sizeLimit="1000000" 
-						description="Select Your CV" 
-						dragDropSupport="true"
-						multiple="false" 
-						fileLimit="1"
-						required="true"
-						requiredMessage="CV upload required"
-						update="cvuploaded" />
-					<p:message for="upload" />
-					
-					<p:outputLabel value="Source :" for="source" />
-					<p:selectOneMenu id="source" value="#{jobApplicationBean.source}"
-						required="true" converter="omnifaces.SelectItemsConverter">
-						<f:selectItem noSelectionOption="true" itemLabel="Select One" />
-						<f:selectItems
-							value="#{jobApplicationBean.positionProxy.jobAdvertisingChanel}"
-							var="channel" itemLabel="#{channel.chanelName}"
-							itemValue="#{channel.chanelName}" />
-					</p:selectOneMenu>
-					<p:message for="source" />
-					
+						<p:outputLabel value="School :" for="school" />
+						<p:inputText id="school" value="#{jobApplicationBean.school}"
+							required="true" />
+						<p:message for="school" />
 
-				</p:panelGrid>
-				<p:growl id="growl" />
-				<br />
-				<p:commandButton value="Apply"
-					action="#{jobApplicationBean.applyJobApplication()}"
-					update="formApplyPosition growl" />
-			</center>
-		</h:form>
-	</p:panel>
-</h:body>
-</html>
+						<p:outputLabel value="Letter :" for="letter" />
+						<h:inputTextarea id="letter" value="#{jobApplicationBean.letter}"
+							required="true" />
+						<p:message for="letter" />
+
+						<p:outputLabel value="Upload CV:" for="cvuploaded" />
+						<p:outputLabel id="cvuploaded"
+							value="#{jobApplicationBean.uploadedfilename}" />
+						<p:message for="cvuploaded" />
+
+						<!-- SPACE -->
+						<p:fileUpload id="upload"
+							fileUploadListener="#{jobApplicationBean.upload}" auto="true"
+							mode="advanced" allowTypes="/(\.|\/)(pdf|doc?x|xps)$/"
+							sizeLimit="1000000" description="Select Your CV"
+							dragDropSupport="true" multiple="false" fileLimit="1"
+							required="true" requiredMessage="CV upload required"
+							update="cvuploaded" />
+						<p:message for="upload" />
+
+						<p:outputLabel value="Source :" for="source" />
+						<p:selectOneMenu id="source" value="#{jobApplicationBean.source}"
+							required="true" converter="omnifaces.SelectItemsConverter">
+							<f:selectItem noSelectionOption="true" itemLabel="Select One" />
+							<f:selectItems
+								value="#{jobApplicationBean.positionProxy.jobAdvertisingChanel}"
+								var="channel" itemLabel="#{channel.chanelName}"
+								itemValue="#{channel.chanelName}" />
+						</p:selectOneMenu>
+						<p:message for="source" />
+
+
+					</p:panelGrid>
+					<p:growl id="growl" />
+					<br />
+					<p:commandButton value="Apply"
+						action="#{jobApplicationBean.applyJobApplication()}"
+						update="formApplyPosition growl" />
+				</center>
+			</h:form>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="utf-8" />
+	<title>CriticalJobApplication</title>
+	<ui:insert name="stylesheet" />
+	<h:outputStylesheet library="css" name="style.css" />
+
+</h:head>
+<h:body>
+	<div class="ui-grid ui-grid-responsive">
+		
+		<div class="ui-grid-row">
+			<header class="ui-grid-col-12">
+				<h:form id="forHeader">
+				
+					<p:menubar
+						style="width: auto; background-color:white; float:right; margin: 20px;">
+						<p:submenu label="Menu">
+							<p:menuitem value="SignIn"
+								icon="ui-icon-pencil"
+								outcome="/pages/everybody/signin" />
+							<p:menuitem value="SignUp"
+								icon="ui-icon-pencil"
+								outcome="/pages/everybody/signup" />
+								
+							<p:separator />
+							
+							<p:menuitem value="View Open Positions"
+								outcome="/pages/everybody/viewOpenPositions" />
+							<p:menuitem value="Homepage"
+								icon="ui-icon-home"
+								outcome="/pages/everybody/company" />
+						</p:submenu>
+						<f:facet name="options">
+							<p:commandButton value="Signin" icon="ui-icon-person"
+								action="/pages/everybody/signin" />
+						</f:facet>
+						
+					</p:menubar>
+
+				</h:form>
+			</header>
+			<BR />
+			<h:outputLabel value=" " />
+			<BR />
+		</div>
+		
+
+		<div class="ui-grid-row">
+			<nav class="ui-grid-col-2">
+				
+				<h:form id="formNavigator">
+					<p:panelMenu>
+						<p:submenu label="Account" >
+							<p:menuitem value="SignIn"
+								icon="ui-icon-pencil"
+								outcome="/pages/everybody/signin" />
+							<p:menuitem value="SignUp"
+								icon="ui-icon-pencil"
+								outcome="/pages/everybody/signup" />
+						</p:submenu>
+						<p:submenu label="Position">
+							<p:menuitem value="View Open Positions" 
+								outcome="/pages/everybody/viewOpenPositions" />
+						</p:submenu>
+						<p:menuitem value="Homepage"
+								icon="ui-icon-home"
+								outcome="/pages/everybody/company" />
+									
+					</p:panelMenu>
+				</h:form>
+			</nav>
+			
+			<div class="ui-grid-col-1" />	
+
+			<div class="ui-grid-col-8">										
+
+				<ui:insert name="content" />
+
+			</div>
+			
+			
+			<div class="ui-grid-col-1" />	
+			
+		</div>
+		
+		
+		<div class="ui-grid-row">
+			<footer class="ui-grid-col-12">
+				<ui:include src="/template/footer.xhtml" />
+			</footer>
+		</div>
+	</div>
+</h:body>
+</html>
