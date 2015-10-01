@@ -4,10 +4,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
-	
+
+
 	<ui:define name="outputScript">
-		<h:outputScript  library="js" name="calendar.js" />
+		<h:outputScript library="js" name="calendar.js" />
 	</ui:define>
 	<ui:define name="stylesheet">
 		<h:outputStylesheet library="css" name="reports.css" />
@@ -15,8 +15,11 @@
 
 	<ui:define name="content">
 		<h1>Reports</h1>
+		<h:form id = "formReports"  >
+		<p:growl id="msg" />
+		</h:form>
 
-		<h:form id="formReports">
+		<h:form id="formReportApp">
 
 			<p:panel id="spontaneousApp" header="Spontaneous Applications"
 				toggleable="true" toggleSpeed="500" closeSpeed="500"
@@ -24,15 +27,14 @@
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:calendar value="#{reportBean.startDateSpontaneousApp}"
-					navigator="true" pattern="MM-yyyy" />
+				<p:inputText value="#{reportBean.startDateSpontaneousApp}"
+					styleClass="monthYearPicker" />
 				<p:outputLabel value="To:" />
-				<p:calendar value="#{reportBean.endDateSpontaneousApp}"
-					navigator="true" pattern="MM-yyyy" />
+				<p:inputText value="#{reportBean.endDateSpontaneousApp}" 
+					styleClass="monthYearPicker" />
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppSpontaneousBetweenDates()}"
-					update=":formReports:resultSpontaneous :formReports:msg"
-					ajax="false" />
+					update=":formReportApp:resultSpontaneous :formReports:msg" />
 
 				<p:dataTable id="resultSpontaneous"
 					value="#{reportBean.spontaneousApp}" var="result">
@@ -47,22 +49,24 @@
 				</p:dataTable>
 
 			</p:panel>
-			<p:growl id="msg" />
 
+		</h:form>
+		
+		<h:form id="formReportAppSpontaneous">
 			<p:panel id="app" header="Applications" toggleable="true"
 				toggleSpeed="500" closeSpeed="500" widgetVar="panelApp"
 				style="margin-bottom:20px">
 				<p:ajax event="toggle" />
 
-				<p:outputLabel value="From:" />
-				<p:calendar value="#{reportBean.startDateApp}" navigator="true"
-					pattern="MM-yyyy" />
+				<p:outputLabel value="From:"  />
+				<p:inputText  value="#{reportBean.startDateApp}"
+					styleClass="monthYearPicker" />
 				<p:outputLabel value="To:" />
-				<p:calendar value="#{reportBean.endDateApp}" navigator="true"
-					pattern="MM-yyyy" />
+				<p:inputText value="#{reportBean.endDateApp}"
+					styleClass="monthYearPicker" />
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppBetweenDates()}"
-					update=":formReports:resultApp :formReports:msg" ajax="false" />
+					update=":formReportAppSpontaneous:resultApp :formReports:msg" />
 
 				<p:dataTable id="resultApp" value="#{reportBean.app}" var="result">
 					<p:column headerText="Date">
@@ -76,14 +80,8 @@
 				</p:dataTable>
 
 			</p:panel>
-			
-			<h:outputLabel value="From:" for="from"/>
-			<h:inputText id = "from" styleClass="monthYearPicker" />
-			<h:outputLabel value="To:" for="to"/>
-			<h:inputText id = "to" styleClass="monthYearPicker" />
-
-
-			
+		</h:form>
+		<h:form id="formReportCandidateInPosition">
 		</h:form>
 	</ui:define>
 </ui:composition>

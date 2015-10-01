@@ -3,7 +3,7 @@ $(function() {
 		changeMonth: true,
 		changeYear: true,
 		showButtonPanel: true,
-		dateFormat: 'MM yy'
+		dateFormat: 'MM-yyyy'
 	}).focus(function() {
 		var thisCalendar = $(this);
 		$('.ui-datepicker-calendar').detach();
