@@ -29,12 +29,12 @@
 				<p:outputLabel value="From:" />
 				<p:inputText value="#{reportBean.startDateSpontaneousApp}"
 					styleClass="monthPicker" >
-					<f:convertDateTime pattern="MMMM yyyy" />
+					<f:convertDateTime pattern="MMM yyyy" />
 				</p:inputText>
 				<p:outputLabel value="To:" />
 				<p:inputText value="#{reportBean.endDateSpontaneousApp}"
 					styleClass="monthPicker">
-					<f:convertDateTime pattern="MMMM yyyy" />
+					<f:convertDateTime pattern="MMM yyyy" />
 				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppSpontaneousBetweenDates()}"
@@ -64,10 +64,14 @@
 
 				<p:outputLabel value="From:" />
 				<p:inputText value="#{reportBean.startDateApp}"
-					styleClass="monthPicker" />
+					styleClass="monthPicker" >
+					<f:convertDateTime pattern="MMM yyyy" />
+				</p:inputText>
 				<p:outputLabel value="To:" />
 				<p:inputText value="#{reportBean.endDateApp}"
-					styleClass="monthPicker" />
+					styleClass="monthPicker">
+					<f:convertDateTime pattern="MMM yyyy" />
+				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppBetweenDates()}"
 					update=":formReportAppSpontaneous:resultApp :formReports:msg" />
