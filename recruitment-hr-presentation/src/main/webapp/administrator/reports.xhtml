@@ -16,10 +16,10 @@
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:calendar value="#{reportBean.startDate}" navigator="true"
+				<p:calendar value="#{reportBean.startDateSpontaneousApp}" navigator="true"
 					pattern="MMM-yyyy" />
 				<p:outputLabel value="To:" />
-				<p:calendar value="#{reportBean.endDate}" navigator="true"
+				<p:calendar value="#{reportBean.endDateSpontaneousApp}" navigator="true"
 					pattern="MMM-yyyy" />
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppSpontaneousBetweenDates()}"
@@ -46,10 +46,10 @@
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:calendar value="#{reportBean.startDate}" navigator="true"
+				<p:calendar value="#{reportBean.startDateApp}" navigator="true"
 					pattern="MMM-yyyy" />
 				<p:outputLabel value="To:" />
-				<p:calendar value="#{reportBean.endDate}" navigator="true"
+				<p:calendar value="#{reportBean.endDateApp}" navigator="true"
 					pattern="MMM-yyyy" />
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppBetweenDates()}"

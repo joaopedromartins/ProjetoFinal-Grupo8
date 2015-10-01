@@ -22,36 +22,48 @@ public class ReportBean implements Serializable{
 	
 	@EJB
 	private IReportsFacade reportsFacade;
-	private Date startDate;
-	private Date endDate;
+	private Date startDateSpontaneousApp;
+	private Date endDateSpontaneousApp;
 	private List<ResultReport> spontaneousApp;
+	private Date startDateApp;
+	private Date endDateApp;
 	private List<ResultReport> app;
 	
 	public ReportBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Date getStartDate() {
-		return startDate;
+	public Date getStartDateSpontaneousApp() {
+		return startDateSpontaneousApp;
 	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setStartDateSpontaneousApp(Date startDate) {
+		this.startDateSpontaneousApp = startDate;
 	}
-	public Date getEndDate() {
-		return endDate;
+	public Date getEndDateSpontaneousApp() {
+		return endDateSpontaneousApp;
 	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEndDateSpontaneousApp(Date endDate) {
+		this.endDateSpontaneousApp = endDate;
 	}
 	
-	public Date getLocalDate() {
-		return new Date();
-	}
 	public List<ResultReport> getSpontaneousApp() {
 		return spontaneousApp;
 	}
 	public void setSpontaneousApp(List<ResultReport> spontaneousApp) {
 		this.spontaneousApp = spontaneousApp;
+	}
+	
+	public Date getStartDateApp() {
+		return startDateApp;
+	}
+	public void setStartDateApp(Date startDateApp) {
+		this.startDateApp = startDateApp;
+	}
+	public Date getEndDateApp() {
+		return endDateApp;
+	}
+	public void setEndDateApp(Date endDateApp) {
+		this.endDateApp = endDateApp;
 	}
 	public List<ResultReport> getApp() {
 		return app;
@@ -61,12 +73,12 @@ public class ReportBean implements Serializable{
 	}
 	public void listOfAllAppSpontaneousBetweenDates (){
 		System.out.println("entre na função que vai buscar hashMap");
-		this.spontaneousApp =  reportsFacade.listOfAllAppSpontaneousBetweenDates(startDate, endDate);
+		this.spontaneousApp =  reportsFacade.listOfAllAppSpontaneousBetweenDates(startDateSpontaneousApp, endDateSpontaneousApp);
 	}
 	
 	public void listOfAllAppBetweenDates (){
 		System.out.println("entre na função que vai buscar hashMap");
-		this.app =  reportsFacade.listOfAllAppBetweenDates(startDate, endDate);
+		this.app =  reportsFacade.listOfAllAppBetweenDates(startDateApp, endDateApp);
 	}
 	
 	
