@@ -15,8 +15,8 @@
 
 	<ui:define name="content">
 		<h1>Reports</h1>
-		<h:form id = "formReports"  >
-		<p:growl id="msg" />
+		<h:form id="formReports">
+			<p:growl id="msg" />
 		</h:form>
 
 		<h:form id="formReportApp">
@@ -28,10 +28,14 @@
 
 				<p:outputLabel value="From:" />
 				<p:inputText value="#{reportBean.startDateSpontaneousApp}"
-					styleClass="monthYearPicker" />
+					styleClass="monthPicker" >
+					<f:convertDateTime pattern="MMMM yyyy" />
+				</p:inputText>
 				<p:outputLabel value="To:" />
-				<p:inputText value="#{reportBean.endDateSpontaneousApp}" 
-					styleClass="monthYearPicker" />
+				<p:inputText value="#{reportBean.endDateSpontaneousApp}"
+					styleClass="monthPicker">
+					<f:convertDateTime pattern="MMMM yyyy" />
+				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppSpontaneousBetweenDates()}"
 					update=":formReportApp:resultSpontaneous :formReports:msg" />
@@ -51,19 +55,19 @@
 			</p:panel>
 
 		</h:form>
-		
+
 		<h:form id="formReportAppSpontaneous">
 			<p:panel id="app" header="Applications" toggleable="true"
 				toggleSpeed="500" closeSpeed="500" widgetVar="panelApp"
 				style="margin-bottom:20px">
 				<p:ajax event="toggle" />
 
-				<p:outputLabel value="From:"  />
-				<p:inputText  value="#{reportBean.startDateApp}"
-					styleClass="monthYearPicker" />
+				<p:outputLabel value="From:" />
+				<p:inputText value="#{reportBean.startDateApp}"
+					styleClass="monthPicker" />
 				<p:outputLabel value="To:" />
 				<p:inputText value="#{reportBean.endDateApp}"
-					styleClass="monthYearPicker" />
+					styleClass="monthPicker" />
 				<p:commandButton value="Generate"
 					action="#{reportBean.listOfAllAppBetweenDates()}"
 					update=":formReportAppSpontaneous:resultApp :formReports:msg" />
