@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -131,6 +132,18 @@ public class PositionPersistenceService implements IPositionPersistenceService {
 		}		
 		return proxy;
 	}
-	
-	
+
+	@Override
+	public List<IPositionProxy> listOfAllOpenPositionBetweenDates(Date startDate, Date endDate) {
+		TypedQuery<PositionEntity> query =  em.createNamedQuery(PositionEntity.LIST_OF_ALL_OPEN_POSITION_BETWEEN_DATES, PositionEntity.class);
+		query.setParameter("startDate", startDate);
+		query.setParameter("endDate", endDate);
+		List <PositionEntity> entity = query.getResultList();
+		
+		List <IPositionProxy> proxy = new ArrayList<>();
+		for (PositionEntity p: entity){
+			proxy.add(new PositionProxy(p));
+		}
+		return proxy;
+	}	
 }

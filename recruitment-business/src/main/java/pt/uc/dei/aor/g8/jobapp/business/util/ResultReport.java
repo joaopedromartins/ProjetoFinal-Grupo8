@@ -9,11 +9,16 @@ public class ResultReport {
 	
 	private Date date;
 	private int quantity;
+	private String string;
 	
 	public ResultReport() {
 	}
 	public ResultReport(Date date, int quantity) {
 		this.date = date;
+		this.quantity = quantity;
+	}
+	public ResultReport(String string, int quantity) {
+		this.string = string;
 		this.quantity = quantity;
 	}
 	
@@ -30,6 +35,12 @@ public class ResultReport {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public String getString() {
+		return string;
+	}
+	public void setString(String string) {
+		this.string = string;
 	}
 	
 

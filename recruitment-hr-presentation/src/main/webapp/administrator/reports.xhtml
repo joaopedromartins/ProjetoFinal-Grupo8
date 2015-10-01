@@ -27,14 +27,12 @@
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:inputText value="#{spontaneousApp.from}"
-					styleClass="monthPicker">
-					
+				<p:inputText value="#{spontaneousApp.from}" styleClass="monthPicker">
+
 				</p:inputText>
 				<p:outputLabel value="To:" />
-				<p:inputText value="#{spontaneousApp.to}"
-					styleClass="monthPicker">
-					
+				<p:inputText value="#{spontaneousApp.to}" styleClass="monthPicker">
+
 				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{spontaneousApp.listOfAllAppSpontaneousBetweenDates()}"
@@ -63,20 +61,19 @@
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:inputText value="#{applications.from}"
-					styleClass="monthPicker">
-					
+				<p:inputText value="#{applications.from}" styleClass="monthPicker">
+
 				</p:inputText>
 				<p:outputLabel value="To:" />
-				<p:inputText value="#{applications.to}"
-					styleClass="monthPicker">
-					
+				<p:inputText value="#{applications.to}" styleClass="monthPicker">
+
 				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{applications.listOfAllAppBetweenDates()}"
 					update=":formReportApp:resultApp :formReports:msg" />
 
-				<p:dataTable id="resultApp" value="#{applications.app}" var="result1">
+				<p:dataTable id="resultApp" value="#{applications.app}"
+					var="result1">
 					<p:column headerText="Date">
 						<p:outputLabel value="#{result1.date}" />
 					</p:column>
@@ -90,35 +87,32 @@
 			</p:panel>
 		</h:form>
 		<h:form id="formReportCandidateInPosition">
-			<p:panel id="CandidateInPosition" header="Candidates In Position" toggleable="true"
-				toggleSpeed="500" closeSpeed="500" widgetVar="panelCandidateInPosition"
-				style="margin-bottom:20px">
+			<p:panel id="CandidateInPosition" header="Candidates In Position"
+				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panelCandidateInPosition" style="margin-bottom:20px">
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:inputText value="#{reportBean.startDateApp}"
+				<p:inputText value="#{candidateInPosition.from}"
 					styleClass="monthPicker">
 				</p:inputText>
 				<p:outputLabel value="To:" />
-				<p:inputText value="#{reportBean.endDateApp}"
+				<p:inputText value="#{candidateInPosition.to}"
 					styleClass="monthPicker">
-					
 				</p:inputText>
 				<p:commandButton value="Generate"
-					action="#{reportBean.listOfAllAppBetweenDates()}"
+					action="#{candidateInPosition.listOfCandidateInPositionBetweenDates()}"
 					update=":formReportCandidateInPosition:resultCandidateInPosition :formReports:msg" />
 
-				<p:dataTable id="resultCandidateInPosition" value="#{reportBean.app}" var="result">
-					<p:column headerText="Date">
-						<p:outputLabel value="#{result.date}" />
+				<p:dataTable id="resultCandidateInPosition"
+					value="#{candidateInPosition.candidateInPosition}" var="result">
+					<p:column headerText="Position Title">
+						<p:outputLabel value="#{result.string}" />
 					</p:column>
-					<p:column headerText="Quantity">
+					<p:column headerText="Candidates">
 						<p:outputLabel value="#{result.quantity}" />
 					</p:column>
-
-
 				</p:dataTable>
-
 			</p:panel>
 		</h:form>
 	</ui:define>

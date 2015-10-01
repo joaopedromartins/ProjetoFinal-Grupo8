@@ -11,6 +11,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Months;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobInterviewPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;
@@ -70,6 +71,21 @@ public class ReportsFacade implements IReportsFacade {
 			app.add(new ResultReport(start.plusMonths(i).toDate(), quantity));
 		}
 		return app;
+	}
+
+	@Override
+	public List<ResultReport> listOfCandidateInPositionBetweenDates(Date start, Date end) {
+		List<IPositionProxy> positions = positionService.listOfAllOpenPositionBetweenDates(start, end);
+		List <ResultReport> candidatesInPosition = new ArrayList<>();
+		for(IPositionProxy p: positions){
+			List <IJobApplicationProxy> proxy = appService.listOfAllAppByPosition(p);
+			if(proxy == null){
+				candidatesInPosition.add(new ResultReport(p.getTitle(), 0));
+			} else {
+				candidatesInPosition.add(new ResultReport(p.getTitle(), proxy.size()));
+			}
+		}
+		return candidatesInPosition;
 	}
 
 

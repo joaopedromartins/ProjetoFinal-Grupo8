@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.g8.jobapp.business.persistence;
 
+import java.util.Date;
 import java.util.List;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -21,4 +22,6 @@ public interface IPositionPersistenceService {
 	public List<IPositionProxy> listOfAllPositionManager (IUserProxy manager);
 
 	public List<IScriptProxy> listScriptOfPosition(IPositionProxy positionProxy);
+	
+	public List<IPositionProxy> listOfAllOpenPositionBetweenDates (Date startDate, Date endDate);
 }
