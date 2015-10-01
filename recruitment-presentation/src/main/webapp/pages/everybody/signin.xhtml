@@ -8,19 +8,24 @@
 	<ui:define name="content">
 		<center>
 			<p:panel header="Signin to enter your Personal Area">
-				<h:form id="loginForm"
-					onsubmit="document.loginForm.action = 'j_security_check'; action='./pages/candidate/company.xhtml';">
+				<h:form id="signinForm" >
 					<center>
-						<p:panelGrid id="panelSignIn" columns="2">
-							<p:outputLabel value="Username" />
-							<input name="j_username" type="text" />
+						<p:panelGrid id="panelSignIn" columns="3">
+							<p:outputLabel value="Username" for="username" />
+							<p:inputText id="username" required="true"
+								value="#{signUpBean.username}" />
+							<p:message for="username" />
 
-							<p:outputLabel value="Password" />
-							<input name="j_password" type="password" />
+							<p:outputLabel value="Password" for="password" />
+							<p:password id="password" required="true"
+								value="#{signUpBean.password}" feedback="true" weakLabel="Week"
+								goodLabel="Good" strongLabel="Strong"
+								promptLabel="Insert Password" inline="true" />
+							<p:message for="password" />
+							
 						</p:panelGrid>
-						<br />
-						<p:commandButton id="signin" value="SignIn" ajax="false" />
-						<br />
+						<p:commandButton value="SignIn" title="Click here to SignIn"
+							action="#{signUpBean.signin}" />
 					</center>
 				</h:form>
 

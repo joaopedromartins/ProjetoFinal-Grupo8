@@ -32,32 +32,9 @@ public class LoginBean implements Serializable {
 	private String oldPassword;
 	
 	
+	
 	// Getters and Setters
-	
-	public void currentCandidate() {
-		if (candidate == null) {
-			String username = getUsername();
-			// TODO logger
-			System.out.println("Get Candidate:");
-			System.out.println("Username:" + username);
-			if ( username != null ){	
-				this.candidate = candidateFacade.findCandidateByUsername(username);
-				// TODO logger
-				System.out.println("Firstname:" + candidate.getFirstname());
-				System.out.println("Lastname:" + candidate.getLastname());
-				System.out.println("Username:" + candidate.getUsername());
-				System.out.println("Email:" + candidate.getEmail());
-				System.out.println("LinkedIn:" + candidate.getLinkedinAddress());
-				
-			} else {
-				logout();
-				this.candidate=null;
-				
-			}
-		} 
-			
-	}
-	
+		
 	public ICandidateProxy getCandidate() {
 		if( candidate == null){
 			currentCandidate();
@@ -87,7 +64,34 @@ public class LoginBean implements Serializable {
 	}
 
 	
+
 	//methods
+	
+	public void currentCandidate() {
+		if (candidate == null) {
+			String username = getUsername();
+			// TODO logger
+			System.out.println("Get Candidate:");
+			System.out.println("Username:" + username);
+			if ( username != null ){	
+				this.candidate = candidateFacade.findCandidateByUsername(username);
+				// TODO logger
+				System.out.println("Firstname:" + candidate.getFirstname());
+				System.out.println("Lastname:" + candidate.getLastname());
+				System.out.println("Username:" + candidate.getUsername());
+				System.out.println("Email:" + candidate.getEmail());
+				System.out.println("LinkedIn:" + candidate.getLinkedinAddress());
+				
+			} else {
+				logout();
+				this.candidate=null;
+				
+			}
+		} 
+			
+	}
+	
+	
 	
 	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -110,6 +114,8 @@ public class LoginBean implements Serializable {
 		return "/index?faces-redirect=true";
 	}
 
+	
+	
 	public void changePassword(){
 		// TODO add metodo changePassword(candidate,oldPassword,password)
 		String messageFacade = candidateFacade.changePassword(candidate,oldPassword,password);
