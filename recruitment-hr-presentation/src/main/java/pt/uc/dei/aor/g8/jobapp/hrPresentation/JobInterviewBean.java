@@ -171,8 +171,23 @@ public class JobInterviewBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("growl", message);	
 		} else {
 			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_WARN,
+					"Interview's answers saved successfully.\nDon´t forget feedback of Interview.", "");
+			FacesContext.getCurrentInstance().addMessage("growl", message);
+		}
+	}
+	
+	public void saveFeedbackOfInterview(){
+		IJobInterviewProxy proxyInterview = interviewFacade.saveFeedbackOfInterview(feedback,interview);
+		if(proxyInterview == null){
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error save interview.", "");
+			FacesContext.getCurrentInstance().addMessage("growl", message);	
+		} else {
+			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
-					"Interview's answers saved successfully.", "");
+					"Feedback saved with successfully.\n Interview completed.", "");
 			FacesContext.getCurrentInstance().addMessage("growl", message);
 		}
 	}

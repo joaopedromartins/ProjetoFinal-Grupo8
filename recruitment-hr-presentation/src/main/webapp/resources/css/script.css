@@ -68,6 +68,7 @@ tbody {
 
 #formDoScript {
 	margin: auto;
-	display: flex;
-	display: -webkit-flex;
+	-webkit-flex-flow: row wrap;
+	justify-content: center;
+	list-style: none;
 }

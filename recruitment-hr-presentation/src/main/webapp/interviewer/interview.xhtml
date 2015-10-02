@@ -37,7 +37,8 @@
 
 						<h:panelGrid id="questionText"
 							rendered="#{question.questiontype eq 'TEXT'}" columns="1">
-							<p:inputText value="#{jobInterviewBean.answers[index].individualAnswer}"
+							<p:inputText
+								value="#{jobInterviewBean.answers[index].individualAnswer}"
 								required="true" label="Question Text" />
 						</h:panelGrid>
 
@@ -66,18 +67,18 @@
 								value="#{jobInterviewBean.answers[index].answer}"
 								required="true" converter="omnifaces.SelectItemsConverter">
 								<f:selectItems value="#{question.options}" var="option"
-									itemLabel="#{option.option}" itemValue = "#{option.option}"/>
+									itemLabel="#{option.option}" itemValue="#{option.option}" />
 							</p:selectManyCheckbox>
 						</h:panelGrid>
 
 						<h:panelGrid id="questionChooseFromList"
 							rendered="#{question.questiontype eq 'CHOOSEFROMLIST'}"
 							columns="1">
-							<p:selectManyMenu  id="optionsList" label="Question list"
+							<p:selectManyMenu id="optionsList" label="Question list"
 								value="#{jobInterviewBean.answers[index].answer}"
 								required="true" converter="omnifaces.SelectItemsConverter">
 								<f:selectItems value="#{question.options}" var="option"
-									itemLabel="#{option.option}" itemValue="#{option.option}"/>
+									itemLabel="#{option.option}" itemValue="#{option.option}" />
 							</p:selectManyMenu>
 						</h:panelGrid>
 
@@ -106,7 +107,7 @@
 						</h:panelGrid>
 
 					</h:panelGroup>
-					
+
 
 				</p:column>
 				<f:facet name="footer">
@@ -116,22 +117,24 @@
 				</f:facet>
 
 			</p:dataTable>
-			
+
 			<p:growl id="growl" />
-			
+
 			<p:panel id="feedback" header="Feedback/observations"
 				toggleable="true" toggleSpeed="500" closeSpeed="500"
-				widgetVar="panelfeedback" style="margin-bottom:20px">
+				widgetVar="panelfeedback" style="margin-bottom:20px"
+				collapsed="true">
 				<p:ajax event="toggle" />
-				<p:inputTextarea value="#{jobInterviewBean.feedback}" rows="6" cols="50" />
-				<br/>
+				<p:inputTextarea value="#{jobInterviewBean.feedback}" rows="6"
+					cols="80" />
+				<br />
 				<p:commandButton id="saveFeedback" value="Save Feedback"
-						
-						update=":formDoScript:growl" icon="ui-icon-disk" />
-			
+					action="#{jobInterviewBean.saveFeedbackOfInterview()}"
+					update=":formDoScript:growl" icon="ui-icon-disk" />
+
 			</p:panel>
 		</h:form>
-		
+
 
 	</ui:define>
 
