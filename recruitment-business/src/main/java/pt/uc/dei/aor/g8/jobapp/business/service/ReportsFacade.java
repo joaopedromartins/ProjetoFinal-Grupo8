@@ -11,6 +11,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Months;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobInterviewPersistenceService;
@@ -119,6 +120,41 @@ public class ReportsFacade implements IReportsFacade {
 			}
 		}
 		return rejectedCandidates;
+	}
+
+	@Override
+	public List<ResultReport> listOfResultsInterviewsBetweenDates(Date start, Date end) {
+		List<IJobApplicationProxy> appWidhInterview = appService.listOfAllAppWidhInterviewBetweenDates(start, end);
+		List <ResultReport> resultsInterviews = new ArrayList<>();
+		int rejected = 0;
+		int newInterview = 0;
+		int proposal = 0;
+		int total = 0;
+		if(appWidhInterview.isEmpty()){
+			resultsInterviews.add(new ResultReport("Total interview(s)", 0));
+		} else {
+			for(IJobApplicationProxy jA: appWidhInterview){
+				total = total + 1;
+				resultsInterviews.add(new ResultReport("Total interview(s)", total));
+				if(jA.getInterviews()== null && jA.getProposal()== null){
+					rejected = rejected + 1;
+					resultsInterviews.add(new ResultReport("Rejected", rejected));
+				} else if (jA.getInterviews()!= null && jA.getProposal()== null){
+					newInterview = newInterview + 1;
+					resultsInterviews.add(new ResultReport("New interview", newInterview));
+				} else if (jA.getProposal()!= null){
+					proposal = proposal + 1;
+					resultsInterviews.add(new ResultReport("Proposal", proposal));
+				}
+			}
+		}
+		return resultsInterviews;
+	}
+
+	@Override
+	public List<ResultReport> listOfpresentedProposalsBetweenDates(Date start, Date end) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

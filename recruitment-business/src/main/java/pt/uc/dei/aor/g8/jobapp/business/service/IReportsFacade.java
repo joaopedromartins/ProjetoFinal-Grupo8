@@ -14,4 +14,8 @@ public interface IReportsFacade {
 	public List<ResultReport> listOfCandidateInPositionBetweenDates(Date start, Date end);
 
 	public List<ResultReport> listOfRejectedCandidatesBetweenDates(Date startDate, Date endDate);
+
+	public List<ResultReport> listOfResultsInterviewsBetweenDates(Date start, Date end);
+
+	public List<ResultReport> listOfpresentedProposalsBetweenDates(Date start, Date end);
 }

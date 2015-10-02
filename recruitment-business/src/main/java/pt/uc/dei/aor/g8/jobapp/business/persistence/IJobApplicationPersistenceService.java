@@ -44,5 +44,7 @@ public interface IJobApplicationPersistenceService {
 	//public void deleteJobApplication(IJobApplicationProxy jobApplicationProxy);
 
 	public List<IJobApplicationProxy> listOfAllApplicationRejectedBetweenDates (Date startDate, Date endDate);
+
+	public List<IJobApplicationProxy> listOfAllAppWidhInterviewBetweenDates(Date start, Date end);
 	
 }

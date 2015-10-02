@@ -242,6 +242,20 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		return proxy;
 	}
 
+	@Override
+	public List<IJobApplicationProxy> listOfAllAppWidhInterviewBetweenDates(Date start, Date end) {
+		TypedQuery<JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_APP_WITH_INTERVIEW_BETWEEN_DATES, JobApplicationEntity.class);
+		query.setParameter("start", start);
+		query.setParameter("end", end);
+		List <JobApplicationEntity> entity = query.getResultList();
+		
+		List <IJobApplicationProxy> proxy = new ArrayList<>();
+		for (JobApplicationEntity jA: entity){
+			proxy.add(new JobApplicationProxy(jA));
+		}
+		return proxy;
+	}
+
 //	@Override
 //	public void deleteJobApplication(IJobApplicationProxy jobApplicationProxy) {
 //		// TODO deleteJobApplication Confirmar se é para limpar dados associadoa a tabela proposal 
