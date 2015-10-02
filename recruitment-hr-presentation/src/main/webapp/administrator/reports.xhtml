@@ -169,7 +169,7 @@
 					update=":formReportInterviewsResults:resultInterviewsResults :formReports:msg" />
 
 				<p:dataTable id="resultInterviewsResults"
-					value="#{resultsInterviews.resultsInterviews()}" var="result">
+					value="#{resultsInterviews.resultsInterviews}" var="result">
 					<p:column headerText="Result interviews">
 						<p:outputLabel value="#{result.string}" />
 					</p:column>
@@ -196,7 +196,7 @@
 				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{presentedProposals.listOfpresentedProposals()}"
-					update=":formReportPresentedProposals:resultpresentedProposals :formReports:msg" />
+					update=":formReportPresentedProposals:resultPresentedProposals :formReports:msg" />
 
 				<p:dataTable id="resultPresentedProposals"
 					value="#{presentedProposals.presentedProposals}" var="result">
