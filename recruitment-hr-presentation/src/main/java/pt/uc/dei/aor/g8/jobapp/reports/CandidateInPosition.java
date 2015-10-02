@@ -66,7 +66,7 @@ public class CandidateInPosition implements Serializable{
 	}
 	public void setTo(String to) {
 		this.to = to;
-		this.end = converter.converterStringToDate(to+"-01");
+		this.end = converter.converterStringToDate(to + "-01");
 	}
 	
 	public void listOfCandidateInPositionBetweenDates (){

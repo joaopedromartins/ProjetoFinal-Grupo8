@@ -27,11 +27,13 @@
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:inputText value="#{spontaneousApp.from}" styleClass="monthPicker">
+				<p:inputText value="#{spontaneousApp.from}" styleClass="monthPicker"
+					required="true">
 
 				</p:inputText>
 				<p:outputLabel value="To:" />
-				<p:inputText value="#{spontaneousApp.to}" styleClass="monthPicker">
+				<p:inputText value="#{spontaneousApp.to}" styleClass="monthPicker"
+					required="true">
 
 				</p:inputText>
 				<p:commandButton value="Generate"
@@ -61,11 +63,13 @@
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
-				<p:inputText value="#{applications.from}" styleClass="monthPicker">
+				<p:inputText value="#{applications.from}" styleClass="monthPicker"
+					required="true">
 
 				</p:inputText>
 				<p:outputLabel value="To:" />
-				<p:inputText value="#{applications.to}" styleClass="monthPicker">
+				<p:inputText value="#{applications.to}" styleClass="monthPicker"
+					required="true">
 
 				</p:inputText>
 				<p:commandButton value="Generate"
@@ -94,11 +98,11 @@
 
 				<p:outputLabel value="From:" />
 				<p:inputText value="#{candidateInPosition.from}"
-					styleClass="monthPicker">
+					styleClass="monthPicker" required="true">
 				</p:inputText>
 				<p:outputLabel value="To:" />
 				<p:inputText value="#{candidateInPosition.to}"
-					styleClass="monthPicker">
+					styleClass="monthPicker" required="true">
 				</p:inputText>
 				<p:commandButton value="Generate"
 					action="#{candidateInPosition.listOfCandidateInPositionBetweenDates()}"
