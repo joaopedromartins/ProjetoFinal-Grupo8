@@ -118,7 +118,20 @@
 			</p:dataTable>
 			
 			<p:growl id="growl" />
+			
+			<p:panel id="feedback" header="Feedback/observations"
+				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panelfeedback" style="margin-bottom:20px">
+				<p:ajax event="toggle" />
+				<p:inputTextarea value="#{jobInterviewBean.feedback}" rows="6" cols="50" />
+				<br/>
+				<p:commandButton id="saveFeedback" value="Save Feedback"
+						
+						update=":formDoScript:growl" icon="ui-icon-disk" />
+			
+			</p:panel>
 		</h:form>
+		
 
 	</ui:define>
 

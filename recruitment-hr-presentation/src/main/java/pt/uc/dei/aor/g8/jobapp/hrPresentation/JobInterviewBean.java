@@ -47,6 +47,7 @@ public class JobInterviewBean implements Serializable{
 	private IJobApplicationProxy jobApplication;
 	private long interviewId;
 	private IJobInterviewProxy interview;
+	private String feedback;
 
 	public JobInterviewBean() {
 
@@ -134,6 +135,14 @@ public class JobInterviewBean implements Serializable{
 
 	public void setAnswers(List<IAnswerInterviewProxy> answers) {
 		this.answers = answers;
+	}
+
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
 	}
 
 	public void findById(){

@@ -59,6 +59,9 @@ public class JobInterviewEntity implements Serializable{
 	
 	@Column
 	private boolean finished = false;
+	
+	@Column
+	private String feedback;
 
 
 	public JobInterviewEntity() {
@@ -84,7 +87,6 @@ public class JobInterviewEntity implements Serializable{
 	public long getId() {
 		return id;
 	}
-
 
 	public Date getInterviewDate() {
 		return interviewDate;
@@ -129,15 +131,19 @@ public class JobInterviewEntity implements Serializable{
 		this.scriptInterview = scriptInterview;
 	}
 
-
 	public boolean isFinished() {
 		return finished;
 	}
 
-
 	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
+	public String getFeedback() {
+		return feedback;
+	}
 
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
 
 }
