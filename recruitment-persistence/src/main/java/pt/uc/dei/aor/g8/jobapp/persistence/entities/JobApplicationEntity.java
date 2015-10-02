@@ -56,6 +56,9 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 				" FROM JobApplicationEntity j WHERE j.situation like 'HIRE%' and" +
 				" j.jobAppDate <= j.hiredDate AND " +
 				" j.hiredDate >= :startdate AND j.hiredDate < :endate "),
+	@NamedQuery(name = "JobApplication.listOfAllAppRejectedBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'REJECTED' AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
+	@NamedQuery(name = "JobApplication.listOfAllAppWithInterviewBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.interviews <> NULL AND jA.jobAppDate >= :start AND jA.jobAppDate < :end"),
+
 })
 public class JobApplicationEntity {
 
@@ -73,6 +76,9 @@ public class JobApplicationEntity {
 	public static final String LIST_OF_ALL_APP_BY_POSITION = "JobApplication.listOfAllAppByPosition";
 	public static final String AVERAGE_TIME_FOR_FIRST_INTERVIEW = "JobApplication.reportAverageTimeForFirstInterview";
 	public static final String AVERAGE_TIME_TO_HIRING = "JobApplication.reportAverageTimeForHiring";
+	public static final String LIST_OF_ALL_APP_REJECTED_BETWEEN_DATES = "JobApplication.listOfAllAppRejectedBetweenDates"; 
+	public static final String LIST_OF_ALL_APP_WITH_INTERVIEW_BETWEEN_DATES = "JobApplication.listOfAllAppWithInterviewBetweenDates";
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
