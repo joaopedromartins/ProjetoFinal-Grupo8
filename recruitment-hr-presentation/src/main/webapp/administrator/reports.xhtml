@@ -22,7 +22,7 @@
 		<h:form id="formReportAppSpontaneous">
 
 			<p:panel id="spontaneousApp" header="Spontaneous Applications"
-				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				toggleable="true" toggleSpeed="500" closeSpeed="500" closable="true"
 				widgetVar="panelSpontaneous" style="margin-bottom:20px">
 				<p:ajax event="toggle" />
 
@@ -59,7 +59,7 @@
 		<h:form id="formReportApp">
 			<p:panel id="app" header="Applications" toggleable="true"
 				toggleSpeed="500" closeSpeed="500" widgetVar="panelApp"
-				style="margin-bottom:20px">
+				style="margin-bottom:20px" closable="true">
 				<p:ajax event="toggle" />
 
 				<p:outputLabel value="From:" />
@@ -92,7 +92,7 @@
 		</h:form>
 		<h:form id="formReportCandidateInPosition">
 			<p:panel id="CandidateInPosition" header="Candidates In Position"
-				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				toggleable="true" toggleSpeed="500" closeSpeed="500" closable="true"
 				widgetVar="panelCandidateInPosition" style="margin-bottom:20px">
 				<p:ajax event="toggle" />
 
@@ -119,6 +119,37 @@
 				</p:dataTable>
 			</p:panel>
 		</h:form>
+		<h:form id="formReportRejetedCandidates">
+			<p:panel id="rejetedCandidates" header="Rejected Candidates"
+				toggleable="true" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panelRejetedCandidates" style="margin-bottom:20px"
+				closable="true">
+				<p:ajax event="toggle" />
+
+				<p:outputLabel value="From:" />
+				<p:inputText value="#{rejectCandidates.from}"
+					styleClass="monthPicker" required="true">
+				</p:inputText>
+				<p:outputLabel value="To:" />
+				<p:inputText value="#{rejectCandidates.to}"
+					styleClass="monthPicker" required="true">
+				</p:inputText>
+				<p:commandButton value="Generate"
+					action="#{rejectCandidates.listOfRejectedCandidatesBetweenDates()}"
+					update=":formReportRejetedCandidates:resultRejetedCandidates :formReports:msg" />
+
+				<p:dataTable id="resultRejetedCandidates"
+					value="#{rejectCandidates.rejectCandidates}" var="result">
+					<p:column headerText="Rejected">
+						<p:outputLabel value="#{result.string}" />
+					</p:column>
+					<p:column headerText="Candidates">
+						<p:outputLabel value="#{result.quantity}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
 	</ui:define>
 </ui:composition>
 

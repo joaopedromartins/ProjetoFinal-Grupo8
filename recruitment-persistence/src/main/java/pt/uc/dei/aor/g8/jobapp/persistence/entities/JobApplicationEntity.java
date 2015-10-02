@@ -45,6 +45,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAllAppBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppSpontaneousBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobappSpontaneous = TRUE AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppByPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.positionEntity=:position"),
+	@NamedQuery(name = "JobApplication.listOfAllAppRejectedBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'REJECTED' AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 })
 public class JobApplicationEntity {
 
@@ -60,7 +61,7 @@ public class JobApplicationEntity {
 	public static final String LIST_OF_ALL_APP_BETWEEN_DATES = "JobApplication.listOfAllAppBetweenDates";
 	public static final String LIST_OF_ALL_APP_SPONTANEOUS_BETWEEN_DATES = "JobApplication.listOfAllAppSpontaneousBetweenDates";
 	public static final String LIST_OF_ALL_APP_BY_POSITION = "JobApplication.listOfAllAppByPosition";
-	
+	public static final String LIST_OF_ALL_APP_REJECTED_BETWEEN_DATES = "JobApplication.listOfAllAppRejectedBetweenDates"; 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

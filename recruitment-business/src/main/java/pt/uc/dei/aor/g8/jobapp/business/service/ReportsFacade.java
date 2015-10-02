@@ -77,17 +77,48 @@ public class ReportsFacade implements IReportsFacade {
 	public List<ResultReport> listOfCandidateInPositionBetweenDates(Date start, Date end) {
 		List<IPositionProxy> positions = positionService.listOfAllOpenPositionBetweenDates(start, end);
 		List <ResultReport> candidatesInPosition = new ArrayList<>();
-		for(IPositionProxy p: positions){
-			List <IJobApplicationProxy> proxy = appService.listOfAllAppByPosition(p);
-			if(proxy == null){
-				candidatesInPosition.add(new ResultReport(p.getTitle(), 0));
-			} else {
-				candidatesInPosition.add(new ResultReport(p.getTitle(), proxy.size()));
+		if ( positions.isEmpty()){
+			candidatesInPosition.add(new ResultReport("Don´t have Position", 0));		
+		} else {
+			for(IPositionProxy p: positions){
+				List <IJobApplicationProxy> proxy = appService.listOfAllAppByPosition(p);
+				if(proxy == null){
+					candidatesInPosition.add(new ResultReport(p.getTitle(), 0));
+				} else {
+					candidatesInPosition.add(new ResultReport(p.getTitle(), proxy.size()));
+				}
 			}
 		}
 		return candidatesInPosition;
 	}
 
-
+	@Override
+	public List<ResultReport> listOfRejectedCandidatesBetweenDates(Date startDate, Date endDate) {
+		List<IJobApplicationProxy> appRejected = appService.listOfAllApplicationRejectedBetweenDates(startDate, endDate);
+		List <ResultReport> rejectedCandidates = new ArrayList<>();
+		int stateSubmitted = 0;
+		int stateInterview = 0;
+		int stateProposal = 0;
+		int total = 0;
+		if(appRejected.isEmpty()){
+			rejectedCandidates.add(new ResultReport("Total rejected", 0));
+		} else {
+			for(IJobApplicationProxy jA: appRejected){
+				total = total + 1;
+				rejectedCandidates.add(new ResultReport("Total rejected", total));
+				if(jA.getInterviews()== null && jA.getProposal()== null){
+					stateSubmitted = stateSubmitted + 1;
+					rejectedCandidates.add(new ResultReport("On Submitted", stateSubmitted));
+				} else if (jA.getInterviews()!= null && jA.getProposal()== null){
+					stateInterview = stateInterview + 1;
+					rejectedCandidates.add(new ResultReport("On interview(s)", stateSubmitted));
+				} else if (jA.getProposal()!= null){
+					stateProposal = stateProposal + 1;
+					rejectedCandidates.add(new ResultReport("On proposal", stateProposal));
+				}
+			}
+		}
+		return rejectedCandidates;
+	}
 
 }
