@@ -45,6 +45,11 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAllAppBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppSpontaneousBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobappSpontaneous = TRUE AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppByPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.positionEntity=:position"),
+	@NamedQuery(name = "JobApplication.reportAverageTimeForFirstInterview ", 
+		query = "SELECT AVG ( MIN(i.interviewDate) - j.jobAppDate) AS days " +
+				"FROM JobApplicationEntity j INNER JOIN j.interviews i  WHERE " +
+				"j.jobAppDate >= :startdate AND j.jobAppDate < :endate AND " +
+				"i.interviewDate >= :startdate AND i.interviewDate < :endate "),
 })
 public class JobApplicationEntity {
 
@@ -60,7 +65,8 @@ public class JobApplicationEntity {
 	public static final String LIST_OF_ALL_APP_BETWEEN_DATES = "JobApplication.listOfAllAppBetweenDates";
 	public static final String LIST_OF_ALL_APP_SPONTANEOUS_BETWEEN_DATES = "JobApplication.listOfAllAppSpontaneousBetweenDates";
 	public static final String LIST_OF_ALL_APP_BY_POSITION = "JobApplication.listOfAllAppByPosition";
-	
+	public static final String REPORT_AVERAGE_TIME_FOR_FIRST_INTERVIEW = "JobApplication.reportAverageTimeForFirstInterview";
+	public static final String REPORT_AVERAGE_TIME_TO_HIRED = "";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
