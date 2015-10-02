@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import org.joda.time.DateTime;
 import org.joda.time.Months;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.ProposalStatus;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProposalProxy;
@@ -176,11 +177,11 @@ public class ReportsFacade implements IReportsFacade {
 		} else {
 			for(IProposalProxy p: proposals){
 				total = total + 1;
-				if(p.getProposalStatus().equals("SUBMITTED")){
+				if(p.getProposalStatus() == ProposalStatus.SUBMITTED ){
 					stateSubmitted = stateSubmitted + 1;	
-				} else if (p.getProposalStatus().equals("REJECTED")){
+				} else if (p.getProposalStatus() == ProposalStatus.REJECTED){
 					stateRejected = stateRejected + 1;		
-				} else if (p.getProposalStatus().equals("ACCEPTED")){
+				} else if (p.getProposalStatus() == ProposalStatus.ACCEPTED){
 					stateAccepted = stateAccepted + 1;
 				}
 			}
