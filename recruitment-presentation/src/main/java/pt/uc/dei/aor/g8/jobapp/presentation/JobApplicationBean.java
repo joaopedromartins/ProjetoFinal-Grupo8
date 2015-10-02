@@ -490,5 +490,14 @@ public class JobApplicationBean implements Serializable {
 		return jobApplicationFacade.listOfJobApplicationByUsername(loginBean.getUsername());
 	}
 	
+	public void deleteJobApplication() {
+		jobApplicationFacade.deleteJobApplicationByCandidate(jobApplicationProxy);
+	}
+	
+	public void deleteSpontaneousJobApplication() {
+		jobApplicationFacade.deleteJobApplicationByCandidate(spontaneousJobApplicationProxy);
+		getSpontaneousJobApplicationProxy();
+	}
+	
 	
 }	

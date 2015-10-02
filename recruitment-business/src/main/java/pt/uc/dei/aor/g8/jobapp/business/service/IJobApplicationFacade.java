@@ -37,5 +37,7 @@ public interface IJobApplicationFacade {
 	
 	public List <IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation ();
 	
+	public void deleteJobApplicationByCandidate(IJobApplicationProxy jobApplicationProxy);
+	
 	
 }

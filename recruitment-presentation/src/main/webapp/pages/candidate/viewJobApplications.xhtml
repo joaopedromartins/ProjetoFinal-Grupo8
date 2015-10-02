@@ -43,7 +43,7 @@
 					<h:outputText value="#{jobapplication.situation.description}" />
 				</p:column>
 	
-				<p:column style="width:32px;text-align: center" headerText="Detail">
+				<p:column style="width:32px;text-align: center" headerText="View/Del">
 					<p:commandButton
 						update=":formJobApplicationTable:tableJobApplications :positionDetail :jobapplicationDetail"
 						oncomplete="PF('jobApplicationView').show()" icon="ui-icon-search"
@@ -53,9 +53,21 @@
 					</p:commandButton>
 				</p:column>
 				
-				<p:column style="width:32px;text-align: center" headerText="Edit">
+				<p:column style="width:32px;text-align: center" headerText="Delete">
+					<p:commandButton id="deleteJobApp"
+						style="margin=10px;"
+						actionListener="#{jobApplicationBean.deleteJobApplication()}"
+						icon="ui-icon-trash" 
+						update=":formJobApplicationTable:tableJobApplications" >
+						<f:setPropertyActionListener value="#{jobapplication}"
+							target="#{jobApplicationBean.jobApplicationProxy}" />
+					</p:commandButton>
+				</p:column>
+				
+				<!-- EDIT DISABLED -->
+				<p:column style="width:32px;text-align: center" headerText="Edit" rendered="false">
 					<p:commandButton update=":formJobApplicationEdit:jobApplicationEdit"
-						oncomplete="PF('jobApplicationEdit').show()" icon="ui-icon-pencil"
+						oncomplete="PF('jobApplicationEdit').show()" icon="ui-icon-trash"
 						title="edit">
 						<f:setPropertyActionListener value="#{jobapplication}"
 							target="#{jobApplicationBean.jobApplicationProxy}" />

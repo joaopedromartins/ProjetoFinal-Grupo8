@@ -336,4 +336,14 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		}
 	}
 
+	@Override
+	public void deleteJobApplicationByCandidate(IJobApplicationProxy jobApplicationProxy) {
+		//service.deleteJobApplication(jobApplicationProxy);
+		// change SITUATION to DELETE_BY_CANDIDATE added
+		if (jobApplicationProxy != null) {
+			jobApplicationProxy.setSituation(JobAppSituation.DELETE_BY_CANDIDATE);
+			service.editJobApplication(jobApplicationProxy);
+		}
+	}
+
 }

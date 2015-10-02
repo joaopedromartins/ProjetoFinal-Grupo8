@@ -228,6 +228,15 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		return proxy;
 	}
 
+//	@Override
+//	public void deleteJobApplication(IJobApplicationProxy jobApplicationProxy) {
+//		// TODO deleteJobApplication Confirmar se é para limpar dados associadoa a tabela proposal 
+//		
+//		JobApplicationEntity entity = getEntity(jobApplicationProxy);
+//		entity = em.merge(entity);
+//		em.remove(entity);
+//	}
+
 
 
 }

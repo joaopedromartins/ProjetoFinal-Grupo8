@@ -41,5 +41,7 @@ public interface IJobApplicationPersistenceService {
 
 	public List <IJobApplicationProxy> listOfAllAppByPosition(IPositionProxy p);
 
+	//public void deleteJobApplication(IJobApplicationProxy jobApplicationProxy);
+
 	
 }

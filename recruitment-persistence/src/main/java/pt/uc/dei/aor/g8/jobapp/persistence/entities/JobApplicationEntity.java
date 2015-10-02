@@ -28,10 +28,11 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 @NamedQueries({
 	@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
-				" where c.username like :login and j.situation NOT LIKE 'SPONTANEOUS'") ,
+				" where c.username like :login " + 
+				"and j.situation NOT LIKE 'SPONTANEOUS' and j.situation NOT LIKE 'DELETE_BY_CANDIDATE' ") ,
 	@NamedQuery(name = "JobApplication.listOfAllCandidateSpontaneousJobApplication", 
 	query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
-		" where c.username like :login and j.situation LIKE 'SPONTANEOUS'") ,
+		" where c.username like :login and j.jobappSpontaneous = TRUE and j.situation NOT LIKE 'DELETE_BY_CANDIDATE'") ,
 	@NamedQuery(name = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
 				" inner join j.positionEntity p where c.username like :username and p.code like :code "),
