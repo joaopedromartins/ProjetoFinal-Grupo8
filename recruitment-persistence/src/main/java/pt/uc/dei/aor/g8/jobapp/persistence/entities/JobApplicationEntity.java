@@ -29,10 +29,11 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAllCandidateJobApplication", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
 				" where c.username like :login " + 
-				"and j.situation NOT LIKE 'SPONTANEOUS' and j.situation NOT LIKE 'DELETE_BY_CANDIDATE' ") ,
+				" and j.situation NOT LIKE 'SPONTANEOUS' and j.situation NOT LIKE 'DELETE_BY_CANDIDATE' ") ,
 	@NamedQuery(name = "JobApplication.listOfAllCandidateSpontaneousJobApplication", 
-	query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
-		" where c.username like :login and j.jobappSpontaneous = TRUE and j.situation NOT LIKE 'DELETE_BY_CANDIDATE'") ,
+		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " +
+				" where c.username like :login and j.jobappSpontaneous = TRUE and " +
+				" j.situation NOT LIKE 'DELETE_BY_CANDIDATE'") ,
 	@NamedQuery(name = "JobApplication.listOfAllJobApplicationToPositionCodeAndUsername", 
 		query = "SELECT j FROM JobApplicationEntity j inner join j.candidateEntity c " + 
 				" inner join j.positionEntity p where c.username like :username and p.code like :code "),
@@ -47,9 +48,14 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAllAppByPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.positionEntity=:position"),
 	@NamedQuery(name = "JobApplication.reportAverageTimeForFirstInterview ", 
 		query = "SELECT AVG ( MIN(i.interviewDate) - j.jobAppDate) AS days " +
-				"FROM JobApplicationEntity j INNER JOIN j.interviews i  WHERE " +
-				"j.jobAppDate >= :startdate AND j.jobAppDate < :endate AND " +
-				"i.interviewDate >= :startdate AND i.interviewDate < :endate "),
+				" FROM JobApplicationEntity j INNER JOIN j.interviews i  WHERE " +
+				" j.jobAppDate <= i.interviewDate AND " +
+				" i.interviewDate >= :startdate AND i.interviewDate < :endate "),
+	@NamedQuery(name = "JobApplication.reportAverageTimeForHiring", 
+		query = "SELECT AVG ( j.hiredDate - j.jobAppDate) AS days " +
+				" FROM JobApplicationEntity j WHERE j.situation like 'HIRE%' and" +
+				" j.jobAppDate <= j.hiredDate AND " +
+				" j.hiredDate >= :startdate AND j.hiredDate < :endate "),
 })
 public class JobApplicationEntity {
 
@@ -65,8 +71,8 @@ public class JobApplicationEntity {
 	public static final String LIST_OF_ALL_APP_BETWEEN_DATES = "JobApplication.listOfAllAppBetweenDates";
 	public static final String LIST_OF_ALL_APP_SPONTANEOUS_BETWEEN_DATES = "JobApplication.listOfAllAppSpontaneousBetweenDates";
 	public static final String LIST_OF_ALL_APP_BY_POSITION = "JobApplication.listOfAllAppByPosition";
-	public static final String REPORT_AVERAGE_TIME_FOR_FIRST_INTERVIEW = "JobApplication.reportAverageTimeForFirstInterview";
-	public static final String REPORT_AVERAGE_TIME_TO_HIRED = "";
+	public static final String AVERAGE_TIME_FOR_FIRST_INTERVIEW = "JobApplication.reportAverageTimeForFirstInterview";
+	public static final String AVERAGE_TIME_TO_HIRING = "JobApplication.reportAverageTimeForHiring";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -122,6 +128,9 @@ public class JobApplicationEntity {
 	@Column
 	private boolean jobappSpontaneous = false;
 
+	@Temporal(TemporalType.DATE)
+	@Column
+	private Date hiredDate;
 
 	//Constructors
 	public JobApplicationEntity(){

@@ -41,6 +41,10 @@ public interface IJobApplicationPersistenceService {
 
 	public List <IJobApplicationProxy> listOfAllAppByPosition(IPositionProxy p);
 
+	public int averageTimeForFirstInterview(Date startDate, Date endDate);
+
+	public int averageTimeToHiring(Date startDate, Date endDate);
+
 	//public void deleteJobApplication(IJobApplicationProxy jobApplicationProxy);
 
 	

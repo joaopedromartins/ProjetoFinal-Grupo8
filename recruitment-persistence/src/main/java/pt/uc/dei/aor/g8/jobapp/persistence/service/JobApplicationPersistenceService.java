@@ -227,7 +227,26 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		}
 		return proxy;
 	}
-
+	
+	@Override
+	public int averageTimeForFirstInterview(Date startDate, Date endDate) {
+		TypedQuery<Integer> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_FOR_FIRST_INTERVIEW, Integer.class);
+		query.setParameter( "startdate", startDate);
+		query.setParameter( "enddate", endDate);
+		
+		return query.getSingleResult();
+	}
+	
+	@Override
+	public int averageTimeToHiring(Date startDate, Date endDate) {
+		TypedQuery<Integer> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_TO_HIRING, Integer.class);
+		query.setParameter( "startdate", startDate);
+		query.setParameter( "enddate", endDate);
+		
+		return query.getSingleResult();
+	}
+	
+	
 //	@Override
 //	public void deleteJobApplication(IJobApplicationProxy jobApplicationProxy) {
 //		// TODO deleteJobApplication Confirmar se é para limpar dados associadoa a tabela proposal 
