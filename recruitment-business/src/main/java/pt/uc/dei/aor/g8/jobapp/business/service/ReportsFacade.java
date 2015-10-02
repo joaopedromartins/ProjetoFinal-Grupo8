@@ -78,7 +78,7 @@ public class ReportsFacade implements IReportsFacade {
 		List<IPositionProxy> positions = positionService.listOfAllOpenPositionBetweenDates(start, end);
 		List <ResultReport> candidatesInPosition = new ArrayList<>();
 		if ( positions.isEmpty()){
-			candidatesInPosition.add(new ResultReport("Don´t have Position", 0));		
+			candidatesInPosition.add(new ResultReport("Don´t have open position", 0));		
 		} else {
 			for(IPositionProxy p: positions){
 				List <IJobApplicationProxy> proxy = appService.listOfAllAppByPosition(p);
