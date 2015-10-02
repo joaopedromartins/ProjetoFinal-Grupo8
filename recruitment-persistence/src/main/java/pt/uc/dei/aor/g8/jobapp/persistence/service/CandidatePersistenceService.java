@@ -9,13 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.ICandidatePersistenceService;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.CandidateEntity;
-import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.CandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.IEntityAware;
-import pt.uc.dei.aor.g8.jobapp.persistence.proxy.UserProxy;
 
 @Stateless
 public class CandidatePersistenceService implements ICandidatePersistenceService {

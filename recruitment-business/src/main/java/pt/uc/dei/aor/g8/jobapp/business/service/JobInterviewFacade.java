@@ -114,8 +114,18 @@ public class JobInterviewFacade implements IJobInterviewFacade {
 		try{
 			interview.setAnswer(answers);
 			interview.setFinhished(true);
-			return service.updateInterview(interview);
-			
+			return service.updateInterview(interview);	
+		}catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}	
+	}
+
+	@Override
+	public IJobInterviewProxy saveFeedbackOfInterview(String feedback, IJobInterviewProxy interview) {
+		try{
+			interview.setFeedback(feedback);
+			return service.updateInterview(interview);	
 		}catch (EJBTransactionRolledbackException e){
 			log.error(e.getMessage());
 			return null;

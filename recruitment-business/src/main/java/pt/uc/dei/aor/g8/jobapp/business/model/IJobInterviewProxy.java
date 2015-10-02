@@ -3,6 +3,8 @@ package pt.uc.dei.aor.g8.jobapp.business.model;
 import java.util.Date;
 import java.util.List;
 
+
+
 public interface IJobInterviewProxy {
 
 	public Date getInterviewDate();
@@ -26,4 +28,10 @@ public interface IJobInterviewProxy {
 	
 	public boolean getFinished();
 	public void setFinhished (boolean finished);
+	
+	
+	public String getFeedback();
+	public void setFeedback(String feedback);
+
+
 }

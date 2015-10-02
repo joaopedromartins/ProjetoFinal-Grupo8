@@ -22,4 +22,6 @@ public interface IJobInterviewFacade {
 	public List<IAnswerInterviewProxy> getListAnswers(IScriptProxy scriptInterview);
 
 	public IJobInterviewProxy saveAnswersOfScript(List<IAnswerInterviewProxy> answers, IJobInterviewProxy interview);
+
+	public IJobInterviewProxy saveFeedbackOfInterview(String feedback, IJobInterviewProxy interview);
 }

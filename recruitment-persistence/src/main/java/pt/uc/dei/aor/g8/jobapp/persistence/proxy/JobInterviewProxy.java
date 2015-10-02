@@ -162,5 +162,13 @@ public class JobInterviewProxy implements IJobInterviewProxy, IEntityAware<JobIn
 	public void setFinhished(boolean finished) {
 		entity.setFinished(finished);		
 	}
+	@Override
+	public String getFeedback() {
+		return entity.getFeedback();
+	}
+	@Override
+	public void setFeedback(String feedback) {
+		entity.setFeedback(feedback);
+	}
 
 }

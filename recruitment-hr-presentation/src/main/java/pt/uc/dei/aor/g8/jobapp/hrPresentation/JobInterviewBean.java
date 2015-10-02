@@ -47,6 +47,7 @@ public class JobInterviewBean implements Serializable{
 	private IJobApplicationProxy jobApplication;
 	private long interviewId;
 	private IJobInterviewProxy interview;
+	private String feedback;
 
 	public JobInterviewBean() {
 
@@ -136,6 +137,14 @@ public class JobInterviewBean implements Serializable{
 		this.answers = answers;
 	}
 
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
 	public void findById(){
 		this.interview = interviewFacade.findById(interviewId);
 		this.answers = interviewFacade.getListAnswers (interview.getScriptInterview());
@@ -162,8 +171,23 @@ public class JobInterviewBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("growl", message);	
 		} else {
 			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_WARN,
+					"Interview's answers saved successfully.\nDon´t forget feedback of Interview.", "");
+			FacesContext.getCurrentInstance().addMessage("growl", message);
+		}
+	}
+	
+	public void saveFeedbackOfInterview(){
+		IJobInterviewProxy proxyInterview = interviewFacade.saveFeedbackOfInterview(feedback,interview);
+		if(proxyInterview == null){
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error save interview.", "");
+			FacesContext.getCurrentInstance().addMessage("growl", message);	
+		} else {
+			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_INFO,
-					"Interview's answers saved successfully.", "");
+					"Feedback saved with successfully.\n Interview completed.", "");
 			FacesContext.getCurrentInstance().addMessage("growl", message);
 		}
 	}

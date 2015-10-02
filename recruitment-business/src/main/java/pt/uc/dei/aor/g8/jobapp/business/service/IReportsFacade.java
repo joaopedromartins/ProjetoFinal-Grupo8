@@ -10,4 +10,6 @@ public interface IReportsFacade {
 	public List<ResultReport> listOfAllAppSpontaneousBetweenDates(Date startDate, Date endDate);
 	
 	public List<ResultReport> listOfAllAppBetweenDates(Date startDate, Date endDate);
+
+	public List<ResultReport> listOfCandidateInPositionBetweenDates(Date start, Date end);
 }

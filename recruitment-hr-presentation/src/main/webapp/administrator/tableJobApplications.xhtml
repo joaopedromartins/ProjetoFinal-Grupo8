@@ -10,7 +10,8 @@
 		<h:form id="formViewjobApplication">
 
 			<p:dataTable id="gridJobApplication"
-				value="#{jobApplicationBean.listOfAllAppNOTSpontaneousSituation()}" var="jobApplication">
+				value="#{jobApplicationBean.listOfAllAppNOTSpontaneousSituation()}"
+				var="jobApplication">
 				<p:column headerText="Position">
 					<p:outputLabel value="#{jobApplication.positionEntity.code}" />
 					<br />
@@ -20,7 +21,10 @@
 				<p:column headerText="Candidate">
 					<p:outputLabel value="#{jobApplication.candidateEntity.firstname}" />
 					<br />
-					<p:outputLabel value="#{jobApplication.cv}" />
+					<p:commandButton id="downloadLink" value="CV" ajax="false"
+						actionListener="#{downloadBean.prepDownload(jobApplication)}">
+						<p:fileDownload value="#{downloadBean.download}" />
+					</p:commandButton>
 				</p:column>
 
 				<p:column headerText="Detail">
