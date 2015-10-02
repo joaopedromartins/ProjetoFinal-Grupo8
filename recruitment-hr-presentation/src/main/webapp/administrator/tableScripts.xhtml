@@ -38,13 +38,14 @@
 				</p:column>
 			</p:dataTable>
 		</h:form>
-		<p:dialog header="Script" widgetVar="scriptView" minimizable="true" maximizable="true"
-			showEffect="fade" hideEffect="fade" resizable="false">
+		<p:dialog header="Script" widgetVar="scriptView" minimizable="true"
+			maximizable="true" showEffect="fade" hideEffect="fade"
+			resizable="false">
 
 			<p:dataTable id="scriptDetailPanelGrid" var="question"
-				converter="omnifaces.ListConverter" scrollable="true" scrollHeight="400"
-				value="#{scriptBean.script.questions}" styleClass="scriptTable"
-				rowStyleClass="rowClasses">
+				converter="omnifaces.ListConverter" scrollable="true"
+				scrollHeight="400" value="#{scriptBean.script.questions}"
+				styleClass="scriptTable" rowStyleClass="rowClasses">
 
 				<f:facet name="header" style="width:70%;">#{scriptBean.script.scriptTitle}</f:facet>
 
@@ -133,7 +134,26 @@
 
 						</h:panelGrid>
 
-						<h:panelGrid>
+						<h:panelGrid id="questionTime"
+							rendered="#{question.questiontype eq 'TIME'}" columns="1">
+							<p:calendar id="time" disabled="true" pattern="HH:mm"
+								timeOnly="true" />
+						</h:panelGrid>
+
+						<h:panelGrid id="questionDate"
+							rendered="#{question.questiontype eq 'DATE'}" columns="1">
+							<p:calendar id="button" disabled="true" showOn="button" />
+						</h:panelGrid>
+
+						<h:panelGrid id="questionNumber"
+							rendered="#{question.questiontype eq 'NUMBER'}" columns="1">
+							<p:spinner id="Number" disabled="true" min="0" />
+						</h:panelGrid>
+
+						<h:panelGrid id="questionCurrency"
+							rendered="#{question.questiontype eq 'CURRENCY'}" columns="2">
+							<p:inputText id="currency" disabled="true" />
+							<p:outputLabel value="€" />
 						</h:panelGrid>
 
 					</h:panelGroup>

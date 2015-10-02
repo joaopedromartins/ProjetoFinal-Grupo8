@@ -108,7 +108,7 @@
 				<p:selectOneMenu id="scriptInterview"
 					value="#{jobApplicationBean.interviewBean.scriptInterview}"
 					required="true" converter="omnifaces.SelectItemsConverter">
-					<f:selectItems value="#{jobApplicationBean.listScripOfPosition()}"
+					<f:selectItems value="#{scriptBean.scripts}"
 						var="script" itemLabel="#{script.scriptTitle}" />
 				</p:selectOneMenu>
 

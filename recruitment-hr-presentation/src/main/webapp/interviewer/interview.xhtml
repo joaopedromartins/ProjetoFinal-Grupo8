@@ -103,7 +103,34 @@
 							<p:outputLabel value="#{question.scale.maxLabel}" />
 						</h:panelGrid>
 
-						<h:panelGrid>
+						<h:panelGrid id="questionTime"
+							rendered="#{question.questiontype eq 'TIME'}" columns="1">
+							<p:calendar id="time"
+								value="#{jobInterviewBean.answers[index].individualAnswer}"
+								pattern="HH:mm" timeOnly="true" required="true"
+								label="Question Time" />
+						</h:panelGrid>
+
+						<h:panelGrid id="questionDate"
+							rendered="#{question.questiontype eq 'DATE'}" columns="1">
+							<p:calendar id="button"
+								value="#{jobInterviewBean.answers[index].individualAnswer}"
+								showOn="button" required="true" label="Question Date" />
+						</h:panelGrid>
+
+						<h:panelGrid id="questionNumber"
+							rendered="#{question.questiontype eq 'NUMBER'}" columns="1">
+							<p:spinner id="Number"
+								value="#{jobInterviewBean.answers[index].individualAnswer}"
+								min="0" required="true" label="Question Number" />
+						</h:panelGrid>
+
+						<h:panelGrid id="questionCurrency"
+							rendered="#{question.questiontype eq 'CURRENCY'}" columns="2">
+							<p:inputText id="currency"
+								value="#{jobInterviewBean.answers[index].individualAnswer}"
+								required="true" label="Question Currency" />
+							<p:outputLabel value="€" />
 						</h:panelGrid>
 
 					</h:panelGroup>
