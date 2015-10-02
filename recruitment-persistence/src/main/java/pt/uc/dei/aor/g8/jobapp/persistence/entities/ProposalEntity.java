@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,12 +19,15 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.ProposalStatus;
 
 @Entity
 @Table(name = "Proposal")
+@NamedQuery(name = "Proposal.listOfAllProposalBetweenDates", query = "SELECT p FROM ProposalEntity p WHERE p.proposalDate >= :start AND p.proposalDate < :end")
 public class ProposalEntity implements Serializable{
+	
+	public static final String LIST_OF_ALL_PROPOSAL_BETWEEN_DATES = "Proposal.listOfAllProposalBetweenDates";
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -31,20 +35,20 @@ public class ProposalEntity implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column
 	private Date proposalDate;
-	
+
 	@Column
 	private String proposal;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column
 	private  ProposalStatus proposalStatus;
 
-	
-	
+
+
 	public ProposalEntity() {
 
 	}
-	
+
 	public ProposalEntity(Date proposalDate, String proposal) {
 		super();
 		this.proposalDate = proposalDate;
@@ -81,5 +85,5 @@ public class ProposalEntity implements Serializable{
 	public long getId() {
 		return id;
 	}
-	
+
 }

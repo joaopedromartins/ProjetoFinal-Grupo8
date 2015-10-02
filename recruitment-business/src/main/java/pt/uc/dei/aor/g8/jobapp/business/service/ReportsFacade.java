@@ -11,8 +11,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Months;
 
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
-import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IProposalProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobInterviewPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IPositionPersistenceService;
@@ -106,23 +106,24 @@ public class ReportsFacade implements IReportsFacade {
 		} else {
 			for(IJobApplicationProxy jA: appRejected){
 				total = total + 1;
-				rejectedCandidates.add(new ResultReport("Total rejected", total));
 				if(jA.getInterviews()== null && jA.getProposal()== null){
 					stateSubmitted = stateSubmitted + 1;
-					rejectedCandidates.add(new ResultReport("On Submitted", stateSubmitted));
 				} else if (jA.getInterviews()!= null && jA.getProposal()== null){
 					stateInterview = stateInterview + 1;
-					rejectedCandidates.add(new ResultReport("On interview(s)", stateSubmitted));
 				} else if (jA.getProposal()!= null){
-					stateProposal = stateProposal + 1;
-					rejectedCandidates.add(new ResultReport("On proposal", stateProposal));
+					stateProposal = stateProposal + 1;	
 				}
 			}
+			rejectedCandidates.add(new ResultReport("Total rejected", total));
+			rejectedCandidates.add(new ResultReport("On Submitted", stateSubmitted));
+			rejectedCandidates.add(new ResultReport("On interview(s)", stateInterview));
+			rejectedCandidates.add(new ResultReport("On proposal", stateProposal));
 		}
+		
 		return rejectedCandidates;
 	}
 
-	@Override
+/*	@Override
 	public List<ResultReport> listOfResultsInterviewsBetweenDates(Date start, Date end) {
 		List<IJobApplicationProxy> appWidhInterview = appService.listOfAllAppWidhInterviewBetweenDates(start, end);
 		List <ResultReport> resultsInterviews = new ArrayList<>();
@@ -134,27 +135,61 @@ public class ReportsFacade implements IReportsFacade {
 			resultsInterviews.add(new ResultReport("Total interview(s)", 0));
 		} else {
 			for(IJobApplicationProxy jA: appWidhInterview){
-				total = total + 1;
-				resultsInterviews.add(new ResultReport("Total interview(s)", total));
-				if(jA.getInterviews()== null && jA.getProposal()== null){
-					rejected = rejected + 1;
-					resultsInterviews.add(new ResultReport("Rejected", rejected));
-				} else if (jA.getInterviews()!= null && jA.getProposal()== null){
-					newInterview = newInterview + 1;
-					resultsInterviews.add(new ResultReport("New interview", newInterview));
-				} else if (jA.getProposal()!= null){
+				int numberInterviews = jA.getInterviews().size();
+				total = total + numberInterviews;
+				
+				if(jA.getProposal()!= null){
 					proposal = proposal + 1;
 					resultsInterviews.add(new ResultReport("Proposal", proposal));
 				}
+
+				for(IJobInterviewProxy i: jA.getInterviews()){
+
+					resultsInterviews.add(new ResultReport("Total interview(s)", total));
+					if(jA.getInterviews().size()==1){
+						rejected = rejected + 1;
+						resultsInterviews.add(new ResultReport("Rejected", rejected));
+					} else if (jA.getInterviews()!= null && jA.getProposal()== null){
+						newInterview = newInterview + 1;
+						resultsInterviews.add(new ResultReport("New interview", newInterview));
+					} else if (jA.getInterviews()!= null && jA.getProposal()!= null){
+						proposal = proposal + 1;
+						resultsInterviews.add(new ResultReport("Proposal", proposal));
+					}	
+				}
+
 			}
 		}
 		return resultsInterviews;
-	}
+	}*/
 
 	@Override
 	public List<ResultReport> listOfpresentedProposalsBetweenDates(Date start, Date end) {
-		// TODO Auto-generated method stub
-		return null;
+		List<IProposalProxy> proposals = proposalService.listOfAllProposalBetweenDates(start, end);
+		List <ResultReport> presentedProposals = new ArrayList<>();
+		int stateSubmitted = 0;
+		int stateRejected = 0;
+		int stateAccepted = 0;
+		int total = 0;
+		if(proposals.isEmpty()){
+			presentedProposals.add(new ResultReport("Total proposal", 0));
+		} else {
+			for(IProposalProxy p: proposals){
+				total = total + 1;
+				if(p.getProposalStatus().equals("SUBMITTED")){
+					stateSubmitted = stateSubmitted + 1;	
+				} else if (p.getProposalStatus().equals("REJECTED")){
+					stateRejected = stateRejected + 1;		
+				} else if (p.getProposalStatus().equals("ACCEPTED")){
+					stateAccepted = stateAccepted + 1;
+				}
+			}
+			presentedProposals.add(new ResultReport("Total proposal", total));
+			presentedProposals.add(new ResultReport("Submitted", stateSubmitted));
+			presentedProposals.add(new ResultReport("Rejected", stateRejected));
+			presentedProposals.add(new ResultReport("Accepted", stateAccepted));
+		}
+		return presentedProposals;
 	}
 
 }

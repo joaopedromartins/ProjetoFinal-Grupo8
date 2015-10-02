@@ -149,36 +149,7 @@
 				</p:dataTable>
 			</p:panel>
 		</h:form>
-		<h:form id="formReportInterviewsResults">
-			<p:panel id="interviewsResults" header="Interview(s) Result(s)"
-				toggleable="true" toggleSpeed="500" closeSpeed="500"
-				widgetVar="panelInterviewsResults" style="margin-bottom:20px"
-				closable="true">
-				<p:ajax event="toggle" />
-
-				<p:outputLabel value="From:" />
-				<p:inputText value="#{resultsInterviews.from}"
-					styleClass="monthPicker" required="true">
-				</p:inputText>
-				<p:outputLabel value="To:" />
-				<p:inputText value="#{resultsInterviews.to}"
-					styleClass="monthPicker" required="true">
-				</p:inputText>
-				<p:commandButton value="Generate"
-					action="#{resultsInterviews.listOfResultsInterview()}"
-					update=":formReportInterviewsResults:resultInterviewsResults :formReports:msg" />
-
-				<p:dataTable id="resultInterviewsResults"
-					value="#{resultsInterviews.resultsInterviews}" var="result">
-					<p:column headerText="Result interviews">
-						<p:outputLabel value="#{result.string}" />
-					</p:column>
-					<p:column headerText="Quantity">
-						<p:outputLabel value="#{result.quantity}" />
-					</p:column>
-				</p:dataTable>
-			</p:panel>
-		</h:form>
+		
 		<h:form id="formReportPresentedProposals">
 			<p:panel id="presentedProposals" header="Presented Proposals"
 				toggleable="true" toggleSpeed="500" closeSpeed="500"

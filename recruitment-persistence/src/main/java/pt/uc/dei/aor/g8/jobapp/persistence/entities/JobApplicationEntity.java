@@ -46,7 +46,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAllAppSpontaneousBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobappSpontaneous = TRUE AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppByPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.positionEntity=:position"),
 	@NamedQuery(name = "JobApplication.listOfAllAppRejectedBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'REJECTED' AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
-	@NamedQuery(name = "JobApplication.listOfAllAppWithInterviewBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.interviews <> NULL AND jA.jobAppDate >= :start AND jA.jobAppDate < :end")
+	@NamedQuery(name = "JobApplication.listOfAllAppWithInterviewBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.interviews <> NULL AND jA.jobAppDate >= :start AND jA.jobAppDate < :end"),
 })
 public class JobApplicationEntity {
 
