@@ -177,6 +177,7 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 		entity.setCandidateEntity(((IEntityAware<CandidateEntity>)candidateJobApplication).getEntity());
 
 	}
+	
 
 	@Override
 	public IPositionProxy getPositionEntity() {
@@ -234,11 +235,11 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 		}
 		return entity;
 	} 
-
+	
 	@Override
 	public IProposalProxy getProposal() {
-		ProposalEntity entityProposal = entity.getProposal();
-		return new ProposalProxy(entityProposal);
+	if (entity.getProposal() == null) return null;
+	return new ProposalProxy(entity.getProposal());
 	}
 
 	@Override
