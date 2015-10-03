@@ -181,25 +181,32 @@
 			</p:panel>
 			<p:commandButton id="addProposal" value="Add Proposal"
 				rendered="#{proposalBean.addProposal eq 'false'}"
-				action="#{proposalBean.showPanelAddProposal()}"
+				action="#{jobApplicationBean.proposal.showPanelAddProposal()}"
+				update="groupProposal @form" />
+			<p:commandButton id="editProposal" value="Edit Proposal"
+				rendered="#{proposalBean.editProposal eq 'false'}"
+				action="#{jobApplicationBean.proposal.showPanelAddProposal()}"
 				update="groupProposal @form" />
 		</h:form>
-		
-		
+
+
 		<h:panelGroup id="groupProposal">
-			<h:form id="formProposal" rendered="#{proposalBean.addProposal}">
+			<h:form id="formProposal"
+				rendered="#{jobApplicationBean.proposal.addProposal}">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="Proposal Status:" for="proposalStatus" />
-					<p:selectOneMenu id="proposalStatus" value="#{proposalBean.status}"
-						required="true" converter="omnifaces.SelectItemsConverter">
-						<f:selectItems value="#{proposalBean.possibleStatusProposal()}"
+					<p:selectOneMenu id="proposalStatus"
+						value="#{jobApplicationBean.proposal.status}" required="true"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItems
+							value="#{jobApplicationBean.proposal.possibleStatusProposal()}"
 							var="status" itemLabel="#{status.description}" />
 					</p:selectOneMenu>
 					<p:outputLabel value="Observations:" for="observation" />
 					<p:inputTextarea id="observation"
-						value="#{proposalBean.observation}" />
+						value="#{jobApplicationBean.proposal.observation}" />
 					<p:commandButton value="Save Proposal"
-						action="#{proposalBean.saveProposal(jobApplicationBean.jobApplication)}"
+						action="#{jobApplicationBean.saveProposal()}"
 						update=":groupProposal :formProposalView :formgrowl:growl" />
 
 				</h:panelGrid>

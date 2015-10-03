@@ -63,18 +63,7 @@ public class ProposalBean implements Serializable{
 	}
 
 
-	public void saveProposal (IJobApplicationProxy jobApplictaion){
-		this.jobApplication = facade.saveProposal(status, observation, jobApplictaion );
-		if (jobApplication != null){
-			this.addProposal = false;
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Proposal submitted to candidate.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error on submitted proposal.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		}
-	}
+	
 
 
 	public boolean isAddProposal() {

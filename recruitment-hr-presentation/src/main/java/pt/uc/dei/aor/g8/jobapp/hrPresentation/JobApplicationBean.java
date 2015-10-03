@@ -36,6 +36,8 @@ public class JobApplicationBean implements Serializable {
 	private IJobInterviewFacade facadeInterview;
 	@Inject
 	private JobInterviewBean interviewBean;
+	@Inject
+	private ProposalBean proposal;
 	private long id;
 	private IJobApplicationProxy jobApplication;
 	private IPositionProxy submitPosition;
@@ -109,6 +111,7 @@ public class JobApplicationBean implements Serializable {
 		IJobInterviewProxy interviewProxy = facadeInterview.newInterview(interviewBean.getDate(), interviewBean.getUserInterviwer(), jobApplication, interviewBean.getScriptInterview());
 		if (interviewProxy != null){
 			this.addInterview = false;
+			this.jobApplication = facade.findId(id);
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Scheduled interview with succeed.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -168,6 +171,29 @@ public class JobApplicationBean implements Serializable {
 	
 	public void showPanelAddInterview(){
 		this.addInterview = true;
+	}
+
+
+	public ProposalBean getProposal() {
+		return proposal;
+	}
+
+
+	public void setProposal(ProposalBean proposal) {
+		this.proposal = proposal;
+	}
+	
+	public void saveProposal (){
+		this.jobApplication = facade.saveProposal(proposal.getStatus(), proposal.getObservation(), jobApplication );
+		if (jobApplication != null){
+			proposal.setAddProposal(false);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Proposal submitted to candidate.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error on submitted proposal.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
 	}
 
 	
