@@ -44,6 +44,7 @@ public class JobApplicationBean implements Serializable {
 	private JobAppSituation status;
 	private boolean addInterview = false;
 	private boolean editProposal = false;
+	private boolean saveProposal = false;
 	
 
 
@@ -191,6 +192,7 @@ public class JobApplicationBean implements Serializable {
 		this.jobApplication = facade.saveProposal(proposal.getStatus(), proposal.getObservation(), jobApplication );
 		if (jobApplication != null){
 			proposal.setAddProposal(false);
+			this.saveProposal = false;
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Proposal submitted to candidate.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -203,6 +205,7 @@ public class JobApplicationBean implements Serializable {
 		this.jobApplication = facade.editProposal(proposal.getStatus(), proposal.getObservation(), jobApplication );
 		if (jobApplication != null){
 			proposal.setAddProposal(false);
+			editProposal = false;
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Proposal submitted to candidate.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -224,12 +227,26 @@ public class JobApplicationBean implements Serializable {
 	public void showPanelAddProposal(){
 		if(jobApplication.getProposal()==null){
 			this.proposal.setAddProposal(true);
+			this.editProposal = false;
+			this.saveProposal = true;
 		} else {
 			this.editProposal = true;
+			this.proposal.setAddProposal(true);
+			this.saveProposal = false;
 		}
-		
-		
 	}
+
+
+	public boolean isSaveProposal() {
+		return saveProposal;
+	}
+
+
+	public void setSaveProposal(boolean saveProposal) {
+		this.saveProposal = saveProposal;
+	}
+	
+	
 
 
 	

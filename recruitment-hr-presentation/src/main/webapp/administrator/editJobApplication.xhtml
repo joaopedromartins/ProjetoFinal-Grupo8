@@ -182,13 +182,13 @@
 			<p:commandButton id="addProposal" value="Add/Edit Proposal"
 				rendered="#{proposalBean.addProposal eq 'false'}"
 				action="#{jobApplicationBean.showPanelAddProposal()}"
-				update="groupProposal @form" />
+				update=":groupEditProposal :groupProposal @form" />
 		</h:form>
 
 
 		<h:panelGroup id="groupProposal">
 			<h:form id="formProposal"
-				rendered="#{jobApplicationBean.proposal.addProposal}">
+				rendered="#{jobApplicationBean.saveProposal eq 'true'}">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="Proposal Status:" for="proposalStatus" />
 					<p:selectOneMenu id="proposalStatus"
@@ -209,7 +209,7 @@
 		</h:panelGroup>
 		<h:panelGroup id="groupEditProposal">
 			<h:form id="formEditProposal"
-				rendered="#{jobApplicationBean.editProposal}">
+				rendered="#{jobApplicationBean.editProposal eq 'true'}">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="Proposal Status:" for="proposalStatus" />
 					<p:selectOneMenu id="proposalStatus"
@@ -222,9 +222,9 @@
 					<p:outputLabel value="Observations:" for="observation" />
 					<p:inputTextarea id="observation"
 						value="#{jobApplicationBean.proposal.observation}" />
-					<p:commandButton value="Save Proposal"
+					<p:commandButton value="Update Proposal"
 						action="#{jobApplicationBean.saveProposal()}"
-						update=":groupEditProposal :groupProposal :formProposalView :formgrowl:growl" />
+						update=":groupEditProposal :formProposalView :formgrowl:growl" />
 
 				</h:panelGrid>
 			</h:form>

@@ -202,10 +202,11 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 	
 
 	@Override
-	public IJobApplicationProxy findId(long id) {
-
-		return service.findById(id);
-	}
+    public IJobApplicationProxy findId(long id) {
+            IJobApplicationProxy p = service.findById(id);
+            return p;
+    }
+	
 
 	@Override
 	public List<IJobApplicationProxy> listOfJobApplicationByUsername(String username) {
