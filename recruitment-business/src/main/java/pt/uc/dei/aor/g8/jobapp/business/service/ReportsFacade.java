@@ -8,11 +8,13 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.Months;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.ProposalStatus;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProposalProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
@@ -154,45 +156,47 @@ public class ReportsFacade implements IReportsFacade {
 		return resultsInterviews;
 	}
 
-	/*	@Override
-	public List<ResultReport> listOfResultsInterviewsBetweenDates(Date start, Date end) {
-		List<IJobApplicationProxy> appWidhInterview = appService.listOfAllAppWidhInterviewBetweenDates(start, end);
-		List <ResultReport> resultsInterviews = new ArrayList<>();
-		int rejected = 0;
-		int newInterview = 0;
-		int proposal = 0;
-		int total = 0;
-		if(appWidhInterview.isEmpty()){
-			resultsInterviews.add(new ResultReport("Total interview(s)", 0));
-		} else {
-			for(IJobApplicationProxy jA: appWidhInterview){
-				int numberInterviews = jA.getInterviews().size();
-				total = total + numberInterviews;
 
-				if(jA.getProposal()!= null){
-					proposal = proposal + 1;
-					resultsInterviews.add(new ResultReport("Proposal", proposal));
-				}
 
-				for(IJobInterviewProxy i: jA.getInterviews()){
+	@Override
+	public List<ResultReport> averageTimeForFirstInterviewBetweenDates(Date start, Date end) {
+		DateTime startDate = new DateTime(start);
+		DateTime endDate = new DateTime(end);
+		System.out.println("here");
+		int months = Months.monthsBetween(startDate, endDate ).getMonths();
+		List<ResultReport> averageTime = new ArrayList<>();
 
-					resultsInterviews.add(new ResultReport("Total interview(s)", total));
-					if(jA.getInterviews().size()==1){
-						rejected = rejected + 1;
-						resultsInterviews.add(new ResultReport("Rejected", rejected));
-					} else if (jA.getInterviews()!= null && jA.getProposal()== null){
-						newInterview = newInterview + 1;
-						resultsInterviews.add(new ResultReport("New interview", newInterview));
-					} else if (jA.getInterviews()!= null && jA.getProposal()!= null){
-						proposal = proposal + 1;
-						resultsInterviews.add(new ResultReport("Proposal", proposal));
-					}	
-				}
+		for (int i = 0 ; i <= months ; i++){
+			System.out.println(startDate.toDate()+" - "+startDate.plusMonths(i).toDate());
 
+			List<IJobApplicationProxy> appWidhInterview = 
+					appService.listOfAllAppWidhInterviewBetweenDates(startDate.plusMonths(i).toDate(),
+							startDate.plusMonths(i+1).toDate());
+			System.out.println(appWidhInterview);
+			double average = 0;
+			int counter = 0;
+
+			for (IJobApplicationProxy app : appWidhInterview) {
+				System.out.println(app.getJobAppDate());
+				DateTime firstInterviewDate = getFirstInterviewDate(app.getInterviews());
+				average += Days.daysBetween(new DateTime(app.getJobAppDate()), firstInterviewDate).getDays();
+				counter++;
 			}
+			average /= counter;
+			averageTime.add(new ResultReport(startDate.plusMonths(i).toDate(), (int) average));
 		}
-		return resultsInterviews;
-	}*/
+		return averageTime;
+	}
+
+
+	private DateTime getFirstInterviewDate(List<IJobInterviewProxy> interviews) {
+		DateTime firstDate = new DateTime(interviews.get(0).getInterviewDate());
+		for (IJobInterviewProxy i : interviews) {
+			DateTime interviewDate = new DateTime(i.getInterviewDate());
+			if (interviewDate.isBefore(firstDate)) firstDate = interviewDate;
+		}
+		return firstDate;
+	}
 
 	@Override
 	public List<ResultReport> listOfpresentedProposalsBetweenDates(Date start, Date end) {
@@ -223,18 +227,6 @@ public class ReportsFacade implements IReportsFacade {
 		return presentedProposals;
 	}
 
-	@Override
-	public List<ResultReport> averageTimeForFirstInterviewBetweenDates(Date start, Date end) {
-		DateTime startDate = new DateTime(start);
-		DateTime endDate = new DateTime(end);
-		int months = Months.monthsBetween(startDate, endDate ).getMonths();
-		List<ResultReport> averageTime = new ArrayList<>();
-		double average;
-		for (int i = 0 ; i <= months ; i++){
-			average = appService.averageTimeForFirstInterview(startDate.plusMonths(i).toDate(), startDate.plusMonths(i+1).toDate());
-			averageTime.add(new ResultReport(startDate.plusMonths(i).toDate(), (int) average));
-		}
-		return averageTime;
-	}
+
 
 }

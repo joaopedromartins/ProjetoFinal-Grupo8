@@ -1,5 +1,10 @@
 @CHARSET "ISO-8859-1";
 
+h1 {
+	font-family: Verdana, Arial, sans-serif;
+	margin-left: 10px;
+}
+
 .radioLabel {
 	width: 27px;
 	display: inline-block;
