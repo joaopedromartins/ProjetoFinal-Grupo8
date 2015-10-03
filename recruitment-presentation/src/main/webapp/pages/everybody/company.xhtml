@@ -8,11 +8,19 @@
 	<ui:define name="content">
 
 		<center>
-			<p:panel header="#{layoutBean.companyInfoTextTitle}" >
-				<p:outputLabel value="#{layoutBean.companyInfoText}" />
-				
-			</p:panel>
-			
+
+			<p:dataTable id="company" value="#{layoutBean.companyInfoText}"
+				var="company">
+				<f:facet name="header">
+					<H1>"#{layoutBean.companyInfoTextTitle}"</H1>
+				</f:facet>
+				<p:column>
+					<p:outputLabel value="#{layoutBean.companyInfoText}" />
+				</p:column>
+			</p:dataTable>
+
+
+
 		</center>
 
 	</ui:define>
