@@ -13,38 +13,43 @@
 
 </h:head>
 <h:body>
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage library="images" name="loading-light.gif" />
+	</p:dialog>
+
 	<div class="ui-grid ui-grid-responsive">
-		
+
 		<div class="ui-grid-row">
 			<header class="ui-grid-col-12">
-			<h:graphicImage library="images" name="critical.jpg"
+				<h:graphicImage library="images" name="critical.jpg"
 					style="margin:0px 20px;float:left; width:100px; padding: 0px;
     border: 6px solid ##000000;" />
 				<h:form id="forHeader">
-				
+
 					<p:menubar
 						style="width: auto; background-color:white; float:right; margin: 20px;">
 						<p:submenu label="Menu">
-							<p:menuitem value="SignIn"
-								icon="ui-icon-person"
+							<p:menuitem value="SignIn" icon="ui-icon-person"
 								outcome="/pages/everybody/signin" />
-							<p:menuitem value="SignUp"
-								icon="ui-icon-pencil"
+							<p:menuitem value="SignUp" icon="ui-icon-pencil"
 								outcome="/pages/everybody/signup" />
-								
+
 							<p:separator />
-							
+
 							<p:menuitem value="View Open Positions"
 								outcome="/pages/everybody/viewOpenPositions" />
-							<p:menuitem value="Homepage"
-								icon="ui-icon-home"
+							<p:menuitem value="Homepage" icon="ui-icon-home"
 								outcome="/pages/everybody/company" />
 						</p:submenu>
 						<f:facet name="options">
 							<p:commandButton value="SignIn" icon="ui-icon-person"
 								action="/pages/everybody/signin" />
 						</f:facet>
-						
+
 					</p:menubar>
 
 				</h:form>
@@ -53,50 +58,47 @@
 			<h:outputLabel value=" " />
 			<BR />
 		</div>
-		
+
 
 		<div class="ui-grid-row">
 			<nav class="ui-grid-col-2">
-				
+
 				<h:form id="formNavigator">
 					<p:panelMenu>
-						<p:submenu label="Account" >
-							<p:menuitem value="SignIn"
-								icon="ui-icon-person"
+						<p:submenu label="Account">
+							<p:menuitem value="SignIn" icon="ui-icon-person"
 								outcome="/pages/everybody/signin" />
-							<p:menuitem value="SignUp"
-								icon="ui-icon-pencil"
+							<p:menuitem value="SignUp" icon="ui-icon-pencil"
 								outcome="/pages/everybody/signup" />
 						</p:submenu>
 						<p:submenu label="Position">
-							<p:menuitem value="View Open Positions" 
-								icon="ui-icon-search"
+							<p:menuitem value="View Open Positions" icon="ui-icon-search"
 								outcome="/pages/everybody/viewOpenPositions" />
 						</p:submenu>
 						<p:submenu label="Company">
-							<p:menuitem value="About Us"
-								icon="ui-icon-home"
+							<p:menuitem value="About Us" icon="ui-icon-home"
 								outcome="/pages/everybody/company" />
 						</p:submenu>
-									
+
 					</p:panelMenu>
 				</h:form>
 			</nav>
-			
 
-			<div class="ui-grid-col-10">										
+
+			<div class="ui-grid-col-10">
 
 				<ui:insert name="content" />
 
 			</div>
-			
-	
-			
+
+
+
 		</div>
-		
-		
+
+
 		<div class="ui-grid-row">
-			<footer class="ui-grid-col-12" style="margin-top:20px; color:white; background-color: black; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+			<footer class="ui-grid-col-12"
+				style="margin-top: 20px; color: white; background-color: black; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
 				<ui:include src="/template/footer.xhtml" />
 			</footer>
 		</div>

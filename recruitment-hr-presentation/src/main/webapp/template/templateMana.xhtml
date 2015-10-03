@@ -13,10 +13,17 @@
 
 </h:head>
 <h:body>
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage library="images" name="loading-light.gif" />
+	</p:dialog>
 	<div class="ui-grid ui-grid-responsive">
 		<div class="ui-grid-row">
 			<header class="ui-grid-col-12">
-			<h:graphicImage library="images" name="critical.jpg"
+				<h:graphicImage library="images" name="critical.jpg"
 					style="margin:0px 20px;float:left; width:100px; padding: 0px;
     border: 6px solid ##000000;" />
 				<h:form id="forHeader">

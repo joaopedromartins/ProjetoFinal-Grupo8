@@ -8,10 +8,13 @@
 	<ui:define name="content">
 
 		<h1>Table Interviews</h1>
+	
 		<h:form id="formInterviewsTable">
-			<p:dataTable id="tableInterviews" var="interview" widgetVar="tableInterviews"
+
+			<p:dataTable id="tableInterviews" var="interview"
+				widgetVar="tableInterviews"
 				value="#{jobInterviewBean.listInterviewsOfInterviewer()}">
-        		<f:facet name="header">
+				<f:facet name="header">
 					<H1>Interviews</H1>
 					<p:outputPanel style="text-align: right;">
 						<h:outputText value="Search all fields:" />
@@ -41,7 +44,7 @@
 
 					</p:row>
 				</p:columnGroup>
-				<p:column >
+				<p:column>
 					<h:outputText value="#{interview.interviewDate}">
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 					</h:outputText>
@@ -65,7 +68,8 @@
 					<h:outputText
 						value="#{interview.jobapplication.positionEntity.code}" />
 				</p:column>
-				<p:column filterBy="#{interview.jobapplication.positionEntity.title}"
+				<p:column
+					filterBy="#{interview.jobapplication.positionEntity.title}"
 					filterMatchMode="contains">
 					<h:outputText
 						value="#{interview.jobapplication.positionEntity.title}" />
@@ -85,14 +89,16 @@
 					</p:commandButton>
 				</p:column>
 
-				<p:column filterBy="#{interview.jobapplication.candidateEntity.fullName}"
+				<p:column
+					filterBy="#{interview.jobapplication.candidateEntity.fullName}"
 					filterMatchMode="contains">
 					<h:outputText
 						value="#{interview.jobapplication.candidateEntity.fullName}" />
 				</p:column>
 				<p:column>
-					<p:link href="#{interview.jobapplication.candidateEntity.linkedinAddress}" target="_blank"
-						value="Linkendin" />
+					<p:link
+						href="#{interview.jobapplication.candidateEntity.linkedinAddress}"
+						target="_blank" value="Linkendin" />
 					<br />
 					<p:commandButton id="downloadLink" value="CV" ajax="false"
 						actionListener="#{downloadBean.prepDownload(interview.jobapplication)}">
