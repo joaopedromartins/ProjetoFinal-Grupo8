@@ -46,16 +46,16 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.listOfAllAppBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppSpontaneousBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobappSpontaneous = TRUE AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppByPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.positionEntity=:position"),
-	@NamedQuery(name = "JobApplication.reportAverageTimeForFirstInterview ", 
+	@NamedQuery(name = "JobApplication.reportAverageTimeForFirstInterview", 
 		query = "SELECT AVG ( MIN(i.interviewDate) - j.jobAppDate) AS days " +
 				" FROM JobApplicationEntity j INNER JOIN j.interviews i  WHERE " +
 				" j.jobAppDate <= i.interviewDate AND " +
-				" i.interviewDate >= :startdate AND i.interviewDate < :endate "),
+				" i.interviewDate >= :startdate AND i.interviewDate < :enddate "),
 	@NamedQuery(name = "JobApplication.reportAverageTimeForHiring", 
 		query = "SELECT AVG ( j.hiredDate - j.jobAppDate) AS days " +
 				" FROM JobApplicationEntity j WHERE j.situation like 'HIRE%' and" +
 				" j.jobAppDate <= j.hiredDate AND " +
-				" j.hiredDate >= :startdate AND j.hiredDate < :endate "),
+				" j.hiredDate >= :startdate AND j.hiredDate < :enddate "),
 	@NamedQuery(name = "JobApplication.listOfAllAppRejectedBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'REJECTED' AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppWithInterviewBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.interviews <> NULL AND jA.jobAppDate >= :start AND jA.jobAppDate < :end"),
 

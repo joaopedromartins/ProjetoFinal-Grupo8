@@ -18,4 +18,6 @@ public interface IReportsFacade {
 	//public List<ResultReport> listOfResultsInterviewsBetweenDates(Date start, Date end);
 
 	public List<ResultReport> listOfpresentedProposalsBetweenDates(Date start, Date end);
+
+	public List<ResultReport> averageTimeForFirstInterviewBetweenDates(Date start, Date end);
 }

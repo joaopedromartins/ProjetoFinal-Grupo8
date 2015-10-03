@@ -229,8 +229,8 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 	}
 	
 	@Override
-	public int averageTimeForFirstInterview(Date startDate, Date endDate) {
-		TypedQuery<Integer> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_FOR_FIRST_INTERVIEW, Integer.class);
+	public double averageTimeForFirstInterview(Date startDate, Date endDate) {
+		TypedQuery<Double> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_FOR_FIRST_INTERVIEW, Double.class);
 		query.setParameter( "startdate", startDate);
 		query.setParameter( "enddate", endDate);
 		
@@ -238,8 +238,8 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 	}
 	
 	@Override
-	public int averageTimeToHiring(Date startDate, Date endDate) {
-		TypedQuery<Integer> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_TO_HIRING, Integer.class);
+	public double averageTimeToHiring(Date startDate, Date endDate) {
+		TypedQuery<Double> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_TO_HIRING, Double.class);
 		query.setParameter( "startdate", startDate);
 		query.setParameter( "enddate", endDate);
 		

@@ -193,4 +193,18 @@ public class ReportsFacade implements IReportsFacade {
 		return presentedProposals;
 	}
 
+	@Override
+	public List<ResultReport> averageTimeForFirstInterviewBetweenDates(Date start, Date end) {
+		DateTime startDate = new DateTime(start);
+		DateTime endDate = new DateTime(end);
+		int months = Months.monthsBetween(startDate, endDate ).getMonths();
+		List<ResultReport> averageTime = new ArrayList<>();
+		double average;
+		for (int i = 0 ; i <= months ; i++){
+			average = appService.averageTimeForFirstInterview(startDate.plusMonths(i).toDate(), startDate.plusMonths(i+1).toDate());
+			averageTime.add(new ResultReport(startDate.plusMonths(i).toDate(), (int) average));
+		}
+		return averageTime;
+	}
+
 }

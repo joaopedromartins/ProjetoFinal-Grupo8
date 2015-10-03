@@ -180,6 +180,39 @@
 				</p:dataTable>
 			</p:panel>
 		</h:form>
+		<h:form id="formReportAverageTimeForFirstInterview">
+
+			<p:panel id="averageTimeForFirstInterview" header="Average Time For The FirstInterview"
+				toggleable="true" toggleSpeed="500" closeSpeed="500" closable="true"
+				widgetVar="panelAverageTimeForFirstInterview" style="margin-bottom:20px">
+				<p:ajax event="toggle" />
+
+				<p:outputLabel value="From:" />
+				<p:inputText value="#{averageTimeForFirstInterview.from}" styleClass="monthPicker"
+					required="true">
+
+				</p:inputText>
+				<p:outputLabel value="To:" />
+				<p:inputText value="#{averageTimeForFirstInterview.to}" styleClass="monthPicker"
+					required="true">
+				</p:inputText>
+				<p:commandButton value="Generate"
+					action="#{averageTimeForFirstInterview.averageTimeForFirstInterviewBetweenDates()}"
+					update=":formReportAverageTimeForFirstInterview:resultAverageTimeForFirstInterview :formReports:msg" />
+
+				<p:dataTable id="resultAverageTimeForFirstInterview"
+					value="#{averageTimeForFirstInterview.averageTimeForFirstInterview}" var="result">
+					<p:column headerText="Date">
+						<p:outputLabel value="#{result.date}" />
+					</p:column>
+					<p:column headerText="Quantity">
+						<p:outputLabel value="#{result.quantity}" />
+					</p:column>
+				</p:dataTable>
+
+			</p:panel>
+
+		</h:form>
 
 	</ui:define>
 </ui:composition>

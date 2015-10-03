@@ -65,7 +65,6 @@ public class SpontaneousApp implements Serializable{
 		this.endDateSpontaneousApp = converter.converterStringToDate(to+"-01");
 	}
 	public void listOfAllAppSpontaneousBetweenDates (){
-		System.out.println("entre na função que vai buscar hashMap");
 		this.spontaneousApp =  reportsFacade.listOfAllAppSpontaneousBetweenDates(startDateSpontaneousApp, endDateSpontaneousApp);
 	}
 }
