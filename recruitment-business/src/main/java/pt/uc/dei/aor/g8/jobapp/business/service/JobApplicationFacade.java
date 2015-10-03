@@ -239,6 +239,19 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		}
 
 	}
+	
+	@Override
+	public IJobApplicationProxy editProposal(ProposalStatus status, String observation, IJobApplicationProxy jobApp){
+		try {
+			jobApp.getProposal().setProposal(observation);
+			jobApp.getProposal().setProposalStatus(status);
+			return service.editJobApplication(jobApp);
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
+
+	}
 
 	@Override
 	public List<IJobApplicationProxy> listOfAllSpontaneous() {

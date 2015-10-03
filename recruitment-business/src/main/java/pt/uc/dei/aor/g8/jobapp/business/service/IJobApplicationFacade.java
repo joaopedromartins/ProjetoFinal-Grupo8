@@ -30,6 +30,8 @@ public interface IJobApplicationFacade {
 	
 	public IJobApplicationProxy saveProposal(ProposalStatus status, String observation, IJobApplicationProxy jobApp);
 	
+	public IJobApplicationProxy editProposal(ProposalStatus status, String observation, IJobApplicationProxy jobApp);
+	
 	public List<IJobApplicationProxy> listOfAllSpontaneous();
 	
 	public List<IJobApplicationProxy> listOfAllSpontaneousSituation();

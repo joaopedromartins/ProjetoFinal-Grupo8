@@ -43,7 +43,11 @@ public class JobApplicationBean implements Serializable {
 	private IPositionProxy submitPosition;
 	private JobAppSituation status;
 	private boolean addInterview = false;
+	private boolean editProposal = false;
 	
+
+
+
 
 
 	public JobApplicationBean() {
@@ -195,6 +199,38 @@ public class JobApplicationBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
+	public void saveEditProposal (){
+		this.jobApplication = facade.editProposal(proposal.getStatus(), proposal.getObservation(), jobApplication );
+		if (jobApplication != null){
+			proposal.setAddProposal(false);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Proposal submitted to candidate.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error on submitted proposal.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		}
+	}
+	
+	public boolean isEditProposal() {
+		return editProposal;
+	}
+
+
+	public void setEditProposal(boolean editProposal) {
+		this.editProposal = editProposal;
+	}
+	
+	public void showPanelAddProposal(){
+		if(jobApplication.getProposal()==null){
+			this.proposal.setAddProposal(true);
+		} else {
+			this.editProposal = true;
+		}
+		
+		
+	}
+
 
 	
 	

@@ -26,6 +26,7 @@ public class ProposalBean implements Serializable{
 	private IJobApplicationProxy jobApplication;
 	private boolean addProposal = false;
 	
+	
 	@EJB
 	private IJobApplicationFacade facade;
 
@@ -74,9 +75,6 @@ public class ProposalBean implements Serializable{
 	}
 	
 	
-	public void showPanelAddProposal(){
-		this.addProposal = true;
-	}
 
 	
 	
