@@ -10,9 +10,10 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<p:growl id="growl"/>
+		
 		<h1>Add a Position</h1>
 		<h:form id="formAddPosition">
+		<p:growl id="growl"/>
 			<p:panelGrid id="gridPosition" columns="3">
 				<p:outputLabel value="Title :" for="title" />
 				<p:inputText id="title" value="#{positionBean.title}"
@@ -125,7 +126,7 @@
 				</p:selectCheckboxMenu>
 				<p:message for="scripts" />
 			</p:panelGrid>
-			<p:messages autoUpdate="true"/>
+			
 			<p:commandButton value="Save"
 				action="#{positionBean.creatNewPosition()}"
 				update="gridPosition" validateClient="true"/>

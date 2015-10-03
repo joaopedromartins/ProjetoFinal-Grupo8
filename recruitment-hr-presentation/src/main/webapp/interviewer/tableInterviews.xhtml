@@ -11,9 +11,15 @@
 		<h:form id="formInterviewsTable">
 			<p:dataTable id="tableInterviews" var="interview" widgetVar="tableInterviews"
 				value="#{jobInterviewBean.listInterviewsOfInterviewer()}">
-				<f:facet name="header">
-            		Interviews
-        		</f:facet>
+        		<f:facet name="header">
+					<H1>Interviews</H1>
+					<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('tableInterviews').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
 
 				<p:columnGroup type="header">
 					<p:row>
@@ -54,7 +60,8 @@
 				</p:column>
 
 
-				<p:column>
+				<p:column filterBy="#{interview.jobapplication.positionEntity.code}"
+					filterMatchMode="contains">
 					<h:outputText
 						value="#{interview.jobapplication.positionEntity.code}" />
 				</p:column>
