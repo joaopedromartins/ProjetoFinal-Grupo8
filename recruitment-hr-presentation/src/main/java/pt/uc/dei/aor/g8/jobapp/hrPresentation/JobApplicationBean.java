@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.g8.jobapp.hrPresentation;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,6 +11,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -37,6 +40,7 @@ public class JobApplicationBean implements Serializable {
 	private long id;
 	private IJobApplicationProxy jobApplication;
 	private IPositionProxy submitPosition;
+	private JobAppSituation status;
 
 
 	public JobApplicationBean() {
@@ -84,6 +88,19 @@ public class JobApplicationBean implements Serializable {
 	public void setSubmitPosition(IPositionProxy submitPosition) {
 		this.submitPosition = submitPosition;
 	}
+
+	public List<JobAppSituation> getPossibleStatus(){
+		return Arrays.asList(JobAppSituation.values());
+	}
+	
+	public JobAppSituation getStatus() {
+		return status;
+	}
+
+	public void setStatus(JobAppSituation status) {
+		this.status = status;
+	}
+
 
 	public void scheduleInterview (){
 		System.out.println("date interview: "+interviewBean.getDate());
