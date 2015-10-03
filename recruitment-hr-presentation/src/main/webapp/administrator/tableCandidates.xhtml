@@ -8,8 +8,17 @@
 	<ui:define name="content">
 		<h1>List of all Candidates</h1>
 		<h:form id="formTableCandidates">
-			<p:dataTable id="tableCandidates"
+			<p:dataTable id="tableCandidates" widgetVar="candidatesTables"
 				value="#{candidateBean.allCandidates()}" var="candidate">
+				<f:facet name="header">
+					<H1>Candidates</H1>
+					<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('candidatesTables').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
 
 				<p:column headerText="Name:" filterBy="#{candidate.fullName}"
 					filterMatchMode="contains">

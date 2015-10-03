@@ -9,7 +9,16 @@
 		<h1>List Of Employees</h1>
 		<h:form id="formEditEmployee">
 			<p:dataTable id="tableEditCandidates" value="#{userBean.allUser()}"
-				var="user">
+				var="user" widgetVar="userTable">
+				<f:facet name="header">
+					<H1>Employees</H1>
+					<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('userTable').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
 				<p:column headerText="Name">
 					<p:outputLabel value="#{user.fullName}" />
 				</p:column>

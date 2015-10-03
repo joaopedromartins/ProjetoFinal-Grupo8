@@ -9,9 +9,18 @@
 		<h1>List JobApplication</h1>
 		<h:form id="formViewjobApplication">
 
-			<p:dataTable id="gridJobApplication"
+			<p:dataTable id="gridJobApplication" widgetVar="positionsTable"
 				value="#{jobApplicationBean.listOfAllAppNOTSpontaneousSituation()}"
 				var="jobApplication">
+				<f:facet name="header">
+					<H1>List JobApplication</H1>
+					<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('positionsTable').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
 				<p:column headerText="Position"
 					filterBy="#{jobApplication.positionEntity.title}"
 					filterMatchMode="contains">
@@ -21,17 +30,17 @@
 				</p:column>
 
 				<p:column headerText="Candidate"
-					ilterBy="#{jobApplication.candidateEntity.fullName}"
+					filterBy="#{jobApplication.candidateEntity.fullName}"
 					filterMatchMode="contains">
 					<p:outputLabel value="#{jobApplication.candidateEntity.fullName}" />
 					<br />
 					<p:link href="#{candidate.linkedinAddress}" target="_blank"
-						value="Linkendin">
-						<br />
-						<p:commandButton id="downloadLink" value="CV" ajax="false"
-							actionListener="#{downloadBean.prepDownload(jobApplication)}">
-							<p:fileDownload value="#{downloadBean.download}" />
-						</p:commandButton>
+						value="Linkendin" />
+					<br />
+					<p:commandButton id="downloadLink" value="CV" ajax="false"
+						actionListener="#{downloadBean.prepDownload(jobApplication)}">
+						<p:fileDownload value="#{downloadBean.download}" />
+					</p:commandButton>
 				</p:column>
 
 				<p:column headerText="Edit/View">

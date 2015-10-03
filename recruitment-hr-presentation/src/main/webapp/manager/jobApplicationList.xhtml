@@ -22,6 +22,9 @@
 				<p:column headerText="Candidate">
 					<p:outputLabel value="#{jobApplication.candidateEntity.firstname}" />
 					<br />
+					<p:link href="#{candidate.linkedinAddress}" target="_blank"
+						value="Linkendin" />
+					<br />
 					<p:commandButton id="downloadLink" value="CV" ajax="false"
 						actionListener="#{downloadBean.prepDownload(jobApplication)}">
 						<p:fileDownload value="#{downloadBean.download}" />

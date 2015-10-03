@@ -9,7 +9,7 @@
 
 		<h1>table Interviews</h1>
 		<h:form id="formInterviewsTable">
-			<p:dataTable id="tableInterviews" var="interview"
+			<p:dataTable id="tableInterviews" var="interview" widgetVar="tableInterviews"
 				value="#{jobInterviewBean.listInterviewsOfInterviewer()}">
 				<f:facet name="header">
             		Interviews
@@ -58,7 +58,8 @@
 					<h:outputText
 						value="#{interview.jobapplication.positionEntity.code}" />
 				</p:column>
-				<p:column>
+				<p:column filterBy="#{interview.jobapplication.positionEntity.title}"
+					filterMatchMode="contains">
 					<h:outputText
 						value="#{interview.jobapplication.positionEntity.title}" />
 				</p:column>
@@ -77,11 +78,15 @@
 					</p:commandButton>
 				</p:column>
 
-				<p:column>
+				<p:column filterBy="#{interview.jobapplication.candidateEntity.fullName}"
+					filterMatchMode="contains">
 					<h:outputText
 						value="#{interview.jobapplication.candidateEntity.fullName}" />
 				</p:column>
 				<p:column>
+					<p:link href="#{interview.jobapplication.candidateEntity.linkedinAddress}" target="_blank"
+						value="Linkendin" />
+					<br />
 					<p:commandButton id="downloadLink" value="CV" ajax="false"
 						actionListener="#{downloadBean.prepDownload(interview.jobapplication)}">
 						<p:fileDownload value="#{downloadBean.download}" />

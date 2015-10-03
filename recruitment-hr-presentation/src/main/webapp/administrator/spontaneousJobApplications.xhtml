@@ -9,9 +9,18 @@
 
 		<h1>Spontaneous Job Applications</h1>
 		<h:form id="formSpontaneousjobApplication">
-			<p:dataTable id="gridSpontaneousJobApplication"
+			<p:dataTable id="gridSpontaneousJobApplication" widgetVar="spontaneousTable"
 				value="#{jobApplicationBean.findALLSpontaneousSituation()}"
 				var="jobApplication">
+				<f:facet name="header">
+					<H1>List JobApplication</H1>
+					<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('spontaneousTable').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
 				<p:column headerText="Date:">
 					<p:outputLabel value="#{jobApplication.jobAppDate}" />
 				</p:column>

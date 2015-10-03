@@ -210,8 +210,8 @@ public class UserBean implements Serializable {
 	public List<IUserProxy> allUser(){
 		return userFacade.allUser();
 	}
-	
-	
+
+
 	public void editUser() {
 		String newEmail = currentUser.getEmail();
 		String newUsername = currentUser.getUsername();
@@ -289,7 +289,7 @@ public class UserBean implements Serializable {
 
 	public void changePassword(){
 		String messageFacade = userFacade.changePassword(currentUser,oldPassword,password);
-		
+
 		if (messageFacade.equals("sucess")) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Password changed with success.", "");
@@ -300,31 +300,40 @@ public class UserBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
-	
-	
+
+
 	public boolean isAdministrator() {
 		return currentUser.getRoles().contains(RoleType.ADMINISTRATOR);
 	}
-	
+
 	public boolean isManager() {
 		return currentUser.getRoles().contains(RoleType.MANAGER);
 	}
 	public boolean isInterviewer() {
 		return currentUser.getRoles().contains(RoleType.INTERVIEWER);
 	}
-	
+
 	public void deleteUser(IUserProxy user){
-		if (userFacade.deleteUser(user) != null) {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"User deleted with success.", "");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		} else {
+
+		try {
+			if (userFacade.deleteUser(user) != null) {
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"User deleted with success.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			} else {
+				FacesMessage message = new FacesMessage(
+						FacesMessage.SEVERITY_ERROR, "Error on delete user.", "");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			}	
+		}catch (Exception e) {
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Error on delete user.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
-		}	
+		}
 	}
-	
+
+
+
 	public void editUserSelected(){
 		if (userFacade.editUserSelected(selectUser, role) != null) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -336,5 +345,5 @@ public class UserBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
-	
+
 }
