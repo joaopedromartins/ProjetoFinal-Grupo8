@@ -1,0 +1,69 @@
+<ui:composition template="/template/templateMana.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="stylesheet">
+		<h:outputStylesheet library="css" name="style.css" />
+	</ui:define>
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="viewInterviewId" value="#{jobInterviewBean.id}" />
+			<f:viewAction action="#{jobInterviewBean.findInterviewById()}" />
+		</f:metadata>
+
+		<h1>Interview</h1>
+		<p:link outcome="editJobApplication?faces-redirect=true"
+			value="Back to details Job Applications">
+			<f:param name="editjobApplicationId"
+				value="#{jobInterviewBean.interview.jobapplication.id}" />
+		</p:link>
+
+		<h:panelGroup style="margin: auto; display:table">
+			<p:outputLabel value="Candidate:" />
+			<p:outputLabel
+				value="#{jobInterviewBean.interview.jobapplication.candidateEntity.fullName}" />
+			<p:spacer width="20" height="20" />
+			<p:outputLabel value="Interviewer:" />
+			<p:outputLabel
+				value="#{jobInterviewBean.interview.interviewersAsString}" />
+			<br />
+			<p:outputLabel value="Date: " />
+			<p:outputLabel value="#{jobInterviewBean.interview.interviewDate}">
+				<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+			</p:outputLabel>
+			<p:spacer width="20" height="20" />
+			<p:outputLabel value="Position code: " />
+			<p:outputLabel
+				value="#{jobInterviewBean.interview.jobapplication.positionEntity.code}" />
+			<p:spacer width="8" height="8" />
+			<p:outputLabel value="Position title: " />
+			<p:outputLabel
+				value="#{jobInterviewBean.interview.jobapplication.positionEntity.title}" />
+			<br />
+			<br />	
+			<h:panelGroup style="margin: auto; display:table">
+				<p:outputLabel value="Feedback: " />
+				<p:outputLabel value="#{jobInterviewBean.interview.feedback}" />
+			</h:panelGroup>	
+		</h:panelGroup>
+
+		<p:dataTable id="script" var="answer"
+			value="#{jobInterviewBean.interview.answer}" styleClass="answerTable">
+
+			<p:column headerText="Question">
+				<h:outputLabel value="#{answer.question}" />
+			</p:column>
+			<p:column headerText="Question Type">
+				<h:outputLabel value="#{answer.questionType}" />
+			</p:column>
+			<p:column>
+				<h:outputLabel value="#{answer.answerToString}" />
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+
+</ui:composition>

@@ -43,6 +43,8 @@ public class JobApplicationBean implements Serializable {
 	private IPositionProxy submitPosition;
 	private JobAppSituation situation;
 	private String statusString;
+	@Inject
+	private UserBean currentUser;
 	
 
 
@@ -64,6 +66,15 @@ public class JobApplicationBean implements Serializable {
 	public List<IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation(){
 		return facade.listOfAllAppNOTSpontaneousSituation();
 	}
+	
+	public List<IJobApplicationProxy> listOfAllAppNOTSpontaneousSituationManager(){
+		return facade.listOfAllAppNOTSpontaneousSituationManager(currentUser.getCurrentUser());
+	}
+
+	public UserBean getCurrentUser() {
+		return currentUser;
+	}
+
 
 	public IJobApplicationProxy getJobApplication() {
 		return jobApplication;

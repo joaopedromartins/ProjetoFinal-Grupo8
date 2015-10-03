@@ -16,13 +16,16 @@
 	<div class="ui-grid ui-grid-responsive">
 		<div class="ui-grid-row">
 			<header class="ui-grid-col-12">
+			<h:graphicImage library="images" name="critical.jpg"
+					style="margin:0px 20px;float:left; width:100px; padding: 0px;
+    border: 6px solid ##000000;" />
 				<h:form id="forHeader">
 
 					<p:menubar
 						style="width: auto; background-color:white; float:right; margin: 20px;">
 						<p:submenu label="#{userBean.currentUser.firstname}">
-							<p:menuitem value="Edit profile"
-								outcome="/manager/editProfile" icon="ui-icon-pencil" />
+							<p:menuitem value="Edit profile" outcome="/manager/editProfile"
+								icon="ui-icon-pencil" />
 							<p:menuitem value="Change password"
 								outcome="/manager/changePassword" icon="ui-icon-pencil" />
 							<p:menuitem value="Notifications"
@@ -59,20 +62,12 @@
 						<p:submenu label="Position">
 							<p:menuitem value="Positions" outcome="/manager/tablePositions"
 								icon="ui-icon-search" />
-							<p:menuitem value="JobApplications"
-								outcome="/manager/jobApplicationList" icon="ui-icon-search" />
+
 						</p:submenu>
 
-						<p:submenu label="Interviewers">
-							<p:menuitem value="Shedule Interview"
-								outcome="/manager/scheduleInterview" icon="ui-icon-plus" />
-							<p:menuitem value="Edit Interview"
-								outcome="/manager/editInterview" icon="ui-icon-pencil" />
-						</p:submenu>
 						<p:submenu label="Job Applications">
-							<p:menuitem value="Spontaneous Job Applications"
-								outcome="/manager/jobApplicationsSpontaneous"
-								icon="ui-icon-search" />
+							<p:menuitem value="JobApplications"
+								outcome="/manager/jobApplicationList" icon="ui-icon-search" />
 						</p:submenu>
 
 						<p:submenu label="Notifications">
@@ -83,7 +78,7 @@
 				</h:form>
 			</nav>
 
-			<div class="ui-grid-col-10">										
+			<div class="ui-grid-col-10">
 
 				<ui:insert name="content" />
 
@@ -93,7 +88,7 @@
 
 		<div class="ui-grid-row">
 			<footer class="ui-grid-col-12"
-			style="margin-top:20px; color:white; background-color: black; bborder-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+				style="margin-top: 20px; color: white; background-color: black; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
 				<ui:include src="/template/footer.xhtml" />
 			</footer>
 		</div>

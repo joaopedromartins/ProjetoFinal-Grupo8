@@ -99,6 +99,14 @@ public class NotificationPersistenceService implements INotificationPersistenceS
 		return new NotificationProxy(entity);
 	}
 
-
+	@Override
+	public INotificationProxy deleteNotification(INotificationProxy newNotification) {
+		NotificationEntity entity = getEntity(newNotification);
+		entity = em.merge(entity);
+		em.remove(entity);
+		return new NotificationProxy (entity);
+	}
+	
+	
 
 }

@@ -39,7 +39,7 @@
 				<p:column headerText="Technical Area">
 					<h:outputText value="#{position.technicalArea.description}" />
 				</p:column>
-				
+
 				<p:column style="width:45px;text-align: center">
 					<p:commandButton update=":formPositionEdit:positionEdit "
 						oncomplete="PF('positionEdit').show()" icon="ui-icon-search"
@@ -84,7 +84,7 @@
 								var="status" itemLabel="#{status.description}"
 								itemValue="#{status}" />
 						</p:selectOneMenu>
-						
+
 						<h:outputText value="Company:" />
 						<h:inputText value="#{positionBean.positionProxy.company}"
 							disabled="true" />
@@ -107,12 +107,18 @@
 						<p:inputText id="userManager"
 							value="#{positionBean.positionProxy.managerPosition.fullName}"
 							disabled="true" />
-
+						</p:panelGrid>
+						<p:panelGrid columns="2">
+	
+							<p:outputLabel value="Description:" for="userManager" />
+							<p:inputTextarea id="description" disabled="true" style="width: 330%;"
+								value="#{positionBean.positionProxy.descriptionPosition}" />
+						</p:panelGrid>
 
 						<p:commandButton value="Update"
 							action="#{positionBean.editPosition()}"
 							update=":formPositionsTable:tablePositions growl" />
-					</p:panelGrid>
+					
 				</p:outputPanel>
 				<p:growl id="growl" />
 			</p:dialog>

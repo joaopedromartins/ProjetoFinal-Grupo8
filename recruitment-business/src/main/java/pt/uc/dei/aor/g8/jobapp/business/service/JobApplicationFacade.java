@@ -17,6 +17,7 @@ import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProposalProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IProxyFactory;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.business.util.GmailMessage;
 
@@ -358,6 +359,17 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 			return null;
 		}
 	}
+	
+	@Override
+	public List<IJobApplicationProxy> listOfAllAppNOTSpontaneousSituationManager(IUserProxy manager) {
+		try {
+			return service.listOfAllAppNotSituationSpontaneousManager(manager);
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
+	}
+
 
 	@Override
 	public void deleteJobApplicationByCandidate(IJobApplicationProxy jobApplicationProxy) {
@@ -422,4 +434,5 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 
 	}
 
+	
 }

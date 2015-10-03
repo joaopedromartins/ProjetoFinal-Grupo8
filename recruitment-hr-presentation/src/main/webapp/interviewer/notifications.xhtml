@@ -14,6 +14,7 @@
 
 
 		<h:form id="formNotificationsTable">
+		<p:growl id ="growl"/>
 			<p:dataTable id="tableNotifications" var="notification"
 				value="#{notificationBean.allNotificationByUser()}"
 				rowStyleClass="#{notification.viewNotification ? 'view' : 'notView'}">
@@ -33,6 +34,12 @@
 						oncomplete="PF('notificationView').show()" icon="ui-icon-search"
 						title="View"
 						actionListener="#{notificationBean.viewTrue(notification)}">
+
+					</p:commandButton>
+					<p:commandButton id="deletePosition" icon="ui-icon-trash"
+						update=":formNotificationsTable:tableNotifications :notificationDetail :formNotificationsTable:growl"
+						process="@this"
+						actionListener="#{notificationBean.deleteNotification(notification)}">
 
 					</p:commandButton>
 				</p:column>

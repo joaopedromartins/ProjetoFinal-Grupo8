@@ -8,7 +8,7 @@
 <h:head>
 	<meta charset="utf-8" />
 	<title>CriticalJobApplication</title>
-	<ui:insert name="outputScript"/>
+	<ui:insert name="outputScript" />
 	<ui:insert name="stylesheet" />
 	<h:outputStylesheet library="css" name="style.css" />
 
@@ -17,6 +17,9 @@
 	<div class="ui-grid ui-grid-responsive">
 		<div class="ui-grid-row">
 			<header class="ui-grid-col-12">
+				<h:graphicImage library="images" name="critical.jpg"
+					style="margin:0px 20px;float:left; width:100px; padding: 0px;
+    border: 6px solid ##000000;" />
 				<h:form id="forHeader">
 
 					<p:menubar
@@ -82,7 +85,7 @@
 
 		<div class="ui-grid-row">
 			<footer class="ui-grid-col-12"
-			style="margin-top:20px; color:white; background-color: black; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+				style="margin-top: 20px; color: white; background-color: black; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
 				<ui:include src="/template/footer.xhtml" />
 			</footer>
 		</div>

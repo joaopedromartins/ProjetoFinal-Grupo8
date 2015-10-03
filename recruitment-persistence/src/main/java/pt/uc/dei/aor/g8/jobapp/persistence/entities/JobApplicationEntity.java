@@ -46,6 +46,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplication.findJobAppSpontaneousSituationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidateEntity AND jA.situation LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidateAndPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.positionEntity=:position"),
 	@NamedQuery(name = "JobApplication.listOfAllApplicationNotSituationSpontaneous", query = "SELECT jA FROM JobApplicationEntity jA Where jA.situation NOT LIKE 'SPONTANEOUS' AND jA.situation NOT LIKE 'HIRED' AND jA.situation NOT LIKE 'DELETE_BY_CANDIDATE'"),
+	@NamedQuery(name = "JobApplication.listOfAllApplicationNotSituationSpontaneousManager", query = "SELECT jA FROM JobApplicationEntity jA INNER JOIN jA.positionEntity p Where p.managerPosition =:manager AND jA.situation NOT LIKE 'SPONTANEOUS' AND jA.situation NOT LIKE 'HIRED' AND jA.situation NOT LIKE 'DELETE_BY_CANDIDATE'"),
 	@NamedQuery(name = "JobApplication.listOfAllAppBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppSpontaneousBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobappSpontaneous = TRUE AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppByPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.positionEntity=:position"),
@@ -75,6 +76,7 @@ public class JobApplicationEntity {
 	public static final String FIND_SPONTANEOUS_JOBAPP_BY_CANDIDATE = "JobApplication.findJobAppSpontaneousSituationByCandidate";
 	public static final String LIST_OF_JOBAPPLICATION_BY_CANDIDATE_AND_POSITION = "JobApplication.listOfJobApplicationByCandidateAndPosition";
 	public static final String LIST_OF_ALL_APPLICATION_NOT_SITUATION_SPONTANEOUS ="JobApplication.listOfAllApplicationNotSituationSpontaneous" ;
+	public static final String LIST_OF_ALL_APPLICATION_NOT_SITUATION_SPONTANEOUS_MANAGER = "JobApplication.listOfAllApplicationNotSituationSpontaneousManager";
 	public static final String LIST_OF_ALL_APP_BETWEEN_DATES = "JobApplication.listOfAllAppBetweenDates";
 	public static final String LIST_OF_ALL_APP_SPONTANEOUS_BETWEEN_DATES = "JobApplication.listOfAllAppSpontaneousBetweenDates";
 	public static final String LIST_OF_ALL_APP_BY_POSITION = "JobApplication.listOfAllAppByPosition";
@@ -82,6 +84,7 @@ public class JobApplicationEntity {
 	public static final String AVERAGE_TIME_TO_HIRING = "JobApplication.reportAverageTimeForHiring";
 	public static final String LIST_OF_ALL_APP_REJECTED_BETWEEN_DATES = "JobApplication.listOfAllAppRejectedBetweenDates"; 
 	public static final String LIST_OF_ALL_APP_WITH_INTERVIEW_BETWEEN_DATES = "JobApplication.listOfAllAppWithInterviewBetweenDates";
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

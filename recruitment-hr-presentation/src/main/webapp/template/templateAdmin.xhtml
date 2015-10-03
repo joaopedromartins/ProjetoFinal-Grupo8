@@ -17,6 +17,9 @@
 	<div class="ui-grid ui-grid-responsive">
 		<div class="ui-grid-row">
 			<header class="ui-grid-col-12">
+				<h:graphicImage library="images" name="critical.jpg"
+					style="margin:0px 20px;float:left; width:100px; padding: 0px;
+    border: 6px solid ##000000;" />
 				<h:form id="forHeader">
 
 					<p:menubar
@@ -57,19 +60,13 @@
 			<nav class="ui-grid-col-2">
 				<h:form id="formNavigator">
 					<p:panelMenu>
-						<p:submenu label="Template Configuration">
-							<p:menuitem value="Edit Template"
-								outcome="/administrator/editTemplate" icon="ui-icon-pencil" />
-						</p:submenu>
-						<p:submenu label="Reports">
-							<p:menuitem value="Reports" outcome="/administrator/reports"
-								icon="ui-icon-search" />
-						</p:submenu>
-						<p:submenu label="User">
-							<p:menuitem value="New user" outcome="/administrator/addEmployee"
-								icon="ui-icon-plus" />
-							<p:menuitem value="Users" outcome="/administrator/tableEmployee"
-								icon="ui-icon-pencil" />
+
+
+						<p:submenu label="Employees">
+							<p:menuitem value="New Employe"
+								outcome="/administrator/addEmployee" icon="ui-icon-plus" />
+							<p:menuitem value="Employees"
+								outcome="/administrator/tableEmployee" icon="ui-icon-pencil" />
 						</p:submenu>
 						<p:submenu label="Position">
 							<p:menuitem value="New position"
@@ -83,22 +80,22 @@
 							<p:menuitem value="Scripts" outcome="/administrator/tableScripts"
 								icon="ui-icon-search" />
 						</p:submenu>
-						<p:submenu label="Interviewers">
-							<p:menuitem value="Shedule Interview"
-								outcome="/administrator/scheduleInterview" icon="ui-icon-plus" />
-							<p:menuitem value="Edit Interview"
-								outcome="/administrator/editInterview" icon="ui-icon-pencil" />
-						</p:submenu>
-						<p:submenu label="Candidates">
-							<p:menuitem value="Candidates"
-								outcome="/administrator/tableCandidates" icon="ui-icon-search" />
-						</p:submenu>
 						<p:submenu label="Job Applications">
 							<p:menuitem value="Job Applications"
 								outcome="/administrator/tableJobApplications"
 								icon="ui-icon-search" />
 							<p:menuitem value="Spontaneous Job Applications"
 								outcome="/administrator/spontaneousJobApplications"
+								icon="ui-icon-search" />
+						</p:submenu>
+
+						<p:submenu label="Candidates">
+							<p:menuitem value="Candidates"
+								outcome="/administrator/tableCandidates" icon="ui-icon-search" />
+						</p:submenu>
+
+						<p:submenu label="Reports">
+							<p:menuitem value="Reports" outcome="/administrator/reports"
 								icon="ui-icon-search" />
 						</p:submenu>
 
@@ -120,7 +117,7 @@
 
 		<div class="ui-grid-row">
 			<footer class="ui-grid-col-12"
-				style="margin-top:20px; color:white; background-color: black; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+				style="margin-top: 20px; color: white; background-color: black; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
 				<ui:include src="/template/footer.xhtml" />
 			</footer>
 		</div>

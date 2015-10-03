@@ -6,6 +6,7 @@ import java.util.List;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 
 public interface IJobApplicationPersistenceService {
 	
@@ -32,6 +33,8 @@ public interface IJobApplicationPersistenceService {
 
 	public List <IJobApplicationProxy> listOfAllAppNotSituationSpontaneous();
 	
+	public List <IJobApplicationProxy> listOfAllAppNotSituationSpontaneousManager(IUserProxy manager);
+	
 	public List <IJobApplicationProxy> listOfAllAppBetweenDates(Date startDate, Date endDate);
 	
 	public List <IJobApplicationProxy> listOfAllAppSpontaneousBetweenDates (Date startDate, Date endDate);
@@ -41,7 +44,7 @@ public interface IJobApplicationPersistenceService {
 
 	public List <IJobApplicationProxy> listOfAllAppByPosition(IPositionProxy p);
 
-	public double averageTimeForFirstInterview(Date startDate, Date endDate);
+	
 
 	public double averageTimeToHiring(Date startDate, Date endDate);
 
@@ -50,5 +53,7 @@ public interface IJobApplicationPersistenceService {
 	public List<IJobApplicationProxy> listOfAllApplicationRejectedBetweenDates (Date startDate, Date endDate);
 
 	public List<IJobApplicationProxy> listOfAllAppWidhInterviewBetweenDates(Date start, Date end);
+
+	
 	
 }

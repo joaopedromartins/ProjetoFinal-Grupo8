@@ -12,10 +12,12 @@ import javax.persistence.TypedQuery;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 import pt.uc.dei.aor.g8.jobapp.business.persistence.IJobApplicationPersistenceService;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.CandidateEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.JobApplicationEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.entities.PositionEntity;
+import pt.uc.dei.aor.g8.jobapp.persistence.entities.UserEntity;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.IEntityAware;
 import pt.uc.dei.aor.g8.jobapp.persistence.proxy.JobApplicationProxy;
 
@@ -138,6 +140,8 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		}
 		return proxy;
 	}
+	
+	
 
 	@Override
 	public List<IJobApplicationProxy> listOfAllSpontaneousSituation() {
@@ -185,6 +189,26 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		}
 		return proxy;
 	}
+	
+	@Override
+	public List<IJobApplicationProxy> listOfAllAppNotSituationSpontaneousManager(IUserProxy manager) {
+		TypedQuery <JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_APPLICATION_NOT_SITUATION_SPONTANEOUS_MANAGER, JobApplicationEntity.class);
+		query.setParameter("manager", userConverterProxyToEntity(manager));
+		List <JobApplicationEntity> entity = query.getResultList();
+
+		List <IJobApplicationProxy> proxy = new ArrayList<>();
+		for (JobApplicationEntity jA: entity){
+			proxy.add(new JobApplicationProxy(jA));
+		}
+		return proxy; //TODO
+	}
+	
+	@SuppressWarnings("unchecked")
+	private UserEntity userConverterProxyToEntity (IUserProxy user){
+		UserEntity entity = ((IEntityAware<UserEntity>)user).getEntity();
+		return entity;
+	}
+	
 
 	@Override
 	public List<IJobApplicationProxy> listOfAllAppBetweenDates(Date startDate, Date endDate) {
@@ -228,40 +252,6 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		return proxy;
 	}
 	
-	@Override
-	public double averageTimeForFirstInterview(Date startDate, Date endDate) {
-		// TODO logger
-		System.out.println( "\n\n* JobApplicationPersistentService");
-		System.out.println( "* Start date:\t" + startDate);
-		System.out.println( "* End date:\t" + endDate);
-		
-		
-		TypedQuery<Date> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_FOR_FIRST_INTERVIEW, Date.class);
-		query.setParameter( "startdate", startDate);
-		query.setParameter( "enddate", endDate);
-		
-		List<Date> entity = query.getResultList();
-		
-		
-		
-		if (entity.isEmpty()) {
-			// TODO logger
-			System.out.println( "Empty average report" );
-			return 0.0;
-		} else {
-			// TODO logger
-			System.out.println( "average report" );
-			if (entity.size()>0) {
-				double soma=0.0;
-				for(int i=0; i<entity.size(); i++) {
-					System.out.println("entity:\t" + entity.get(i));
-					soma+=entity.get(i).getDay()+entity.get(i).getHours()/24.0;
-				}
-				return soma/entity.size();
-			}
-			return 0.0;
-		}
-	}
 	
 	@Override
 	public double averageTimeToHiring(Date startDate, Date endDate) {
@@ -276,7 +266,6 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 
 	@Override
 	public List<IJobApplicationProxy> listOfAllApplicationRejectedBetweenDates (Date startDate, Date endDate) {
-		
 		
 		TypedQuery<JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_APP_REJECTED_BETWEEN_DATES, JobApplicationEntity.class);
 		query.setParameter("startDate", startDate);
@@ -304,15 +293,7 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 		return proxy;
 	}
 
-
-//	@Override
-//	public void deleteJobApplication(IJobApplicationProxy jobApplicationProxy) {
-//		// TODO deleteJobApplication Confirmar se é para limpar dados associadoa a tabela proposal 
-//		
-//		JobApplicationEntity entity = getEntity(jobApplicationProxy);
-//		entity = em.merge(entity);
-//		em.remove(entity);
-//	}
+	
 
 
 

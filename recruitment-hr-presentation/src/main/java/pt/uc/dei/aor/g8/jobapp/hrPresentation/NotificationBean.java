@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -59,6 +61,21 @@ public class NotificationBean implements Serializable{
 		this.notificationProxy = notification;
 		if( !notificationProxy.isViewNotification()){
 			this.notificationProxy = facade.viewTrue(notificationProxy);
+		}
+	}
+	
+	public void deleteNotification(INotificationProxy noti){
+		INotificationProxy delete = facade.deleteNotification(noti);
+		if(delete == null){
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Error on deleted notification.", "");
+			FacesContext.getCurrentInstance().addMessage("growl", message);	
+		} else {
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_WARN,
+					"Notification deleted successfully.", "");
+			FacesContext.getCurrentInstance().addMessage("growl", message);
 		}
 	}
 

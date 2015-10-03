@@ -7,6 +7,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.ProposalStatus;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
+import pt.uc.dei.aor.g8.jobapp.business.model.IUserProxy;
 
 public interface IJobApplicationFacade {
 
@@ -39,10 +40,12 @@ public interface IJobApplicationFacade {
 	public String submitPositionOnSpontaneousApplication(IJobApplicationProxy jobApplication);
 	
 	public List <IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation ();
+	public List<IJobApplicationProxy> listOfAllAppNOTSpontaneousSituationManager(IUserProxy manager);
 	
 	public void deleteJobApplicationByCandidate(IJobApplicationProxy jobApplicationProxy);
 	
 	public IJobApplicationProxy updateSituationJobApplication(JobAppSituation status ,IJobApplicationProxy jobApplicationProxy);
+	
 	
 	
 }

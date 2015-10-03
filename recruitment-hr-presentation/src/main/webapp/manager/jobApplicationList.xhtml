@@ -7,7 +7,36 @@
 
 	<ui:define name="content">
 
-		<h1>Position - Job Applications table</h1>
+		<h1>Job Applications</h1>
+		<h:form id="formViewjobApplicationManager">
+
+			<p:dataTable id="gridJobApplication"
+				value="#{jobApplicationBean.listOfAllAppNOTSpontaneousSituationManager()}"
+				var="jobApplication">
+				<p:column headerText="Position">
+					<p:outputLabel value="#{jobApplication.positionEntity.code}" />
+					<br />
+					<p:outputLabel value="#{jobApplication.positionEntity.title}" />
+				</p:column>
+
+				<p:column headerText="Candidate">
+					<p:outputLabel value="#{jobApplication.candidateEntity.firstname}" />
+					<br />
+					<p:commandButton id="downloadLink" value="CV" ajax="false"
+						actionListener="#{downloadBean.prepDownload(jobApplication)}">
+						<p:fileDownload value="#{downloadBean.download}" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="Edit/View">
+					<p:link outcome="editJobApplication?faces-redirect=true"
+						value="Edit/View">
+						<f:param name="editjobApplicationId" value="#{jobApplication.id}" />
+					</p:link>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
 
 
 	</ui:define>
