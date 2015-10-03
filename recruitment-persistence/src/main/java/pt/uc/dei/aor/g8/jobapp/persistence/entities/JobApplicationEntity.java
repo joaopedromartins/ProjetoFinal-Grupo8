@@ -314,6 +314,14 @@ public class JobApplicationEntity {
 		this.jobappSpontaneous = jobappSpontaneous;
 	}
 
+	public Date getHiredDate() {
+		return hiredDate;
+	}
+
+	public void setHiredDate(Date hiredDate) {
+		this.hiredDate = hiredDate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

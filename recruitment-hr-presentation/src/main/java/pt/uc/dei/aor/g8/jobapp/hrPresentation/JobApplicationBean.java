@@ -41,7 +41,11 @@ public class JobApplicationBean implements Serializable {
 	private long id;
 	private IJobApplicationProxy jobApplication;
 	private IPositionProxy submitPosition;
-	private JobAppSituation status;
+	private JobAppSituation situation;
+	private String statusString;
+	
+
+
 	private boolean addInterview = false;
 	private boolean editProposal = false;
 	private boolean saveProposal = false;
@@ -102,11 +106,26 @@ public class JobApplicationBean implements Serializable {
 	}
 
 	public JobAppSituation getStatus() {
-		return status;
+		return situation;
 	}
 
 	public void setStatus(JobAppSituation status) {
-		this.status = status;
+		this.situation = status;
+	}
+	
+	
+	public String getStatusString() {
+		return statusString;
+	}
+
+
+	public void setStatusString(String statusString) {
+		if(statusString == "Rejected"){
+			this.situation = JobAppSituation.REJECTED;
+		} else {
+			this.situation = JobAppSituation.HIRED;
+		}
+		this.statusString = statusString;
 	}
 
 
@@ -152,7 +171,7 @@ public class JobApplicationBean implements Serializable {
 	}
 
 	public void changeStatusJobApp(){		
-		IJobApplicationProxy proxy = facade.updateSituationJobApplication(status,jobApplication);
+		IJobApplicationProxy proxy = facade.updateSituationJobApplication(situation,jobApplication);
 		if(proxy != null){
 			this.jobApplication = proxy;
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,

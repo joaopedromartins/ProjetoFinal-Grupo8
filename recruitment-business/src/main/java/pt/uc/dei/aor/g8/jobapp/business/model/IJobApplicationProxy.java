@@ -56,5 +56,8 @@ public interface IJobApplicationProxy {
 	public void setJobappSpontaneous(boolean jobappSpontaneous);
 	
 	public Date getJobAppDate();
+	
+	public Date getHiredDate ();
+	public void setHiredDate(Date hired);
 
 }

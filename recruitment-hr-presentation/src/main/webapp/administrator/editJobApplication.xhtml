@@ -156,7 +156,7 @@
 
 			</h:form>
 		</h:panelGroup>
-
+		<br />
 		<h:form id="formProposalView">
 
 			<p:panel id="jobAppProposalPanel" header="Proposal(s)"
@@ -229,18 +229,18 @@
 				</h:panelGrid>
 			</h:form>
 		</h:panelGroup>
-
+		<br />
 		<h:form id="formEditJobApp">
 			<p:panelGrid id="editJobapp" columns="2">
 				<p:outputLabel value="Job Application Satus:" />
 				<p:outputLabel id="statusJobapp"
 					value="#{jobApplicationBean.jobApplication.situation.description}" />
 				<p:selectOneMenu id="status"
-					converter="omnifaces.SelectItemsConverter"
-					value="#{jobApplicationBean.status}">
-					<f:selectItems value="#{jobApplicationBean.possibleStatus}"
-						var="status" itemLabel="#{status.description}"
-						itemValue="#{status}" />
+					value="#{jobApplicationBean.statusString}">
+					<f:selectItem itemLabel="Rejected"
+						itemValue="Rejected" />
+					<f:selectItem itemLabel="Hired"
+						itemValue="Hired" />	
 				</p:selectOneMenu>
 				<p:commandButton value="Update Status"
 					action="#{jobApplicationBean.changeStatusJobApp()}"

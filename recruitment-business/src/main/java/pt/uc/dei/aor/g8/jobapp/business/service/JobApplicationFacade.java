@@ -199,20 +199,20 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		return returnJobApp;
 	}
 
-	
+
 
 	@Override
-    public IJobApplicationProxy findId(long id) {
-            IJobApplicationProxy p = service.findById(id);
-            return p;
-    }
-	
+	public IJobApplicationProxy findId(long id) {
+		IJobApplicationProxy p = service.findById(id);
+		return p;
+	}
+
 
 	@Override
 	public List<IJobApplicationProxy> listOfJobApplicationByUsername(String username) {
 		return service.listOfAllCandidateJobApplication(username);
 	}
-	
+
 	@Override
 	public IJobApplicationProxy spontaneousJobApplicationByUsername(String username) {
 		return service.candidateSpontaneousJobApplication(username);
@@ -240,13 +240,22 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		}
 
 	}
-	
+
 	@Override
 	public IJobApplicationProxy editProposal(ProposalStatus status, String observation, IJobApplicationProxy jobApp){
 		try {
-			jobApp.getProposal().setProposal(observation);
-			jobApp.getProposal().setProposalStatus(status);
-			return service.editJobApplication(jobApp);
+			if ( status == ProposalStatus.REJECTED){
+				jobApp.getProposal().setProposal(observation);
+				jobApp.getProposal().setProposalStatus(status);
+				jobApp.setSituation(JobAppSituation.REJECTED);
+				sendMailRejetedCandidate(jobApp);
+				return service.editJobApplication(jobApp);
+			} else {
+				jobApp.getProposal().setProposal(observation);
+				jobApp.getProposal().setProposalStatus(status);
+				return service.editJobApplication(jobApp);
+			}
+
 		} catch (EJBTransactionRolledbackException e){
 			log.error(e.getMessage());
 			return null;
@@ -276,7 +285,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 
 	@Override
 	public String submitPositionOnSpontaneousApplication(IJobApplicationProxy jobApplication) {
-	
+
 		ICandidateProxy candidate = jobApplication.getCandidateEntity();
 		IPositionProxy position = jobApplication.getPositionEntity();
 		IJobApplicationProxy proxyApp;
@@ -286,7 +295,7 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 			log.error(e.getMessage());
 			return "Error on save submit.";
 		}
-		
+
 		if (proxyApp != null){
 			return "This candidate has already applied for this position, " + position.getTitle() + ".";
 		} else {
@@ -365,11 +374,52 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 			IJobApplicationProxy jobApplicationProxy) {
 		try {
 			jobApplicationProxy.setSituation(status);
-			return service.editJobApplication(jobApplicationProxy);
+			if (status == JobAppSituation.REJECTED){
+				sendMailRejetedCandidate(jobApplicationProxy);
+				return service.editJobApplication(jobApplicationProxy);
+			} else if (status == JobAppSituation.HIRED){
+				jobApplicationProxy.setHiredDate(new Date());
+				sendMailHiredCandidate(jobApplicationProxy);
+				return service.editJobApplication(jobApplicationProxy);
+			} else {
+				return null;
+			}	
+
 		} catch (EJBTransactionRolledbackException e){
 			log.error(e.getMessage());
 			return null;
 		}
+	}
+
+	private void sendMailHiredCandidate(IJobApplicationProxy proxy) {
+		//Notify Candidate by email
+		mail.sendEmail(proxy.getCandidateEntity().getEmail(), 
+				"jobappmailtest@gmail.com", 
+				"Hired to Position : " + proxy.getPositionEntity().getTitle(),
+				"Dear Mr./Mrs./Ms./Miss " +  proxy.getCandidateEntity().getFirstname() + ",\n" +
+						"Congratulations! We are pleased to confirm you have been selected to work for our company, to the position, " +
+						proxy.getPositionEntity().getTitle() + ".\nYou will be contacted shortly to discuss the details.\nWe are confident you will " +
+						"be able to make a significant contribution to the success of our company and look forward to working with you."+
+						"\n\nSincerely,\n\n"+
+						proxy.getPositionEntity().getManagerPosition().getFirstname() + " " + 
+						proxy.getPositionEntity().getManagerPosition().getLastname() 		
+				);
+	}
+
+	private void sendMailRejetedCandidate (IJobApplicationProxy proxy){
+		//Notify Candidate by email
+		mail.sendEmail(proxy.getCandidateEntity().getEmail(), 
+				"jobappmailtest@gmail.com", 
+				"Job Application Rejected: " + proxy.getPositionEntity().getTitle(),
+				"Dear Mr./Mrs./Ms./Miss " +  proxy.getCandidateEntity().getFirstname() + ",\n" +
+						"We appreciate your interest in our company.\nUnfortunetely, we regret to inform your submission for position, "+proxy.getPositionEntity().getTitle()+ 
+						", was rejected after analysis.\nPlease do apply again in the future should you see a job position for which you qualify or as a spontaneous application." +
+						"\nAgain, thank you for applying. We wish you all the best."+
+						"\n\nBest Regards,,\n" + 
+						proxy.getPositionEntity().getManagerPosition().getFirstname() + " " + 
+						proxy.getPositionEntity().getManagerPosition().getLastname() 		
+				);
+
 	}
 
 }

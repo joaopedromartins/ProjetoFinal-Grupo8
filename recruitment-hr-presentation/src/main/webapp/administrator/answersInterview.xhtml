@@ -1,4 +1,4 @@
-<ui:composition template="/template/templateInter.xhtml"
+<ui:composition template="/template/templateAdmin.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -16,7 +16,7 @@
 		</f:metadata>
 
 		<h1>Interview</h1>
-		<p:link outcome="editJobApplications?faces-redirect=true"
+		<p:link outcome="editJobApplication?faces-redirect=true"
 			value="Back to details Job Applications">
 			<f:param name="editjobApplicationId"
 				value="#{jobInterviewBean.interview.jobapplication.id}" />

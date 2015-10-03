@@ -268,4 +268,14 @@ public class JobApplicationProxy implements IJobApplicationProxy, IEntityAware<J
 		return entity.getJobAppDate();
 	}
 
+	@Override
+	public Date getHiredDate() {
+		return entity.getHiredDate();
+	}
+
+	@Override
+	public void setHiredDate(Date hired) {
+		entity.setHiredDate(hired);
+	}
+
 }
