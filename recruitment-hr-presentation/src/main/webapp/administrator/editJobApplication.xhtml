@@ -231,21 +231,29 @@
 		</h:panelGroup>
 		<br />
 		<h:form id="formEditJobApp">
-			<p:panelGrid id="editJobapp" columns="2">
-				<p:outputLabel value="Job Application Satus:" />
-				<p:outputLabel id="statusJobapp"
-					value="#{jobApplicationBean.jobApplication.situation.description}" />
-				<p:selectOneMenu id="status"
-					value="#{jobApplicationBean.statusString}">
-					<f:selectItem itemLabel="Rejected"
-						itemValue="Rejected" />
-					<f:selectItem itemLabel="Hired"
-						itemValue="Hired" />	
-				</p:selectOneMenu>
-				<p:commandButton value="Update Status"
-					action="#{jobApplicationBean.changeStatusJobApp()}"
-					update="formEditJobApp:statusJobapp :formgrowl:growl" />
-			</p:panelGrid>
+
+			<p:panel id="jobAppEditPanel"
+				header="Modifed Status of JobApplication" toggleable="true"
+				toggleSpeed="500" widgetVar="jobAppProposalPanel"
+				style="margin-bottom:20px" collapsed="false">
+				<p:ajax event="toggle" />
+
+				<p:panelGrid id="editJobapp" columns="2">
+
+
+					<p:outputLabel value="Job Application Satus:" />
+					<p:outputLabel id="statusJobapp"
+						value="#{jobApplicationBean.jobApplication.situation.description}" />
+					<p:selectOneMenu id="status"
+						value="#{jobApplicationBean.statusString}">
+						<f:selectItem itemLabel="Rejected" itemValue="Rejected" />
+						<f:selectItem itemLabel="Hired" itemValue="Hired" />
+					</p:selectOneMenu>
+					<p:commandButton value="Update Status"
+						action="#{jobApplicationBean.changeStatusJobApp()}"
+						update="formEditJobApp:statusJobapp :formgrowl:growl" />
+				</p:panelGrid>
+			</p:panel>
 		</h:form>
 		<h:form id="formgrowl">
 			<p:growl id="growl" />

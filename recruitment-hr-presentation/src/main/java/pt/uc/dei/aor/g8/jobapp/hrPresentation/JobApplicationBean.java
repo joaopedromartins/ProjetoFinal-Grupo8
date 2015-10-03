@@ -120,9 +120,9 @@ public class JobApplicationBean implements Serializable {
 
 
 	public void setStatusString(String statusString) {
-		if(statusString == "Rejected"){
+		if(statusString.equals("Rejected")){
 			this.situation = JobAppSituation.REJECTED;
-		} else {
+		} else if (statusString.equals("Hired")){
 			this.situation = JobAppSituation.HIRED;
 		}
 		this.statusString = statusString;
