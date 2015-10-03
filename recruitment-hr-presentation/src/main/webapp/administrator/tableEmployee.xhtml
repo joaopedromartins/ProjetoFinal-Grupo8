@@ -19,7 +19,8 @@
 							placeholder="Enter keyword" />
 					</p:outputPanel>
 				</f:facet>
-				<p:column headerText="Name">
+				<p:column headerText="Name" filterBy="#{user.fullName}"
+					filterMatchMode="contains">
 					<p:outputLabel value="#{user.fullName}" />
 				</p:column>
 				<p:column headerText="Email">
