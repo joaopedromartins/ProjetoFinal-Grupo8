@@ -1,0 +1,153 @@
+<ui:composition template="/template/templateAdmin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="editjobApplicationId"
+				value="#{jobApplicationBean.id}" />
+			<f:viewAction action="#{jobApplicationBean.findById()}" />
+		</f:metadata>
+		<h1>Edit Job Application</h1>
+		<h:form id="formDialogDetailJobApplication">
+			<h:panelGrid columns="2">
+				<p:panel id="positionJobApplicaton" header="Position Detail"
+					toggleable="true" toggleSpeed="500" widgetVar="panel"
+					style="margin-bottom:20px">
+
+					<h:panelGrid columns="2" cellpadding="10">
+
+						<h:outputText value="Position code:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.code}" />
+
+						<h:outputText value="Title:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.title}" />
+
+
+						<h:outputText value="Open Date:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.openDate}" />
+
+
+						<h:outputText value="Location:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.stringLocalization}" />
+
+						<h:outputText value="Status:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.status.description}" />
+
+						<h:outputText value="Company:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.company}" />
+
+						<h:outputText value="Technical Area:" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.positionEntity.technicalArea.description}" />
+					</h:panelGrid>
+
+				</p:panel>
+
+				<p:panel id="candidateJobApplicaton" header="Candidate Detail"
+					toggleable="true" toggleSpeed="500" widgetVar="panel2"
+					style="margin-bottom:20px">
+
+					<p:ajax event="toggle" />
+
+					<h:panelGrid columns="2" cellpadding="10">
+
+						<h:outputText value="Name :" />
+						<h:outputText
+							value="#{jobApplicationBean.jobApplication.candidateEntity.fullName}" />
+
+						<h:outputText value="Adress:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.address}" />
+
+
+						<h:outputText value="Degree:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.diploma}" />
+
+						<h:outputText value="Cover letter:" />
+						<h:outputLabel value="#{jobApplicationBean.jobApplication.letter}" />
+
+						<h:outputText value="School:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.school}" />
+
+						<h:outputText value="Phone:" />
+						<h:outputText value="#{jobApplicationBean.jobApplication.phone}" />
+
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>
+
+			<h:dataTable id="jobAppInterview"
+				value="#{jobApplicationBean.jobApplication.interviews}"
+				var="interview" rendered="#{not empty jobApplicationBean.jobApplication.interviews}">
+				<f:facet name="header">
+							Interview(s)
+						</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date" />
+					</f:facet>
+					<h:outputText value="#{interview.interviewDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Feedback" />
+					</f:facet>
+					<h:outputLabel value="#{interview.feedback}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Answers" />
+					</f:facet>
+					<p:link outcome="answersInterview?faces-redirect=true" value="View">
+						<f:param name="viewInterviewId" value="#{interview.id}" />
+					</p:link>
+				</h:column>
+			</h:dataTable>
+			<h:dataTable id="jobAppProposal"
+				value="#{jobApplicationBean.jobApplication.proposal}"
+				var="proposal" rendered="#{not empty jobApplicationBean.jobApplication.proposal}">
+				<f:facet name="header">
+							Proposal(s)
+						</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date" />
+					</f:facet>
+					<h:outputText value="#{proposal.proposalDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="String" />
+					</f:facet>
+					<h:outputLabel value="#{proposal.proposalStatus.description}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Proposal" />
+					</f:facet>
+					<h:outputLabel value="#{proposal.proposal}"/>
+				</h:column>
+			</h:dataTable>
+
+
+
+
+		</h:form>
+
+		<p:growl id="growl" />
+	</ui:define>
+</ui:composition>

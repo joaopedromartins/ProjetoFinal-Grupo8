@@ -60,7 +60,7 @@ public class JobInterviewEntity implements Serializable{
 	@Column
 	private boolean finished = false;
 	
-	@Column
+	@Column (length = 1000)
 	private String feedback;
 
 

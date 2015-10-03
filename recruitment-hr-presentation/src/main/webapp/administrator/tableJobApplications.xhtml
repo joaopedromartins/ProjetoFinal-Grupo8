@@ -33,6 +33,12 @@
 						<f:param name="jobApplicationId" value="#{jobApplication.id}" />
 					</p:link>
 				</p:column>
+				<p:column headerText="Edit">
+					<p:link outcome="editJobApplication?faces-redirect=true"
+						value="ui-icon-search Search">
+						<f:param name="editjobApplicationId" value="#{jobApplication.id}" />
+					</p:link>
+				</p:column>
 
 			</p:dataTable>
 		</h:form>

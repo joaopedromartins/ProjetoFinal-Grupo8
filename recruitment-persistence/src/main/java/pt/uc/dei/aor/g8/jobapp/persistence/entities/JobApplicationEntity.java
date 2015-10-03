@@ -105,7 +105,7 @@ public class JobApplicationEntity {
 	@Column(length = 60, nullable = false)
 	private String school;
 
-	@Column
+	@Column (length = 1000)
 	private String letter;
 
 	@Column

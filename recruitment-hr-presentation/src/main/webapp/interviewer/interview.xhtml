@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="stylesheet">
-		<h:outputStylesheet library="css" name="script.css" />
+		<h:outputStylesheet library="css" name="interview.css" />
 	</ui:define>
 	<ui:define name="content">
 
@@ -53,7 +53,7 @@
 							rendered="#{question.questiontype eq 'MULTIPLECHOICE'}"
 							columns="1">
 							<p:selectOneRadio id="multiplechoiceRadio"
-								label="Question Choice"
+								label="Question Choice" layout="grid" columns="4"
 								value="#{jobInterviewBean.answers[index].individualAnswer}"
 								converter="omnifaces.SelectItemsConverter" required="true">
 								<f:selectItems value="#{question.options}" var="option"
@@ -64,7 +64,7 @@
 						<h:panelGrid id="questionCheckboxes"
 							rendered="#{question.questiontype eq 'CHECKBOXES'}" columns="1">
 							<p:selectManyCheckbox id="checkBoxes" label="Question checkBox"
-								value="#{jobInterviewBean.answers[index].answer}"
+								value="#{jobInterviewBean.answers[index].answer}" layout="grid" columns="4"
 								required="true" converter="omnifaces.SelectItemsConverter">
 								<f:selectItems value="#{question.options}" var="option"
 									itemLabel="#{option.option}" itemValue="#{option.option}" />

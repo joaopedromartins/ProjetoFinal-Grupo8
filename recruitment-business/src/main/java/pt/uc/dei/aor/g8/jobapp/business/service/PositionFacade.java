@@ -70,6 +70,9 @@ public class PositionFacade implements IPositionFacade {
 
 	@Override
 	public IPositionProxy editPosition(IPositionProxy positionProxy) {
+		if( positionProxy.getStatus()== StatusPosition.CLOSE){
+			positionProxy.setCloseDate(new Date());
+		}
 		return service.editPosition(positionProxy);
 	}
 
