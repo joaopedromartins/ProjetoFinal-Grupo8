@@ -25,9 +25,13 @@
 header {
 	padding: 5px 0px;
 	margin-bottom: 6px;
-	background-color: silver;
+	background-color: #000000;
 	color: #fff;
 	box-shadow: 5px 5px 5px #ccc;
+	 border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 #login {
