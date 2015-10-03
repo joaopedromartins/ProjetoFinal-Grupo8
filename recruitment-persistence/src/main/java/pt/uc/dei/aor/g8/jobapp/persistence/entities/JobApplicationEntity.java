@@ -45,7 +45,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 	@NamedQuery(name = "JobApplications.listOfAllSpontaneousSituation", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.findJobAppSpontaneousSituationByCandidate", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidateEntity AND jA.situation LIKE 'SPONTANEOUS'"),
 	@NamedQuery(name = "JobApplication.listOfJobApplicationByCandidateAndPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.candidateEntity=:candidate AND jA.positionEntity=:position"),
-	@NamedQuery(name = "JobApplication.listOfAllApplicationNotSituationSpontaneous", query = "SELECT jA FROM JobApplicationEntity jA Where jA.situation NOT LIKE 'SPONTANEOUS'"),
+	@NamedQuery(name = "JobApplication.listOfAllApplicationNotSituationSpontaneous", query = "SELECT jA FROM JobApplicationEntity jA Where jA.situation NOT LIKE 'SPONTANEOUS' AND jA.situation NOT LIKE 'HIRED' AND jA.situation NOT LIKE 'DELETE_BY_CANDIDATE'"),
 	@NamedQuery(name = "JobApplication.listOfAllAppBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppSpontaneousBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA Where jA.jobappSpontaneous = TRUE AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
 	@NamedQuery(name = "JobApplication.listOfAllAppByPosition", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.positionEntity=:position"),
