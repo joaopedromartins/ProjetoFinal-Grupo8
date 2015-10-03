@@ -7,23 +7,33 @@
 
 	<ui:define name="content">
 
-				
+
 		<h:form id="formPositionsTable">
 			<p:dataTable id="tablePositions" var="position"
+				widgetVar="positionsTable"
 				value="#{positionBean.listOfAllOpenPosition()}">
 				<f:facet name="header">
-		            <H1>Positions</H1>
-		        </f:facet>
+					<H1>Positions</H1>
+					<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('positionsTable').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
 				<p:column headerText="Code" style="width:42px;">
 					<h:outputText value="#{position.code}" />
 				</p:column>
-				<p:column headerText="Title">
+				<p:column headerText="Title" filterBy="#{position.title}"
+					filterMatchMode="contains">>
 					<h:outputText value="#{position.title}" />
 				</p:column>
 				<p:column headerText="Open Date" style="width:100px;">
 					<h:outputText value="#{position.openDate}" />
 				</p:column>
-				<p:column headerText="Location" style="width:90px;">
+				<p:column headerText="Location" style="width:90px;"
+					filterBy="#{position.stringLocalization}"
+					filterMatchMode="contains">
 					<h:outputText value="#{position.stringLocalization}" />
 				</p:column>
 				<p:column headerText="Status" style="width:60px;">
@@ -44,7 +54,7 @@
 							target="#{positionBean.positionProxy}" />
 					</p:commandButton>
 				</p:column>
-	
+
 				<p:column headerText="Apply" style="width:42px;text-align: center">
 					<p:commandButton icon="ui-icon-bookmark"
 						action="#{jobApplicationBean.applyPosition}"
@@ -53,10 +63,10 @@
 							target="#{jobApplicationBean.positionProxy}" />
 					</p:commandButton>
 				</p:column>
-	
+
 			</p:dataTable>
 		</h:form>
-	
+
 		<p:dialog header="Position Info" widgetVar="positionView" modal="true"
 			showEffect="fade" hideEffect="fade" resizable="false">
 			<p:outputPanel id="positionDetail" style="text-align:center;">
@@ -64,44 +74,44 @@
 					<f:facet name="header">
 						<h:outputText value="#{positionBean.positionProxy.title}" />
 					</f:facet>
-	
+
 					<h:outputText value="Position code:" />
 					<h:outputText value="#{positionBean.positionProxy.code}" />
-	
+
 					<h:outputText value="Title:" />
 					<h:outputText value="#{positionBean.positionProxy.title}" />
-	
+
 					<h:outputText value="Description Position:" />
 					<h:outputText
 						value="#{positionBean.positionProxy.descriptionPosition}" />
-	
+
 					<h:outputText value="Open Date:" />
 					<h:outputText value="#{positionBean.positionProxy.openDate}" />
-	
+
 					<h:outputText value="Close Date:" />
 					<h:outputText value="#{positionBean.positionProxy.closeDate}" />
-	
+
 					<h:outputText value="Location:" />
 					<h:outputText
 						value="#{positionBean.positionProxy.stringLocalization}" />
-	
+
 					<h:outputText value="Status:" />
 					<h:outputText
 						value="#{positionBean.positionProxy.status.description}" />
-	
+
 					<h:outputText value="Company:" />
 					<h:outputText value="#{positionBean.positionProxy.company}" />
-	
+
 					<h:outputText value="Technical Area:" />
 					<h:outputText
 						value="#{positionBean.positionProxy.technicalArea.description}" />
-	
-	
+
+
 				</p:panelGrid>
-	
+
 			</p:outputPanel>
 		</p:dialog>
 
-		
+
 	</ui:define>
 </ui:composition>

@@ -1,5 +1,9 @@
 @CHARSET "ISO-8859-1";
 
+.ui-datatable .ui-column-filter{
+	width: 80px !important;
+}
+
 .ui-menu, .ui-menu .ui-menu-child {
 	background: white;
 	background: white;
