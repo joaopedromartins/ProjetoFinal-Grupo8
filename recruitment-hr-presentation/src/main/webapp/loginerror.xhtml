@@ -5,14 +5,18 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<title>Error in Login</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
-	<h:form>
-		<p:panel header="Login Error">
+	<h:form style="width: 400px; margin: auto;">
+		<p:panel header="Login Error" styleClass="grid-login">
+
 			<h1 style="margin: 15px; font-size: 34px;">Login Failed</h1>
 			<br />
 			<h:commandLink action="login?faces-redirect=true"
 				value="Click here to try again" style="margin:15px; font-size:24px;" />
+
+
 		</p:panel>
 	</h:form>
 </h:body>
