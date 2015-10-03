@@ -65,8 +65,7 @@ public class JobInterviewEntity implements Serializable{
 
 
 	public JobInterviewEntity() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 

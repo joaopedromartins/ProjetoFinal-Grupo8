@@ -1,7 +1,10 @@
 package pt.uc.dei.aor.g8.jobapp.persistence.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -125,7 +128,7 @@ public class JobApplicationEntity {
 	private PositionEntity positionEntity;
 
 	@OneToMany (cascade=CascadeType.ALL , mappedBy="jobapplication",fetch = FetchType.EAGER)
-	private List <JobInterviewEntity> interviews;
+	private Set <JobInterviewEntity> interviews;
 	
 	@OneToOne (cascade=CascadeType.ALL)
 	private ProposalEntity proposal;
@@ -286,11 +289,12 @@ public class JobApplicationEntity {
 
 
 	public List<JobInterviewEntity> getInterviews() {
-		return interviews;
+		return new ArrayList<>(interviews);
 	}
 
 	public void setInterviews(List<JobInterviewEntity> interviewers) {
-		this.interviews = interviewers;
+		this.interviews = new HashSet<>();
+		this.interviews.addAll(interviews);
 	}
 
 	public ProposalEntity getProposal() {

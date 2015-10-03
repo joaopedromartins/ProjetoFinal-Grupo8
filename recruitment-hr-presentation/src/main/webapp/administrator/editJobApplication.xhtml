@@ -89,75 +89,57 @@
 				</p:panel>
 			</h:panelGrid>
 
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="1">
 				<p:panel id="jobAppInterviewPanel" header="Interview(s)"
 					toggleable="true" toggleSpeed="500"
 					widgetVar="jobAppInterviewPanel" style="margin-bottom:20px"
 					collapsed="true">
 					<p:ajax event="toggle" />
-					<h:dataTable id="jobAppInterview"
+					<p:dataTable id="jobAppInterview"
 						value="#{jobApplicationBean.jobApplication.interviews}"
 						var="interview">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Date" />
-							</f:facet>
+						<p:column headerText="Date">
 							<h:outputText value="#{interview.interviewDate}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Feedback" />
-							</f:facet>
+						</p:column>
+						<p:column headerText="Feedback">
 							<h:outputLabel value="#{interview.feedback}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Answers" />
-							</f:facet>
+						</p:column>
+						<p:column  headerText="Answers">
 							<p:link outcome="answersInterview?faces-redirect=true"
 								value="View">
 								<f:param name="viewInterviewId" value="#{interview.id}" />
 							</p:link>
-						</h:column>
-					</h:dataTable>
+						</p:column>
+					</p:dataTable>
 				</p:panel>
 				<p:panel id="jobAppProposalPanel" header="Proposal(s)"
 					toggleable="true" toggleSpeed="500" widgetVar="jobAppProposalPanel"
 					style="margin-bottom:20px" collapsed="true">
 					<p:ajax event="toggle" />
-					<h:dataTable id="jobAppProposal"
+					<p:dataTable id="jobAppProposal"
 						value="#{jobApplicationBean.jobApplication.proposal}"
 						var="proposal">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Date" />
-							</f:facet>
+						<p:column headerText="Date">
 							<h:outputText value="#{proposal.proposalDate}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="String" />
-							</f:facet>
+						</p:column>
+						<p:column headerText="Status">
 							<h:outputLabel value="#{proposal.proposalStatus.description}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Proposal" />
-							</f:facet>
+						</p:column>
+						<p:column headerText="Proposal">
 							<h:outputLabel value="#{proposal.proposal}" />
-						</h:column>
-					</h:dataTable>
+						</p:column>
+					</p:dataTable>
 				</p:panel>
 
 			</h:panelGrid>
 
 			<p:panelGrid id="editJobapp" columns="2">
 				<p:outputLabel value="Job Application Satus:" />
-				<p:outputLabel
+				<p:outputLabel id="statusJobapp"
 					value="#{jobApplicationBean.jobApplication.situation.description}" />
 				<p:selectOneMenu id="status"
 					converter="omnifaces.SelectItemsConverter"
@@ -166,6 +148,8 @@
 						var="status" itemLabel="#{status.description}"
 						itemValue="#{status}" />
 				</p:selectOneMenu>
+				<p:commandButton value="Update Status" action="#{jobApplicationBean.changeStatusJobApp()}"
+				update="formDialogDetailJobApplication:statusJobapp growl"/>
 			</p:panelGrid>
 
 

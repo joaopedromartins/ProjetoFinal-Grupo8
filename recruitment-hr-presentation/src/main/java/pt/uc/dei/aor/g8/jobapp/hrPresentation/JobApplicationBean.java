@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
-import pt.uc.dei.aor.g8.jobapp.business.enumeration.StatusPosition;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobInterviewProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -48,7 +47,7 @@ public class JobApplicationBean implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+
 	public List<IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation(){
 		return facade.listOfAllAppNOTSpontaneousSituation();
 	}
@@ -68,7 +67,7 @@ public class JobApplicationBean implements Serializable {
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -92,7 +91,7 @@ public class JobApplicationBean implements Serializable {
 	public List<JobAppSituation> getPossibleStatus(){
 		return Arrays.asList(JobAppSituation.values());
 	}
-	
+
 	public JobAppSituation getStatus() {
 		return status;
 	}
@@ -104,7 +103,7 @@ public class JobApplicationBean implements Serializable {
 
 	public void scheduleInterview (){
 		System.out.println("date interview: "+interviewBean.getDate());
-		
+
 		IJobInterviewProxy interviewProxy = facadeInterview.newInterview(interviewBean.getDate(), interviewBean.getUserInterviwer(), jobApplication, interviewBean.getScriptInterview());
 		if (interviewProxy != null){
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -115,19 +114,19 @@ public class JobApplicationBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
-	
+
 	public List <IScriptProxy> listScripOfPosition (){	
 		return positionFacade.listScriptOfPosition(jobApplication.getPositionEntity());
 	}
-	
+
 	public List<IJobApplicationProxy> findALLSpontaneousSituation(){
 		return facade.listOfAllSpontaneousSituation();
 	}
-	
+
 	public List<IPositionProxy> allPositionOpen (){
 		return positionFacade.listOfAllOpenPosition();
 	}
-	
+
 	public void submitPosition(){
 		this.jobApplication.setPositionEntity(submitPosition);
 		String msg = facade.submitPositionOnSpontaneousApplication(jobApplication);
@@ -139,6 +138,20 @@ public class JobApplicationBean implements Serializable {
 			FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, "");
 			FacesContext.getCurrentInstance().addMessage(null, message2);
 		} 
+	}
+
+	public void changeStatusJobApp(){
+		jobApplication.setSituation(status);
+		IJobApplicationProxy proxy = facade.editJobApplication(jobApplication);
+		if(proxy != null){
+			this.jobApplication = proxy;
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Job Application status update with succeed.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error on update Job Application Status.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message2);
+		}
 	}
 
 
