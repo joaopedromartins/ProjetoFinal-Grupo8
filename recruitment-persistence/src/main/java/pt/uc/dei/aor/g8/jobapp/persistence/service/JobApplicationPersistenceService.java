@@ -230,11 +230,37 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 	
 	@Override
 	public double averageTimeForFirstInterview(Date startDate, Date endDate) {
-		TypedQuery<Double> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_FOR_FIRST_INTERVIEW, Double.class);
+		// TODO logger
+		System.out.println( "\n\n* JobApplicationPersistentService");
+		System.out.println( "* Start date:\t" + startDate);
+		System.out.println( "* End date:\t" + endDate);
+		
+		
+		TypedQuery<Date> query = em.createNamedQuery(JobApplicationEntity.AVERAGE_TIME_FOR_FIRST_INTERVIEW, Date.class);
 		query.setParameter( "startdate", startDate);
 		query.setParameter( "enddate", endDate);
 		
-		return query.getSingleResult();
+		List<Date> entity = query.getResultList();
+		
+		
+		
+		if (entity.isEmpty()) {
+			// TODO logger
+			System.out.println( "Empty average report" );
+			return 0.0;
+		} else {
+			// TODO logger
+			System.out.println( "average report" );
+			if (entity.size()>0) {
+				double soma=0.0;
+				for(int i=0; i<entity.size(); i++) {
+					System.out.println("entity:\t" + entity.get(i));
+					soma+=entity.get(i).getDay()+entity.get(i).getHours()/24.0;
+				}
+				return soma/entity.size();
+			}
+			return 0.0;
+		}
 	}
 	
 	@Override
@@ -250,6 +276,8 @@ public class JobApplicationPersistenceService implements IJobApplicationPersiste
 
 	@Override
 	public List<IJobApplicationProxy> listOfAllApplicationRejectedBetweenDates (Date startDate, Date endDate) {
+		
+		
 		TypedQuery<JobApplicationEntity> query = em.createNamedQuery(JobApplicationEntity.LIST_OF_ALL_APP_REJECTED_BETWEEN_DATES, JobApplicationEntity.class);
 		query.setParameter("startDate", startDate);
 		query.setParameter("endDate", endDate);
