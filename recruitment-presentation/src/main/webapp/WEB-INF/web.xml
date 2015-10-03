@@ -10,6 +10,12 @@
 	<welcome-file-list>
 		<welcome-file>/pages/everybody/company.xhtml</welcome-file>
 	</welcome-file-list>
+	
+	<!-- Primefaces Theme -->
+    <context-param>  
+	    <param-name>primefaces.THEME</param-name>  
+	    <param-value>bootstrap</param-value>  
+	</context-param> 
 
 	<servlet>
 		<servlet-name>facesServlet</servlet-name>
@@ -21,7 +27,7 @@
 		<servlet-name>facesServlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-
+	
 	<!-- Primefaces File Upload Filter -->
 	<filter>
       <filter-name>PrimeFaces FileUpload Filter</filter-name>

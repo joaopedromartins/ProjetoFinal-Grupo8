@@ -54,9 +54,11 @@
 				<version>${slf4j.version}</version>
 				<scope>provided</scope>
 			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
-
+	
+	
 	<build>
 		<pluginManagement>
 			<plugins>
