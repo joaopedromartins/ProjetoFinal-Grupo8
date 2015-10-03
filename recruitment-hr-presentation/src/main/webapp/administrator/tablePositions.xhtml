@@ -13,35 +13,41 @@
 		<h1>List of Positions</h1>
 		<h:form id="formPositionsTable">
 			<p:dataTable id="tablePositions" var="position"
+				widgetVar="positionsTable"
 				value="#{positionBean.listOfAllPosition()}">
 				<f:facet name="header">
-            		Positions
-        		</f:facet>
-				<p:column headerText="Position code">
+					<H1>Positions</H1>
+					<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('positionsTable').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
+				<p:column headerText="Code" style="width:42px;">
 					<h:outputText value="#{position.code}" />
 				</p:column>
-				<p:column headerText="Title">
+				<p:column headerText="Title" filterBy="#{position.title}"
+					filterMatchMode="contains">
 					<h:outputText value="#{position.title}" />
 				</p:column>
-				<p:column headerText="Open Date">
+				<p:column headerText="Open Date" style="width:100px;" sortBy="#{position.openDate}">
 					<h:outputText value="#{position.openDate}" />
 				</p:column>
-				<p:column headerText="Close Date">
-					<h:outputText value="#{position.closeDate}" />
-				</p:column>
-				<p:column headerText="Location">
+				<p:column headerText="Location" filterBy="#{position.localization}"
+					filterMatchMode="contains">
 					<h:outputText value="#{position.stringLocalization}" />
 				</p:column>
-				<p:column headerText="Status">
+				<p:column headerText="Status" style="width:60px;">
 					<h:outputText value="#{position.status.description}" />
 				</p:column>
 				<p:column headerText="Company">
 					<h:outputText value="#{position.company}" />
 				</p:column>
-				<p:column headerText="Technical Area">
+				<p:column headerText="Technical Area" style="width:100px;">
 					<h:outputText value="#{position.technicalArea.description}" />
 				</p:column>
-				<p:column style="width:32px;text-align: center">
+				<p:column style="width:50px;text-align: center">
 					<p:commandButton
 						update=":formPositionsTable:tablePositions :positionDetail"
 						oncomplete="PF('positionView').show()" icon="ui-icon-search"
@@ -49,8 +55,6 @@
 						<f:setPropertyActionListener value="#{position}"
 							target="#{positionBean.positionProxy}" />
 					</p:commandButton>
-				</p:column>
-				<p:column style="width:32px;text-align: center">
 					<p:commandButton update=":formPositionEdit:positionEdit"
 						oncomplete="PF('positionEdit').show()" icon="ui-icon-pencil"
 						title="edit">
@@ -98,7 +102,7 @@
 						value="#{positionBean.positionProxy.technicalArea.description}" />
 					<h:outputText value="Description:" />
 					<h:outputText
-						value="#{positionBean.positionProxy.descriptionPosition}" />	
+						value="#{positionBean.positionProxy.descriptionPosition}" />
 
 				</p:panelGrid>
 			</p:outputPanel>

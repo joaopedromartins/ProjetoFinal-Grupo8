@@ -15,13 +15,15 @@
 				<p:column headerText="Date:">
 					<p:outputLabel value="#{jobApplication.jobAppDate}" />
 				</p:column>
-				<p:column headerText="Name">
+				<p:column headerText="Name" filterBy="#{jobApplication.candidateEntity.fullName}"
+					filterMatchMode="contains">
 					<p:outputLabel value="#{jobApplication.candidateEntity.fullName}" />
 				</p:column>
 				<p:column headerText="City">
 					<p:outputLabel value="#{jobApplication.city}" />
 				</p:column>
-				<p:column headerText="Diploma/School">
+				<p:column headerText="Diploma/School" filterBy="#{jobApplication.diploma}"
+					filterMatchMode="contains">
 					<p:outputLabel value="#{jobApplication.diploma}" />
 					<p:outputLabel value="#{jobApplication.school}" />
 				</p:column>

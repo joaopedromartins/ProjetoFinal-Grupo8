@@ -11,7 +11,8 @@
 			<p:dataTable id="tableCandidates"
 				value="#{candidateBean.allCandidates()}" var="candidate">
 
-				<p:column headerText="Name:">
+				<p:column headerText="Name:" filterBy="#{candidate.fullName}"
+					filterMatchMode="contains">
 					<p:outputLabel value="#{candidate.fullName}" />
 				</p:column>
 

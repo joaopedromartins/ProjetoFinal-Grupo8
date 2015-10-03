@@ -12,19 +12,26 @@
 			<p:dataTable id="gridJobApplication"
 				value="#{jobApplicationBean.listOfAllAppNOTSpontaneousSituation()}"
 				var="jobApplication">
-				<p:column headerText="Position">
+				<p:column headerText="Position"
+					filterBy="#{jobApplication.positionEntity.title}"
+					filterMatchMode="contains">
 					<p:outputLabel value="#{jobApplication.positionEntity.code}" />
 					<br />
 					<p:outputLabel value="#{jobApplication.positionEntity.title}" />
 				</p:column>
 
-				<p:column headerText="Candidate">
-					<p:outputLabel value="#{jobApplication.candidateEntity.firstname}" />
+				<p:column headerText="Candidate"
+					ilterBy="#{jobApplication.candidateEntity.fullName}"
+					filterMatchMode="contains">
+					<p:outputLabel value="#{jobApplication.candidateEntity.fullName}" />
 					<br />
-					<p:commandButton id="downloadLink" value="CV" ajax="false"
-						actionListener="#{downloadBean.prepDownload(jobApplication)}">
-						<p:fileDownload value="#{downloadBean.download}" />
-					</p:commandButton>
+					<p:link href="#{candidate.linkedinAddress}" target="_blank"
+						value="Linkendin">
+						<br />
+						<p:commandButton id="downloadLink" value="CV" ajax="false"
+							actionListener="#{downloadBean.prepDownload(jobApplication)}">
+							<p:fileDownload value="#{downloadBean.download}" />
+						</p:commandButton>
 				</p:column>
 
 				<p:column headerText="Edit/View">

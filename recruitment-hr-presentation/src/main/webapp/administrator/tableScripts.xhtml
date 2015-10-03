@@ -13,10 +13,18 @@
 		<h1>List of Scripts</h1>
 		<h:form id="formTableScript">
 
-			<p:dataTable id="tableScripts" var="script"
+			<p:dataTable id="tableScripts" var="script" widgetVar="scriptsTable"
 				value="#{scriptBean.scripts}"
 				style="width:90%; margin:auto; text-align: center;">
-				<f:facet name="header">Scripts</f:facet>
+				<f:facet name="header">
+				<h1>Scripts</h1>
+				<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('scriptsTable').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
 				<p:column headerText="Title" style="width:auto;">
 					<h:outputText value="#{script.scriptTitle}" />
 				</p:column>
