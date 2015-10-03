@@ -346,4 +346,16 @@ public class JobApplicationFacade implements IJobApplicationFacade {
 		}
 	}
 
+	@Override
+	public IJobApplicationProxy updateSituationJobApplication(JobAppSituation status,
+			IJobApplicationProxy jobApplicationProxy) {
+		try {
+			jobApplicationProxy.setSituation(status);
+			return service.editJobApplication(jobApplicationProxy);
+		} catch (EJBTransactionRolledbackException e){
+			log.error(e.getMessage());
+			return null;
+		}
+	}
+
 }

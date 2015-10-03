@@ -88,55 +88,121 @@
 					</h:panelGrid>
 				</p:panel>
 			</h:panelGrid>
+		</h:form>
 
-			<h:panelGrid columns="1">
-				<p:panel id="jobAppInterviewPanel" header="Interview(s)"
-					toggleable="true" toggleSpeed="500"
-					widgetVar="jobAppInterviewPanel" style="margin-bottom:20px"
-					collapsed="true">
-					<p:ajax event="toggle" />
-					<p:dataTable id="jobAppInterview"
-						value="#{jobApplicationBean.jobApplication.interviews}"
-						var="interview">
-						<p:column headerText="Date">
-							<h:outputText value="#{interview.interviewDate}">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:outputText>
-						</p:column>
-						<p:column headerText="Feedback">
-							<h:outputLabel value="#{interview.feedback}" />
-						</p:column>
-						<p:column  headerText="Answers">
-							<p:link outcome="answersInterview?faces-redirect=true"
-								value="View">
-								<f:param name="viewInterviewId" value="#{interview.id}" />
-							</p:link>
-						</p:column>
-					</p:dataTable>
-				</p:panel>
-				<p:panel id="jobAppProposalPanel" header="Proposal(s)"
-					toggleable="true" toggleSpeed="500" widgetVar="jobAppProposalPanel"
-					style="margin-bottom:20px" collapsed="true">
-					<p:ajax event="toggle" />
-					<p:dataTable id="jobAppProposal"
-						value="#{jobApplicationBean.jobApplication.proposal}"
-						var="proposal">
-						<p:column headerText="Date">
-							<h:outputText value="#{proposal.proposalDate}">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:outputText>
-						</p:column>
-						<p:column headerText="Status">
-							<h:outputLabel value="#{proposal.proposalStatus.description}" />
-						</p:column>
-						<p:column headerText="Proposal">
-							<h:outputLabel value="#{proposal.proposal}" />
-						</p:column>
-					</p:dataTable>
-				</p:panel>
+		<h:form id="formDetailsInterview">
+
+			<p:panel id="jobAppInterviewPanel" header="Interview(s)"
+				toggleable="true" toggleSpeed="500" widgetVar="jobAppInterviewPanel"
+				style="margin-bottom:20px" collapsed="true">
+				<p:ajax event="toggle" />
+				<p:dataTable id="jobAppInterview"
+					value="#{jobApplicationBean.jobApplication.interviews}"
+					var="interview">
+					<p:column headerText="Date">
+						<h:outputText value="#{interview.interviewDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Feedback">
+						<h:outputLabel value="#{interview.feedback}" />
+					</p:column>
+					<p:column headerText="Answers">
+						<p:link outcome="answersInterview?faces-redirect=true"
+							value="View">
+							<f:param name="viewInterviewId" value="#{interview.id}" />
+						</p:link>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			<p:commandButton id="scheduleInterview" value="Schedule Interview"
+				rendered="#{jobApplicationBean.addInterview eq 'false'}"
+				action="#{jobApplicationBean.showPanelAddInterview()}"
+				update="forScheduleInterview @form" />
+
+		</h:form>
+
+		<h:form id="forScheduleInterview"
+			rendered="#{jobApplicationBean.addInterview}">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Interviwer:" for="userInterviwer" />
+				<p:selectManyMenu id="userInterviwer"
+					value="#{jobApplicationBean.interviewBean.userInterviwer}"
+					required="true" converter="omnifaces.SelectItemsConverter"
+					filter="true" filterMatchMode="contains" showCheckbox="true">
+					<f:selectItems
+						value="#{jobApplicationBean.interviewBean.possibleUserInterviwer}"
+						var="manager" itemLabel="#{manager.fullName}" />
+				</p:selectManyMenu>
+
+				<p:outputLabel value="Interview date:" for="interviewDate" />
+				<p:calendar id="interviewDate"
+					value="#{jobApplicationBean.interviewBean.date}" required="true"
+					showOn="button" pattern="dd/MM/yyyy HH:mm" />
+
+				<p:outputLabel value="Script of Interview:" />
+				<p:selectOneMenu id="scriptInterview"
+					value="#{jobApplicationBean.interviewBean.scriptInterview}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{scriptBean.scripts}" var="script"
+						itemLabel="#{script.scriptTitle}" />
+				</p:selectOneMenu>
+
+
+				<p:commandButton value="Schedule interview"
+					action="#{jobApplicationBean.scheduleInterview}" update=":formDetailsInterview :formgrowl:growl" />
 
 			</h:panelGrid>
 
+		</h:form>
+
+		<h:form id="formProposalView">
+
+			<p:panel id="jobAppProposalPanel" header="Proposal(s)"
+				toggleable="true" toggleSpeed="500" widgetVar="jobAppProposalPanel"
+				style="margin-bottom:20px" collapsed="true">
+				<p:ajax event="toggle" />
+				<p:dataTable id="jobAppProposal"
+					value="#{jobApplicationBean.jobApplication.proposal}"
+					var="proposal">
+					<p:column headerText="Date">
+						<h:outputText value="#{proposal.proposalDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Status">
+						<h:outputLabel value="#{proposal.proposalStatus.description}" />
+					</p:column>
+					<p:column headerText="Proposal">
+						<h:outputLabel value="#{proposal.proposal}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			<p:commandButton id="addProposal" value="Add Proposal"
+				rendered="#{proposalBean.addProposal eq 'false'}"
+				action="#{proposalBean.showPanelAddProposal()}"
+				update="formProposal @form" />
+		</h:form>
+
+		<h:form id="formProposal" rendered="#{proposalBean.addProposal}">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Proposal Status:" for="proposalStatus" />
+				<p:selectOneMenu id="proposalStatus" value="#{proposalBean.status}"
+					required="true" converter="omnifaces.SelectItemsConverter">
+					<f:selectItems value="#{proposalBean.possibleStatusProposal()}"
+						var="status" itemLabel="#{status.description}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Observations:" for="observation" />
+				<p:inputTextarea id="observation"
+					value="#{proposalBean.observation}" />
+				<p:commandButton value="Save Proposal"
+					action="#{proposalBean.saveProposal(jobApplicationBean.jobApplication)}"
+					update=":formProposalView :formgrowl:growl" />
+
+			</h:panelGrid>
+		</h:form>
+
+		<h:form id="formEditJobApp">
 			<p:panelGrid id="editJobapp" columns="2">
 				<p:outputLabel value="Job Application Satus:" />
 				<p:outputLabel id="statusJobapp"
@@ -148,13 +214,13 @@
 						var="status" itemLabel="#{status.description}"
 						itemValue="#{status}" />
 				</p:selectOneMenu>
-				<p:commandButton value="Update Status" action="#{jobApplicationBean.changeStatusJobApp()}"
-				update="formDialogDetailJobApplication:statusJobapp growl"/>
+				<p:commandButton value="Update Status"
+					action="#{jobApplicationBean.changeStatusJobApp()}"
+					update="formEditJobApp:statusJobapp :formgrowl:growl" />
 			</p:panelGrid>
-
-
 		</h:form>
-
+		<h:form id="formgrowl">
 		<p:growl id="growl" />
+		</h:form>
 	</ui:define>
 </ui:composition>

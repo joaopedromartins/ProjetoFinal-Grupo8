@@ -2,6 +2,7 @@ package pt.uc.dei.aor.g8.jobapp.business.service;
 
 import java.util.List;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.ProposalStatus;
 import pt.uc.dei.aor.g8.jobapp.business.model.ICandidateProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
@@ -38,6 +39,8 @@ public interface IJobApplicationFacade {
 	public List <IJobApplicationProxy> listOfAllAppNOTSpontaneousSituation ();
 	
 	public void deleteJobApplicationByCandidate(IJobApplicationProxy jobApplicationProxy);
+	
+	public IJobApplicationProxy updateSituationJobApplication(JobAppSituation status ,IJobApplicationProxy jobApplicationProxy);
 	
 	
 }

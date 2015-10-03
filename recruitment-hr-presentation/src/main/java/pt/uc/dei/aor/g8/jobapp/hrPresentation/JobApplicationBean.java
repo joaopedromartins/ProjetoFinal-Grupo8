@@ -40,6 +40,8 @@ public class JobApplicationBean implements Serializable {
 	private IJobApplicationProxy jobApplication;
 	private IPositionProxy submitPosition;
 	private JobAppSituation status;
+	private boolean addInterview = false;
+	
 
 
 	public JobApplicationBean() {
@@ -106,6 +108,7 @@ public class JobApplicationBean implements Serializable {
 
 		IJobInterviewProxy interviewProxy = facadeInterview.newInterview(interviewBean.getDate(), interviewBean.getUserInterviwer(), jobApplication, interviewBean.getScriptInterview());
 		if (interviewProxy != null){
+			this.addInterview = false;
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Scheduled interview with succeed.", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -140,9 +143,8 @@ public class JobApplicationBean implements Serializable {
 		} 
 	}
 
-	public void changeStatusJobApp(){
-		jobApplication.setSituation(status);
-		IJobApplicationProxy proxy = facade.editJobApplication(jobApplication);
+	public void changeStatusJobApp(){		
+		IJobApplicationProxy proxy = facade.updateSituationJobApplication(status,jobApplication);
 		if(proxy != null){
 			this.jobApplication = proxy;
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -154,6 +156,22 @@ public class JobApplicationBean implements Serializable {
 		}
 	}
 
+
+	public boolean isAddInterview() {
+		return addInterview;
+	}
+
+
+	public void setAddInterview(boolean addInterview) {
+		this.addInterview = addInterview;
+	}
+	
+	public void showPanelAddInterview(){
+		this.addInterview = true;
+	}
+
+	
+	
 
 
 }
