@@ -10,16 +10,27 @@
 		<h1>Job Applications</h1>
 		<h:form id="formViewjobApplicationManager">
 
-			<p:dataTable id="gridJobApplication"
+			<p:dataTable id="gridJobApplication" widgetVar="positionsTable"
 				value="#{jobApplicationBean.listOfAllAppNOTSpontaneousSituationManager()}"
 				var="jobApplication">
-				<p:column headerText="Position">
+				<f:facet name="header">
+					<H1>List JobApplication</H1>
+					<p:outputPanel style="text-align: right;">
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('positionsTable').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
+				<p:column headerText="Position" filterBy="#{jobApplication.positionEntity.title}"
+					filterMatchMode="contains">
 					<p:outputLabel value="#{jobApplication.positionEntity.code}" />
 					<br />
 					<p:outputLabel value="#{jobApplication.positionEntity.title}" />
 				</p:column>
 
-				<p:column headerText="Candidate">
+				<p:column headerText="Candidate" filterBy="#{jobApplication.candidateEntity.firstname}"
+					filterMatchMode="contains">
 					<p:outputLabel value="#{jobApplication.candidateEntity.firstname}" />
 					<br />
 					<p:link href="#{candidate.linkedinAddress}" target="_blank"
