@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import org.joda.time.DateTime;
 import org.joda.time.Months;
 
+import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 import pt.uc.dei.aor.g8.jobapp.business.enumeration.ProposalStatus;
 import pt.uc.dei.aor.g8.jobapp.business.model.IJobApplicationProxy;
 import pt.uc.dei.aor.g8.jobapp.business.model.IPositionProxy;
@@ -120,11 +121,40 @@ public class ReportsFacade implements IReportsFacade {
 			rejectedCandidates.add(new ResultReport("On interview(s)", stateInterview));
 			rejectedCandidates.add(new ResultReport("On proposal", stateProposal));
 		}
-		
+
 		return rejectedCandidates;
 	}
 
-/*	@Override
+
+	@Override
+	public List<ResultReport> listOfResultsInterviewsBetweenDates(Date start, Date end) {
+		List<IJobApplicationProxy> appWidhInterview = appService.listOfAllAppWidhInterviewBetweenDates(start, end);
+		List <ResultReport> resultsInterviews = new ArrayList<>();
+		int rejected = 0;
+		int newInterview = 0;
+		int proposal = 0;
+		int total = 0;
+		for(IJobApplicationProxy jA: appWidhInterview){
+			int numberInterviews = jA.getInterviews().size();
+			total += numberInterviews;
+			if (numberInterviews > 0) {
+				if(jA.getProposal()!= null){ 
+					proposal = proposal + 1;
+				} else if (jA.getSituation() == JobAppSituation.REJECTED) {
+					rejected = rejected + 1;
+				}
+				newInterview += numberInterviews-1;
+			}
+		}
+		resultsInterviews.add(new ResultReport("Total interview(s)", total));
+		if (proposal > 0) resultsInterviews.add(new ResultReport("Proposal", proposal));
+		if (newInterview > 0) resultsInterviews.add(new ResultReport("New interview", newInterview));
+		if (rejected > 0) resultsInterviews.add(new ResultReport("Rejected", rejected));
+
+		return resultsInterviews;
+	}
+
+	/*	@Override
 	public List<ResultReport> listOfResultsInterviewsBetweenDates(Date start, Date end) {
 		List<IJobApplicationProxy> appWidhInterview = appService.listOfAllAppWidhInterviewBetweenDates(start, end);
 		List <ResultReport> resultsInterviews = new ArrayList<>();
@@ -138,7 +168,7 @@ public class ReportsFacade implements IReportsFacade {
 			for(IJobApplicationProxy jA: appWidhInterview){
 				int numberInterviews = jA.getInterviews().size();
 				total = total + numberInterviews;
-				
+
 				if(jA.getProposal()!= null){
 					proposal = proposal + 1;
 					resultsInterviews.add(new ResultReport("Proposal", proposal));

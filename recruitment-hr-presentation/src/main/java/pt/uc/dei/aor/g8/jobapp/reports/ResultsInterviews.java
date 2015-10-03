@@ -8,6 +8,8 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.time.DateUtils;
+
 //import org.apache.commons.lang3.time.DateUtils;
 
 import pt.uc.dei.aor.g8.jobapp.business.service.IReportsFacade;
@@ -70,7 +72,7 @@ public class ResultsInterviews implements Serializable{
 	}
 	
 	public void listOfResultsInterview(){
-		//this.resultsInterviews =  reportsFacade.listOfResultsInterviewsBetweenDates(start, DateUtils.addMonths(end, 1));
+		this.resultsInterviews =  reportsFacade.listOfResultsInterviewsBetweenDates(start, DateUtils.addMonths(end, 1));
 	}
 
 }

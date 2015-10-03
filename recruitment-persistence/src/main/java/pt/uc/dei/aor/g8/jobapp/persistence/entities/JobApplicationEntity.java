@@ -57,8 +57,7 @@ import pt.uc.dei.aor.g8.jobapp.business.enumeration.JobAppSituation;
 				" j.jobAppDate <= j.hiredDate AND " +
 				" j.hiredDate >= :startdate AND j.hiredDate < :enddate "),
 	@NamedQuery(name = "JobApplication.listOfAllAppRejectedBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.situation LIKE 'REJECTED' AND jA.jobAppDate >= :startDate AND jA.jobAppDate < :endDate"),
-	@NamedQuery(name = "JobApplication.listOfAllAppWithInterviewBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE jA.interviews <> NULL AND jA.jobAppDate >= :start AND jA.jobAppDate < :end"),
-
+	@NamedQuery(name = "JobApplication.listOfAllAppWithInterviewBetweenDates", query = "SELECT jA FROM JobApplicationEntity jA WHERE size(jA.interviews) > 0 AND jA.jobAppDate >= :start AND jA.jobAppDate < :end"),
 })
 public class JobApplicationEntity {
 
