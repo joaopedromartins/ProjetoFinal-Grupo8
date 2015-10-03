@@ -27,15 +27,9 @@
 					</p:commandButton>
 				</p:column>
 
-				<p:column headerText="Detail">
-					<p:link outcome="detailsJobApplication?faces-redirect=true"
-						value="ui-icon-search Search">
-						<f:param name="jobApplicationId" value="#{jobApplication.id}" />
-					</p:link>
-				</p:column>
-				<p:column headerText="Edit">
+				<p:column headerText="Edit/View">
 					<p:link outcome="editJobApplication?faces-redirect=true"
-						value="ui-icon-search Search">
+						value="Edit/View">
 						<f:param name="editjobApplicationId" value="#{jobApplication.id}" />
 					</p:link>
 				</p:column>
